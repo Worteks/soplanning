@@ -1,0 +1,12 @@
+
+ALTER TABLE  `planning_periode` ADD  `titre` VARCHAR( 255 ) NULL AFTER  `duree`;
+
+ALTER TABLE  `planning_ferie` CHANGE  `libelle`  `libelle` VARCHAR( 50 ) CHARACTER SET latin1 COLLATE latin1_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE  `planning_periode` CHANGE  `duree`  `duree` TIME NULL DEFAULT NULL;
+
+UPDATE `planning_periode` SET duree = MAKETIME(SECOND(duree), 0, 0)  WHERE duree IS NOT NULL;
+
+ALTER TABLE  `planning_projet` CHANGE  `createur_id`  `createur_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL;
+
+UPDATE  `planning_config` SET  valeur ='1.22' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

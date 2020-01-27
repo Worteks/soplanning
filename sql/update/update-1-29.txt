@@ -1,0 +1,4 @@
+
+UPDATE  `planning_config` SET  valeur ='1.29' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+UPDATE planning_user SET couleur = '000000' WHERE couleur = 'black';

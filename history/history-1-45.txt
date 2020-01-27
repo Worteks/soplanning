@@ -1,0 +1,17 @@
+v1.45
+
+- new form decicated to task creation ! This form is lighter than the modification form and will save time when creating several tasks.
+- improved hour selection in task form, it's now easier to fill hour/minute
+- Task during less than one day are now beveled, and the text displayed is colored accordingly
+- versioning upgrade, now we'll be able to publish minor releases for small bugs/quickfixes
+- improved link between tasks assigned at the same time. Now you can see all people that are linked to this task. Tasks remain separated in the planning view for better understanding.
+- new CSV export, with raw data : the file will show all columns for each task
+- german translation update
+- improved installer/upgrader, will make more checks and will clear smarty cache
+- user profile popin improvement (interface and explanations)
+- new option in ICAL export, you can now define number of months included for past tasks
+- statutes management improved
+- mobile version improved
+- floating scroll in the planning improved
+- many small fixes as usual
+

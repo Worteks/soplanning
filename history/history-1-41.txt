@@ -1,0 +1,10 @@
+v1.41
+
+- Big change : now statutes are stored in database, for task status and project status. It means you can change status name, add new ones, etc !
+- PDF export : summary under the planning is now an option (included or not)
+- Project filter on planning : projects covering the timeline are now displayed first in the filter
+- Added "people" filter in "My tasks" modules, so you can filter by selecting one or more users
+- Improvement in the planning on task order when mixing AM / PM / hours. Now they are ordered based on their start
+- Many display improvements
+- Several bug fixes : update graph library, PHP 7.1 compliancy, PDF display, etc.
+- Bugfix on new version alert : the alert was blocked and will be display again on login page when new version available

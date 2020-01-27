@@ -1,0 +1,18 @@
+
+update planning_user set droits = replace(droits, ']', ', "stats_users", "stats_projects"]') where user_id = 'ADM'; 
+
+UPDATE  `planning_config` SET  valeur ='1.40' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+CREATE TABLE `planning_right_on_user` (
+  `right_id` int(11) NOT NULL,
+  `owner_id` varchar(20) COLLATE latin1_general_ci NOT NULL,
+  `allowed_id` varchar(20) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+ALTER TABLE `planning_right_on_user`
+  ADD KEY `owner_id` (`owner_id`),
+  ADD KEY `allowed_id` (`allowed_id`);
+
+ALTER TABLE `planning_right_on_user`
+  ADD CONSTRAINT `fk_rou_allowed_id` FOREIGN KEY (`allowed_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_rou_owner_id` FOREIGN KEY (`owner_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;

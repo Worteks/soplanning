@@ -1,0 +1,16 @@
+CREATE TABLE `planning_config` (
+  `cle` varchar(30) COLLATE latin1_general_ci NOT NULL,
+  `valeur` varchar(250) COLLATE latin1_general_ci DEFAULT NULL,
+  `commentaire` text COLLATE latin1_general_ci,
+  PRIMARY KEY (`cle`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+INSERT INTO `planning_config` VALUES('PLANNING_PAGES', '1,5,10,20,50,100', 'rows per page in the planning');
+
+ALTER TABLE `planning_user` ADD `type` ENUM( 'admin', 'planner', 'lecture_seule' ) collate latin1_general_ci NOT NULL DEFAULT 'admin' AFTER `user_id`;
+
+ALTER TABLE `planning_user` DROP `droit_planification`;
+
+ALTER TABLE  `planning_projet` ADD `createur_id` CHAR(3) collate latin1_general_ci NOT NULL , ADD INDEX ( createur_id );
+
+INSERT INTO `planning_config` VALUES('PROJECT_COLORS_POSSIBLE', '', 'color choice limitation for planner (empty for no limit). Exemple :#ff0000,#aa8811,#446622');

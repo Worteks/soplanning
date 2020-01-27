@@ -1,0 +1,142 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+PRODID:-//education.gouv.fr//NONSGML iCalcreator 2.6//
+VERSION:2.0
+X-WR-CALNAME:Calendrier Scolaire - Zone C
+X-WR-CALDESC:Calendrier Scolaire - Zone C
+X-WR-TIMEZONE:Europe/Paris
+BEGIN:VEVENT
+UID:572@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Prérentrée des enseignants
+DTSTART;VALUE=DATE:20180831
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Prérentrée des enseignants - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:573@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Rentrée scolaire des élèves
+DTSTART;VALUE=DATE:20180903
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Rentrée scolaire des élèves - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:574@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances de la Toussaint
+DTSTART;VALUE=DATE:20181020
+DTEND;VALUE=DATE:20181105
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances de la Toussaint - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:575@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances de Noël
+DTSTART;VALUE=DATE:20181222
+DTEND;VALUE=DATE:20190107
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances de Noël - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:576@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances d'hiver
+DTSTART;VALUE=DATE:20190223
+DTEND;VALUE=DATE:20190311
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances d'hiver - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:577@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances de printemps
+DTSTART;VALUE=DATE:20190420
+DTEND;VALUE=DATE:20190506
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances de printemps - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:578@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances d'été
+DTSTART;VALUE=DATE:20190706
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances d'été - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:665@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Prérentrée des enseignants
+DTSTART;VALUE=DATE:20190830
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Prérentrée des enseignants - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:666@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Rentrée scolaire des élèves
+DTSTART;VALUE=DATE:20190902
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Rentrée scolaire des élèves - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:667@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances de la Toussaint
+DTSTART;VALUE=DATE:20191019
+DTEND;VALUE=DATE:20191104
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances de la Toussaint - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:668@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances de Noël
+DTSTART;VALUE=DATE:20191221
+DTEND;VALUE=DATE:20200106
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances de Noël - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:669@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances d'hiver
+DTSTART;VALUE=DATE:20200208
+DTEND;VALUE=DATE:20200224
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances d'hiver - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:670@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances de printemps
+DTSTART;VALUE=DATE:20200404
+DTEND;VALUE=DATE:20200420
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances de printemps - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:671@education.gouv.fr
+DTSTAMP:20180801T135926Z
+DESCRIPTION:Vacances d'été
+DTSTART;VALUE=DATE:20200704
+LOCATION:Créteil\, Montpellier\, Paris\, Toulouse\, Versailles
+SUMMARY:Vacances d'été - Zone C
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

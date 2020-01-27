@@ -1,0 +1,10 @@
+
+UPDATE  `planning_config` SET  valeur ='1.27' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+ALTER TABLE  `planning_periode` ADD  `createur_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NULL;
+ALTER TABLE  `planning_periode` ADD INDEX (  `createur_id` );
+INSERT INTO `planning_config` VALUES('PLANNING_REPEAT_HEADER', 0, 'If > 0, repeat header (days/months) in the planning each x lines');
+
+ALTER TABLE  `planning_periode` ADD  `statut_tache` ENUM(  'a_faire',  'en_cours',  'fait',  'abandon' ) NOT NULL DEFAULT  'a_faire' AFTER  `lien`;
+
+ALTER TABLE  `planning_periode` ADD  `livrable` ENUM(  'oui',  'non' ) NOT NULL DEFAULT  'non' AFTER  `statut_tache`;

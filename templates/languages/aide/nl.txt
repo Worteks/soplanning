@@ -1,0 +1,292 @@
+
+aide_retour = "Back to main menu"
+
+index_contenu = """
+	<b>HELP SUMMARY</b>
+	<br><br>
+	SOPlanning is easy to use: you plan tasks by associating a person with a project.
+	<br>
+	Once this rule is assimilated, SOPlanning offers you many features to plan and manage your projects, people, resources or places with a clear display.
+	<br><br>
+	Find below all the features of SOPlanning.
+	<br>
+	Feel free to contact <a target="_blank" href="http://www.soplanning.org">technical support</a> or go to <a href = "http://forum.soplanning.org target="_ blank">forum</a> for any questions.
+"""
+
+planning_titre = "Planning view"
+
+planning_contenu = """
+	<h3> The different display modes </h3>
+	In the "Display" menu you will find all the displays available in SOPlanning:
+	<br>
+	<ul>
+		<li> <b> Planning by people </b>: SOPlanning arranges the people / users in the left column, the tasks are arranged on the lines of each person. </ li>
+		<li> <b> Planning by projects </b>: SOPlanning arranges the projects in the left column, the tasks are arranged on the lines of each project. </ li>
+		<li> <b> Location planning </b>: If this module is activated, SOPlanning arranges the places in the left column, the tasks related to these places will be arranged on the corresponding lines. </ li>
+		<li> <b> Planning resources </b>: If this module is activated, SOPlanning has the resources in the left column, the tasks related to these places will be arranged on the corresponding lines. </ li>
+		<li> <b> People Calendar </b>: This view in Calendar mode allows you to display all the tasks for each person for a specific day. The names of the people are displayed at the top of the schedule, the time slots of the selected day are in the left column. </ Li>
+		<li> <b> Hour view </b>: The columns of the schedule are the time slots (1 column = 1 hour). So you can track your projects hour by hour and view tasks that span several hours. </ Li>
+		<li> <b> Day view </b>: the columns of the schedule are the days, this is the default view of SOPlanning </ li>
+		<li> <b> Show empty lines </b>: by default SOPlanning displays all lines (people, projects, etc.) of the schedule. If you disable this option, SOPlanning will only show lines containing at least one task in the selected period. </ Li>
+		<li> <b> Show Total Row </b>: Displays an extra row under the schedule, containing the total number of each column </ li>
+		<li> <b> Summary View </b> - Displays a summary table of all tasks below the schedule. This version is more "textual" and allows a more detailed reading of tasks. </ Li>
+	</ul>
+	Once you have made a choice in this menu, you can switch from one view to another without additional settings.
+
+	<h3> Select dates to display </h3>
+	The schedule is displayed based on a start date and an end date (except for the calendar view, which only displays one day).
+	<br> You choose the period of time to display in the schedule by clicking on the dates on the top left.
+	<br> The module then allows you to choose the start date, end date, or preselect a date with shortcuts (today, last week, etc.). Just click on the validation button to instantly change the displayed time period.
+	<br> You can also use the buttons to the right of the choice of dates (buttons with arrows front and back). These buttons allow you to shift the schedule in one direction or the other. The offset applied corresponds to the duration displayed: if you display 2 months, the buttons will shift the schedule by 2 months, and so on.
+
+	<h3> Filters </h3>
+	The different filters present allow you to customize the display to see only the tasks that interest you.
+	<br> You can filter by <b> user </b>, <b> project </b>, <b> job status </b>, <b> project status </b>, by <b> location </b> or <b> resource </b>.
+	<br> For each of these filters you can check several choices. Once the filter is applied, it turns red to quickly see that a filter is active. Only the tasks corresponding to these choices will be displayed.
+	<br> You can at any time remove a filter by clicking the filter again, then the <i> Disable </i> button.
+
+	<h3> Other display options </h3>
+	You can <b> sort the planning </b> according to your choice: sort by person name or identifier if the schedule is displayed per person, or sort by project name or project ID if the schedule is displayed per project.
+	<br>
+	You can also display an additional level by selecting <i> Team </i> for view per person, or <i> Project Group </i> for view by project.
+	<br><br>
+
+	<b> Detail View / Compact View </b>: By default SOPlanning displays a compact view of tasks, showing only the ID of the person or project. The detailed view expands the cell of a task to display additional information (all information is displayed anyway on task overview): start time of the task, duration of the task, total time of the day for the person assigned to this task, and "fill" gauge: it indicates 100% if the total of the person's tasks on the day correspond to the maximum hours of work available. Example: one person has a task of 5h and another of 3h, the gauge will indicate 100% if you have activated 8 hours available in SOPlanning.
+	<br><br>
+	You can customize the navigation in the planning: by activating <b> Lift at the top of the planning </b>, you add a scrollbar above the schedule that will be useful if you have a long list of projects / people.
+	<br> The <b> Navigation Arrows </b> option adds arrows on either side of the schedule, allowing you to navigate to the right or to the left of the schedule by successive hops.
+	<br> The <b> Floating Headers </b> option allows you to keep the schedule header (dates and days) even when you scroll down the page. This is more or less the principle of locking lines in Excel.
+
+
+	<h3> The schedule and task management form </h3>
+	The schedule is simple and intuitive. In person view, the small cells representing the tasks indicate the project identifier for the task. Conversely, in project view, we display the user ID assigned to the task.
+	<br>
+	When hovering over a task, you can see all the information in the task. Just click on the cell of a task to modify it.
+	<br>
+	The list of tasks, projects and people displayed is directly related to the rights of the connected person. Depending on the rights assigned to it in the <a href="utilisateurs.php"> user management </a>, the connected person will see more or less information.
+	<br>
+	When you click on an empty day, or below existing tasks, you go directly to the task creation form, and the project or person is pre-selected, as well as the date. You can also add a task directly from the menu at the top of the "Schedule >> Add a task" tool or from the colored "Add a task" button.
+	<br>
+	In the <b> task form only a few fields are required </b>: the project, the assigned user, the start date, and the duration.
+	<br>
+	All the other fields are there to allow you to go further in the management of your projects and offer you more possibilities.
+	<br>
+	Regarding the assigned person, we can inform several when creating the task. The task entered will then be duplicated to each person, each task being <b> independent </b>.
+	<br><br>
+	The <b> duration of a task </b> can be in the following form: an end date (ie several days in a row), or a duration in hours / minutes, or a start and end time, or morning or afternoon. These 4 possibilities offer you the flexibility to coordinate tasks and projects of different sizes by managing in a micro or macro way. You can easily mix tasks of several days with tasks of a few hours, SOPlanning will display the best according to your data.
+	<br><br>
+	The <b> recurrence </b> allows you to schedule a task at regular intervals: every day / weeks / month, depending on your needs. You can play with the different options: repeat every X days if you want to be able to space the tasks in time, set an end date of the repetition, and manage the case of the days not worked (to shift to the following day, do not not add or add anyway).
+	<br><br>
+	<B> statuses </b> allow the filter application in the schedule. Some statuses, such as the "Completed" status, display the task as a strikethrough in the schedule.
+	<br><br>
+	The concept of <b> deliverable </b> is close to a Gantt chart: it is a task representing a delivery on a given date. the task then displays a suitable pictogram, serving as a visual cue.
+	<br><br>
+	<B> Places and Resources </b> are optional modules for assigning items other than people and projects. This allows you to manage the booking of locations / rooms, equipment, vehicles, etc.
+	<br><br>
+	<B> email notification </b> is enabled by default. Important: the email will only be sent if this box is checked, the user assigned to a valid email entered in his form, and he has activated the option to receive notifications from SOPlanning.
+	<br><br>
+	Several users can easily access and modify the schedule or the same task at the same time: the information saved is that of the last person who validated the form.
+
+
+	<h3>Export modules</h3>
+	Several types of export are available.
+	If you can not find the desired export, the SOPlanning team can develop a tailor-made for you, please <a href="https://www.soplanning.org" target="_blank"> contact us </a>.
+	<br>
+	You can export the planning information in the format:
+	<Ul>
+	<li> CSV (open in excel) </ li>
+	<li> as an excel file with formatting close to that of the schedule </ li>
+	<li> in PDF (current page) </ li>
+	<li> in Gantt chart (used for project management with milestones) </ li>
+	<li> export ICal, synchronize with outlook or Gmail so you can view your tasks directly in your personal / pro calendar </ li>
+	<li> in calendar mode: this is a simplified view (paper calendar format) </ li>
+	</ Ul>
+
+	<h3> The planning summary </h3>
+	This summary table is optional, you can disable it in the <b> Display </b> menu. <br>
+	It allows a more detailed reading of the different tasks, also indicating a notion of total and load for each line (person or project according to the view). <br>
+	It is possible to modify the tasks by clicking on the different blocks describing the tasks.
+"""
+
+ressources_titre = "Resources management"
+
+ressources_contenu = """
+	Resources are additional data that can be task-related. <br>
+	This module is optional and can be activated or deactivated at any time in the SOPlanning options.
+	<br>
+	When the module is active, a selection drop-down menu appears in the task management form, containing the list of available resources. You can manage this list in the interface of <a href="ressources.php"> resource management </a>, via the "Settings >> Resources" menu.
+	<br>
+	This field is optional in the task form, so you do not have to choose a resource for each task even if the module is enabled.
+	<br><br>
+	For each resource you can define whether it is exclusive or not. If you make it exclusive, you will not be able to create another task with the same resource at the same time, SOPlanning will tell you that there is a conflict. If this exclusivity is not enabled, you can assign this resource as many times as you want at the same time.
+	<br><br>
+	Once a resource is assigned, you can also delete it from a task afterwards by editing the task again.
+"""
+
+users_titre = "Users management"
+
+users_contenu = """
+	Users represent the list of people displayed in the tool, as well as the people who can connect to the tool to view the schedule.
+	<br>
+	You can create as many users as you want, each will have specific rights.
+	<br>
+	A task is always linked to a project and a user. Before creating a task, make sure that the corresponding user is already created.
+
+	<h3> My profile </h3>
+	Each user can edit his profile by clicking on his name at the top right of the menu bar. This interface allows him to modify his email, his password, the activation of the notifications by email, as well as his preferences of display of the planning. Other information can only be changed by people with user rights.
+
+	<h3> Admin account </h3>
+	The user "admin" existing by default in the tool is not mandatory: this account is not the only one that can have all rights, you can safely remove it and create as many users with all rights that you wish. This avoids having a single account that can perform all operations.
+
+	<h3> List of users </h3>
+	The list of users includes all the people registered in the tool. This interface allows you to create / modify / delete a user, and view basic information of each user account.
+	<br>
+	You can sort this list by clicking on the names of the columns, and filter the list by team or by search engine.
+	<br>
+	<b> Important </b>: Deleting a user will delete all the tasks for that user.
+
+	<h3> The main information of a user </h3>
+	The identifier is a string of characters that is unique for each user. This identifier is the one that is displayed in the schedule. The goal is to define an identifier that easily represents the person concerned (initials, employee number, etc.). This identifier can not be changed later.
+	<br>
+	The field "name" is the only other required field for creating a user, this name will be displayed in the full summary under the schedule.
+	<br>
+	The "email" field is optional and will only be used if you enable email notifications (see below).
+	<br>
+	The "login" and "password" are also optional, and will only be needed if you want to give access to the schedule to the user concerned. Each login is unique. Please also enter passwords that are sufficiently complex (8 characters, with several breaks).
+
+	<H3> Team </h3>
+	You can attach a user to one and only one team. This will then define rights related to the team to which it belongs. See help on <a href="equipes.php"> teams </a> to manage the list of teams. See the <a href="../user_groupes.php"> Team Management </a> module
+
+	<h3> Definition of rights </h3>
+	<b> User Management </b>: gives the right to all possible actions on user accounts. There is no intermediate right to partially modify the accounts. See the module <a href="../user_list.php"> project management </a>.
+	<br><br>
+	<b> Project Management </b>: gives the right to all the possible actions on the project file. it does not give any rights over the tasks associated with these projects. There is no intermediate right to partially modify projects. See the module <a href="../projets.php"> project management </a>.
+	<br><br>
+	<b> Project Group Management </b>: Manage project groups to which projects can be attached. See the <a href="../groupe_list.php"> project group management </a> module.
+	<br><br>
+	<b> Schedule Modification </b>: This right determines what the user can modify in the schedule, it is not necessarily the set of tasks he sees (see right below). <I> read only </i> access does not allow any modification. The option <i> Only for projects owned by it </i> allows it to modify only these projects if it has been defined as owner in a project's form (see <a href = "../ projets.php "> project management </a>). The <i> Tasks to which it is assigned or its own projects </i> option allows it to modify the tasks where it owns the project and the tasks assigned to it on other projects. Finally the option <i> for all projects </i> allows him to modify all the tasks of the projects he can see.
+	<br><br>
+
+	<b> Planning view </b>: the <i> all projects </i> option allows the user to see all the projects present in the tool (unless he has voluntarily applied a schedule filter). The <i> Only Team Projects </i> option allows you to view only projects that are covered by at least one person on the same team as this user. You can not define a specific list of projects for this right, just add at least one task on a new project so that everyone on the same team can access this project. The <i> Only projects owned or assigned </i> option allows you to see all the tasks of the projects owned by the user, as well as the tasks on which it is assigned. The <i> Only Tasks assigned to it </i> option allows you to restrict the display to its own tasks only.
+	<br><br>
+	<b> Location Management </b>: gives the right to all the possible actions on the list of available places. This right only applies if this optional module is enabled in the SOPlanning settings. See the <a href="../lieux.php"> site management module </a>.
+	<br><br>
+	<b> Resource Management </b> entitles you to all possible actions on the list of available resources / materials. This right only applies if this optional module is enabled in the SOPlanning settings. See the module <a href="../ressources.php"> resource management </a>.
+	<br><br>
+	<b> Parameter Management </b>: gives access to the modification of all SOPlanning parameters.
+	<br><br>
+	<b> Statistical Access </b>: provides access to the different statistical modules available. The statistics are global and are not limited to the schedule view rights defined for the user.
+
+	<h3> Customization and Notifications </h3>
+	You can make the user <i> visible </i> or not in the schedule. This will not prevent him from being able to connect and consult the schedule, but it will be impossible to assign tasks to him.
+	<br>
+	You can also determine if this user will receive <i> email notifications </i>. An email will be sent to him for any created task that will be assigned to him, or for any modification or deletion of a task assigned to him.
+	<br>
+	you can finally set the <i> color </i> of the user. This color serves as a visual cue in the planning (in person view). If you distribute the colors among your different users, you will have an overview at a glance of the schedule of each without having to fly over each task to see the detail.
+
+	<h3> Personal info </h3>
+	These fields are optional and allow you to add additional information about each user. This information is not visible in the schedule and is only accessible to people with user management rights.
+"""
+
+equipes_titre = "Teams management"
+
+equipes_contenu = """
+	Teams can group together projects visually.
+	<br>
+	Teams can impact user rights in some cases, see managing <a href="user.php"> user rights </a>.
+	<br>
+	These teams help visibility in the management of users (filter on a possible team), and in the planning (possibility of grouping users by team in the option "sort by").
+	<br>
+	The team management module makes it possible to create / modify / delete teams at will.
+"""
+
+projets_titre = "Projects management"
+
+projets_contenu = """
+	A task is always linked to a project and a user. Before creating a task, make sure the corresponding project is already created.
+	<br>
+	You can create as many projects as you want. You can of course edit and delete them at will.
+
+	<h3> List of projects </h3>
+	By default, only <i> to </i> or <i> projects in progress </i> are displayed. You can change these criteria, they will only apply in this interface and not on the schedule.
+	<br>
+	You can also filter this list of projects by date, by project group, or do a text search on the project title. You can finally sort the list by clicking on the names of the columns.
+	<br>
+	In the list, the projects are grouped according to the groups of projects, the projects without group are at the beginning.
+	<br>
+	<b> Important </b>: Deleting a project will delete all tasks from this project
+
+	<h3> Project information </h3>
+	The <i> identifier </i> is a string of characters, unique for each project. This information is the visual cue displayed in the schedule.
+	<br>
+	The <i> project name </i> is the only other mandatory information for creating a project.
+	<br>
+	You can optionally set a <i> group of projects </i>, so you can easily group them visually, in the project listing and in the schedule.
+	<br>
+	The <i> status </i> also allows you to sort projects. By default, abandoned or archived projects are hidden.
+	<br>
+	The <i> charge </i>, the <i> delivery date </i>, the <i> link </i>, and the <i> comments </i> are simple information allowing you to Add details to your projects without consequences on the schedule.
+	<br>
+	The <i> color </i> of the project is the background color of the cell for tasks (in project view). Choose representative colors for each project for better readability.
+"""
+
+groupes_titre = "Project groups"
+
+groupes_contenu = """
+	Groups can group together projects visually. Groups have no impact on user rights.
+	<br>
+	These groups help visibility in the management of projects (grouped by group), and in the planning (possibility to group projects by group in the option "sort by").
+	<br>
+	The group management module makes it possible to create / modify / delete groups at will.
+"""
+
+faq_titre = "FAQ"
+
+faq_contenu = """
+	<b> Can I create a task without assigning anyone? </b>
+	<br>
+	No, the SOPlanning principle is based on the association of a person and a project, which gives a task at a given moment.
+	<br><br>
+
+	<b> How to manage holidays or absences in SOPlanning? </b>
+	<br>
+	SOPlanning is not designed to manage all the complex rules of holiday, each country and conventions having their own rules.
+	<br> The most effective way is to create a project "Leave" with a visible color, and to create tasks to represent your holidays. So when viewing the schedule, you will easily see people who already have assigned leave on the days concerned.
+	<br><br>
+
+	<b> I do not receive email notifications. What's going on? </b>
+	<br>
+	<ul>
+		<li> Check that your email is well informed in your profile, by clicking on your name at the top right of SOPlanning </ li>
+		<li> Check in this window that you have activated the reception of notifications </ li>
+		<li> Check in the settings of SOPlanning that you have correctly entered the SMTP parameters for sending emails (use the test tool to validate the correct functioning) </ li>
+		<li> Check that the person creating the task has checked "notify by email" </ li>
+		<li> Warning: if you assign yourself a task, you will not receive an email! </ li>
+	</ul>
+	<br>
+
+	<b> Can I put a user in multiple teams? </b>
+	<br>
+	No, currently SOPlanning can link a person to a single team, to remain simple in the management of rights. Contact us if you want to set up custom rights.
+	<br><br>
+
+	<b> How to manage holidays? </b>
+	<br>
+	Use the <a href="../feries.php"> Holidays Management </a> module. You can do an automatic import, or seize yourself on specific days. A box similar to a task will be displayed in the planning with the word "OFF".
+"""
+
+lieux_titre = "Places management"
+
+lieux_contenu = """
+	Places are additional data that can be related to tasks. <br>
+	This module is optional and can be activated or deactivated at any time in the SOPlanning options.
+	<br>
+	When the module is active, a selection drop-down menu appears in the task management form, containing the list of available locations. You can manage this list in the <a href="lieux.php"> place management </a> interface, via the "Settings >> Places" menu.
+	<br>
+	This field is optional in the task form, so you do not have to choose a location for each task even if the module is enabled.
+	<br><br>
+	For each place you can define whether it is exclusive or not. If you make it exclusive, you will not be able to create another task for that same place at the same time, SOPlanning will tell you there is a conflict. If this exclusivity is not activated, you can assign this place as many times as you like at the same time.
+	<br><br>
+	Once assigned, you can also delete it from a task afterwards by editing the task again.
+"""
+

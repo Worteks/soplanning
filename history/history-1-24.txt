@@ -1,0 +1,5 @@
+v1.24
+
+- New full layout !
+- Added portuguese and spanish languages
+- Added project color in the planning column, and today highlight.

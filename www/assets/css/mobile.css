@@ -1,0 +1,448 @@
+/* small smartphone : iphone 5*/
+@media ( max-width : 325px ) {
+	.modalBig {width: 90% !important;}
+	/* Planning */
+	.ms-options{min-width: auto !important;}
+	.planning-dateselector td{display:inline !important;}
+	#date_debut_affiche{width:125px !important;font-size:12px !important}
+	#date_fin_affiche{width:125px !important;font-size:12px !important}
+	#date_debut_custom{display:none !important}
+	#date_fin_custom{display:none !important}
+	.planningTabTask{display:block}
+	.planningTabCharge{display:none}
+	.planningTabName{display:none}
+	#dropdownProjectFilter{float:right}
+	#dropdownProjectFilter button{width:100% !important}
+	#dropdownUserFilter button{width:100% !important}
+	#dropdownProjectFilter button{width:100% !important}
+	#dropdownTri button{width:100% !important}	
+	#dropdownExport button {width:100% !important}
+	#btnDayView {float:right;}	
+	#btnDayView button {width:100% !important;padding-right:0px;}
+	#divPagination{width:48% !important}
+	#divNbrow{width:100% !important}
+	#divNbrow a{width:100% !important}
+	#divHideRow{width:100% !important}
+	#divHideRow a{width:100% !important}
+	#divShowRow{width:49% !important}
+	#divShowRow a{width:100% !important}
+	#divShowTable{width:49% !important}
+	#divShowTable a{width:100% !important}
+	
+	/*Project */
+	#projectListLabel{width:100% !important;clear:both;display:block;}
+	#projectListLabel label{width:100% !important;}
+	#projectStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectStatusLabel label{width:100% !important;}	
+	#projectStatusCheckbox{width:100% !important;}
+	#projectgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectgroupStatusLabel label{width:100% !important;}
+	#projectgroupStatusCheckbox{width:100% !important;}
+	.projectTabColCreator{display:none;}
+	.projectTabColCharge{display:none;}
+	.projectTabColDelivry{display:none;}
+	.projectTabColComment{display:none;}
+	
+	/*Users */
+	#userTab td{white-space:normal !important;}
+	.userTabColGroup{display:block;}
+	.userTabColRights{display:none !important;}
+	.userTabColEmail{display:none;}
+	.userTabColId{display:none;}
+	.userTabColLogin{display:none;}
+	.userTabColVisible{display:none;}
+	.userTabColInfo{display:none;}
+		
+	/*Taches*/
+	#date_fin_affiche_tache{width:90px !important;font-size:12px !important;}
+	#date_debut_affiche_tache{width:90px !important;font-size:12px !important;}
+	#taskDateSelectLabel{width:100%;clear:both;}
+	#taskDateSelectStart{display:block;float:left;}
+	#taskDateSelectEnd{display:block;float:left;}
+	#taskListLabel{width:100% !important;clear:both;display:block;}
+	#taskListLabel label{width:100% !important;}
+	#taskListFiltreLabel{width:100% !important;clear:both;display:block;}
+	#taskListFiltreLabel label{width:100% !important;}
+	#taskListButton{width:50% !important;}
+	#taskListFiltreButton{width:100%;clear:both;}
+	#taskListGroupeButton{width:100%;clear:both;}
+	#taskDateSelect{width:100%;clear:both;}
+	#taskStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskStatusLabel label{width:100% !important;}	
+	#taskStatusCheckbox{clear:both;display:block;width:100% !important;}
+	#taskgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskgroupStatusLabel label{width:100% !important;}
+	#taskgroupStatusCheckbox{width:100% !important;}
+	#taskNbMonth{width:38% !important;display:block;float:left;}
+	#taskFromDate{width:62% !important;display:block;float:left;}
+	#taskToDate{width:50%;}
+	#taskTab td{white-space:normal !important;}
+	.taskTabColCreator{display:none;}
+	.taskTabColCharge{display:none;}
+	.taskTabColDelivry{display:none;}
+	.taskTabColDebut{display:block;}
+	.taskTabColFin{display:block;}
+	.taskTabColComment{display:none;}
+}	
+	
+/* smartphone : iphone 6*/
+@media ( min-width : 325px ) and ( max-width : 400px ) {
+	.ms-options{min-width: auto !important;}
+	.col-md-12 {padding-left: 0px;padding-right: 0px;}
+	.row {margin-right: 0px !important}
+	.dropdown-menu{font-size:12px !important}
+	.dropdown-menu input[type=submit]{font-size:12px !important}	
+	.modalBig {width: 95% !important;}
+	.modal-body{padding:10px !important}
+	.cursor-help{display:none}
+	
+	/* Login */
+	/*.form-control{width:100% !important;}*/
+	
+	/* Planning */
+	#planning-dateselector tr{display:inline !important;}	
+	#divPlanningMainFilter{text-align:justify !important}
+	#divPlanningSecondFilter{text-align:justify !important}
+	#date_debut_affiche{width:125px !important;font-size:12px !important}
+	#date_fin_affiche{width:125px !important;font-size:12px !important}
+	#buttonDateSelector{width:100% !important;}
+	#dropdownUserFilter button{width:100% !important}
+	#dropdownProjectFilter button{width:100% !important}
+	#dropdownAdvancedFilter button{width:100% !important}
+	#dropdownTri button{width:100% !important}	
+	#dropdownExport button {width:100% !important}
+	#btnDayView {float:right;}	
+	#btnDayView button {width:100% !important;padding-right:0px;}
+	#divPagination{width:46% !important}
+	#divNbrow{width:46% !important}
+	#divNbrow a{width:100% !important}
+	#divHideRow{width:52% !important}
+	#divHideRow a{width:100% !important}
+	#divShowRow{width:46% !important}
+	#divShowRow a{width:100% !important}
+	#divShowTable{width:52% !important}
+	#divShowTable a{width:100% !important}
+	.planningTabTask{display:block}
+	.planningTabCharge{display:none}
+	.planningTabName{display:none}
+		
+	/*Project */
+	#projectListLabel{width:100% !important;clear:both;display:block;}
+	#projectListLabel label{width:100% !important;}
+	#projectStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectStatusLabel label{width:100% !important;}	
+	#projectStatusCheckbox{width:100% !important;}
+	#projectgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectgroupStatusLabel label{width:100% !important;}
+	#projectgroupStatusCheckbox{width:100% !important;}
+	.projectTabColCreator{display:none;}
+	.projectTabColCharge{display:none;}
+	.projectTabColDelivry{display:none;}
+	.projectTabColComment{display:none;}
+	
+	/*Users */
+	#userTab td{white-space:normal !important;}
+	.userTabColGroup{display:block;}
+	.userTabColRights{display:none !important;}
+	.userTabColEmail{display:none;}
+	.userTabColId{display:none;}
+	.userTabColLogin{display:none;}
+	.userTabColVisible{display:none;}
+	.userTabColInfo{display:none;}
+		
+	/*Taches*/
+	#date_fin_affiche_tache{width:90px !important;font-size:12px !important;}
+	#date_debut_affiche_tache{width:90px !important;font-size:12px !important;margin-right:5px;}
+	#dateFilterButtonTask{margin-top:0px;}
+	#taskDateSelect{width:100%;clear:both;}
+	#taskDateSelectLabel{width:100%;}
+	#taskDateSelectStart{display:block;float:left;}
+	#taskDateSelectEnd{display:block;float:left;}
+	#taskListLabel{width:100% !important;clear:both;display:block;}
+	#taskListLabel label{width:100% !important;}
+	#taskListButton{width:50% !important;}
+	#taskListFiltreButton{width:100%;clear:both;}
+	#taskListGroupeButton{width:100%;clear:both;}
+	#taskDateSelect{width:100%;clear:both;}
+	#taskStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskStatusLabel label{width:100% !important;}	
+	#taskStatusCheckbox{clear:both;display:block;width:100% !important;}
+	#taskgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskgroupStatusLabel label{width:100% !important;}
+	#taskgroupStatusCheckbox{width:100% !important;}
+	#taskNbMonth{width:35% !important;display:block;float:left;}
+	#taskFromDate{width:45% !important;display:block;float:left;margin-left:25px;}
+	#taskFromDate label{margin-left:0px !important;}
+	#taskToDate{width:100% !important;}
+	#taskToDate label{margin-left:0px !important;}
+	#taskTab td{white-space:normal !important;}
+	.taskTabColCreator{display:none;}
+	.taskTabColCharge{display:none;}
+	.taskTabColDelivry{display:none;}
+	.taskTabColComment{display:none;}
+}
+
+
+/* smartphone : iphone 6*/
+@media ( min-width : 400px ) and ( max-width : 720px ) {
+	.col-md-12 {padding-left: 0px;padding-right: 0px;}
+	.row {margin-right: 0px !important}
+	.dropdown-menu{font-size:12px !important}
+	.dropdown-menu input[type=submit]{font-size:12px !important}
+	.modalBig {width: 90% !important;}
+	.modal-body{padding:10px !important}
+	.cursor-help{display:none}
+		
+	/* Login */
+	/*.form-control{width:100% !important;}*/
+	
+	/* Planning */
+	#label_affichage{display:inline !important}
+	#label_addtask{display:inline !important}
+	#label_tierpar{display:inline !important}
+	#label_export{display:inline !important}	
+	#buttonDateSelector{width:100% !important;}
+	#dropdownUserFilter button{width:100% !important}
+	#dropdownProjectFilter button{width:100% !important}
+	#dropdownAdvancedFilter button{width:100% !important}
+	#btnDayView {float:right;display:block;}	
+	#btnDayView button {width:100% !important;}
+	#divPagination{width:46% !important}
+	#divNbrow{width:46% !important}
+	#divNbrow a{width:100% !important}
+	#divHideRow{width:52% !important}
+	#divHideRow a{width:100% !important}
+	#divShowRow{width:46% !important}
+	#divShowRow a{width:100% !important}
+	#divShowTable{width:52% !important}
+	#divShowTable a{width:100% !important}
+	.planningTabTask{display:block}
+	.planningTabCharge{display:none}
+	.planningTabName{display:none}
+	
+	/*Project */
+	#projectListLabel{width:100% !important;clear:both;display:block;}
+	#projectListLabel label{width:100% !important;}
+	#projectStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectStatusLabel label{width:100% !important;}	
+	#projectStatusCheckbox{width:100% !important;}
+	#projectgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectgroupStatusLabel label{width:100% !important;}
+	#projectgroupStatusCheckbox{width:100% !important;}
+	.projectTabColCreator{display:block;}
+	.projectTabColCharge{display:none;}
+	.projectTabColDelivry{display:none;}
+	.projectTabColComment{display:none;}
+	
+	/*Users */
+	#userTab td{white-space:normal !important;}
+	.userTabColGroup{display:block;}
+	.userTabColRights{display:none !important;}
+	.userTabColEmail{display:none;}
+	.userTabColId{display:none;}
+	.userTabColLogin{display:none;}
+	.userTabColVisible{display:none;}
+	.userTabColInfo{display:none;}
+		
+	/*Taches*/
+	#date_fin_affiche_tache{width:90px !important;font-size:12px !important;}
+	#date_debut_affiche_tache{width:90px !important;font-size:12px !important;margin-right:5px;}
+	#dateFilterButtonTask{margin-top:0px;}
+	#taskDateSelectLabel{width:100%;clear:both;}
+	#taskListLabel{width:100% !important;clear:both;display:block;}
+	#taskListLabel label{width:100% !important;}
+	#taskListButton{width:50% !important;}
+	#taskListFiltreButton{width:100%;clear:both;}
+	#taskListGroupeButton{width:100%;clear:both;}
+	#taskDateSelect{width:100%;clear:both;}
+	#taskStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskStatusLabel label{width:100% !important;}	
+	#taskStatusCheckbox{clear:both;display:block;width:100% !important;}
+	#taskgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskgroupStatusLabel label{width:100% !important;}
+	#taskgroupStatusCheckbox{width:100% !important;}
+	#taskSearchbox{width:100%;display:block;}
+	#taskNbMonth{width:38% !important;display:block;float:left;}
+	#taskFromDate{width:62% !important;display:block;float:left;}
+	#taskToDate{width:50%;}
+	#taskTab td{white-space:normal !important;}
+	.taskTabColCreator{display:block;}
+	.taskTabColCharge{display:none;}
+	.taskTabColDelivry{display:none;}
+	.taskTabColComment{display:none;}
+}
+
+/* smartphone : iphone 6*/
+@media ( max-width : 580px ) {
+	#label_tierpar{display:none !important}
+	#label_export{display:none !important}	
+}
+
+/* smartphone : iphone 6*/
+@media ( max-width : 580px ) {
+	#label_addtask{display:none !important}
+	#label_vuemois{display:none !important}
+	#label_vuejour{display:none !important}	
+}
+
+/* smartphone : iphone 6*/
+@media ( min-width : 720px ) and ( max-width : 860px ) {
+	.col-md-12 {padding-left: 0px;padding-right: 0px;}
+	.row {margin-right: 0px !important}
+	.dropdown-menu{font-size:12px !important}
+	.dropdown-menu input[type=submit]{font-size:12px !important}
+	.modalBig {width: 75% !important;}
+	.modal-body{padding:10px !important}
+	.cursor-help{display:none}
+		
+	/* Login */
+	/*#formLogin .form-control{width:100% !important;}*/
+	
+	/* Planning */
+	#label_affichage{display:inline !important}
+	#label_addtask{display:inline !important}
+	#label_tierpar{display:inline !important}
+	#label_export{display:inline !important}
+	#buttonDateSelector{width:100% !important;}
+	#dropdownUserFilter button{width:100% !important}
+	#dropdownProjectFilter button{width:100% !important}
+	#dropdownAdvancedFilter button{width:100% !important}
+	#btnDayView {margin-left:0px !important;padding-right:0px;float:right;}	
+	#btnDayView button {width:100% !important;padding-right:0px;}
+	#divPagination{width:46% !important}
+	#divNbrow{width:46% !important}
+	#divNbrow a{width:100% !important}
+	#divHideRow{width:52% !important}
+	#divHideRow a{width:100% !important}
+	#divShowRow{width:46% !important}
+	#divShowRow a{width:100% !important}
+	#divShowTable{width:52% !important}
+	#divShowTable a{width:100% !important}
+	.planningTabTask{display:block}
+	.planningTabCharge{display:block}
+	.planningTabName{display:block}
+
+	/*Project */
+	#projectStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectStatusLabel label{width:100% !important;}	
+	#projectStatusCheckbox{width:100% !important;}
+	#projectgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#projectgroupStatusLabel label{width:100% !important;}
+	#projectgroupStatusCheckbox{width:100% !important;}
+	.projectTabColCreator{display:block;}
+	.projectTabColCharge{display:none;}
+	.projectTabColDelivry{display:none;}
+	.projectTabColComment{display:none;}
+	
+	/*Users */
+	#userTab td{white-space:normal !important;}
+	.userTabColGroup{display:block;}
+	.userTabColRights{display:none !important;}
+	.userTabColEmail{display:none;}
+	.userTabColId{display:none;}
+	.userTabColLogin{display:none;}
+	.userTabColVisible{display:none;}
+	.userTabColInfo{display:none;}
+		
+	/*Taches*/
+	#taskListButton{width:50% !important;}
+	#taskStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskStatusLabel label{width:100% !important;}		
+	#taskStatusCheckbox{clear:both;display:block;width:100% !important;}
+	#taskgroupStatusLabel{width:100% !important;clear:both;display:block;}
+	#taskgroupStatusLabel label{width:100% !important;}
+	#taskgroupStatusCheckbox{width:100% !important;}
+	#taskListFiltreButton{width:100%;clear:both;}
+	#taskListGroupeButton{width:100%;clear:both;}
+	#taskDateSelect{width:100%;clear:both;}
+	#taskSearchbox{width:100%;display:block;}
+	#taskNbMonth{width:38% !important;display:block;float:left;}
+	#taskFromDate{width:62% !important;display:block;float:left;}
+	#taskToDate{width:50%;}
+	#taskTab td{white-space:normal !important;}
+	.taskTabColCreator{display:block;}
+	.taskTabColCharge{display:none;}
+	.taskTabColDelivry{display:none;}
+	.taskTabColComment{display:none;}
+}
+
+/* smartphone, phablets, tablets */
+@media ( max-width : 860px ) {
+	.form-horizontal .btn-primary {margin-left: 0px !important;}
+	.btn-group {margin-right:0px !important;}
+	.form-horizontal .control-label, .radio, .input {font-weight: bold;}
+	.tab-content .form-group {margin-right:10px;}
+	.col-md-4{padding-left: 0px;}
+	.input-group .form-control, .input-group-addon, .input-group-btn{display:block;}
+	.radio-inline{padding-left:0px !important;margin-left:0px !important;}
+	.radio label{padding-left:5px !important;}
+	
+	#divPlanningDateSelector{text-align:left;font-size:12px;}
+	#divPlanningRecap td{white-space:normal}
+	#tablePlanning{margin-left:0px}
+	#label_affichage{display:none}
+	#label_addtask{display:none}
+	#label_tierpar{display:none}
+	#label_export{display:none}	
+	#tabProjets{width:auto}
+	#tabUsers{width:auto!important;}
+	.emptylabel{display:none}
+	.container-fluid{padding-left:5px;padding-right:5px;}
+	.container{padding-left:5px;padding-right:5px;}
+	.navbar-static-top{margin-bottom:10px;}
+	.dropdown-menu-hover{display:none !important;}
+	.soplanning-box{padding:7px;text-align:left;}
+
+	.w12 {width:auto}
+	.w25 {width:auto}
+	.w40 {width:auto}
+	.w50 {width:auto}
+	#userTab .w100{width:100px;}
+	#projectTab .w100{width:100px;}
+	
+	.padding-left-100{padding-left:0px;}
+	.col-md-12{padding-left:8px;}
+
+	/*.form-group{padding-left:10px;}*/
+	.tab-content .form-group{padding-left:15px;}
+	
+	#navbar > ul{margin-left:8px;}
+	#myTab {margin-bottom:10px;}
+	.navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}	
+	.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+	padding-left: 15px;
+	}
+	#optionsRow .col-md-3, #optionsRow .col-md-9{padding-right:2px !important;}
+    .navbar-collapse,.navbar-header{margin-right:0px !important;}
+	#periodForm .datepicker,#projectForm .datepicker{width:20% !important}}
+
+@media ( min-width : 860px ) and ( max-width : 1100px ) 
+{
+	.modalBig {width: 75% !important;}	
+	#taskListFiltreButton{width:100%;clear:both;}
+	#taskListGroupeButton{width:100%;clear:both;}
+	#taskDateSelect{width:100%;clear:both;}
+}
+
+@media (max-width: 1165px) {
+.alert {
+    margin-left: 0px;
+    margin-right: 0px;
+	}
+  .collapse.in{
+      display:block !important;
+  }
+  .input-withicon{width:100%}
+}
+
+input[type="date"]::-webkit-clear-button,
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+
+#taskDateSelect {display:block;}
+#taskListFiltreButton{display:block;}
+#taskListGroupeButton{display:block;}
+#taskListGroupeLabel{padding-left:0px;}
+#taskStatusCheckbox{display:block;}

@@ -1,0 +1,13 @@
+v1.35
+New fresh view : click on the "zoom" icon and display more detailed cells for tasks : user name, title, duration, day occupency
+Added total hours assigned and occupency rate at bottom of the planning (if activitated)
+Total hours (bottom of the planning) now well computed and displayed in the last right cell of the day
+Now save horizontal and vertical scrolls position for each view (months and days). Refreshing, filtering or switching does not affect anymore planning viewing
+backward / forward buttons are now sticked to dates selected, move for the same duration
+Modification on a repeated task is now applied to all repetitions
+You can now repeat task from every task, not only the original one, and you can repeat in the past (retroplanning)
+Added buttons "Delete before / after" on repeated tasks
+Drag and drop a task covering several days : start date is now relative, defined by the day you moved
+Obsolete code deleted for better compatibility with last versions of PHP
+Completed or abandoned projects : they are now hidden in the planning, unless one task is covering days displayed
+Fulltext search upgraded, can now search on several words, will display all tasks concerned by one of the words

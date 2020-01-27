@@ -1,0 +1,290 @@
+
+aide_retour = "Retour au sommaire"
+
+index_contenu = """
+	<b>SOMMAIRE DE L'AIDE EN LIGNE</b>
+	<br><br>
+	SOPlanning est simple d'utilisation : vous planifiez des tâches, en associant une personne à un projet.
+	<br>
+	Une fois cette règle assimiliée, SOPlanning vous propose de nombreuses fonctionnalités permettant de planifier et gérer vos projets, personnes, ressources ou lieux avec un affichage clair.
+	<br><br>
+	Retrouvez ci-dessous l'ensemble des fonctionnalités de SOPlanning.
+	<br>
+	N'hésitez pas à contacter le <a target="_blank" href="http://www.soplanning.org">support technique</a> ou aller sur le <a href="http://forum.soplanning.org" target="_blank">forum</a> pour toute question.
+"""
+
+planning_titre = "Affichage du planning"
+
+planning_contenu = """
+	<h3>Les différents modes d'affichage</h3>
+	Dans le menu "Affichage" vous trouverez tous les affichages disponibles dans SOPlanning :
+	<br>
+	<ul>
+		<li><b>Planning par personnes</b> : SOPlanning dispose les personnes/utilisateurs dans la colonne de gauche, les tâches sont ainsi disposées sur les lignes de chaque personnes.</li>
+		<li><b>Planning par projets</b> : SOPlanning dispose les projets dans la colonne de gauche, les tâches sont ainsi disposées sur les lignes de chaque projet.</li>
+		<li><b>Planning lieux</b> : Si ce module est activé, SOPlanning dispose les lieux dans la colonne de gauche, les tâches relatives à ces lieux seront disposées sur les lignes correspondantes.</li>
+		<li><b>Planning ressources</b> : Si ce module est activé, SOPlanning dispose les ressources dans la colonne de gauche, les tâches relatives à ces lieux seront disposées sur les lignes correspondantes.</li>
+		<li><b>Agenda personnes</b> : Cet affichage en mode agenda permet d'afficher l'ensemble des tâches pour chaque personne pour une journée précise. Les noms des personnes sont affichées en haut du planning, les tranches horaires de la journée sélectionnée sont dans la colonne de gauche.</li>
+		<li><b>Vue par heure</b> : les colonnes du planning sont les tranches horaires (1 colonne = 1 heure). Ainsi vous pouvez suivre vos projets heure par heure et visualiser les tâches qui couvre plusieurs heures.</li>
+		<li><b>Vue par jour</b> : les colonnes du planning sont les jours, il s'agit de l'affichage par défaut de SOPlanning</li>
+		<li><b>Afficher les lignes vides</b> : par défaut SOPlanning affiche toutes les lignes (personnes, projets, etc) du planning. Si vous désactivez cette option, SOPlanning n'affichera que les lignes contenant au moins une tâche sur la période sélectionnée.</li>
+		<li><b>Afficher ligne de total</b> : affiche une ligne supplémentaire sous le planning, contenant le total horaire de chaque colonne</li>
+		<li><b>Affichage récapitulatif</b> : affiche un tableau récapitulatif de toutes les tâches en dessous du planning. Cette version est plus "textuelle" et permet une lecture plus détaillée des tâches.</li>
+	</ul>
+	Une fois un choix effectué dans ce menu, vous pouvez passer d'une vue à l'autre sans paramétrage supplémentaire.
+
+	<h3>Sélection des dates à afficher</h3>
+	Le planning est affiché selon une date de début et une date de fin (sauf pour l'affichage agenda, qui n'affiche qu'un jour).
+	<br>C'est vous qui choisissez la période de temps à afficher dans le planning en cliquant sur les dates en haut à gauche.
+	<br>Le module vous permet alors de choisir la date de début, la date de fin, ou de préselectionner une date avec des raccourcis (aujourd'hui, semaine dernière, etc). Il suffit de cliquer sur le bouton de validation pour changer instantanément la période de temps affichée.
+	<br>Vous pouvez également utiliser les boutons situés à droite du choix des dates (boutons avec flèches avant et arrière). Ces boutons vous permettent de décaler le planning dans un sens ou dans l'autre. Le décalage appliqué correspond à la durée affichée : si vous affichez 2 mois, les boutons décaleront le planning de 2 mois, ainsi de suite.
+
+	<h3>Les filtres</h3>
+	Les différents filtres présents permettent de personnaliser l'affichage pour ne voir que les tâches qui vous intêressent.
+	<br>Vous pouvez filtrer par <b>utilisateur</b>, par <b>projet</b>, par <b>statut des tâches</b>, par <b>statut des projets</b>, par <b>lieu</b> ou par <b>ressource</b>.
+	<br>Pour chacun de ces filtres vous pouvez cocher plusieurs choix. Une fois le filtre appliqué, il devient rouge pour voir rapidement qu'un filtre est actif. Seules les tâches correspondant à ces choix seront affichées.
+	<br>Vous pouvez à tout moment retirer un filtre en cliquant à nouveau sur le filtre, puis sur le bouton <i>Désactiver</i>.
+
+	<h3>Autres options d'affichage</h3>
+	Vous pouvez <b>trier le planning</b> selon votre choix : tri par nom de personne ou identifiant si le planning est affiché par personne, ou tri par nom de projet ou identifiant de projet si le planning est affiché par projet.
+	<br>
+	Vous pouvez également afficher un niveau supplémentaire en sélectionnant <i>Equipe</i> pour la vue par personne, ou <i>Groupe de projets</i> pour la vue par projet.
+	<br><br>
+	<b>Vue détaillée / vue compacte</b> : par défaut SOPlanning affiche une vue compacte des tâches, indiquant seulement l'identifiant de la personne ou du projet. La vue détaillée élargit la cellule d'une tâche pour afficher des informations supplémentaires (toutes les informations sont de toutes façon affichées au survol des tâches) : heure de début de la tâche, durée de la tâche, total horaire de la journée pour la personne assignée à cette tâche, et jauge de "remplissage" : elle indique 100% si le total des tâches de la personne sur la journée correspondent au maximum d'heures de travail disponibles. Exemple : une personne a une tâche de 5h et une autre de 3h, la jauge indiquera 100% si vous avez activé 8 heures disponibles dans SOPlanning.
+	<br><br>
+	Vous pouvez personnaliser la navigation dans le planning : en activant <b>Ascenceur en haut du planning</b>, vous rajouter un ascenceur au dessus du planning qui sera utile si vous avez une longue liste de projets/personnes.
+	<br>L'option <b>Flèches de navigation</b> ajoute des flèches de par et d'autre du planning, vous permettant de naviguer vers la droite ou vers la gauche du planning par bonds successifs.
+	<br>L'option <b>Entêtes flottantes</b> vous permet de conserver l'entête du planning (les dates et jours) même lorsque vous défiler la page vers le bas. Cela revient plus ou moins au principe de vérouillage des lignes sous Excel.
+
+
+	<h3>Le planning et le formulaire de gestion de tâche</h3>
+	Le planning est simple et intuitif. En vue par personne, les petites cellules représentant les tâches indiquent l'identifiant du projet concerné par la tâche. A l'inverse, en vue par projet, on affiche l'identifiant de l'utilisateur assigné à la tâche.
+	<br>
+	Au survol de la souris sur une tâche, vous pouvez consulter l'ensemble des informations de la tâche. Il suffit de cliquer sur la cellule d'une tâche pour la modifier.
+	<br>
+	La liste des tâches, projets et personnes affichées découlent directement des droits de la personne connectée. Suivant les droits qui lui ont été attribués dans la <a href="utilisateurs.php">gestion des utilisateurs</a>, la personne connectée verra plus ou moins d'informations.
+	<br><br>
+	Lors du clic sur un jour vide, ou en dessous de tâches existantes, vous accédez directement au formulaire de création de tâche, et le projet ou la personne correspondant est pré-sélectionné, ainsi que la date. Vous pouvez également ajouter une tâche directement depuis le menu en haut de l'outil "Planning >> Ajouter une tâche" ou depuis le bouton coloré "Ajouter une tâche".
+	<br>
+	Dans le formulaire de tâche <b>seuls quelques champs sont obligatoires</b> : le projet, l'utilisateur assigné, la date de début, et la durée.
+	<br>
+	Tous les autres champs sont là pour vous permettre d'aller plus loin dans la gestion de vos projets et vous offrir plus de possibilités.
+	<br>
+	Concernant la personne assignée, on peut en renseigner plusieurs lors de la création de tâche. La tâche saisie sera alors dupliquée à chaque personne, chaque tâche étant <b>indépendante</b>.
+	<br><br>
+	La <b>durée d'une tâche</b> peut être sous la forme suivante : une date de fin (donc plusieurs jours à la suite), ou une durée en heures/minutes, ou une heure de début et de fin, ou matin ou après-midi. Ces 4 possibilités vous offrent toute la souplesse de coordonner des tâches et projets de différentes tailles en gérant de manière micro ou macro. Vous pouvez sans problème mixer des tâches de plusieurs jours avec des tâches de quelques heures, SOPlanning affichera au mieux selon vos données.
+	<br><br>
+	La <b>récurrence</b> vous permet de planifier une tâche à interval régulier : tous les jours / semaines / mois, selon vos besoins. Vous pouvez jouer avec les différentes options : répéter tous les X jours si l'on veut pouvoir espacer les tâches dans le temps, définir une date de fin de la répétition, et gérer le cas des jours non travaillés (décaler au jour suivant, ne pas ajouter ou ajouter quand même).
+	<br><br>
+	Les <b>statuts</b> permettent l'application de filtre dans le planning. Certains statuts comme le statut "Terminé" affiche la tâche en barré dans le planning.
+	<br><br>
+	La notion de <b>livrable</b> se rapproche d'un diagramme de Gantt : il s'agit d'une tâche réprésentant une livraison à une date donnée. la tâche affiche alors un pictogramme adapté, servant de repère visuel.
+	<br><br>
+	Les <b>lieux et ressources</b> sont des modules facultatifs permettant d'assigner des items autres que les personnes et projets. Cela vous permet de gérer la réservation d'emplacements / salles, matériels, véhicules, etc.
+	<br><br>
+	La <b>notification par email</b> est activée par défaut. Important : l'email ne sera envoyé que si cette case est cochée, que l'utilisateur assigné à un email valide renseigné dans sa fiche, et qu'il a bien activé l'option pour recevoir les notifications de SOPlanning.
+	<br><br>
+	Plusieurs utilisateurs peuvent sans problème accéder et modifier le planning ou la même tâche en même temps : les informations sauvegardées sont celles de la dernière personne ayant validé le formulaire.
+
+
+	<h3>Les exports</h3>
+	Plusieurs types d'export sont disponibles.
+	Si vous ne trouvez pas l'export souhaité, l'équipe de SOPlanning peut en développer un sur mesure pour vous, veuillez <a href="https://www.soplanning.org" target="_blank">nous contacter</a>.
+	<br>
+	Vous pouvez exporter les informations du planning en format :
+	<ul>
+		<li>CSV (ouvrable dans excel)</li>
+		<li>en fichier excel avec une mise en forme proche de celle du planning</li>
+		<li>en PDF (page courante)</li>
+		<li>en diagramme de Gantt (utilisé pour la gestion de projets avec jalons)</li>
+		<li>en export ICal, à synchroniser avec outlook ou Gmail afin de pouvoir consulter vos tâches directement dans votre agenda perso/pro</li>
+		<li>en mode calendrier : il s'agit d'une vue simplifiée (format calendrier papier)</li>
+	</ul>
+
+	<h3>Le récapitulatif du planning</h3>
+	Ce tableau de synthèse est facultatif, vous pouvez le désactiver dans le menu <b>Affichage</b>.<br>
+	Il permet une lecture plus détaillée des différentes tâches, en indiquant également un notion de total et de charge pour chaque ligne (personne ou projet selon la vue).<br>
+	Il est possible de modifier les tâches en cliquant sur les différents blocs décrivant les tâches.
+"""
+
+ressources_titre = "Gestion des ressources"
+
+ressources_contenu = """
+	Les ressources sont des données supplémentaires pouvant être liées aux tâches.<br>
+	Ce module est facultatif et peut être activé ou désactivé à tout moment dans les options de SOPlanning.
+	<br>
+	Lorsque le module est actif, une menu déroulant de sélection apparait dans le formulaire de gestion de tâche, contenant la liste des ressources disponibles. Vous pouvez gérer cette liste dans l'interface de <a href="ressources.php">gestion des ressources</a>, via le menu "Paramètres >> Ressources".
+	<br>
+	Ce champ est facultatif dans le formulaire de tâche, vous n'êtes donc pas obligé de choisir une ressource pour chaque tâche même si le module est activé.
+	<br><br>
+	Pour chaque ressource vous pouvez définir si elle est exclusive ou non. Si vous la rendez exclusive, vous ne pourrez pas créer d'autre tâche avec cette même ressource au même moment, SOPlanning vous indiquera qu'il existe un conflit. Si cette exclusivité n'est pas activée, vous pourrez assigner cette ressource autant de fois que vous le souhaitez en simultané.
+	<br><br>
+	Une fois une ressource assignée, vous pouvez également la supprimer d'une tâche par la suite en éditant à nouveau la tâche.
+"""
+
+users_titre = "Gestion des utilisateurs"
+
+users_contenu = """
+	Les utilisateurs représentent la liste des personnes affichées dans l'outil, ainsi que les personnes pouvant se connecter à l'outil pour consulter le planning.
+	<br>
+	Vous pouvez créer autant d'utilisateurs que vous le souhaitez, chacun aura des droits spécifiques.
+	<br>
+	Une tâche est systématiquement reliée à un projet et un utilisateur. Avant de créer une tâche, assurez-vous que l'utilisateur correspondant soit déjà créé.
+
+	<h3>Mon profil</h3>
+	Chaque utilisateur peut éditer son profil en cliquant sur son nom en haut à droite de la barre de menu. Cet interface lui permet de modifier son email, son mot de passe, l'activation des notifications par email, ainsi que ses préférences d'affichage du planning. Les autres informations ne sont modifiables que par les personnes ayant les droits de gestion des utilisateurs.
+
+	<h3>Compte admin</h3>
+	L'utilisateur "admin" existant par défaut dans l'outil n'est pas obligatoire : ce compte n'est pas le seul qui peut avoir tous les droits, vous pouvez sans problème le supprimer et créer autant d'utilisateurs avec tous les droits que vous souhaitez. Ceci évite d'avoir un seul compte qui peut effectuer toutes les opérations.
+
+	<h3>Liste des utilisateurs</h3>
+	La liste des utilisateurs reprend l'ensemble des personnes enregistrées dans l'outil. Cet interface vous permet de créer / modifier / supprimer un utilisateur, et consulter des infos basiques de chaque compte utilisateur.
+	<br>
+	Vous pouvez trier cette liste en cliquant sur les noms des colonnes, et filtrer la liste par équipe ou par moteur de recherche.
+	<br>
+	<b>Important</b> : la suppression d'un utilisateur entrainera la suppression de toutes les tâches de cet utilisateur.
+
+	<h3>Les principales informations d'un utilisateur</h3>
+	L'identifiant est une chaine de caractères qui est unique pour chaque utilisateur. Cet identifiant est celui qui affiché dans le planning. Le but est de définir un identifiant représentant facilement la personne concernée (initiales, numéro d'employé, etc). Cet identifiant ne peut être changé par la suite.
+	<br>
+	Le champ "nom" est le seul autre champ obligatoire pour la création d'un utilisateur, ce nom sera affiché dans le récapitulatif complet sous le planning.
+	<br>
+	Le champ "email" est optionnel et servira uniquement si vous activez les notifications par email (voir plus bas).
+	<br>
+	Le "login" et "mot de passe" sont également facultatif, et ne seront à renseigner que si vous souhaitez donner accès au planning à l'utilisateur concerné. Chaque login est unique. Veuillez également à renseigner des mots de passe suffisamment complexe (8 caractères, avec plusieurs casses).
+
+	<h3>L'équipe</h3>
+	Vous pouvez rattacher un utilisateur à une et une seule équipe. Ceci permettra ensuite de définir des droits en rapport avec l'équipe à laquelle il appartient. Voir aide sur <a href="equipes.php">les équipes</a> pour gérer la liste des équipes. Voir le module de <a href="../user_groupes.php">gestion des équipes</a>
+
+	<h3>Définition des droits</h3>
+	<b>Gestion des utilisateurs</b> : donne droit à l'ensemble des actions possibles sur les comptes utilisateurs. Il n'existe pas de droit intermédiaire permettant de modifier partiellement les comptes. Voir le module de <a href="../user_list.php">gestion des projets</a>.
+	<br><br>
+	<b>Gestion des projets</b> : donne droit à l'ensemble des actions possibles sur la fiche d'un projet. ça ne donne en revancha aucun droit sur les tâches associées à ces projets. Il n'existe pas de droit intermédiaire permettant de modifier partiellement les projets. Voir le module de <a href="../projets.php">gestion des projets</a>.
+	<br><br>
+	<b>Gestion des groupes de projets</b> : permet de gérer les groupes de projets, auxquels peuvent être rattachés les projets.  Voir le module de <a href="../groupe_list.php">gestion des groupes de projets</a>.
+	<br><br>
+	<b>Modification du planning</b> : ce droit détermine ce que l'utilisateur peut modifier dans le planning, ce n'est pas nécessairement l'ensemble des tâches qu'il voit (voir droit ci-dessous). L'accès en <i>lecture seule</i> ne lui permet aucune modification. L'option <i>Uniquement pour les projets dont il est le propriétaire</i> lui permet de modifier uniquement ces projets si il a été défini comme propriétaire dans la fiche d'un projet (voir <a href="../projets.php">gestion des projets</a>). L'option <i>Tâches sur lesquelles il est assigné ou ses propres projets</i> lui permet de modifier les tâches où il est propriétaire du projet ainsi que les tâches qui lui sont assignées sur d'autres projets. Enfin l'option <i>pour tous les projets</i> lui permet de modifier l'ensemble des tâches des projets qu'il peut voir.
+	<br><br>
+	<b>Vue du planning</b> : l'option <i>tous les projets</i> permet à l'utilisateur de voir l'ensemble des projets présents dans l'outil (sauf s'il a volontairement appliqué un filtre au planning). L'option <i>Uniquement les projets de l'équipe</i> lui permet de consulter uniquement les projets couverts par au moins une personne de la même équipe que cet utilisateur. On ne peut pas définir une liste précise de projets pour ce droit, il suffit d'ajouter au moins une tâche sur un nouveau projet pour que toutes les personnes de la même équipe puisse accéder à ce projet. L'option <i>Uniquement les projets dont il est propriétaire ou assigné</i> permet de voir toutes les tâches des projets dont l'utilisateur est propriétaire, ainsi que les tâches sur lesquelles il est assigné. L'option <i>Uniquement les tâches qui lui sont assigné</i> permet de restreindre l'affichage à ses propres tâches uniquement.
+	<br><br>
+	<b>Gestion des lieux</b> : donne droit à l'ensemble des actions possibles sur la liste des lieux disponibles. Ce droit s'applique uniquement si ce module optionnel est activé dans les paramètres de SOPlanning. Voir le module de <a href="../lieux.php">gestion des lieux</a>.
+	<br><br>
+	<b>Gestions des ressources</b> donne droit à l'ensemble des actions possibles sur la liste des ressources/matériels disponibles. Ce droit s'applique uniquement si ce module optionnel est activé dans les paramètres de SOPlanning. Voir le module de <a href="../ressources.php">gestion des ressources</a>.
+	<br><br>
+	<b>Gestion des paramètres</b> : donne accès à la modification de l'ensemble des paramètres de SOPlanning.
+	<br><br>
+	<b>Accès aux statistiques</b> : donne accès aux différents modules de statistiques disponibles. Les statistiques sont globales et ne sont pas limitées aux droits de vue du planning définis pour l'utilisateur.
+
+	<h3>Personnalisation et notifications</h3>
+	Vous pouvez rendre l'utilisateur <i>visible</i> ou non dans le planning. Cela ne l'empêchera pas de pouvoir se connecter et consulter le planning, en revanche il sera impossible de lui attribuer des tâches.
+	<br>
+	Vous pouvez également déterminer si cet utilisateur recevra des <i>notifications par email</i>. Un email lui sera envoyé pour toute tâche créée qui lui sera assignée, ou pour toute modification ou suppression d'une tâche qui lui est assignée.
+	<br>
+	vous pouvez enfin définir la <i>couleur</i> de l'utilisateur. Cette couleur sert de repère visuel dans le planning (en vue par personne). Si vous répartissez les couleurs entre vos différents utilisateurs, vous aurez ainsi un aperçu en un coup d'oeil du planning de chacun sans avoir besoin de survoler chaque tâche pour voir le détail.
+
+	<h3>Infos personnelles</h3>
+	Ces champs sont facultatifs et vous permettent de rajouter des informations complémentaires à propos de chaque utilisateur. Ces informations ne sont pas visibles dans le planning et sont accessibles uniquement aux personnes ayant les droits de gestion des utilisateurs.
+"""
+
+equipes_titre = "Gestion des équipes"
+
+equipes_contenu = """
+	Les équipes permettent de regrouper ensemble des projets visuellement. 
+	<br>
+	Les équipes peuvent avoir un impact sur le droit des utilisateurs dans certains cas, voir gestion des <a href="utilisateurs.php">droits des utilisateurs</a>.
+	<br>
+	Ces équipes aident à la visibilité dans la gestion des utilisateurs (filtre sur une équipe possible), et dans le planning (possibilité de regrouper les utilisateurs par équipe dans l'option "trier par").
+	<br>
+	Le module de gestion des équipes permet de créer / modifier / supprimer des équipes à volonté.
+"""
+
+projets_titre = "Gestion des projets"
+
+projets_contenu = """
+	Une tâche est systématiquement reliée à un projet et un utilisateur. Avant de créer une tâche, assurez-vous que le projet correspondant soit déjà créé.
+	<br>
+	Vous pouvez créer autant de projets que vous le souhaitez. Vous pouvez bien entendu les modifier et supprimer à volonté.
+
+	<h3>Liste des projets</h3>
+	Par défaut ne sont affichés que les projets <i>à faire</i> ou <i>en cours</i>. Vous pouvez changer ces critères, ils ne s'appliqueront que dans cette interface et non sur le planning.
+	<br>
+	Vous pouvez également filtrer cette liste de projets par date, par groupe de projets, ou faire une recherche texte sur le titre du projet. Vous pouvez enfin trier la liste en cliquant sur les noms des colonnes.
+	<br>
+	Dans la liste, les projets sont regroupés selon les groupes de projets, les projets sans groupe sont au début.
+	<br>
+	<b>Important</b> : la suppression d'un projet entrainera la suppression de toutes les tâches de ce projet
+	
+	<h3>Les informations d'un projet</h3>
+	L'<i>identifiant</i> est une chaine de caractère, unique pour chaque projet. Cette information est le repère visuel affiché dans le planning.
+	<br>
+	Le <i>nom du projet</i> est la seule autre information obligatoire pour la création d'un projet.
+	<br>
+	Vous pouvez définir en option un <i>groupe de projets</i>, afin de pouvoir facilement les regrouper visuellement, dans le listing des projets et dans le planning.
+	<br>
+	Le <i>statut</i> permet de trier également les projets. Par défaut, les projets abandonnés ou archivés sont masqués.
+	<br>
+	La <i>charge</i>, la <i>date de livraison</i>, le <i>lien</i>, et les <i>commentaires</i> sont de simples informations vous permettant d'ajouter des détails à vos projets sans conséquences sur le planning.
+	<br>
+	La <i>couleur</i> du projet est la couleur de fond de la cellule pour les tâches (en vue par projet). Choisissez donc des couleurs représentative pour chaque projet pour une meilleure lisibilité.
+"""
+
+groupes_titre = "Gestion des groupes de projets"
+
+groupes_contenu = """
+	Les groupes permettent de regrouper ensemble des projets visuellement. Les groupes n'ont aucun impact sur les droits des utilisateurs.
+	<br>
+	Ces groupes aident à la visibilité dans la gestion des projets (regroupés par groupe), et dans le planning (possibilité de regrouper les projets par groupe dans l'option "trier par").
+	<br>
+	Le module de gestion des groupes permet de créer / modifier / supprimer des groupes à volonté.
+"""
+
+faq_titre = "FAQ"
+
+faq_contenu = """
+	<b>Peut-on créer une tâche sans assigner de personne ?</b>
+	<br>
+	Non, le principe de SOPlanning repose justement sur l'association d'une personne et d'un projet, qui donne une tâche à un moment donné.
+	<br><br>
+
+	<b>Comment gérer les congés ou absences dans SOPlanning ?</b>
+	<br>
+	SOPlanning n'a pas pour vocation de gérer toutes les règles complexes des congés, chaque pays et conventions ayant leur propres règles.
+	<br>Le moyen le plus efficace est de créer un projet "Congés" avec une couleur bien visible, et d'y créer des tâches pour représenter vos congés. Ainsi lors de la consultation du planning, vous verrez facilement les personnes qui ont déjà des congés assignés sur les jours concernés.
+	<br><br>
+
+	<b>Je ne reçois pas les notifications par email. Que se passe t-il ?</b>
+	<br>
+	<ul>
+		<li>Vérifiez que votre email est bien renseigné dans votre profil, en cliquant sur votre nom en haut à droite de SOPlanning</li>
+		<li>Vérifiez dans cette fenêtre que vous avez bien activé la réception des notifications</li>
+		<li>Vérifiez dans les paramètres de SOPlanning que vous avez bien renseigné les paramètres SMTP d'envoi d'emails (utilisez l'outil de test pour valider le bon fonctionnement)</li>
+		<li>Vérifiez que la personne qui crée la tâche a bien coché "notifier par email"</li>
+		<li>Attention : si vous vous assignez une tâche, vous ne recevrez pas d'email !</li>
+	</ul>
+	<br>
+
+	<b>Peut-on mettre un utilisateur dans plusieurs équipes ?</b>
+	<br>
+	Non, actuellement SOPlanning permet de rattacher une personne à une seule équipe, afin de rester simple dans la gestion des droits. Contactez-nous si vous souhaitez mettre en place des droits sur mesure.
+	<br><br>
+	
+	<b>Comment gérer les jours fériés ?</b>
+	<br>
+	Utilisez le module de <a href="../feries.php">gestion des jours fériés</a>. Vous pouvez faire un import automatique, ou saisir vous même des jours précis. Une case similaire à une tâche s'affichera dans le planning avec la mention "OFF".
+"""
+
+lieux_titre = "Gestion des lieux"
+
+lieux_contenu = """
+	Les lieux sont des données supplémentaires pouvant être liées aux tâches.<br>
+	Ce module est facultatif et peut être activé ou désactivé à tout moment dans les options de SOPlanning.
+	<br>
+	Lorsque le module est actif, une menu déroulant de sélection apparait dans le formulaire de gestion de tâche, contenant la liste des lieux disponibles. Vous pouvez gérer cette liste dans l'interface de <a href="lieux.php">gestion des lieux</a>, via le menu "Paramètres >> Lieux".
+	<br>
+	Ce champ est facultatif dans le formulaire de tâche, vous n'êtes donc pas obligé de choisir un lieu pour chaque tâche même si le module est activé.
+	<br><br>
+	Pour chaque lieu vous pouvez définir si il est exclusive ou non. Si vous le rendez exclusif, vous ne pourrez pas créer d'autre tâche pour ce même lieu au même moment, SOPlanning vous indiquera qu'il existe un conflit. Si cette exclusivité n'est pas activée, vous pourrez assigner ce lieu autant de fois que vous le souhaitez en simultané.
+	<br><br>
+	Une fois un lieu assigné, vous pouvez également le supprimer d'une tâche par la suite en éditant à nouveau la tâche.
+"""
+

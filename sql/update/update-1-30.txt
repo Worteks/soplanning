@@ -1,0 +1,13 @@
+
+UPDATE  `planning_config` SET  valeur ='1.30' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+INSERT INTO `planning_config` VALUES('DURATION_AM', '4', 'Morning duration when calculating worked hours');
+INSERT INTO `planning_config` VALUES('DURATION_PM', '5', 'Afternoon duration when calculating worked hours');
+INSERT INTO `planning_config` VALUES('DURATION_DAY', '9', 'Duration when only one day is selected');
+INSERT INTO `planning_config` VALUES('CONTACT_FORM_DEACTIVATE', '', 'Put 1 to deactivate the display of the small button/popin (contact form)');
+
+
+UPDATE `planning_user` SET droits = REPLACE(droits, 'planning_', 'tasks_');
+
+ALTER TABLE  `planning_periode` ADD  `duree_details` VARCHAR( 20 ) NULL AFTER  `duree`;
+UPDATE `planning_periode` SET duree_details = 'duree';

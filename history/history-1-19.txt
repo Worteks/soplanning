@@ -1,0 +1,7 @@
+- Check on read/write of important directories
+- Deported all config.inc variables in option page (now editable in Soplanning interface)
+- add "hide empty line" feature in the planning
+- Bug fix on printable version
+- Bug fix on CSV export
+- Bug fix on drag n drop feature
+- Bug fix in database auto upgrade

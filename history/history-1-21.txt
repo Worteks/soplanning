@@ -1,0 +1,8 @@
+v1.21
+
+- added "repeat task" feature : daily, weekly, monthly
+- fix on user self modification
+- Fix on drag and drop when planning is inverted (displayed by project)
+- Changed users rights for finer management
+- added color management for users => better view in planning when displayed by projects
+- some minor fixes coming from users

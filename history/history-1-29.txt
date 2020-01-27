@@ -1,0 +1,15 @@
+v1.29
+
+- Major update on DE translation (thanks to contributors)
+- full text search now search also on task title
+- Added teams and project groups on the PDF export (only displayed in the planning previously)
+- left column on the planning : added link on objects (users or projects) to open directly the popup window.
+- Top menu now compatible with Mobile/tablet : click on the menus will open sub-menus
+- Bug fix on project deletion (specific rights).
+- Email notification when moving a task (drag and drop).
+- "Sort by" choice is now stored in cookie, to keep the same preference at next login.
+- Modified summary table below the planning : if the planning is displayed by user, now also displays the summary table grouped by user. Same thing for project. Till now, only display by project was available.
+- Added small features to send a test email with the setup done. Allow to test easily if it works.
+- Bug fixed on total time calculation (when more than 100 hours cumulated)
+- Fix on email sending, for task creation. New help text for SMTP setup.
+- Date calculation improved on recurring tasks : now escape days off AND go back to the original day for next weeks/months.

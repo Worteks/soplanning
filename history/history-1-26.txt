@@ -1,0 +1,12 @@
+v1.26
+
+- email notification on task creation/modification/deletion
+- improved project list, display all or filter by date
+- now possible to send email to new user created to let them modify their password
+- the planning is now exactly limited on one month (it was before 1 month + 1 day)
+- project charge added on the summary under the planning
+- filtered project list displayed on task creation/modification (only active/todo projects displayed)
+- fixed XSS issues
+- some new security fixes
+- added new user right to let him view all people in his team
+- can now close opened window (task creation, project creation, etc) with ESC key

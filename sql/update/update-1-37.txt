@@ -1,0 +1,35 @@
+
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_LIEUX', '1', 'Location Option');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_RESSOURCES', '1', 'Ressource Option');
+INSERT INTO `planning_config` VALUES('PLANNING_DATE_FORMAT', '1', 'Date Format');
+INSERT INTO `planning_config` (`cle`, `valeur`, `commentaire`) VALUES ('SOPLANNING_OPTION_ACCES', '0', 'Private access');
+
+ALTER TABLE `planning_periode`	ADD COLUMN `lieu_id` VARCHAR(10) NULL COLLATE 'latin1_general_ci' AFTER `livrable`;
+
+ALTER TABLE `planning_periode`	ADD COLUMN `ressource_id` VARCHAR(10) NULL COLLATE 'latin1_general_ci' AFTER `lieu_id`;
+
+CREATE TABLE `planning_lieu` (
+  `lieu_id` varchar(10) collate latin1_general_ci NOT NULL default '',
+  `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
+  `commentaire` TEXT collate latin1_general_ci default NULL,
+  `exclusif` TINYINT NOT NULL DEFAULT '0' COLLATE 'latin1_general_ci', 
+  PRIMARY KEY  (`lieu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+CREATE TABLE `planning_ressource` (
+  `ressource_id` varchar(10) collate latin1_general_ci NOT NULL default '',
+  `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
+  `commentaire` TEXT collate latin1_general_ci default NULL,
+  `exclusif` TINYINT NOT NULL DEFAULT '0' COLLATE 'latin1_general_ci', 
+  PRIMARY KEY  (`ressource_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+ALTER TABLE `planning_user` CHANGE COLUMN `login` `login` VARCHAR(30) NULL DEFAULT NULL COLLATE 'latin1_general_ci' AFTER `nom`;
+	
+UPDATE `planning_user` SET droits='["users_manage_all", "projects_manage_all", "projectgroups_manage_all", "tasks_modify_all", "tasks_view_all_projects", "lieux_all", "ressources_all", "parameters_all"]' WHERE `planning_user`.`user_id`='ADM';
+
+INSERT INTO `planning_user` (`user_id`, `nom`, `visible_planning`, `cle`) VALUES ('publicspl', 'Guest', 'non', 'key');
+
+ALTER TABLE `planning_projet` ADD COLUMN `lien` TEXT NULL COLLATE 'latin1_general_ci' AFTER `livraison`;
+
+UPDATE  `planning_config` SET  valeur ='1.37' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

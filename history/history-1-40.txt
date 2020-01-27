@@ -1,0 +1,12 @@
+v1.40
+
+- PHP7 compliancy !
+- option added in task form to disable notification by email
+- you can now open task from the summary under the planning (click on start date)
+- new design for notification emails
+- emails now contain link to open the task
+- new menu with statistics : charts for users and projects, showing workload/charge assigned. new charts/stats will come soon
+- new module : "my dashboard", allow you to see your task in list mode
+- new right : you can define which specific people a user can see in the planning
+- many small improvements in interfaces and design
+- small bug fixes

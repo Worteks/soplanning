@@ -1,0 +1,21 @@
+
+UPDATE  `planning_config` SET  valeur ='1.43' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+ALTER TABLE `planning_user`  ADD `login_actif` ENUM('oui','non') CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL  AFTER `preferences`;
+
+INSERT INTO `planning_config` (`cle`, `valeur`, `commentaire`) VALUES ('TIMEZONE', 'Europe/Paris', 'Timezone');
+INSERT INTO `planning_config` (`cle`, `valeur`, `commentaire`) VALUES ('PLANNING_DIFFERENCIE_WEEKEND', '1', 'Week-end class activate');
+INSERT INTO `planning_config` (`cle`, `valeur`, `commentaire`) VALUES ('PLANNING_CELL_FONTSIZE', '0', 'Cell Font size');
+ALTER TABLE `planning_status` ADD COLUMN `barre` VARCHAR(2) NULL DEFAULT '0' AFTER `affichage`;
+ALTER TABLE `planning_status` ADD COLUMN `gras` VARCHAR(2) NULL DEFAULT '0' AFTER `barre`;
+ALTER TABLE `planning_status` ADD COLUMN `italique` VARCHAR(2) NULL DEFAULT '0' AFTER `gras`;
+ALTER TABLE `planning_status` ADD COLUMN `souligne` VARCHAR(2) NULL DEFAULT '0' AFTER `italique`;
+ALTER TABLE `planning_status` ADD COLUMN `defaut` VARCHAR(2) NULL DEFAULT '0' AFTER `barre`;
+UPDATE `planning_status` set defaut='tp' where status_id='a_faire';
+UPDATE `planning_status` set barre='1' where status_id='fait';
+UPDATE `planning_status` set barre='1' where status_id='abandon';
+UPDATE `planning_status` set barre='1' where status_id='archive';
+
+ALTER TABLE `planning_projet` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';
+
+ALTER TABLE `planning_periode` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';

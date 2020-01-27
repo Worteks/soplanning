@@ -1,0 +1,85 @@
+SO Planning Installation Guide
+------------------------------
+
+----------------------------------------------------------
+ENGLISH
+You need first a PHP/MYSQL environment.
+If you don't have, you can try www.wampserver.com on Windows or install Apache and Mysql packages on linux.
+PHP5.2 or higher is needed.
+On Linux, don't forget to install the needed locale : ISO-8859-1
+
+IN CASE OF FRESH INSTALL (see below for an upgrade to higher version)
+
+1. Unpack your download
+
+   Unzip the SOPlanning file.
+   Only the www directory must be browsable under Apache, so point the web access to the www directly. All other directories shouldn't be accessible.
+
+2. Verify some technical points :
+	- verify path of COMPIL_DIR in config.inc file, and give read/write access to this directory (default directory is soplanning/smarty/templates_c/)
+	- give read/write access to the file soplanning/database.inc (for first install only)
+	- verify PHP safe mode status : safe mode must be disabled to make working smarty template.
+
+3. Just access to SOPlanning url (refer to the url accessible with your web server), it will automatically launch the installer.
+	In case of failure during install, you can do the manual install : 
+	- import the soplanning/sql/planning_mysql.sql file in a Mysql database (collation "latin1_general_ci")
+	- modify the database.inc file and put the right database parameters
+	Feel free to send your feedback about the installer.
+
+4. Browse to the SO Planning www directory using a web browser.
+	Use admin / admin to connect the first time.
+	Do not forget to change it later.
+
+5. Give any feedback, problem, suggestion.
+	support@soplanning.org
+	Rodolphe, France
+
+
+IF YOU NEED TO UPGRADE AN EXISTING VERSION :
+
+You just have to overwrite all files, EXCEPT database.inc
+The system will automatically process the upgrade.
+
+
+-----------------------------------------------------------------
+FRANCAIS
+Vous devez auparavant avoir un environnement PHP/MYSQL pour héberger l'application.
+Si vous n'en avez pas, vous pouvez par exemple essayer www.wampserver.com pour Windows ou installer les packages Apache et Mysql pour linux.
+PHP5.2 ou plus est requis.
+Sous Linux, ne pas oublier d'installer la locale ISO-8859-1.
+
+EN CAS DE PREMIERE INSTALLATION (voir plus bas pour une mise à jour)
+
+1. Décompresser l'archive contenant l'application
+
+   Dézippez le fichier soplanning.zip à l'endroit désiré.
+   Seul le répertoire www doit être accessible par un navigateur, donc pointez l'accès web à l'application directement sur ce répertoire www.
+
+2. Vérifier les points techniques suivants :
+
+	- vérifiez le chemin situé dans la variable COMPIL_DIR du fichier config.inc, et donnez les droits d'écriture/lecture pour ce répertoire (par défaut le répertoire soplanning/smarty/templates_c/).
+	- donnez les droits d'écriture/lecture sur le fichier soplanning/database.inc (seulement pour la première installation)
+	- vérifiez le safe mode de PHP : le safe mode doit être désactivé pour permettre à Smarty de fonctionner
+
+3. Accédez à l'adresse que vous avez mise en place pour SOPlanning (répertoire www), l'installation automatique va s'afficher.
+	En cas de problème lors de l'installation auto, voici une procédure manuelle :
+	- importer le fichier soplanning/sql/planning_mysql.sql dans une base de données Mysql (collation "latin1_general_ci")
+	- modifier le fichier database.inc et indiquer les paramètres d'accès à la base.
+	N'hésitez pas à faire un feedback sur l'installation auto.
+
+4. Accédez au répertoire www de SO Planning avec votre navigateur web
+
+	Utilisez le login admin / admin pour vous connecter la première fois.
+	N'oubliez pas de changer ce mot de passe par la suite.
+
+5. Donnez votre opinion, rapportez vos problèmes, et faites des suggestions.
+
+
+EN CAS DE MISE A JOUR :
+
+Ecrasez simplement tous les fichiers de SOPlanning à l'exception de database.inc
+Le système exécutera automatiquement la mise à jour.
+
+
+	support@soplanning.org
+	Rodolphe, France

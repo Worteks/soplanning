@@ -1,0 +1,13 @@
+v1.42
+
+- Big new version of the planning. Mostly code rewriting, not so many changes on display, but performances improved.
+- Help pages integrated in the tool. The help content will be improved in the next versions
+- LDAP : added login and password for bind command
+- Added port parameter for mysql DB
+- Several fixes, for display or security improvements
+- Many fixes on some specific rights
+- Email addresses with new TLD now allowed
+- Missing translations added
+- Bugfix for iphone display
+- Bugfix for some PHP versions
+

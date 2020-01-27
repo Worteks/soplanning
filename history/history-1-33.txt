@@ -1,0 +1,6 @@
+v1.33
+
+- Danish translation. Thanks to Peter Wollerup.
+- Hungarian translation. Thanks to Péter Horváth.
+- drag and drop fix for firefox 30
+- Various security issues, thanks to Huy-Ngoc Dau

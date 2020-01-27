@@ -1,0 +1,13 @@
+v1.27
+
+- Small fixes
+- New feature to limit assignment to one task per user per day.
+- added task creator name on the planning. Displayed when mouse is over the task.
+- Added sorting option : can now sort the planning by name (project or user), id, team, group of project. If team or group, their name is also displayed as a separator in the planning.
+- Added new option to display planning header (months/days) every x lines.
+- Added milestone : can create a task as a milestone, displayed with specific icon in the planning. Also added to Gantt export.
+- Added task status : to do, in progress, done, abandoned. Done and abandoned tasks are displayed crossed
+- Added also a filter in the planning to display only status selected.
+- Added repetition information in the email notification
+- Fix bug on task creation : end repetition datepicker was never closed
+- Dropdown added on title field when creating a task, in order to display existing titles for the same project.

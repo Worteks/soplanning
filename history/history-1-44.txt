@@ -1,0 +1,13 @@
+v1.44
+
+- new fresh module : audit / history. This module will let you register allmost all actions in the planning : task modification, task removal, user modification, etc. You will be able to view all past actions and restore data if needed.
+- New design improvments, on desktop and mobile. Closer to current design standards
+- New options for task display in SOPlanning parameters : you can choose if you want to display specific icon depending on task data (link, comment, duration), you can decide where the task color come from (assignee, project, or status), etc
+- Better quality for SOPlanning icon, so you can add it as favorite in your desktop browser, or in your mobile homepage.
+- Drag and drop improved, you see clearly where you move/copy your task
+- new german translation and minor fixes in other languages
+- Added user or project code on milestone tasks
+- many small fixes and improvments as usual
+- you can choose what is displayed in task cells : people ID, project ID, people name, project name, ressource, place
+- new option in settings, allow to hide days off in the planning
+- added "home" button in order to easily display today (+ 2 months) in the planning

@@ -1,0 +1,13 @@
+v1.37
+
+- 2 new optional modules : places and ressources. You can now assign a place and/or a ressource in task. The system will check you won't use the same place or ressource at the same time
+- Select multiple users when creating tasks : you can know copy the task to many people at the same time (2 maximum in the past)
+- New filter on teams added to users management module.
+- German translation updated (thanks to contributor)
+- Fix on PDF export when the cell content is larger than one page
+- Fixed some issues on repeated tasks
+- Many small improvments on interfaces and error messages
+- Several small issues fixed, reported by end users
+- Performances optimized on the planning, specially when many months displayed
+- Added Polish translation
+- Added task list to PDF export

@@ -1,0 +1,15 @@
+v1.36
+
+- Swiss public holidays updated
+- fixed list of projects displayed when using specific right
+- Added SMTP log to Email test (in parameters section) in order to have more details
+- Added "last login date" in user list
+- Added task information on rollover : creation date, last modification date, and who did it
+- display now days off in "planning view per day"
+- project list : added shortcut to display and filter the planning based on clicked project
+- user list : added shortcut to display and filter the planning based on clicked user
+- added new option for ICAL calendar : now possible to display all users or only you, and display all projects or only a specific list of projects
+- project : added "archived" status
+- project : fixed custom color
+- new options/possibilities for task repetition (test it and you will like it !)
+- new user preferences (click on your profile name in the header) : choose default view

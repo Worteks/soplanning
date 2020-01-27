@@ -1,0 +1,10 @@
+
+ALTER TABLE  `planning_user` ADD  `droits` TEXT CHARACTER SET latin1 COLLATE latin1_general_ci default NULL AFTER  `couleur`;
+
+UPDATE `planning_user` SET droits = '["users_manage_all", "projects_manage_all", "projectgroups_manage_all", "planning_modify_all", "planning_view_all_projects", "parameters_all"]' WHERE `type` = 'admin';
+UPDATE `planning_user` SET droits = '["projects_manage_all", "planning_modify_all", "planning_view_all_projects"]' WHERE `type` = 'planner';
+UPDATE `planning_user` SET droits = '["planning_readonly", "planning_view_all_projects"]' WHERE `type` = 'lecture_seule';
+
+ALTER TABLE `planning_user` DROP `type`;
+
+UPDATE  `planning_config` SET  valeur ='1.21' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

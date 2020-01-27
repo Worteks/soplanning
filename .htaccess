@@ -1,0 +1,5 @@
+RewriteEngine On
+
+<Files "*.inc">
+	require all denied
+</Files>

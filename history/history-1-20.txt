@@ -1,0 +1,19 @@
+v1.20
+
+- added Gantt export
+- added email field to user profile
+- added interface to allow user to change own email and password
+- added password recovery feature
+- added option to setup the SMTP parameters
+- added an url for the SOPlanning instance, for email links
+- added option to change SOPlanning name
+- replaced "notes" field in a task assigned by a multi-lines input field
+- replaced the old color picker
+- password are now crypted in the database (sha1)
+- fixed accent bug on PDF export
+- fixed display bug with "hide empty lines" feature
+- fixed when moving a task, the duration is conserved
+- fix on months and days translation
+- project identifier size extended to 10 cars
+- user identifier size extended to 10 cars
+- added text filter in the planning view

@@ -1,0 +1,10 @@
+v1.22
+
+- Bug fix on project creation for users with limited rights
+- added half day displayed differently in the planning
+- added task title : display in mouseover on the planning, and in Gantt export
+- added ICAL export (for calendar sync)
+- Minutes management in task duration
+- added days off management
+- small fixes
+

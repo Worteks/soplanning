@@ -1,0 +1,8 @@
+v1.30
+
+- Design updates : thanks to Sebastien who reviewed all interfaces and applied the same design everywhere. Not a big visual impact, but more flexible and more compatible design !
+- auto-installer/upgrade system added. No file modification needed anymore, the interface will help for initial setup or upgrade to a new version.
+- Session isolation : you can now install 2 SOPlanning instances on the same url (with 2 differents databases), sessions will not be shared. You will be able to browse both instances.
+- Contact form for easier communication with support.
+- Planning options (date, months display, etc) are now kept in cookies and restored at your next login.
+- added an option in the planning to display the total time per day

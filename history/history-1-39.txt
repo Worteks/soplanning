@@ -1,0 +1,15 @@
+v1.39
+
+- Big work on mobile/tablet version
+- new scrolls added on the planning, you can now fix display horizontaly and verticaly
+- you can now click on the planning header, it will display the planning based on the clicked day/week/month
+- Fixed several specific cases on task repeat
+- added parameters to define column width in the planning
+- added parameters to define cells/tasks width in the planning
+- added many new themes with new colors
+- added option to let/block guests creating tasks (only if guest access is activated)
+- Improve upgrade system, tackle some specific cases
+- Improve form fields when filling hours
+- Several libraries updated for security and browser compatibility
+- user identifier updated to 20 chars max (10 in the past)
+- Various bugfixes and small improvements coming from users feedback

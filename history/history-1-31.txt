@@ -1,0 +1,10 @@
+v1.31
+
+- new planning display : now possible to display per day with hour slots !
+- new funny tool to select project and user when creating task
+- fields order changed in task form, for a better experience
+- Many small bug fixes due to the new layout
+- added sortable option in project list
+- Drag and drop fixed
+- Norwegian public holidays added, thanks to Kai
+- Bug fix for gantt chart on recent PHP version

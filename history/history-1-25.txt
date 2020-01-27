@@ -1,0 +1,6 @@
+v1.25
+
+- Added public holidays import module for several countries
+- new PDF calendar export (condensed view)
+- Minor fixes on new design
+- Some Security upgrades

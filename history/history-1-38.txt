@@ -1,0 +1,13 @@
+v1.38
+
+- XLS export added
+- new right added to user : show him only his assigned tasks, he will not see tasks assigned to other people
+- Big layout upgrade for better browser compatibility, and maintenance for the future
+- added theme option with customization. Only current SOPlanning for the moment, new themes will come later
+- added various user fields : address, phone, mobile, job, comment
+- Added feature for Logo upload in the application/homepage header
+- Summary below planning : display improved, and total time is now mixed (days and hours were separated in the past)
+- Translations updated
+- Some fixes on user rights
+- Various small bugfix
+- now possible to start task at 00:00 as start hour

@@ -1,0 +1,8 @@
+
+UPDATE  `planning_config` SET  valeur ='1.26' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+ALTER TABLE  `planning_user` ADD  `cle` VARCHAR( 40 ) NOT NULL;
+
+UPDATE `planning_user` SET cle = MD5(CONCAT(RAND(), user_id)) WHERE cle = '';
+
+ALTER TABLE  `planning_user` ADD  `notifications` ENUM('oui','non') collate latin1_general_ci NOT NULL DEFAULT 'non';

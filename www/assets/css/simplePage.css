@@ -1,0 +1,63 @@
+body {
+	padding-bottom: 50px;
+	color: #666666;
+}
+
+h3 {
+	padding-top: 50px;
+}
+
+.modal h3 {
+	padding-top: 0px;
+}
+
+h3 img {
+	vertical-align: bottom;
+}
+
+.flag img {
+	width: 16px;
+}
+
+.small-container {
+	max-width: 600px;
+	margin: 0px auto;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+.form-horizontal .control-label {
+	width: 200px;
+}
+
+.box {
+	min-width: 300px;
+	padding: 19px 29px 0px;
+	margin: 10px auto;
+	background-color: #fff;
+	border: 1px solid #cdcdcd;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.box .form-group
+{
+	margin-bottom:15px !important;
+}
+
+@media (max-width: 480px) {
+	h3 {
+		padding-top: 0px;
+	}
+}
+
+.alert {
+	margin-left:0px;
+	margin-right:0px;
+}

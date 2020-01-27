@@ -1,0 +1,7 @@
+- New overall look and feel
+- PHP version check (>= 5.2)
+- Database auto-updater for new releases
+- Changed default line height in the planning (fits to assignment cells)
+- separate rights between admin and planers : admin : all rights (project management / users / planning modification). Planner : can create projects, modify/delete his own projects, assign tasks to his projects. No access to users management.Read only : no modification right, can only view planning.
+- paging added to the planning, to limit number of lines displayed
+- PDF export

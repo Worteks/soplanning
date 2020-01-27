@@ -1,0 +1,15 @@
+v1.43
+
+- Improved drag and drop : now you can select "move task" only for selected task or all repeted tasks
+- New option to change text on task cells (increase it if you want)
+- Improved statutes management : display options (bold, underline, strike, etc) and more
+- New option for administrator in user profile : you can deactivate an account and reactivate it later if needed
+- added timezone to SOPlanning : you can now select your own timezone
+- Improved color picker for projects and users color
+- German translation update + german public holidays
+- added option in your user profile in order to define which planning start date you want as default when loading SOPlanning
+- new option for the planning : you can hide/display weekends, and define if those days are grey or not
+- now compatible with PHP 7.2
+- Now you can switch language in your profile without having to logout
+- added places and ressources detail in the summary under the planning
+- Fixed several small bugs

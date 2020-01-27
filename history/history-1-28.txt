@@ -1,0 +1,6 @@
+v1.28
+
+- Update on planning menu, more "fluid" with smaller screens.
+- Bug fix on Firefox and IE : buttons didn't work in the planning (print, export, etc).
+- Bug fix on date picker, specific characters incorrectly displayed
+- Changed display of links in tasks, and add automatically http://

@@ -1,0 +1,24 @@
+
+UPDATE  `planning_config` SET  valeur ='1.41' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+CREATE TABLE `planning_status` (
+  `status_id` varchar(10) collate latin1_general_ci NOT NULL default '',
+  `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
+  `commentaire` TEXT collate latin1_general_ci default NULL,
+  `affichage` VARCHAR(2) NULL DEFAULT 'tp',
+  `pourcentage` TINYINT NOT NULL DEFAULT '0',
+  `couleur` VARCHAR( 6 ) NULL,
+  `priorite` TINYINT NOT NULL DEFAULT '5',
+  PRIMARY KEY  (`status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`) VALUES ('a_faire', '#winPeriode_statut_a_faire#', '#winPeriode_statut_a_faire#','tp',0,1);
+INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`) VALUES ('en_cours', '#winPeriode_statut_en_cours#', '#winPeriode_statut_en_cours#','tp',50,2);
+INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`) VALUES ('fait', '#winPeriode_statut_fait#', '#winPeriode_statut_fait#','tp',100,3);
+INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`) VALUES ('abandon', '#winPeriode_statut_abandon#', '#winPeriode_statut_abandon#','tp',100,4);
+INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`) VALUES ('archive', '#winPeriode_statut_archive#', '#winPeriode_statut_archive#','p',100,4);
+
+ALTER TABLE `planning_periode` CHANGE `statut_tache` `statut_tache` VARCHAR(10) collate latin1_general_ci NOT NULL DEFAULT 'a_faire';
+ALTER TABLE `planning_projet` CHANGE `statut` `statut` VARCHAR(10) collate latin1_general_ci NOT NULL DEFAULT 'a_faire';
+
+INSERT INTO `planning_config` VALUES('PLANNING_AFFICHAGE_STATUS', 'aucun', 'Show status');

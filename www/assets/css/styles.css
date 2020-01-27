@@ -1,0 +1,685 @@
+body{
+	overflow: initial;
+	height:100%
+	}
+html{
+	overflow: initial;
+	height: 100%;
+	font-size:.93rem;
+}
+img{
+	border:0;
+}
+td{
+	vertical-align:top;
+	white-space:nowrap;
+}
+hr{
+	width: 100%; 
+	color: #e5e5e5; 
+	height: 1px;
+	padding:0;
+	margin-top:8px;
+	margin-bottom:8px;
+}
+.footer{height:40px;}
+.wrap{white-space: normal;}
+.nowrap{white-space: normal;}
+
+/* width */
+.w12 {width:12px}
+.w25 {width:25px}
+.w40 {width:40px}
+.w50{width:50px}
+.w100 {width:100px}
+.w140 {width:140px;min-width:140px;}
+
+/* vertical-align */
+.left-0{padding-left:0;margin-left:0;}
+.top-0{margin-top:0;}
+
+/* Menu */
+.navbar-dark .navbar-nav .nav-link,.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-toggler, div.nav-item a.nav-link {
+	color: #fff;
+}
+.container{margin-bottom:60px;}
+.navbar-nav li:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+	min-width: 200px;
+}
+
+/* Buttons */
+
+div.btn-group
+{
+	margin-right:5px;
+}
+.btn
+{
+	font-size:.90rem;
+}
+
+/* Soplanning Box */
+.soplanning-box .inline,.soplanning-box .inline .input-append {
+	margin:0;
+}
+
+.soplanning-box .inline .input-append input {
+	height: 16px;
+}
+
+.soplanning-box {
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.soplanning-box form {
+	margin:0;
+}
+
+/* Modal Box */
+.modal-dialog-normal{
+	max-width:610px;
+}
+
+.modalBig {
+	max-width: 960px;
+	height:auto;
+}
+
+.modal-backdrop,.modal-backdrop.fade.in {
+	opacity: .5;
+}
+
+.modal-header {
+	cursor: move;
+}
+
+.modal-header h5 {
+	font-weight:700;
+}
+
+/* Tooltip */
+.tooltip-inner {
+	max-width: 300px !important;
+	padding: 6px 8px;
+	background-color:#FAFAF7 !important;
+	color: #000;
+	text-align: left !important;
+	background-color: #000;
+	border-radius: .25rem;
+	opacity:1;
+	border:1px solid silver;
+}
+
+.tooltip.show {
+  opacity: 1 !important;
+}
+.picto-link
+{
+position: absolute;right:-5px;top:12px;color:#000;font-size:9px
+}
+.picto-comment
+{
+position: absolute;right:-5px;top:12px;color:#000;font-size:9px;
+}
+.picto-milestone-reduit
+{
+	position:absolute;
+	left:35%;
+	bottom:25%;
+	top:1px;
+}
+.picto-milestone-large
+{
+	position:absolute;
+	left:35px;
+	bottom:0px;
+}
+/* Pagination */
+.pagination {
+	margin: 4px 5px 0px 0px;
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+.pagination ul > li > a,
+.pagination ul > li > span {
+  float: left;
+  padding: 2px 12px;
+  line-height: 20px;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+}
+
+/* Cursor */
+.cursor-help
+{
+	cursor:help;
+}
+.cursor-pointer
+{
+	cursor:pointer;
+}
+
+/* Planning */
+#divConteneurPlanning{
+	overflow:auto;
+}
+.planning_head_day
+{
+	min-width:25px;
+}
+.planning-filter
+{
+	margin:10px;
+}
+.planning-filter td {
+   padding-right:20px;
+}
+.planning-dateselector
+{
+	 margin-left:10px;
+}
+.planning_user_table
+{
+	border:0;
+	padding:2px;
+}
+.planning_user_table td
+{
+	white-space: normal;
+}
+.cellProject,.cellProjectBiseau {
+	min-height: 14px;
+	padding-left:3px;
+	padding-right:3px;
+	box-shadow: 1px 1px 5px silver;
+	z-index:10;
+}
+.planningFirstCol
+{
+	top: auto;
+	width: 120px;
+}
+.cellHolidays {
+	min-width: 25px;
+	min-height: 14px;
+	padding-left:3px;
+	padding-right:3px;
+	box-shadow: 1px 1px 5px silver;
+	z-index:10;
+}
+.cellEmpty {
+height:8px;
+padding:0;
+margin:0;
+margin-top:1px;
+margin-bottom:1px;
+font-size:0;
+box-shadow: none;
+}
+.sumCell
+{
+text-align:center;
+vertical-align: middle;
+}
+.sumLargeCell
+{
+float:left;
+width:100%;
+height:100%;
+text-align:center;
+vertical-align: middle;
+}
+
+.miniCode
+{
+ margin-left:2px;
+ vertical-align:middle;
+}
+.largeCode
+{
+text-align:center;
+font-weight:700
+}
+.startDateCell
+{
+	position:absolute;
+	left:1px;
+	bottom:0
+}
+.percentCell
+{
+	position:absolute;
+	right:15px;
+	bottom:0
+}
+.codesProjets {
+	height: 30px;
+	width: 140px;
+}
+
+.planningContent td {
+	min-width: 25px;
+	min-height: 20px;
+	line-height: 20px;
+}
+
+.planningContent th.today {
+	font-size: 15px;
+}
+
+.planningTabName {
+	white-space: normal;
+	width:400px;
+}
+.planningTabTask {
+	white-space: normal;
+}
+
+/* infosVersion */
+#infosVersion ul {
+	margin-left: 0;
+	list-style: none;
+}
+
+/* planning */
+#divPlanning
+{
+	margin-bottom:40px;
+}
+
+#divProjectTable
+{
+	margin-top:5px;
+	border:0;
+	padding: 2px;
+}
+#divProjectTable thead
+{
+	background-color:#fff;
+}
+
+#divChoixDragNDrop
+{
+ border: 1px solid #000;
+ background-color:#fff;
+ position:absolute;
+ z-index:10000;
+ display:none;
+ padding:10px;
+}
+
+td.planningDropdownFilter label.checkbox
+{
+	padding-bottom:0;
+	padding-top:0;
+	margin-top:0;
+	margin-bottom:0;
+	min-height:20px;
+	cursor:pointer;
+	display:block;
+}
+
+td.planningDropdownFilter div.form-horizontal
+{
+	margin-left:5px;
+	padding-left:0;
+}
+
+.taskDivComment
+{
+	border-radius:10px;
+	padding:5px;
+	margin-bottom:5px;
+	cursor: pointer;
+}
+.taskDivComment:hover
+{
+	cursor: pointer;
+}
+
+#date_debut_affiche
+{
+ height:25px;
+ text-align:left;
+}
+#date_fin_affiche
+{
+ height:25px;
+}
+#date_debut_custom
+{
+	margin-top:5px;
+	width:105px;
+	height:23px;
+	font-size:11px;
+	vertical-align:top;
+	padding:0
+}
+
+#date_fin_custom
+{
+	margin-top:5px;
+	width:105px;
+	height:23px;
+	font-size:11px;
+	vertical-align:top;
+	padding:0
+}
+
+/* Form */
+.datepicker
+{
+	 width:103px !important;
+}
+.ui-datepicker-week-col
+{
+	text-align:center;
+}
+.ui-datepicker{ 
+	z-index: 9999;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+	text-align:center;
+}
+.alert li {
+	list-style-type:disc;
+	margin-left:15px;
+}
+.soplanning_install_title
+{
+font-size:30px;font-weight:700;
+}
+.soplanning_index_title1
+{
+font-size:23px;font-weight:700;
+}
+.soplanning_index_title2
+{
+font-size:30px;font-weight:700;
+}
+
+#dateFilterButton{margin-left:10px;margin-top:10px;}
+#projectListLabel{display:table-cell;margin-right:5px;}
+#projectListLabel label{margin-right:5px;}
+#projectListButton{display:table-cell;}
+#projectStatusLabel{display:table-cell;}
+#projectStatusLabel label{margin-right:5px;}
+#projectStatusCheckbox{display:table-cell;}
+#taskListLabel{display:table-cell;padding-right:10px;}
+#taskDateSelect{display:table-cell;}
+#taskDateSelect tr{height:15px;}
+#taskDateSelectLabel{min-width:90px;display: table-cell;padding-right:10px;}
+#taskListFiltreLabel{min-width:105px;display: table-cell;padding-right:10px;}
+#taskListGroupeLabel{min-width:90px;display: table-cell;padding-right:10px;}
+#taskDateSelectStart{display:inline-block;}
+#taskDateSelectEnd{display:inline-block;}
+#taskDateSelectButton{display: inline-block;}
+#taskListButton{display:table-cell;}
+#taskListFiltreButton{display:table-cell;}
+#taskListGroupeButton{display:table-cell;width: 300px;}
+#taskStatusLabel{display:table-cell;}
+#taskStatusLabel label{margin-right:5px;min-width: 140px;}
+#taskStatusCheckbox{display:table-cell;}
+#taskNbMonth{display:table-cell;}
+#taskFromDate{display:table-cell;}
+#taskFromDate label{margin-right:5px;margin-left:5px;}
+#taskToDate{display:table-cell;}
+.planning_team_div {font-size:16px !important;padding-top:5px;padding-bottom:5px;font-weight:700;}
+
+.tooltip-html{display:none;}
+
+.input-withicon{width:96%}
+#periodForm .container-fluid {padding-right:0;}
+.tab-periode{min-height:150px}
+.userTabColRights{white-space:normal;}
+
+.titrePage {
+	font-size:19px;
+	font-weight:700;
+}
+
+.ms-drop{width:400px;}
+.ms-options{
+min-width:400px;
+border: 1px solid rgba(0,0,0,.15) !important;
+border-radius: .25rem;
+padding-left: .2rem;
+padding-right: .2rem;
+}
+
+.pastille-statut {
+width: 15px;
+height: 15px;
+border-radius: 50px;
+box-shadow: 1px 1px 5px silver;
+}
+
+.pastille-projet, .pastille-user {
+padding:5px;
+border-radius:6px;
+box-shadow: 1px 1px 5px silver;
+}
+
+.progress {
+	width:100px;
+	overflow: hidden;
+	height: 21px;
+	margin-bottom: 5px;
+	background-color: #ebebeb;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Jauges */
+
+@-o-keyframes highlightRouge {
+ 	0% {
+ 		background: none
+ 	}50% {
+ 		background: #f91919;
+ 	}100% {
+ 		background: none;
+ 	} 		
+}
+@-moz-keyframes highlightRouge {
+ 	0% {
+ 		background: none
+ 	}50% {
+ 		background: #f91919;
+ 	}100% {
+ 		background: none;
+ 	} 		
+}
+@keyframes highlightRouge {
+ 	0% {
+ 		background: none
+ 	}50% {
+ 		background: #f91919;
+ 	}100% {
+ 		background: none;
+ 	} 		
+}
+
+
+@-o-keyframes highlightVert {
+ 	0% {
+ 		background: none
+ 	}50% {
+ 		background: #2ded2d;
+ 	}100% {
+ 		background: none;
+ 	} 		
+}
+@-moz-keyframes highlightVert {
+ 	0% {
+ 		background: none
+ 	}50% {
+ 		background: #2ded2d;
+ 	}100% {
+ 		background: none;
+ 	} 		
+}
+@keyframes highlightVert {
+ 	0% {
+ 		background: none
+ 	}50% {
+ 		background: #2ded2d;
+ 	}100% {
+ 		background: none;
+ 	} 		
+}
+
+.jaugeTD{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.jaugeTDReduit{
+	position: relative;
+	top: -20px;
+	left: -35px;
+	width: 100%;
+	height: 100%;
+}
+.jauge0 {
+	font-size: 7px;
+	font-weight:700;
+	color: #000;
+	text-indent: -1px;
+	position: absolute;
+	right: 1px;
+	top: 1px;
+	width: 10px;
+	height: 100%;
+	text-align: center;
+	line-height:100%;
+	background-color: #e5e5e5;
+	border: 1px solid #fff;
+}
+.jauge1 {
+	position: absolute;
+	bottom:0;
+	width: 10%;
+	height: 1px;
+	background-color: #f91919;
+
+}
+.jauge2 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 20%;
+	background-color: #f91919;
+
+}
+.jauge3 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 30%;
+	background-color: #f91919;
+
+}
+.jauge4 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 40%;
+	background-color: #f96019;
+
+}
+.jauge5 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 50%;
+	background-color: #ff8513;
+
+}
+.jauge6 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 60%;
+	background-color: #ffbc05;
+
+}
+.jauge7 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 70%;
+	background-color: #ded300;
+
+}
+.jauge8 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 80%;
+	background-color: #b8d300;
+
+}
+.jauge9 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 90%;
+	animation: highlightVert 1s infinite;
+	animation-timing-function: ease-in-out;
+}
+
+.jauge10 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 100%;
+	background-color: #2ded2d;
+
+}
+.jauge11 {
+	position: absolute;
+	bottom:0;
+	width: 10px;
+	height: 100%;
+	animation: highlightRouge 1s infinite;
+	animation-timing-function: ease-in-out;
+}
+.backgroundRouge{
+	background-color: #f91919;
+}
+
+.form-group {
+	margin-bottom: .5rem;
+}
+#top-scroll{height: 20px;width: 1200px;overflow-x: scroll; overflow-y:hidden;display:none; }
+#top-scroll-inner {height: 20px;}
+#right-scroll{float:right;right:30px;position:absolute;top:50%;display:none;z-index:900}
+#left-scroll{float:left;position:absolute;top:50%;display:none;z-index:900}
+#left-button,#right-button{cursor:pointer;color:gray;}
+#FilterToggle1{display:none;}
+#tab_audit_valeurs {margin-top:10px;}
+#tab_audit_valeurs table,#tab_audit_valeurs tr, #tab_audit_valeurs td, #tab_audit_valeurs th {border: 1px solid silver; border-collapse: collapse;padding: 5px;white-space: normal; }
+
+.week[drop-active=true] {
+  box-shadow: inset 0px 0px 0px 2px red;
+}
+
+.hidden {
+	display:none
+}
+
+.versionNumber {
+	font-size: 60%;
+}

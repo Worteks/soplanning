@@ -1,0 +1,28 @@
+
+ALTER TABLE  `planning_user` ADD  `email` VARCHAR( 255 ) CHARACTER SET latin1 COLLATE latin1_general_ci NULL AFTER  `password`;
+
+INSERT INTO `planning_config` VALUES('PLANNING_LINE_HEIGHT', '', 'Default line height in the planning. If not specified, it fits the username height');
+INSERT INTO `planning_config` VALUES('SOPLANNING_TITLE', 'SOPlanning', 'Change the title of Soplanning for integration in extranet');
+INSERT INTO `planning_config` VALUES('SOPLANNING_URL', '', 'Your SOPlanning instance url, to be able to send email with links');
+
+INSERT INTO `planning_config` VALUES('SMTP_HOST', 'localhost', '');
+INSERT INTO `planning_config` VALUES('SMTP_PORT', '', '');
+INSERT INTO `planning_config` VALUES('SMTP_FROM', 'notification@yourdomain.com', '');
+INSERT INTO `planning_config` VALUES('SMTP_LOGIN', '', '');
+INSERT INTO `planning_config` VALUES('SMTP_PASSWORD', '', '');
+INSERT INTO `planning_config` VALUES('SMTP_SECURE', '', '');
+
+ALTER TABLE  `planning_periode` ADD  `parent_id` INT NULL AFTER  `periode_id`;
+ALTER TABLE  `planning_periode` ADD INDEX (  `parent_id` );
+
+ALTER TABLE  `planning_user` CHANGE  `password`  `password` VARCHAR( 50 ) CHARACTER SET latin1 COLLATE latin1_general_ci NULL DEFAULT NULL;
+
+UPDATE `planning_user` SET password = sha1(CONCAT('¤',password,'¤'));
+
+ALTER TABLE  `planning_user` CHANGE  `user_id`  `user_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL;
+ALTER TABLE  `planning_periode` CHANGE  `user_id`  `user_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT  '0';
+
+ALTER TABLE  `planning_projet` CHANGE  `projet_id`  `projet_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL;
+ALTER TABLE  `planning_periode` CHANGE  `projet_id`  `projet_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL;
+
+UPDATE  `planning_config` SET  valeur ='1.20' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

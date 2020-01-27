@@ -1,0 +1,16 @@
+v1.34
+
+- New design/features for date selection in the planning ! Check it out !
+- Added free custom field in the tasks, for your specific needs (import/export with your system, etc)
+- Improvement in ICAL compatibility (specific cases on Outlook and Google Calendar)
+- Added task creator information in notification email
+- Task link no longer displayed in the printable version
+- Added scrollbar on top for the planning (helpful when many lines)
+- Added sorting option "by delivery date" on projects page
+- Improved installation process and tests (libraries, rights, etc)
+- Filter on user now saved in cookie
+- Added TLS option to LDAP connection
+- when you click on a project line in the planning, now this project is selected in the task creation form
+- Changed session name in order to separate sessions on the same domain. Now you can install several SOPlanning on the same domain or locally.
+- Deactivation of some deprecated PHP alerts
+- Some minors bugs and missing translations

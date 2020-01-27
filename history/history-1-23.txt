@@ -1,0 +1,5 @@
+v1.23
+
+- overlapping periods are now displayed perfectly : cells stay on the same line instead
+- added groups of users, with ability to filter planning on those groups
+- excluded days off and public holidays from the repetition feature

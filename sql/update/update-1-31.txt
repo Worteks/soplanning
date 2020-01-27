@@ -1,0 +1,6 @@
+
+UPDATE  `planning_config` SET  valeur ='1.31' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+INSERT INTO `planning_config` VALUES('HOURS_DISPLAYED', '8,9,10,11,14,15,16,17', 'List of hours displayed in the day view');
+
+INSERT INTO `planning_config` VALUES('DEFAULT_NB_DAYS_DISPLAYED', '2', 'Default number of days displayed in the planning view by day');

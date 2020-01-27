@@ -1,0 +1,17 @@
+
+CREATE TABLE IF NOT EXISTS `planning_user_groupe` (
+  `user_groupe_id` int(11) NOT NULL,
+  `nom` varchar(150) COLLATE latin1_general_ci NOT NULL,
+    PRIMARY KEY (`user_groupe_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+ALTER TABLE  `planning_user` ADD  `user_groupe_id` INT NULL AFTER  `user_id`;
+ALTER TABLE  `planning_user` ADD INDEX (  `user_groupe_id` ) ;
+
+ALTER TABLE `planning_user` ADD CONSTRAINT `planning_user_ibfk_1` FOREIGN KEY (`user_groupe_id`) REFERENCES `planning_user_groupe` (`user_groupe_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+ALTER TABLE  `planning_projet` CHANGE  `projet_id`  `projet_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT  '';
+
+ALTER TABLE  `planning_periode` CHANGE  `projet_id`  `projet_id` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT  '';
+
+UPDATE  `planning_config` SET  valeur ='1.23' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

@@ -1,0 +1,56 @@
+
+UPDATE  `planning_config` SET  valeur ='1.44' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT', '1', 'Audit module');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_TACHES', '1', 'Audit tasks');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_PROJETS', '1', 'Audit project');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_GROUPES', '1', 'Audit project group');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_UTILISATEURS', '1', 'Audit users');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_EQUIPES', '1', 'Audit team');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_LIEUX', '1', 'Audit location');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_RESSOURCES', '1', 'Audit ressource');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_STATUTS', '1', 'Audit status');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_CONNEXIONS', '1', 'Audit connexion');
+INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_RETENTION', '30', 'Audit retention');
+INSERT INTO `planning_config` VALUES('PLANNING_DIFFERENCIE_TACHE_COMMENTAIRE', '0', 'Task comment');
+INSERT INTO `planning_config` VALUES('PLANNING_DIFFERENCIE_TACHE_LIEN', '1', 'Task link');
+INSERT INTO `planning_config` VALUES('PLANNING_DIFFERENCIE_TACHE_PARTIELLE', '1', 'Half Task ');
+INSERT INTO `planning_config` VALUES('PLANNING_COULEUR_TACHE', '0', 'Task Color');
+INSERT INTO `planning_config` VALUES('PLANNING_TEXTE_TACHES_PROJET', 'code_personne', 'Cell text project');
+INSERT INTO `planning_config` VALUES('PLANNING_TEXTE_TACHES_PERSONNE', 'code_projet', 'Cell text user');
+INSERT INTO `planning_config` VALUES('PLANNING_TEXTE_TACHES_LIEU', 'code_projet', 'Cell text location');
+INSERT INTO `planning_config` VALUES('PLANNING_TEXTE_TACHES_RESSOURCE', 'code_projet', 'Cell text resource');
+INSERT INTO `planning_config` VALUES('PLANNING_MASQUER_FERIES', '0', 'Hide holidays');
+ALTER TABLE `planning_status` ADD COLUMN `affichage_liste` VARCHAR(2) NULL DEFAULT '1' AFTER `defaut`;
+ALTER TABLE `planning_ferie` ADD COLUMN `couleur` VARCHAR(6) DEFAULT NULL AFTER `libelle`;
+
+CREATE TABLE `planning_audit` (
+	`audit_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`date_modif` DATETIME NOT NULL,
+	`user_modif` VARCHAR(20) NOT NULL DEFAULT '' COLLATE 'latin1_general_ci',
+	`type` VARCHAR(2) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`user_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`projet_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`periode_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`lieu_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`ressource_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`statut_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`equipe_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`groupe_id` VARCHAR(20) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`anciennes_valeurs` TEXT NULL COLLATE 'latin1_general_ci',
+	`nouvelles_valeurs` TEXT NULL COLLATE 'latin1_general_ci',
+	`nbmodifs` INT(11) NULL DEFAULT NULL COLLATE 'latin1_general_ci',
+	`informations` TEXT NULL COLLATE 'latin1_general_ci',
+	PRIMARY KEY (`audit_id`),
+	INDEX `user_id` (`user_id`),
+	INDEX `projet_id` (`projet_id`)
+)COLLATE='latin1_general_ci' ENGINE=InnoDB;
+
+ALTER TABLE `planning_ressource`
+	CHANGE COLUMN `exclusif` `exclusif` TINYINT(4) NULL DEFAULT '0';
+ALTER TABLE `planning_lieu`
+	CHANGE COLUMN `exclusif` `exclusif` TINYINT(4) NULL DEFAULT '0';
+update planning_user set droits = replace(droits, ']', ', "audit_restore"]') where user_id = 'ADM'; 
+
+ALTER TABLE `planning_projet` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';
+ALTER TABLE `planning_periode` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';

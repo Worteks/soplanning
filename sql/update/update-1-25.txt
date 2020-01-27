@@ -1,0 +1,4 @@
+
+UPDATE  `planning_config` SET  valeur ='1.25' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+
+INSERT INTO `planning_config` VALUES('SECURE_KEY', MD5(RAND()), 'String used only for security matters');

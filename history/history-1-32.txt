@@ -1,0 +1,4 @@
+v1.32
+
+- Many small fixes coming for SOPlanning users, thanks to all
+- Active directory support (experimental)

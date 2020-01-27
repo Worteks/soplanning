@@ -1,0 +1,10 @@
+
+ALTER TABLE `planning_config` CHANGE `cle` `cle` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL ;
+INSERT INTO `planning_config` VALUES('DEFAULT_NB_MONTHS_DISPLAYED', '2', 'Default number of months displayed in the planning');
+INSERT INTO `planning_config` VALUES('DEFAULT_NB_ROWS_DISPLAYED', '100', 'Default number of rows displayed in the planning');
+INSERT INTO `planning_config` VALUES('DEFAULT_NB_PAST_DAYS', '5', 'Default number of past days to display in the planning');
+INSERT INTO `planning_config` VALUES('REFRESH_TIMER', '600', 'refresh time for the planning page (time in second)');
+INSERT INTO `planning_config` VALUES('LOGOUT_REDIRECT', '', 'Optional redirect url after logout (for exemple to return on your own intranet). ex : http://www.google.com');
+INSERT INTO `planning_config` VALUES('DEFAULT_PERIOD_LINK', '', 'Default value for link in a period');
+INSERT INTO `planning_config` VALUES('PLANNING_ONE_ASSIGNMENT_MAX_PER_DAY', '0', 'Option to display only one assignment/task per cell/day in the planning (put "1" to activite this option)');
+INSERT INTO `planning_config` VALUES('DAYS_INCLUDED', '1,2,3,4,5', 'Define the days included to count duration. IMPORTANT : 0=sunday, 1=monday, 2=tuesday, 3=wenesday, 4=thursday, 5=friday, 6=saturday');

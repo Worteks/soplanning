@@ -1,0 +1,4425 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//http://www.feiertage-deutschland.de/kalender-download/
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:6f5bf4073a952c3ce732fe7ea600bef9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20100101
+DTEND;VALUE=DATE:20100101
+END:VEVENT
+BEGIN:VEVENT
+UID:707337a4b01c6b004076d23a7315be3b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20100106
+DTEND;VALUE=DATE:20100106
+END:VEVENT
+BEGIN:VEVENT
+UID:7603115f685bbd622d14be859abbf469@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20100501
+DTEND;VALUE=DATE:20100501
+END:VEVENT
+BEGIN:VEVENT
+UID:a42e3c49fb3f91138051627f2cc03618@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20100808
+DTEND;VALUE=DATE:20100808
+END:VEVENT
+BEGIN:VEVENT
+UID:4ab5d4e7e753c4435d70a9cb7c3d0459@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20100815
+DTEND;VALUE=DATE:20100815
+END:VEVENT
+BEGIN:VEVENT
+UID:68951db7f4f395cdb97e79954d871742@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20101003
+DTEND;VALUE=DATE:20101003
+END:VEVENT
+BEGIN:VEVENT
+UID:53cb08113f96eb790dea7294b42a3c08@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,MV\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20101031
+DTEND;VALUE=DATE:20101031
+END:VEVENT
+BEGIN:VEVENT
+UID:bfb75ea2e1246cc3f78822c6ec525cf9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20101101
+DTEND;VALUE=DATE:20101101
+END:VEVENT
+BEGIN:VEVENT
+UID:20beac638cbab427612730625adcea12@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20101225
+DTEND;VALUE=DATE:20101225
+END:VEVENT
+BEGIN:VEVENT
+UID:428523de96cdd75512e21c5067b94baf@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20101226
+DTEND;VALUE=DATE:20101226
+END:VEVENT
+BEGIN:VEVENT
+UID:4ead7cc84cd6bf5e44ad5744a935f1a6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20110101
+DTEND;VALUE=DATE:20110101
+END:VEVENT
+BEGIN:VEVENT
+UID:b3db844c07a11ee256c7c3404d691d3b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20110106
+DTEND;VALUE=DATE:20110106
+END:VEVENT
+BEGIN:VEVENT
+UID:15484956e1212aa0a806ef175c3dda4d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20110501
+DTEND;VALUE=DATE:20110501
+END:VEVENT
+BEGIN:VEVENT
+UID:3614d9b42b609521b9560d7e70adddea@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20110808
+DTEND;VALUE=DATE:20110808
+END:VEVENT
+BEGIN:VEVENT
+UID:d426b949de55f0ce3a98330b2ac82d26@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20110815
+DTEND;VALUE=DATE:20110815
+END:VEVENT
+BEGIN:VEVENT
+UID:2b1ccb90dea78dd75c5793d1173aee3d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20111003
+DTEND;VALUE=DATE:20111003
+END:VEVENT
+BEGIN:VEVENT
+UID:c4ef0c08db1cdd87f36222c30f1616e1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,MV\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20111031
+DTEND;VALUE=DATE:20111031
+END:VEVENT
+BEGIN:VEVENT
+UID:3eee36803da45a32903a3ac3e72194da@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20111101
+DTEND;VALUE=DATE:20111101
+END:VEVENT
+BEGIN:VEVENT
+UID:4beb85bd0129079b1ac6f5e1149a517e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20111225
+DTEND;VALUE=DATE:20111225
+END:VEVENT
+BEGIN:VEVENT
+UID:7f99c34d189bd9760c9aef314e057e2a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20111226
+DTEND;VALUE=DATE:20111226
+END:VEVENT
+BEGIN:VEVENT
+UID:df8521bc43ade6e98fedc2b9222b19a1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20120101
+DTEND;VALUE=DATE:20120101
+END:VEVENT
+BEGIN:VEVENT
+UID:705e67e6ecc1a1b9617fa9e25f3a9bde@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20120106
+DTEND;VALUE=DATE:20120106
+END:VEVENT
+BEGIN:VEVENT
+UID:0a5b108a6f7795b2d89cd9d2c879e9b9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20120501
+DTEND;VALUE=DATE:20120501
+END:VEVENT
+BEGIN:VEVENT
+UID:0186d054006a2e87967a3d7d55887a85@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20120808
+DTEND;VALUE=DATE:20120808
+END:VEVENT
+BEGIN:VEVENT
+UID:39b60fe80bce2530e15f8b18932488ee@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20120815
+DTEND;VALUE=DATE:20120815
+END:VEVENT
+BEGIN:VEVENT
+UID:b3d55fafd3052d02759c68d59f49fd81@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20121003
+DTEND;VALUE=DATE:20121003
+END:VEVENT
+BEGIN:VEVENT
+UID:1f432889427bc735ef0ed04d7c04b1c9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,MV\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20121031
+DTEND;VALUE=DATE:20121031
+END:VEVENT
+BEGIN:VEVENT
+UID:5d26a475ca864408379d4aa982da2edf@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20121101
+DTEND;VALUE=DATE:20121101
+END:VEVENT
+BEGIN:VEVENT
+UID:5f940f046d3adcc3c91dce0dfd9a5a5f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20121225
+DTEND;VALUE=DATE:20121225
+END:VEVENT
+BEGIN:VEVENT
+UID:21a651c7be2cf2f4449eeffdb786e49c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20121226
+DTEND;VALUE=DATE:20121226
+END:VEVENT
+BEGIN:VEVENT
+UID:5a8e9522e147d504860f2a5276c5ccb2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20130101
+DTEND;VALUE=DATE:20130101
+END:VEVENT
+BEGIN:VEVENT
+UID:218881d5f21ded966a13fb30498261c4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20130106
+DTEND;VALUE=DATE:20130106
+END:VEVENT
+BEGIN:VEVENT
+UID:331383cfae845dc99410d502db58bbcb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20130501
+DTEND;VALUE=DATE:20130501
+END:VEVENT
+BEGIN:VEVENT
+UID:2ab2ee9919d26db29fd9b2c78e69fc0c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20130808
+DTEND;VALUE=DATE:20130808
+END:VEVENT
+BEGIN:VEVENT
+UID:db6ff26b394ec87cb09e7d3d1207fb6b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20130815
+DTEND;VALUE=DATE:20130815
+END:VEVENT
+BEGIN:VEVENT
+UID:42b1b0915b5225e3452d8ee6819a0bb0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20131003
+DTEND;VALUE=DATE:20131003
+END:VEVENT
+BEGIN:VEVENT
+UID:2ebc9c2cf7af481d6d13d0cfaffac5c1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,MV\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20131031
+DTEND;VALUE=DATE:20131031
+END:VEVENT
+BEGIN:VEVENT
+UID:9ae0e96aa308891720f9418519a3c64c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20131101
+DTEND;VALUE=DATE:20131101
+END:VEVENT
+BEGIN:VEVENT
+UID:7749fcbe7a05c90354b18923ae3b737d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20131225
+DTEND;VALUE=DATE:20131225
+END:VEVENT
+BEGIN:VEVENT
+UID:cac5576017645a1a67b80f30433b4639@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20131226
+DTEND;VALUE=DATE:20131226
+END:VEVENT
+BEGIN:VEVENT
+UID:bb1e0396993957e74c332546b84d34a1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20140101
+DTEND;VALUE=DATE:20140101
+END:VEVENT
+BEGIN:VEVENT
+UID:16a51af2853e286c17367d8a2258a560@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20140106
+DTEND;VALUE=DATE:20140106
+END:VEVENT
+BEGIN:VEVENT
+UID:f47f48bbdb409a8dcc09ae7f56c87572@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20140501
+DTEND;VALUE=DATE:20140501
+END:VEVENT
+BEGIN:VEVENT
+UID:847ba6ebdb8e98fcab89afbc6be0912b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20140808
+DTEND;VALUE=DATE:20140808
+END:VEVENT
+BEGIN:VEVENT
+UID:9e85b83d7b0ade869af73af2ad625938@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20140815
+DTEND;VALUE=DATE:20140815
+END:VEVENT
+BEGIN:VEVENT
+UID:00bc52f347a89d5b8a62dc0f03a24599@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20141003
+DTEND;VALUE=DATE:20141003
+END:VEVENT
+BEGIN:VEVENT
+UID:16d27b60bb838c1621171208c9712811@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,MV\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20141031
+DTEND;VALUE=DATE:20141031
+END:VEVENT
+BEGIN:VEVENT
+UID:e9e331f30657cc7ddce9af848587ef22@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20141101
+DTEND;VALUE=DATE:20141101
+END:VEVENT
+BEGIN:VEVENT
+UID:b86d75dee20b6dcaf78ec72a14250040@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20141225
+DTEND;VALUE=DATE:20141225
+END:VEVENT
+BEGIN:VEVENT
+UID:e46846707e35f938398466ea8d86f4a4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20141226
+DTEND;VALUE=DATE:20141226
+END:VEVENT
+BEGIN:VEVENT
+UID:7715758f98b739e16e3fe12145883f5e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20150101
+DTEND;VALUE=DATE:20150101
+END:VEVENT
+BEGIN:VEVENT
+UID:810aa691bcd8b6e6881389b670231c5f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20150106
+DTEND;VALUE=DATE:20150106
+END:VEVENT
+BEGIN:VEVENT
+UID:4b8782c021d6488c25c960f6ca14474a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20150501
+DTEND;VALUE=DATE:20150501
+END:VEVENT
+BEGIN:VEVENT
+UID:44de0867a85d4a3dcc5c5df4a4493745@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20150808
+DTEND;VALUE=DATE:20150808
+END:VEVENT
+BEGIN:VEVENT
+UID:9c942f590d80fe45aaa1c8babc4920b5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20150815
+DTEND;VALUE=DATE:20150815
+END:VEVENT
+BEGIN:VEVENT
+UID:223896f903d5d41b3281e99689c20125@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20151003
+DTEND;VALUE=DATE:20151003
+END:VEVENT
+BEGIN:VEVENT
+UID:32addeb6af8ea87b45e00dd0abcab1da@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,MV\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20151031
+DTEND;VALUE=DATE:20151031
+END:VEVENT
+BEGIN:VEVENT
+UID:b3fffc6326ba02ced688e6d7a803bd0a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20151101
+DTEND;VALUE=DATE:20151101
+END:VEVENT
+BEGIN:VEVENT
+UID:bbb585e285cef7ebf04aafbf4095566d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20151225
+DTEND;VALUE=DATE:20151225
+END:VEVENT
+BEGIN:VEVENT
+UID:d214c43cb390a5b5f74e2b298fd99ef4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20151226
+DTEND;VALUE=DATE:20151226
+END:VEVENT
+BEGIN:VEVENT
+UID:3b0c2f911f60703ee8e07ab2064aabeb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20160101
+DTEND;VALUE=DATE:20160101
+END:VEVENT
+BEGIN:VEVENT
+UID:541ed2d21fb63b835fbee89f20ef3c5e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20160106
+DTEND;VALUE=DATE:20160106
+END:VEVENT
+BEGIN:VEVENT
+UID:33bc6c30a0d4bf243d4051391b22b87b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20160501
+DTEND;VALUE=DATE:20160501
+END:VEVENT
+BEGIN:VEVENT
+UID:2701dcd3d1cc74afc96b8e14e483f7a6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20160808
+DTEND;VALUE=DATE:20160808
+END:VEVENT
+BEGIN:VEVENT
+UID:4b00fa96040fa153622b7fcd4ee5873f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20160815
+DTEND;VALUE=DATE:20160815
+END:VEVENT
+BEGIN:VEVENT
+UID:7db5d602d92f1e95d2cd019ca39cc500@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20161003
+DTEND;VALUE=DATE:20161003
+END:VEVENT
+BEGIN:VEVENT
+UID:bad47bebffdf94f7037354e209d61274@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,MV\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20161031
+DTEND;VALUE=DATE:20161031
+END:VEVENT
+BEGIN:VEVENT
+UID:c5a245d81f36c487069876f866da9743@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20161101
+DTEND;VALUE=DATE:20161101
+END:VEVENT
+BEGIN:VEVENT
+UID:b7b6ad4b7011dcfebfe79200c55b0e11@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20161225
+DTEND;VALUE=DATE:20161225
+END:VEVENT
+BEGIN:VEVENT
+UID:c534530c3e2e32395bf09b37747cf133@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20161226
+DTEND;VALUE=DATE:20161226
+END:VEVENT
+BEGIN:VEVENT
+UID:2538d8c085768b76e1c14a3e843b4dfb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20170101
+DTEND;VALUE=DATE:20170101
+END:VEVENT
+BEGIN:VEVENT
+UID:0387614b736d5063e639ff30668fcd86@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20170106
+DTEND;VALUE=DATE:20170106
+END:VEVENT
+BEGIN:VEVENT
+UID:44622659be57c4f006f22fc002bd9fff@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20170501
+DTEND;VALUE=DATE:20170501
+END:VEVENT
+BEGIN:VEVENT
+UID:f33c09341a20e4c7c6de282fa62a7291@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20170808
+DTEND;VALUE=DATE:20170808
+END:VEVENT
+BEGIN:VEVENT
+UID:e4b86277a8733c7bfbb3974fc440a3a0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20170815
+DTEND;VALUE=DATE:20170815
+END:VEVENT
+BEGIN:VEVENT
+UID:3a0a8e052681c9a3925b894555294138@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20171003
+DTEND;VALUE=DATE:20171003
+END:VEVENT
+BEGIN:VEVENT
+UID:411d86845ef5faae7506cad961e98490@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20171031
+DTEND;VALUE=DATE:20171031
+END:VEVENT
+BEGIN:VEVENT
+UID:27771f54332fc070b59ec8c12174afda@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20171101
+DTEND;VALUE=DATE:20171101
+END:VEVENT
+BEGIN:VEVENT
+UID:f55198744dae0c0b901bc3947eddbac9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20171225
+DTEND;VALUE=DATE:20171225
+END:VEVENT
+BEGIN:VEVENT
+UID:8569be190c829a84d785a79925687e2f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20171226
+DTEND;VALUE=DATE:20171226
+END:VEVENT
+BEGIN:VEVENT
+UID:21cf9161547a1bb5ea81cfacc137cee8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20180101
+DTEND;VALUE=DATE:20180101
+END:VEVENT
+BEGIN:VEVENT
+UID:e0745fdfdb9b599c78c60615c0363c90@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20180106
+DTEND;VALUE=DATE:20180106
+END:VEVENT
+BEGIN:VEVENT
+UID:12b40f1865d278ea7254ee3b54fdbcd5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20180501
+DTEND;VALUE=DATE:20180501
+END:VEVENT
+BEGIN:VEVENT
+UID:8ddb8565f6c62caa22888157c2a165c8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20180808
+DTEND;VALUE=DATE:20180808
+END:VEVENT
+BEGIN:VEVENT
+UID:87ceb5148990dbb7c84ed206e6ce37f1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20180815
+DTEND;VALUE=DATE:20180815
+END:VEVENT
+BEGIN:VEVENT
+UID:c45ae8d86ec11aea187bf82e9d699105@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20181003
+DTEND;VALUE=DATE:20181003
+END:VEVENT
+BEGIN:VEVENT
+UID:9cf451b268fd4677737cf5c4c6f9708b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20181031
+DTEND;VALUE=DATE:20181031
+END:VEVENT
+BEGIN:VEVENT
+UID:8b8ef2ef739c4054948e40d856838cc1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20181101
+DTEND;VALUE=DATE:20181101
+END:VEVENT
+BEGIN:VEVENT
+UID:08c33fc68ac8ca68ce429342b76f3040@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20181225
+DTEND;VALUE=DATE:20181225
+END:VEVENT
+BEGIN:VEVENT
+UID:a78e56e61ec728cacfcd0f7bd5a5585a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20181226
+DTEND;VALUE=DATE:20181226
+END:VEVENT
+BEGIN:VEVENT
+UID:146ed2ad74db1bbab988a25c104e0db7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20190101
+DTEND;VALUE=DATE:20190101
+END:VEVENT
+BEGIN:VEVENT
+UID:93ae1c797093769b91cf142967649458@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20190106
+DTEND;VALUE=DATE:20190106
+END:VEVENT
+BEGIN:VEVENT
+UID:721da98ef7eedcec661f21031fb2ccb7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20190501
+DTEND;VALUE=DATE:20190501
+END:VEVENT
+BEGIN:VEVENT
+UID:6d2a92eaa952fc1eb080b2a5fc07cef2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20190808
+DTEND;VALUE=DATE:20190808
+END:VEVENT
+BEGIN:VEVENT
+UID:b812431d6b6aad48d9cd8b131c9b0d83@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20190815
+DTEND;VALUE=DATE:20190815
+END:VEVENT
+BEGIN:VEVENT
+UID:a7e82b70ed6ff2507f2dcc70679f9fb9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20191003
+DTEND;VALUE=DATE:20191003
+END:VEVENT
+BEGIN:VEVENT
+UID:ef762528ba9e9d79cd4448a8e707fc6b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20191031
+DTEND;VALUE=DATE:20191031
+END:VEVENT
+BEGIN:VEVENT
+UID:8f2bad74b6c8a7dea8b72f2c6aef3f53@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20191101
+DTEND;VALUE=DATE:20191101
+END:VEVENT
+BEGIN:VEVENT
+UID:08afcdffe6c23c65010de0b9c11e1272@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20191225
+DTEND;VALUE=DATE:20191225
+END:VEVENT
+BEGIN:VEVENT
+UID:c0275a098bbc8dcbaef7ea3bbc4335c9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20191226
+DTEND;VALUE=DATE:20191226
+END:VEVENT
+BEGIN:VEVENT
+UID:c3131b66f6fc914dac1c694008298556@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20200101
+DTEND;VALUE=DATE:20200101
+END:VEVENT
+BEGIN:VEVENT
+UID:3a6fe8357693a6dddf33bc626adb01e6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20200106
+DTEND;VALUE=DATE:20200106
+END:VEVENT
+BEGIN:VEVENT
+UID:006ca9107030eb0b411caa23b6346fe1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20200501
+DTEND;VALUE=DATE:20200501
+END:VEVENT
+BEGIN:VEVENT
+UID:3ad3d80ff70c340cc5708a0f07a830d1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20200808
+DTEND;VALUE=DATE:20200808
+END:VEVENT
+BEGIN:VEVENT
+UID:32966e3bac1ae3d5a24c41fe44fbba54@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20200815
+DTEND;VALUE=DATE:20200815
+END:VEVENT
+BEGIN:VEVENT
+UID:015709b3d9b8481c1d796fc3c97e7880@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20201003
+DTEND;VALUE=DATE:20201003
+END:VEVENT
+BEGIN:VEVENT
+UID:92a5d15a9909012abd0009c1c791819d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20201031
+DTEND;VALUE=DATE:20201031
+END:VEVENT
+BEGIN:VEVENT
+UID:89fe9ca34cdb3d242bbb8b7df314fb3d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20201101
+DTEND;VALUE=DATE:20201101
+END:VEVENT
+BEGIN:VEVENT
+UID:8aa5e2c078cb392107a188fc51ecc954@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20201225
+DTEND;VALUE=DATE:20201225
+END:VEVENT
+BEGIN:VEVENT
+UID:0996806571bf41274c59863f51db40ce@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20201226
+DTEND;VALUE=DATE:20201226
+END:VEVENT
+BEGIN:VEVENT
+UID:3ec5fdd567e9782a480187ca1374ef3f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20210101
+DTEND;VALUE=DATE:20210101
+END:VEVENT
+BEGIN:VEVENT
+UID:4618abf91a993aac42f20074cee45930@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20210106
+DTEND;VALUE=DATE:20210106
+END:VEVENT
+BEGIN:VEVENT
+UID:1d08bf1a2c2d79c98681ac6241efe24c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20210501
+DTEND;VALUE=DATE:20210501
+END:VEVENT
+BEGIN:VEVENT
+UID:a5187010b547938e5e4911b785f60035@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20210808
+DTEND;VALUE=DATE:20210808
+END:VEVENT
+BEGIN:VEVENT
+UID:ccac390b928db3be661056f31f70543d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20210815
+DTEND;VALUE=DATE:20210815
+END:VEVENT
+BEGIN:VEVENT
+UID:59cc70c8ef45fe3ca1f4ec99ea839b1e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20211003
+DTEND;VALUE=DATE:20211003
+END:VEVENT
+BEGIN:VEVENT
+UID:8ee89dcddd55a4368e00a328b3441eb1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20211031
+DTEND;VALUE=DATE:20211031
+END:VEVENT
+BEGIN:VEVENT
+UID:d506509d2866b5785f9ed8d342a30247@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20211101
+DTEND;VALUE=DATE:20211101
+END:VEVENT
+BEGIN:VEVENT
+UID:8ecf662ed20d6c5b136685ae31333ceb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20211225
+DTEND;VALUE=DATE:20211225
+END:VEVENT
+BEGIN:VEVENT
+UID:fc265896010e0c5a3f0885a68dca104b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20211226
+DTEND;VALUE=DATE:20211226
+END:VEVENT
+BEGIN:VEVENT
+UID:77265ef2d8424b4e9be7c2fc40bd8939@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20220101
+DTEND;VALUE=DATE:20220101
+END:VEVENT
+BEGIN:VEVENT
+UID:bbcbc7238312bc587f6a2e92f9337a3c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20220106
+DTEND;VALUE=DATE:20220106
+END:VEVENT
+BEGIN:VEVENT
+UID:7498514db273e97a608c9d9e9bdab866@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20220501
+DTEND;VALUE=DATE:20220501
+END:VEVENT
+BEGIN:VEVENT
+UID:7e9b162210bd505ada7bbbd8872dd1ad@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20220808
+DTEND;VALUE=DATE:20220808
+END:VEVENT
+BEGIN:VEVENT
+UID:b7a45ff9f8c3b47a81dbf07b19a5a66a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20220815
+DTEND;VALUE=DATE:20220815
+END:VEVENT
+BEGIN:VEVENT
+UID:43f2c8affa0d04e2080e4b32b5ff1d45@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20221003
+DTEND;VALUE=DATE:20221003
+END:VEVENT
+BEGIN:VEVENT
+UID:5e429880b373b0fc480b84d0c4782ad7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20221031
+DTEND;VALUE=DATE:20221031
+END:VEVENT
+BEGIN:VEVENT
+UID:75d17b6a6582381ed7476345929d1675@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20221101
+DTEND;VALUE=DATE:20221101
+END:VEVENT
+BEGIN:VEVENT
+UID:cf1c3d2175feb9dbb742cc725b171d4f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20221225
+DTEND;VALUE=DATE:20221225
+END:VEVENT
+BEGIN:VEVENT
+UID:c75b4aff1c1317dbf3d764113a659a30@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20221226
+DTEND;VALUE=DATE:20221226
+END:VEVENT
+BEGIN:VEVENT
+UID:8be0095278d37391b0046bc1255ff347@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20230101
+DTEND;VALUE=DATE:20230101
+END:VEVENT
+BEGIN:VEVENT
+UID:4f5a8f84b1c5c04784eef04fbdc9914a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20230106
+DTEND;VALUE=DATE:20230106
+END:VEVENT
+BEGIN:VEVENT
+UID:c6238d35536f1f5b9a90e08ebca70ce6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20230501
+DTEND;VALUE=DATE:20230501
+END:VEVENT
+BEGIN:VEVENT
+UID:c8e8bd1d4a1aaeb8aca45698fcfb5e00@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20230808
+DTEND;VALUE=DATE:20230808
+END:VEVENT
+BEGIN:VEVENT
+UID:129664ba198e1a6d55a30c2efef616a4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20230815
+DTEND;VALUE=DATE:20230815
+END:VEVENT
+BEGIN:VEVENT
+UID:9bc78451313d46a0bee9b87d7c46fb25@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20231003
+DTEND;VALUE=DATE:20231003
+END:VEVENT
+BEGIN:VEVENT
+UID:87c04646fefbaff91fb930e50a390945@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20231031
+DTEND;VALUE=DATE:20231031
+END:VEVENT
+BEGIN:VEVENT
+UID:13e70e004bdd56cf555ea07494de9b3a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20231101
+DTEND;VALUE=DATE:20231101
+END:VEVENT
+BEGIN:VEVENT
+UID:bc88eb9e9e3668e670751520e78b473a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20231225
+DTEND;VALUE=DATE:20231225
+END:VEVENT
+BEGIN:VEVENT
+UID:1fb8438abfdf3049a1e02a4b910177e5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20231226
+DTEND;VALUE=DATE:20231226
+END:VEVENT
+BEGIN:VEVENT
+UID:777d0ade5b7a1000c247637696050630@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20240101
+DTEND;VALUE=DATE:20240101
+END:VEVENT
+BEGIN:VEVENT
+UID:c2cbb3e57c78648a4ea0d9505a7e31d7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20240106
+DTEND;VALUE=DATE:20240106
+END:VEVENT
+BEGIN:VEVENT
+UID:137ecc69e06476710e8b2cbad5dc02b4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20240501
+DTEND;VALUE=DATE:20240501
+END:VEVENT
+BEGIN:VEVENT
+UID:e021c387b22f6ed8dec8f0a82590e7f2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20240808
+DTEND;VALUE=DATE:20240808
+END:VEVENT
+BEGIN:VEVENT
+UID:4a7b13a88590c9d0b7ce6d1e28466a87@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20240815
+DTEND;VALUE=DATE:20240815
+END:VEVENT
+BEGIN:VEVENT
+UID:497a63174ecc6727b5413e573cc98ce1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20241003
+DTEND;VALUE=DATE:20241003
+END:VEVENT
+BEGIN:VEVENT
+UID:3afd088f52389e2b022b2f2ba896dd1e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20241031
+DTEND;VALUE=DATE:20241031
+END:VEVENT
+BEGIN:VEVENT
+UID:67a2ef083a37dbdca11a272e580311e5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20241101
+DTEND;VALUE=DATE:20241101
+END:VEVENT
+BEGIN:VEVENT
+UID:d1b5a67faa3f0cfecca6cef3ddcfd397@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20241225
+DTEND;VALUE=DATE:20241225
+END:VEVENT
+BEGIN:VEVENT
+UID:ff460bf98f6f08a56aa28ef9b3f7b9b0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20241226
+DTEND;VALUE=DATE:20241226
+END:VEVENT
+BEGIN:VEVENT
+UID:90cf434114a84087fbbd1c1a0f9a7829@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20250101
+DTEND;VALUE=DATE:20250101
+END:VEVENT
+BEGIN:VEVENT
+UID:19751b973ea8a6250dbcc7b1219eef6f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20250106
+DTEND;VALUE=DATE:20250106
+END:VEVENT
+BEGIN:VEVENT
+UID:430857c5e0d790b8a559626be77e1122@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20250501
+DTEND;VALUE=DATE:20250501
+END:VEVENT
+BEGIN:VEVENT
+UID:aa0f430db2908792432c84a7d0cd9d0c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20250808
+DTEND;VALUE=DATE:20250808
+END:VEVENT
+BEGIN:VEVENT
+UID:64f73b23b3a77e9e7849e1e56180c897@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20250815
+DTEND;VALUE=DATE:20250815
+END:VEVENT
+BEGIN:VEVENT
+UID:65a584244e5977c3d00f33ee23fd311f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20251003
+DTEND;VALUE=DATE:20251003
+END:VEVENT
+BEGIN:VEVENT
+UID:006028850286f4bd69f0e074805ed4e3@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20251031
+DTEND;VALUE=DATE:20251031
+END:VEVENT
+BEGIN:VEVENT
+UID:1eaab6020e94d766beea7162c90f41a8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20251101
+DTEND;VALUE=DATE:20251101
+END:VEVENT
+BEGIN:VEVENT
+UID:4ba93e0edea9409f0297b7f72f416dc7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20251225
+DTEND;VALUE=DATE:20251225
+END:VEVENT
+BEGIN:VEVENT
+UID:f7ce428e5a1a537e62b2eb11a778847a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20251226
+DTEND;VALUE=DATE:20251226
+END:VEVENT
+BEGIN:VEVENT
+UID:11094e5bfc4e90d4e70caab8fcfbdf84@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260101
+END:VEVENT
+BEGIN:VEVENT
+UID:5dcb377a6ca08cd1e6669bfeec5adc27@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20260106
+DTEND;VALUE=DATE:20260106
+END:VEVENT
+BEGIN:VEVENT
+UID:c9982b31132605179fed3e9a75c40068@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260501
+END:VEVENT
+BEGIN:VEVENT
+UID:5fbb40b479cf40731f65ac04a7d1784b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20260808
+DTEND;VALUE=DATE:20260808
+END:VEVENT
+BEGIN:VEVENT
+UID:bc271f73c8f28be27b4168ec0c019957@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260815
+END:VEVENT
+BEGIN:VEVENT
+UID:db5e49b0b1e33b3e0dc7d8e089cb5f38@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261003
+END:VEVENT
+BEGIN:VEVENT
+UID:643da33bfe8c7009c3bcc7e8c02b4d99@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261031
+END:VEVENT
+BEGIN:VEVENT
+UID:f69330b77da4d74d412a3aad17257393@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261101
+END:VEVENT
+BEGIN:VEVENT
+UID:2dd01123ca3891648eea7d1e88a6abc3@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261225
+END:VEVENT
+BEGIN:VEVENT
+UID:e12d89093480491bb25422fb532a3d33@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20261226
+DTEND;VALUE=DATE:20261226
+END:VEVENT
+BEGIN:VEVENT
+UID:f297f3025df5299a06788036b9fa5386@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270101
+END:VEVENT
+BEGIN:VEVENT
+UID:3091c74fc343f2f646ca123db8b61096@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20270106
+DTEND;VALUE=DATE:20270106
+END:VEVENT
+BEGIN:VEVENT
+UID:747a6ab6428870122b503cf6b2dab9d1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270501
+END:VEVENT
+BEGIN:VEVENT
+UID:8024986b980db79e1688a3c6a4c511ea@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20270808
+DTEND;VALUE=DATE:20270808
+END:VEVENT
+BEGIN:VEVENT
+UID:c7a56c6cbbf18da73fa767eec93dbbf9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270815
+END:VEVENT
+BEGIN:VEVENT
+UID:447dd020816b16445c99b6a42a57a641@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271003
+END:VEVENT
+BEGIN:VEVENT
+UID:292f00a0d6382ca8a67f3a8f3973412d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20271031
+DTEND;VALUE=DATE:20271031
+END:VEVENT
+BEGIN:VEVENT
+UID:a5bb6a278beb607d96a7d13d5543295d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20271101
+DTEND;VALUE=DATE:20271101
+END:VEVENT
+BEGIN:VEVENT
+UID:012b29c5704ebb76c9d6cd59ea7c5d13@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271225
+END:VEVENT
+BEGIN:VEVENT
+UID:803d20b95828a49b7e95899104382c7f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271226
+END:VEVENT
+BEGIN:VEVENT
+UID:c78e265a8b087a0dcbafb178e5950d28@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20280101
+DTEND;VALUE=DATE:20280101
+END:VEVENT
+BEGIN:VEVENT
+UID:43c6527ba4c1c0ec10d382e374156006@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20280106
+DTEND;VALUE=DATE:20280106
+END:VEVENT
+BEGIN:VEVENT
+UID:d744d2638426b1f1c7b6b7ae2a7cdbc4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20280501
+DTEND;VALUE=DATE:20280501
+END:VEVENT
+BEGIN:VEVENT
+UID:9a70c4b548420d9a58abb5fc3eb3bdfa@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20280808
+DTEND;VALUE=DATE:20280808
+END:VEVENT
+BEGIN:VEVENT
+UID:d099c60fd67159f6a08f5c6a92d3d93f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20280815
+DTEND;VALUE=DATE:20280815
+END:VEVENT
+BEGIN:VEVENT
+UID:107c79e7851ef3dcdf34e85e239a4270@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20281003
+DTEND;VALUE=DATE:20281003
+END:VEVENT
+BEGIN:VEVENT
+UID:51f75650dfae12b5c05daa921057e763@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20281031
+DTEND;VALUE=DATE:20281031
+END:VEVENT
+BEGIN:VEVENT
+UID:227da12121b66f744e96095ff18667bb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20281101
+DTEND;VALUE=DATE:20281101
+END:VEVENT
+BEGIN:VEVENT
+UID:7e87480ba52a3b3a8a8ab295efe9bde6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20281225
+DTEND;VALUE=DATE:20281225
+END:VEVENT
+BEGIN:VEVENT
+UID:cc7a11e1cd91b85a1d523c8125035ea8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20281226
+DTEND;VALUE=DATE:20281226
+END:VEVENT
+BEGIN:VEVENT
+UID:b039ae2e5369ce8948aa229c2b489d67@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20290101
+DTEND;VALUE=DATE:20290101
+END:VEVENT
+BEGIN:VEVENT
+UID:d885f1f0143835bf0bd6acc0e1060a40@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20290106
+DTEND;VALUE=DATE:20290106
+END:VEVENT
+BEGIN:VEVENT
+UID:8c0b3d6f4bcadfd63404246a3187be19@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20290501
+DTEND;VALUE=DATE:20290501
+END:VEVENT
+BEGIN:VEVENT
+UID:ff1e630afb66fa7d4a11a079326e55cf@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20290808
+DTEND;VALUE=DATE:20290808
+END:VEVENT
+BEGIN:VEVENT
+UID:8d7848b8eb494d08d80ea72c621d8afc@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20290815
+DTEND;VALUE=DATE:20290815
+END:VEVENT
+BEGIN:VEVENT
+UID:11800c599bc4fe966add8dd1a1e7b1cd@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20291003
+DTEND;VALUE=DATE:20291003
+END:VEVENT
+BEGIN:VEVENT
+UID:94f84e16e98a72b1c3e53f26a87b201d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20291031
+DTEND;VALUE=DATE:20291031
+END:VEVENT
+BEGIN:VEVENT
+UID:4d179f8212f377f8658842cd2d2eb148@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20291101
+DTEND;VALUE=DATE:20291101
+END:VEVENT
+BEGIN:VEVENT
+UID:51cf652eff29800209404820466a707f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20291225
+DTEND;VALUE=DATE:20291225
+END:VEVENT
+BEGIN:VEVENT
+UID:c078a998751cbf9ef7456549447e5f4e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20291226
+DTEND;VALUE=DATE:20291226
+END:VEVENT
+BEGIN:VEVENT
+UID:4ca57937c2dd6203b6661f281844faed@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20300101
+DTEND;VALUE=DATE:20300101
+END:VEVENT
+BEGIN:VEVENT
+UID:f68457bfcef19d64b9818e2ec4dc5c00@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20300106
+DTEND;VALUE=DATE:20300106
+END:VEVENT
+BEGIN:VEVENT
+UID:8dd9ff5f10578924c83661b63e2d0247@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20300501
+DTEND;VALUE=DATE:20300501
+END:VEVENT
+BEGIN:VEVENT
+UID:375bd01764d4b085b2dc555b6a6d38d8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20300808
+DTEND;VALUE=DATE:20300808
+END:VEVENT
+BEGIN:VEVENT
+UID:f33865cdeecd2c49e7ca4e41789c457b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20300815
+DTEND;VALUE=DATE:20300815
+END:VEVENT
+BEGIN:VEVENT
+UID:04be793ffd76125a8732b223a0ed52f9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20301003
+DTEND;VALUE=DATE:20301003
+END:VEVENT
+BEGIN:VEVENT
+UID:e5b490e9292eb4f6d92189c0a8f45203@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20301031
+DTEND;VALUE=DATE:20301031
+END:VEVENT
+BEGIN:VEVENT
+UID:94596729a308423224a64755f89558f8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20301101
+DTEND;VALUE=DATE:20301101
+END:VEVENT
+BEGIN:VEVENT
+UID:84f9c627d39e3af2687dd9712b2ab9ab@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20301225
+DTEND;VALUE=DATE:20301225
+END:VEVENT
+BEGIN:VEVENT
+UID:27c1ca247aa4d201ee23f9ebcc9fb533@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20301226
+DTEND;VALUE=DATE:20301226
+END:VEVENT
+BEGIN:VEVENT
+UID:9bd550ce7b47fc389b10dc975c956f98@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20310101
+DTEND;VALUE=DATE:20310101
+END:VEVENT
+BEGIN:VEVENT
+UID:f80cab0ee8297a55a3240179b38edc39@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20310106
+DTEND;VALUE=DATE:20310106
+END:VEVENT
+BEGIN:VEVENT
+UID:23c5b16cb101ca7c516ac9b06d5d90f2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20310501
+DTEND;VALUE=DATE:20310501
+END:VEVENT
+BEGIN:VEVENT
+UID:a464ebdcff815ad76ad6b458f65e12fa@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20310808
+DTEND;VALUE=DATE:20310808
+END:VEVENT
+BEGIN:VEVENT
+UID:c75bedf7c2afcfb3415a45a331602c83@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20310815
+DTEND;VALUE=DATE:20310815
+END:VEVENT
+BEGIN:VEVENT
+UID:6a28c0149b6ca462084a077cc5961a38@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20311003
+DTEND;VALUE=DATE:20311003
+END:VEVENT
+BEGIN:VEVENT
+UID:7fb9cefa3fa140fe41c1bf415ba8c5aa@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20311031
+DTEND;VALUE=DATE:20311031
+END:VEVENT
+BEGIN:VEVENT
+UID:279721bc6fa68f1e6c191a2346f51bd4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20311101
+DTEND;VALUE=DATE:20311101
+END:VEVENT
+BEGIN:VEVENT
+UID:3826bfbc61f30281c7201875355be787@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20311225
+DTEND;VALUE=DATE:20311225
+END:VEVENT
+BEGIN:VEVENT
+UID:1cac44ca368c6ee96df86428410492da@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20311226
+DTEND;VALUE=DATE:20311226
+END:VEVENT
+BEGIN:VEVENT
+UID:09a144a502f19b2c3ffaa85c9590ccbd@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20320101
+DTEND;VALUE=DATE:20320101
+END:VEVENT
+BEGIN:VEVENT
+UID:35cc3d8e1765dc415499fe1d06c833d8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20320106
+DTEND;VALUE=DATE:20320106
+END:VEVENT
+BEGIN:VEVENT
+UID:aecd70a2cfa5d02d8df9019bc6878b5a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20320501
+DTEND;VALUE=DATE:20320501
+END:VEVENT
+BEGIN:VEVENT
+UID:aa2474ff54e0d9e036d41732b3317e9b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20320808
+DTEND;VALUE=DATE:20320808
+END:VEVENT
+BEGIN:VEVENT
+UID:980577e88e61d7d78f79eabc908648d4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20320815
+DTEND;VALUE=DATE:20320815
+END:VEVENT
+BEGIN:VEVENT
+UID:1502464c6d44e18cff8977d8a02e228e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20321003
+DTEND;VALUE=DATE:20321003
+END:VEVENT
+BEGIN:VEVENT
+UID:98f7ec7d275d555a8552385c0dcd2c3a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20321031
+DTEND;VALUE=DATE:20321031
+END:VEVENT
+BEGIN:VEVENT
+UID:2f6f2765fa7b62a22c6ffb5cd2ebe10a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20321101
+DTEND;VALUE=DATE:20321101
+END:VEVENT
+BEGIN:VEVENT
+UID:446441a563a946c558489d82cea105ea@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20321225
+DTEND;VALUE=DATE:20321225
+END:VEVENT
+BEGIN:VEVENT
+UID:da2eeef8e573ab79c13b50b6bb50d3a8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20321226
+DTEND;VALUE=DATE:20321226
+END:VEVENT
+BEGIN:VEVENT
+UID:d3037b2f310f8c3983069651c4f80ddd@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20330101
+DTEND;VALUE=DATE:20330101
+END:VEVENT
+BEGIN:VEVENT
+UID:20149cad816ff74b2ff7d883ccb13d4e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20330106
+DTEND;VALUE=DATE:20330106
+END:VEVENT
+BEGIN:VEVENT
+UID:b014e0c6d47c5c97ecf9a5d0b5b8faef@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20330501
+DTEND;VALUE=DATE:20330501
+END:VEVENT
+BEGIN:VEVENT
+UID:f2701e69026565c9a673f0d22b055385@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20330808
+DTEND;VALUE=DATE:20330808
+END:VEVENT
+BEGIN:VEVENT
+UID:1f6015eff24cdb3d37dc4917575e2fa2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20330815
+DTEND;VALUE=DATE:20330815
+END:VEVENT
+BEGIN:VEVENT
+UID:299eeba3984da4b99fbe140dba07c74f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20331003
+DTEND;VALUE=DATE:20331003
+END:VEVENT
+BEGIN:VEVENT
+UID:599f9da4661726c7a7ada5ead856e70e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20331031
+DTEND;VALUE=DATE:20331031
+END:VEVENT
+BEGIN:VEVENT
+UID:219cdc8f58a90e6a047c5d50bce7db00@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20331101
+DTEND;VALUE=DATE:20331101
+END:VEVENT
+BEGIN:VEVENT
+UID:ea7ebb039b027c29c235362104120e1e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20331225
+DTEND;VALUE=DATE:20331225
+END:VEVENT
+BEGIN:VEVENT
+UID:82851ba2ec4c9b005701010663f1607f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20331226
+DTEND;VALUE=DATE:20331226
+END:VEVENT
+BEGIN:VEVENT
+UID:a39d4d0238364ec171277d39a1a762d6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20340101
+DTEND;VALUE=DATE:20340101
+END:VEVENT
+BEGIN:VEVENT
+UID:ae41f85225310ce83ebb867bb56ca9ed@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20340106
+DTEND;VALUE=DATE:20340106
+END:VEVENT
+BEGIN:VEVENT
+UID:87c5d4ed4418ff55b40199185cccaffc@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20340501
+DTEND;VALUE=DATE:20340501
+END:VEVENT
+BEGIN:VEVENT
+UID:be1a6ee8efce0f044acb936fa2fefcbe@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20340808
+DTEND;VALUE=DATE:20340808
+END:VEVENT
+BEGIN:VEVENT
+UID:6593607bf478a6e83a5d95cbfee61195@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20340815
+DTEND;VALUE=DATE:20340815
+END:VEVENT
+BEGIN:VEVENT
+UID:ced22520cafd3f7ee94b02f2d9b61ef1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20341003
+DTEND;VALUE=DATE:20341003
+END:VEVENT
+BEGIN:VEVENT
+UID:e7cfc48f809e970ca219d2b6422a1b2c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20341031
+DTEND;VALUE=DATE:20341031
+END:VEVENT
+BEGIN:VEVENT
+UID:02b24edd27ee067d789c19c50f873c8d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20341101
+DTEND;VALUE=DATE:20341101
+END:VEVENT
+BEGIN:VEVENT
+UID:653bd3a3fcdb7c20405c75e08bfccbf0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20341225
+DTEND;VALUE=DATE:20341225
+END:VEVENT
+BEGIN:VEVENT
+UID:fec1fc75d3e8bce5ba68d86f50b909f6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20341226
+DTEND;VALUE=DATE:20341226
+END:VEVENT
+BEGIN:VEVENT
+UID:93e4cdfdd6e4f0dfb2ae6e37e257d2d4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Neujahrstag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/neujahr/
+SUMMARY:Neujahr (§)
+DTSTART;VALUE=DATE:20350101
+DTEND;VALUE=DATE:20350101
+END:VEVENT
+BEGIN:VEVENT
+UID:bd40b05e80ff92a9390170fd8c423d35@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,ST
+DESCRIPTION:Der Dreikönigstag ist ein gesetzlicher Feiertag in: Baden-Württemberg\, Bayern und Sachsen-Anhalt.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/heilige-drei-koenige/
+SUMMARY:Heilige Drei Könige (§)
+DTSTART;VALUE=DATE:20350106
+DTEND;VALUE=DATE:20350106
+END:VEVENT
+BEGIN:VEVENT
+UID:db083793f6faea8998892c863bd10a73@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Arbeit ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-arbeit/
+SUMMARY:Tag der Arbeit (§)
+DTSTART;VALUE=DATE:20350501
+DTEND;VALUE=DATE:20350501
+END:VEVENT
+BEGIN:VEVENT
+UID:2dec15396c6baf59c05b987360784e63@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY
+DESCRIPTION:Das Augsburger Hohes Friedensfest ist ausschließlich in der Stadt Augsburg ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/augsburger-friedensfest/
+SUMMARY:Augsburger Friedensfest
+DTSTART;VALUE=DATE:20350808
+DTEND;VALUE=DATE:20350808
+END:VEVENT
+BEGIN:VEVENT
+UID:dce69b942009f6b731c57b96c6ca1626@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SL
+DESCRIPTION:Mariä Himmelfahrt ist ein gesetzlicher Feiertag in folgenden Bundesländern: Saarland\, Bayern (in Gemeinden mit überwiegend katholischer Bevölkerung).
+URL;VALUE=URI:http://www.feiertage-deutschland.de/mariae-himmelfahrt/
+SUMMARY:Mariä Himmelfahrt (§)
+DTSTART;VALUE=DATE:20350815
+DTEND;VALUE=DATE:20350815
+END:VEVENT
+BEGIN:VEVENT
+UID:d6d93b6839faeaeb81ce3e038bd76ab8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Tag der Deutschen Einheit ist in allen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/tag-der-deutschen-einheit/
+SUMMARY:Tag der Deutschen Einheit (§)
+DTSTART;VALUE=DATE:20351003
+DTEND;VALUE=DATE:20351003
+END:VEVENT
+BEGIN:VEVENT
+UID:5db6d93c5f9d793b8f30ce373d78f9f7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BB\,HB\,HH\,MV\,NI\,SH\,SN\,ST\,TH
+DESCRIPTION:Der Reformationstag ist in folgenden Bundesländern ein gesetzlicher Feiertag: Brandenburg\, Mecklenburg-Vorpommern\, Sachsen\, Sachsen-Anhalt\, Thüringen und seit 2018 auch in Schleswig-Holstein\, Hamburg\, Bremen und Niedersachsen.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/reformationstag/
+SUMMARY:Reformationstag (§)
+DTSTART;VALUE=DATE:20351031
+DTEND;VALUE=DATE:20351031
+END:VEVENT
+BEGIN:VEVENT
+UID:b77031175ad66ff9c75c72e118386141@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,NW\,RP\,SL
+DESCRIPTION:Allerheiligen ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Nordrhein-Westfalen\, Rheinland-Pfalz und Saarland.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/allerheiligen/
+SUMMARY:Allerheiligen (§)
+DTSTART;VALUE=DATE:20351101
+DTEND;VALUE=DATE:20351101
+END:VEVENT
+BEGIN:VEVENT
+UID:d4458b6ca42b50d7bf4e24432b7d7731@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:1. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20351225
+DTEND;VALUE=DATE:20351225
+END:VEVENT
+BEGIN:VEVENT
+UID:4e086f6b6aa0468e5aa57c0f9d6960d8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der erste und zweite Weihnachtsfeiertag sind in ganz Deutschland gesetzliche Feiertage.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/weihnachten/
+SUMMARY:2. Weihnachtstag (§)
+DTSTART;VALUE=DATE:20351226
+DTEND;VALUE=DATE:20351226
+END:VEVENT
+BEGIN:VEVENT
+UID:a2803d0120caffa620bf1282ef9bcb7b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20100401
+DTEND;VALUE=DATE:20100401
+END:VEVENT
+BEGIN:VEVENT
+UID:384cc6d34c6439783f072ec3b329017a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20100402
+DTEND;VALUE=DATE:20100402
+END:VEVENT
+BEGIN:VEVENT
+UID:cc1dfc2d1b3861584079c6d415efcdd3@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20100405
+DTEND;VALUE=DATE:20100405
+END:VEVENT
+BEGIN:VEVENT
+UID:f7c4db9aa5778ab3d688df5931144d88@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20100513
+DTEND;VALUE=DATE:20100513
+END:VEVENT
+BEGIN:VEVENT
+UID:95dcf9e52b6c43ad8721ff518c13dbfe@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20100524
+DTEND;VALUE=DATE:20100524
+END:VEVENT
+BEGIN:VEVENT
+UID:2b180f4a06864a8efcaf7d1a07bb9c9a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20100603
+DTEND;VALUE=DATE:20100603
+END:VEVENT
+BEGIN:VEVENT
+UID:856b0a853f1f95b79b881162e755c2fe@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20101117
+DTEND;VALUE=DATE:20101117
+END:VEVENT
+BEGIN:VEVENT
+UID:283b15997cc0d92c6a5fab049797a21c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20110421
+DTEND;VALUE=DATE:20110421
+END:VEVENT
+BEGIN:VEVENT
+UID:f905725264a06a205192f70ea1452554@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20110422
+DTEND;VALUE=DATE:20110422
+END:VEVENT
+BEGIN:VEVENT
+UID:61591d7d15607412abcb478775a7aba0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20110425
+DTEND;VALUE=DATE:20110425
+END:VEVENT
+BEGIN:VEVENT
+UID:e7ca27952653ef58d23f36be9821f631@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20110602
+DTEND;VALUE=DATE:20110602
+END:VEVENT
+BEGIN:VEVENT
+UID:ba063534906a522f2724ecf38e2eecb8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20110613
+DTEND;VALUE=DATE:20110613
+END:VEVENT
+BEGIN:VEVENT
+UID:3a53d3c30e3ab5b565edada90ed9c640@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20110623
+DTEND;VALUE=DATE:20110623
+END:VEVENT
+BEGIN:VEVENT
+UID:71c681762e809642302eed45f9424d02@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20111116
+DTEND;VALUE=DATE:20111116
+END:VEVENT
+BEGIN:VEVENT
+UID:beaf76f631a5ffb15f60b519ba8cddf2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20120405
+DTEND;VALUE=DATE:20120405
+END:VEVENT
+BEGIN:VEVENT
+UID:ee292e317f984b946ee72401100afbce@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20120406
+DTEND;VALUE=DATE:20120406
+END:VEVENT
+BEGIN:VEVENT
+UID:093af657da9a3d611e998e52d56471ba@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20120409
+DTEND;VALUE=DATE:20120409
+END:VEVENT
+BEGIN:VEVENT
+UID:4d7a5e40c9a77dbe947debd53f7b800a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20120517
+DTEND;VALUE=DATE:20120517
+END:VEVENT
+BEGIN:VEVENT
+UID:ac90ea64c7c7c41a07c85410fdab25b9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20120528
+DTEND;VALUE=DATE:20120528
+END:VEVENT
+BEGIN:VEVENT
+UID:204bcb0cc599d494ed89492bf7c24c31@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20120607
+DTEND;VALUE=DATE:20120607
+END:VEVENT
+BEGIN:VEVENT
+UID:ca9d9903efd87c3e7edac5cf3573768e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20121121
+DTEND;VALUE=DATE:20121121
+END:VEVENT
+BEGIN:VEVENT
+UID:a99cd90bb23002232803048991092560@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20130328
+DTEND;VALUE=DATE:20130328
+END:VEVENT
+BEGIN:VEVENT
+UID:4c2752d1e8bbdd90d5a3be267e25efbd@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20130329
+DTEND;VALUE=DATE:20130329
+END:VEVENT
+BEGIN:VEVENT
+UID:e20d671a28e303daa687218b01a2f701@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20130401
+DTEND;VALUE=DATE:20130401
+END:VEVENT
+BEGIN:VEVENT
+UID:f1e2ed4c06d94563eebf39f660e1cfa7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20130509
+DTEND;VALUE=DATE:20130509
+END:VEVENT
+BEGIN:VEVENT
+UID:6e1cfcd32a131b5bd07e51cefef99dc5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20130520
+DTEND;VALUE=DATE:20130520
+END:VEVENT
+BEGIN:VEVENT
+UID:9f686cc00dee9f592d108ff1645f65f6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20130530
+DTEND;VALUE=DATE:20130530
+END:VEVENT
+BEGIN:VEVENT
+UID:db71392a2560a849645938e274874b12@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20131120
+DTEND;VALUE=DATE:20131120
+END:VEVENT
+BEGIN:VEVENT
+UID:13162f6c5ee9ed86b86f77aad82f253f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20140417
+DTEND;VALUE=DATE:20140417
+END:VEVENT
+BEGIN:VEVENT
+UID:b84209a5bf92ad958a8cdd74e36a0e98@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20140418
+DTEND;VALUE=DATE:20140418
+END:VEVENT
+BEGIN:VEVENT
+UID:348fba38980e9a49d647714487595451@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20140421
+DTEND;VALUE=DATE:20140421
+END:VEVENT
+BEGIN:VEVENT
+UID:82729aab9b8c90119dd91a823ed59d61@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20140529
+DTEND;VALUE=DATE:20140529
+END:VEVENT
+BEGIN:VEVENT
+UID:b09d0d4f60bf3d304adc51fbfe554020@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20140609
+DTEND;VALUE=DATE:20140609
+END:VEVENT
+BEGIN:VEVENT
+UID:68127e70bb736130769abea2ab539ef3@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20140619
+DTEND;VALUE=DATE:20140619
+END:VEVENT
+BEGIN:VEVENT
+UID:484699df2d06e811b37236f7d44040d5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20141119
+DTEND;VALUE=DATE:20141119
+END:VEVENT
+BEGIN:VEVENT
+UID:31124c1edaddebd4714d7b618a24c36d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20150402
+DTEND;VALUE=DATE:20150402
+END:VEVENT
+BEGIN:VEVENT
+UID:5a8012cb71db0b35cfb79dd2bb383aa6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20150403
+DTEND;VALUE=DATE:20150403
+END:VEVENT
+BEGIN:VEVENT
+UID:d09d0942feea5d28d2c7b8fea3828394@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20150406
+DTEND;VALUE=DATE:20150406
+END:VEVENT
+BEGIN:VEVENT
+UID:ad9b9783b133f8946bf60087e6475989@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20150514
+DTEND;VALUE=DATE:20150514
+END:VEVENT
+BEGIN:VEVENT
+UID:2cf908041d3f1aa821b1c0107901ff48@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20150525
+DTEND;VALUE=DATE:20150525
+END:VEVENT
+BEGIN:VEVENT
+UID:4cac73c04e28e38af579af7c6d258fdf@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20150604
+DTEND;VALUE=DATE:20150604
+END:VEVENT
+BEGIN:VEVENT
+UID:5b434e81e66a3c998f46e244208d6109@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20151118
+DTEND;VALUE=DATE:20151118
+END:VEVENT
+BEGIN:VEVENT
+UID:ca02af9776d7ea82bc5a825af066c29b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20160324
+DTEND;VALUE=DATE:20160324
+END:VEVENT
+BEGIN:VEVENT
+UID:21718c72690cdd4aee8f1398f04b14be@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20160325
+DTEND;VALUE=DATE:20160325
+END:VEVENT
+BEGIN:VEVENT
+UID:304c4905893257236e14cc213a2fddfa@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20160328
+DTEND;VALUE=DATE:20160328
+END:VEVENT
+BEGIN:VEVENT
+UID:96227cdbdd8873a346fd9baac1741617@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20160505
+DTEND;VALUE=DATE:20160505
+END:VEVENT
+BEGIN:VEVENT
+UID:527e89b57742fe7c1c3036596aa2608f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20160516
+DTEND;VALUE=DATE:20160516
+END:VEVENT
+BEGIN:VEVENT
+UID:d4cbff2d10e93afa405dc86976aef767@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20160526
+DTEND;VALUE=DATE:20160526
+END:VEVENT
+BEGIN:VEVENT
+UID:2b9d25b1a0667b5f544816b42a4f5fbe@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20161116
+DTEND;VALUE=DATE:20161116
+END:VEVENT
+BEGIN:VEVENT
+UID:0589d0e77b9d06dc329759f855d2d257@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20170413
+DTEND;VALUE=DATE:20170413
+END:VEVENT
+BEGIN:VEVENT
+UID:fa7ae7a7add4071edc86f99dc1dbf266@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20170414
+DTEND;VALUE=DATE:20170414
+END:VEVENT
+BEGIN:VEVENT
+UID:3392ec82b7c770690998b7fbddd6e36f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20170417
+DTEND;VALUE=DATE:20170417
+END:VEVENT
+BEGIN:VEVENT
+UID:2c0231d883390dc112d5045f2c823422@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20170525
+DTEND;VALUE=DATE:20170525
+END:VEVENT
+BEGIN:VEVENT
+UID:d1ca8df5a7be472ec6bb7bfd7d8fc2aa@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20170605
+DTEND;VALUE=DATE:20170605
+END:VEVENT
+BEGIN:VEVENT
+UID:50e86b4ea724192c196f9099271c0a0f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20170615
+DTEND;VALUE=DATE:20170615
+END:VEVENT
+BEGIN:VEVENT
+UID:335410a757e180f8e0fbc794e1ea297c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20171122
+DTEND;VALUE=DATE:20171122
+END:VEVENT
+BEGIN:VEVENT
+UID:6b3e9b4373abff842c15bc5a8ca04c3c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20180329
+DTEND;VALUE=DATE:20180329
+END:VEVENT
+BEGIN:VEVENT
+UID:1b9c8c2be63d27c4eda4ef9ab3c555bb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20180330
+DTEND;VALUE=DATE:20180330
+END:VEVENT
+BEGIN:VEVENT
+UID:7824fd5736ba03ded61cc779e8d284f6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20180402
+DTEND;VALUE=DATE:20180402
+END:VEVENT
+BEGIN:VEVENT
+UID:ae990fa54a1da06503a836b82a99d78f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20180510
+DTEND;VALUE=DATE:20180510
+END:VEVENT
+BEGIN:VEVENT
+UID:bf2ce333886aa3a19d1cf1e37cd6a292@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20180521
+DTEND;VALUE=DATE:20180521
+END:VEVENT
+BEGIN:VEVENT
+UID:b140ebaabc1c8e88fca5e03dbf6fe0f1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20180531
+DTEND;VALUE=DATE:20180531
+END:VEVENT
+BEGIN:VEVENT
+UID:95e45d1272607e00fa2367b724eb845a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20181121
+DTEND;VALUE=DATE:20181121
+END:VEVENT
+BEGIN:VEVENT
+UID:0d7422d551864e884bf8de8169446ef2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20190418
+DTEND;VALUE=DATE:20190418
+END:VEVENT
+BEGIN:VEVENT
+UID:60b25f41f1c2f4688926ca42b732d343@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20190419
+DTEND;VALUE=DATE:20190419
+END:VEVENT
+BEGIN:VEVENT
+UID:9fe080967e04e0a353b920bb0a407ded@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20190422
+DTEND;VALUE=DATE:20190422
+END:VEVENT
+BEGIN:VEVENT
+UID:52b3b3ac98008bf4e07943b4dd170aea@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20190530
+DTEND;VALUE=DATE:20190530
+END:VEVENT
+BEGIN:VEVENT
+UID:ef8455172e0913806e9f486a7bd3081f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20190610
+DTEND;VALUE=DATE:20190610
+END:VEVENT
+BEGIN:VEVENT
+UID:b3386d521fa04a2f6fe4fcb3bcfb281f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20190620
+DTEND;VALUE=DATE:20190620
+END:VEVENT
+BEGIN:VEVENT
+UID:db3dc8faea47f33c63ce6091242b0432@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20191120
+DTEND;VALUE=DATE:20191120
+END:VEVENT
+BEGIN:VEVENT
+UID:2ea230429b3f4030c07a177fd8a1f51c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20200409
+DTEND;VALUE=DATE:20200409
+END:VEVENT
+BEGIN:VEVENT
+UID:503d5e7055e1ed959810e6b204b5c9f0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20200410
+DTEND;VALUE=DATE:20200410
+END:VEVENT
+BEGIN:VEVENT
+UID:3e3c9a8f46206994581038ffb61b5cf3@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20200413
+DTEND;VALUE=DATE:20200413
+END:VEVENT
+BEGIN:VEVENT
+UID:1ffd55fdbd98a5373f5ea36061212719@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20200521
+DTEND;VALUE=DATE:20200521
+END:VEVENT
+BEGIN:VEVENT
+UID:e88b68b2ee484e73cfa5613747c5e195@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20200601
+DTEND;VALUE=DATE:20200601
+END:VEVENT
+BEGIN:VEVENT
+UID:d72e6dd72a902e3e3b6259c1cb2b36d7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20200611
+DTEND;VALUE=DATE:20200611
+END:VEVENT
+BEGIN:VEVENT
+UID:9cafc0d7587db9d89b669d5450784d96@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20201118
+DTEND;VALUE=DATE:20201118
+END:VEVENT
+BEGIN:VEVENT
+UID:1df399809d3f2c299260cde9623abd2e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20210401
+DTEND;VALUE=DATE:20210401
+END:VEVENT
+BEGIN:VEVENT
+UID:54ee1fde38fc35a8c410eae3ebc83442@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20210402
+DTEND;VALUE=DATE:20210402
+END:VEVENT
+BEGIN:VEVENT
+UID:ec4ac9a3d89643fb238408163f4cbc0b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20210405
+DTEND;VALUE=DATE:20210405
+END:VEVENT
+BEGIN:VEVENT
+UID:c4b672167f9fe94344a5af84b7ababf8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20210513
+DTEND;VALUE=DATE:20210513
+END:VEVENT
+BEGIN:VEVENT
+UID:0a9f71e48aa1abc4899d4e82775c02f5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20210524
+DTEND;VALUE=DATE:20210524
+END:VEVENT
+BEGIN:VEVENT
+UID:344f088e41f05cd33cca2214cae3fa0a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20210603
+DTEND;VALUE=DATE:20210603
+END:VEVENT
+BEGIN:VEVENT
+UID:1240b3cb77024c7cad16ae3c17c6dc33@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20211117
+DTEND;VALUE=DATE:20211117
+END:VEVENT
+BEGIN:VEVENT
+UID:a0a9753a0f5cbdecb4be3e1f4c2bb5cb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20220414
+DTEND;VALUE=DATE:20220414
+END:VEVENT
+BEGIN:VEVENT
+UID:ae051a8295b6289eed960336c5bb5322@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20220415
+DTEND;VALUE=DATE:20220415
+END:VEVENT
+BEGIN:VEVENT
+UID:6d4f9cd76aee45c0275f8013afc8d747@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20220418
+DTEND;VALUE=DATE:20220418
+END:VEVENT
+BEGIN:VEVENT
+UID:d681d7f30b47d4a88aeaee29a067048b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20220526
+DTEND;VALUE=DATE:20220526
+END:VEVENT
+BEGIN:VEVENT
+UID:5ff4b1cf8ed0f830200029e7af431d8a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20220606
+DTEND;VALUE=DATE:20220606
+END:VEVENT
+BEGIN:VEVENT
+UID:46de9299e7d5eb7e0ce9195458849655@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20220616
+DTEND;VALUE=DATE:20220616
+END:VEVENT
+BEGIN:VEVENT
+UID:293cbfcd79d9bba1a416217c794869c1@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20221116
+DTEND;VALUE=DATE:20221116
+END:VEVENT
+BEGIN:VEVENT
+UID:174ccab0db2142443fad507187ebd340@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20230406
+DTEND;VALUE=DATE:20230406
+END:VEVENT
+BEGIN:VEVENT
+UID:cc3926b726b81a612f9e5604c66d4465@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20230407
+DTEND;VALUE=DATE:20230407
+END:VEVENT
+BEGIN:VEVENT
+UID:983590654f77162d819edabdfdeb35bd@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20230410
+DTEND;VALUE=DATE:20230410
+END:VEVENT
+BEGIN:VEVENT
+UID:cdd76ec764a5887678b40560a171037f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20230518
+DTEND;VALUE=DATE:20230518
+END:VEVENT
+BEGIN:VEVENT
+UID:0f6d3fdba0e58fbdb9b30a99d7fc279a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20230529
+DTEND;VALUE=DATE:20230529
+END:VEVENT
+BEGIN:VEVENT
+UID:6be124937a0ade0fff2e4fd965f3152c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20230608
+DTEND;VALUE=DATE:20230608
+END:VEVENT
+BEGIN:VEVENT
+UID:ec37a36c0e3fab42a71be8964731d670@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20231122
+DTEND;VALUE=DATE:20231122
+END:VEVENT
+BEGIN:VEVENT
+UID:7835b717827a119097fd190d521911d3@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20240328
+DTEND;VALUE=DATE:20240328
+END:VEVENT
+BEGIN:VEVENT
+UID:8d54b2531202f8dadbdb94444337bba3@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20240329
+DTEND;VALUE=DATE:20240329
+END:VEVENT
+BEGIN:VEVENT
+UID:a58ba294f599b148e4886d4f651c335e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20240401
+DTEND;VALUE=DATE:20240401
+END:VEVENT
+BEGIN:VEVENT
+UID:67ee7a546efc620a77e2b45948a407ab@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20240509
+DTEND;VALUE=DATE:20240509
+END:VEVENT
+BEGIN:VEVENT
+UID:bd875c44f647511cfc1491701827174e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20240520
+DTEND;VALUE=DATE:20240520
+END:VEVENT
+BEGIN:VEVENT
+UID:97f762164d8ced5fc9cd019870d7ee9d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20240530
+DTEND;VALUE=DATE:20240530
+END:VEVENT
+BEGIN:VEVENT
+UID:e6771ca4dfa24358386493d3f7a53fb7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20241120
+DTEND;VALUE=DATE:20241120
+END:VEVENT
+BEGIN:VEVENT
+UID:34db18cc6ac879832db97dd0a71638b7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20250417
+DTEND;VALUE=DATE:20250417
+END:VEVENT
+BEGIN:VEVENT
+UID:fe2243108b9982bcc92b46c14c26e4cf@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20250418
+DTEND;VALUE=DATE:20250418
+END:VEVENT
+BEGIN:VEVENT
+UID:ff94685744c714ab1e020ad81c9e447d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20250421
+DTEND;VALUE=DATE:20250421
+END:VEVENT
+BEGIN:VEVENT
+UID:1bc62bb7b017c787e523d9688b603930@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20250529
+DTEND;VALUE=DATE:20250529
+END:VEVENT
+BEGIN:VEVENT
+UID:3fe966641733445dbb0aacb175df61b6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20250609
+DTEND;VALUE=DATE:20250609
+END:VEVENT
+BEGIN:VEVENT
+UID:9c2f740c9ef6f2d678d1d704d0430cb9@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20250619
+DTEND;VALUE=DATE:20250619
+END:VEVENT
+BEGIN:VEVENT
+UID:686561c6d275183290e1ae27b3a821b6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20251119
+DTEND;VALUE=DATE:20251119
+END:VEVENT
+BEGIN:VEVENT
+UID:05e580f8cd09d3672250730a22484b6c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20260402
+DTEND;VALUE=DATE:20260402
+END:VEVENT
+BEGIN:VEVENT
+UID:d2a1a6f10c424c1da64a5862b306e03f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260403
+END:VEVENT
+BEGIN:VEVENT
+UID:a44f2c4f36048391a70aed7e009b08f4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20260406
+DTEND;VALUE=DATE:20260406
+END:VEVENT
+BEGIN:VEVENT
+UID:afe20b5a20e953fc08807c37f17a4d7a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20260514
+DTEND;VALUE=DATE:20260514
+END:VEVENT
+BEGIN:VEVENT
+UID:e49151c2836ec925f5c0d9abe17a28c2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20260525
+DTEND;VALUE=DATE:20260525
+END:VEVENT
+BEGIN:VEVENT
+UID:0ef0a6092d550a24dd41bde69b395aed@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20260604
+DTEND;VALUE=DATE:20260604
+END:VEVENT
+BEGIN:VEVENT
+UID:fdc89a5438a97f57c8996e295ea6b47c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261118
+END:VEVENT
+BEGIN:VEVENT
+UID:7c9c661173f8bb91102d00b53e32f40e@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20270325
+DTEND;VALUE=DATE:20270325
+END:VEVENT
+BEGIN:VEVENT
+UID:d41dfcc7184c7d36a055bf5f0f263e52@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270326
+END:VEVENT
+BEGIN:VEVENT
+UID:07fba88ae7b03c47e4e2b276007371ac@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270329
+END:VEVENT
+BEGIN:VEVENT
+UID:9ceb53b6c7238ca369fbbc8cd3df4940@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270506
+END:VEVENT
+BEGIN:VEVENT
+UID:d0bd016047e14621276f54a2019ce73c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20270517
+DTEND;VALUE=DATE:20270517
+END:VEVENT
+BEGIN:VEVENT
+UID:7a9c6e1256b49787c8b3c1b21af9588a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20270527
+DTEND;VALUE=DATE:20270527
+END:VEVENT
+BEGIN:VEVENT
+UID:e1cef564bc8415d0b0c250d7899b1cf7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20271117
+DTEND;VALUE=DATE:20271117
+END:VEVENT
+BEGIN:VEVENT
+UID:e05e1ac6851a1535b365290e84db542c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20280413
+DTEND;VALUE=DATE:20280413
+END:VEVENT
+BEGIN:VEVENT
+UID:62d9ac9b5acb6c567d9f0b1ce6dc13a0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20280414
+DTEND;VALUE=DATE:20280414
+END:VEVENT
+BEGIN:VEVENT
+UID:44f488d1349cc540db0f56cc2bbd6fdb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20280417
+DTEND;VALUE=DATE:20280417
+END:VEVENT
+BEGIN:VEVENT
+UID:249b6e777aa88c4e961f5a9f57105093@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20280525
+DTEND;VALUE=DATE:20280525
+END:VEVENT
+BEGIN:VEVENT
+UID:c91811b291c13a9bdd0b3ba5cd6cde20@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20280605
+DTEND;VALUE=DATE:20280605
+END:VEVENT
+BEGIN:VEVENT
+UID:0794a1460ab43eecbfce603f80b53af0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20280615
+DTEND;VALUE=DATE:20280615
+END:VEVENT
+BEGIN:VEVENT
+UID:cd9c80f060c19bb1988baf9121ae310d@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20281122
+DTEND;VALUE=DATE:20281122
+END:VEVENT
+BEGIN:VEVENT
+UID:cf85009483448b372776bb0081c90207@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20290329
+DTEND;VALUE=DATE:20290329
+END:VEVENT
+BEGIN:VEVENT
+UID:af99a0795cf486eb8b7e0bcc5f3484f0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20290330
+DTEND;VALUE=DATE:20290330
+END:VEVENT
+BEGIN:VEVENT
+UID:09ad9e17af906946e939943dcc4cdb66@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20290402
+DTEND;VALUE=DATE:20290402
+END:VEVENT
+BEGIN:VEVENT
+UID:6cfab0f95c4eeee3fba683e362b465da@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20290510
+DTEND;VALUE=DATE:20290510
+END:VEVENT
+BEGIN:VEVENT
+UID:58d5cae331f655dfc0d631745ece80e5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20290521
+DTEND;VALUE=DATE:20290521
+END:VEVENT
+BEGIN:VEVENT
+UID:6129a8fe6e4ba198e87646a58565e1d6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20290531
+DTEND;VALUE=DATE:20290531
+END:VEVENT
+BEGIN:VEVENT
+UID:fe8cb795fa94c232dc4b286315862753@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20291121
+DTEND;VALUE=DATE:20291121
+END:VEVENT
+BEGIN:VEVENT
+UID:03ea5b1f0dc14a47b46740630f6b72ad@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20300418
+DTEND;VALUE=DATE:20300418
+END:VEVENT
+BEGIN:VEVENT
+UID:d7f991724a7c82fda5aec48dc4665b4f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20300419
+DTEND;VALUE=DATE:20300419
+END:VEVENT
+BEGIN:VEVENT
+UID:f67482f159396d6e7d0dec25667882cf@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20300422
+DTEND;VALUE=DATE:20300422
+END:VEVENT
+BEGIN:VEVENT
+UID:07569b2ce2fad9b0060849aa12963ec6@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20300530
+DTEND;VALUE=DATE:20300530
+END:VEVENT
+BEGIN:VEVENT
+UID:ada2adaad5bc4727fae751243ba61a56@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20300610
+DTEND;VALUE=DATE:20300610
+END:VEVENT
+BEGIN:VEVENT
+UID:be484274495d8730941623ddb2c47788@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20300620
+DTEND;VALUE=DATE:20300620
+END:VEVENT
+BEGIN:VEVENT
+UID:7ca1fc1b1626b489d23037a8989ae2df@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20301120
+DTEND;VALUE=DATE:20301120
+END:VEVENT
+BEGIN:VEVENT
+UID:93d5ccba12c599ddea02df0737280fd4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20310410
+DTEND;VALUE=DATE:20310410
+END:VEVENT
+BEGIN:VEVENT
+UID:831120301a333e9d58cf3987f6551cde@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20310411
+DTEND;VALUE=DATE:20310411
+END:VEVENT
+BEGIN:VEVENT
+UID:2b77a1d29787bb081a6d66a8d3514700@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20310414
+DTEND;VALUE=DATE:20310414
+END:VEVENT
+BEGIN:VEVENT
+UID:5af9595c2a24344b4ec12f8a76debc41@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20310522
+DTEND;VALUE=DATE:20310522
+END:VEVENT
+BEGIN:VEVENT
+UID:e8faab9da2d954c7ffb18cf6eb77718f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20310602
+DTEND;VALUE=DATE:20310602
+END:VEVENT
+BEGIN:VEVENT
+UID:3594bb59205a85e887ef8125317c93e4@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20310612
+DTEND;VALUE=DATE:20310612
+END:VEVENT
+BEGIN:VEVENT
+UID:3e0d9ef3a4006e612e56103281a6854a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20311119
+DTEND;VALUE=DATE:20311119
+END:VEVENT
+BEGIN:VEVENT
+UID:5bd97e46432b0690bbb27413eed5b93c@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20320325
+DTEND;VALUE=DATE:20320325
+END:VEVENT
+BEGIN:VEVENT
+UID:e41457431289bf7dbac06d1d274b47a8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20320326
+DTEND;VALUE=DATE:20320326
+END:VEVENT
+BEGIN:VEVENT
+UID:4bf66bce381894a2eaa1af5beaf8c4c7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20320329
+DTEND;VALUE=DATE:20320329
+END:VEVENT
+BEGIN:VEVENT
+UID:8a74ad667aca96e5ca0b409446fe25a8@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20320506
+DTEND;VALUE=DATE:20320506
+END:VEVENT
+BEGIN:VEVENT
+UID:295c033a2168f07ccfd3adb9770fd8eb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20320517
+DTEND;VALUE=DATE:20320517
+END:VEVENT
+BEGIN:VEVENT
+UID:f19863dade1ded79eb5cd6c605f7bf99@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20320527
+DTEND;VALUE=DATE:20320527
+END:VEVENT
+BEGIN:VEVENT
+UID:efa31a0b441c2009759b4f876271a974@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20321117
+DTEND;VALUE=DATE:20321117
+END:VEVENT
+BEGIN:VEVENT
+UID:756da35993bde34666af602a60cb14c5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20330414
+DTEND;VALUE=DATE:20330414
+END:VEVENT
+BEGIN:VEVENT
+UID:80dd79e53574ddadfe9cde7f0056175f@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20330415
+DTEND;VALUE=DATE:20330415
+END:VEVENT
+BEGIN:VEVENT
+UID:8c5d962d6f82dbc390db5efc23627436@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20330418
+DTEND;VALUE=DATE:20330418
+END:VEVENT
+BEGIN:VEVENT
+UID:a03c9aacad72ad9e80273e686d3e72f7@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20330526
+DTEND;VALUE=DATE:20330526
+END:VEVENT
+BEGIN:VEVENT
+UID:ccfdf6f2c095a3581407405e97f02dfb@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20330606
+DTEND;VALUE=DATE:20330606
+END:VEVENT
+BEGIN:VEVENT
+UID:cabb8e238e21f6d8d8c536f6836d1fa2@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20330616
+DTEND;VALUE=DATE:20330616
+END:VEVENT
+BEGIN:VEVENT
+UID:63fd7ba0d7c4eb5959089caf7251d8ed@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20331116
+DTEND;VALUE=DATE:20331116
+END:VEVENT
+BEGIN:VEVENT
+UID:16b58bf73979fc27dc7b5cd8dc9f8f38@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20340406
+DTEND;VALUE=DATE:20340406
+END:VEVENT
+BEGIN:VEVENT
+UID:a7131b3f2a72f3a3ca4838a34b01e6c5@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20340407
+DTEND;VALUE=DATE:20340407
+END:VEVENT
+BEGIN:VEVENT
+UID:6eaac5821ee567751e0d1433536f58a0@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20340410
+DTEND;VALUE=DATE:20340410
+END:VEVENT
+BEGIN:VEVENT
+UID:b208968070f985f4fcc994f99f91a124@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20340518
+DTEND;VALUE=DATE:20340518
+END:VEVENT
+BEGIN:VEVENT
+UID:a60ee96f33edea19b65661a7773ad456@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20340529
+DTEND;VALUE=DATE:20340529
+END:VEVENT
+BEGIN:VEVENT
+UID:0dc194c90b3ca25f0360a8775abf5edd@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20340608
+DTEND;VALUE=DATE:20340608
+END:VEVENT
+BEGIN:VEVENT
+UID:b0fb4e41e9f3e4fb87b4e7e3fe7f289b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20341122
+DTEND;VALUE=DATE:20341122
+END:VEVENT
+BEGIN:VEVENT
+UID:9e5a62b72b7cec4fd6cb92538069c56b@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW
+DESCRIPTION:In keinem Bundesland ist der Gründonnerstag ein gesetzlicher Feiertag. In Baden-Württemberg ist an Gründonnerstag schulfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/gruendonnerstag/
+SUMMARY:Gründonnerstag
+DTSTART;VALUE=DATE:20350322
+DTEND;VALUE=DATE:20350322
+END:VEVENT
+BEGIN:VEVENT
+UID:2c8da987804f1b6d114f0dc67ab96f38@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Karfreitag ist ganz Deutschland ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/karfreitag/
+SUMMARY:Karfreitag (§)
+DTSTART;VALUE=DATE:20350323
+DTEND;VALUE=DATE:20350323
+END:VEVENT
+BEGIN:VEVENT
+UID:dbd490ca88d71a23b97fd191e7e39e43@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Der Ostermontag ist ganz Deutschland ein gesetzlicher Feiertag. 
+URL;VALUE=URI:http://www.feiertage-deutschland.de/ostermontag/
+SUMMARY:Ostermontag (§)
+DTSTART;VALUE=DATE:20350326
+DTEND;VALUE=DATE:20350326
+END:VEVENT
+BEGIN:VEVENT
+UID:f1fcb9fa45a9f55467872600b83e2992@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Christi Himmelfahrt ist ganz Deutschland ein gesetzlicher Feiertag
+URL;VALUE=URI:http://www.feiertage-deutschland.de/christi-himmelfahrt/
+SUMMARY:Christi Himmelfahrt (§)
+DTSTART;VALUE=DATE:20350503
+DTEND;VALUE=DATE:20350503
+END:VEVENT
+BEGIN:VEVENT
+UID:a6102d8ed0e8c837b26ee4081a6c9b27@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:Alle Bundesländer
+DESCRIPTION:Pfingstmontag ist in allen deutschen Bundesländern ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/pfingstmontag/
+SUMMARY:Pfingstmontag (§)
+DTSTART;VALUE=DATE:20350514
+DTEND;VALUE=DATE:20350514
+END:VEVENT
+BEGIN:VEVENT
+UID:9e75d20105ae0218c8134391f613619a@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BW\,BY\,HE\,NW\,RP\,SL\,SN\,TH
+DESCRIPTION:Fronleichnam ist in folgenden Bundesländern ein gesetzlicher Feiertag: Baden-Württemberg\, Bayern\, Hessen\, Nordrhein-Westfalen\, Rheinland-Pfalz\, Saarland. In Sachsen und Thüringen ist Fronleichnam nur in bestimmten Gemeinden ein gesetzlicher Feiertag.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/fronleichnam/
+SUMMARY:Fronleichnam (§)
+DTSTART;VALUE=DATE:20350524
+DTEND;VALUE=DATE:20350524
+END:VEVENT
+BEGIN:VEVENT
+UID:c36d73a12027f5b47b179fb2b9661233@feiertage-deutschland.de
+DTSTAMP:20181102T102739Z
+LOCATION:BY\,SN
+DESCRIPTION:Der Buß- und Bettag ist in Sachsen ein gesetzlicher Feiertag. In Bayern ist der Buß- und Bettag unterrichtsfrei.
+URL;VALUE=URI:http://www.feiertage-deutschland.de/buss-und-bettag/
+SUMMARY:Buß- und Bettag (§)
+DTSTART;VALUE=DATE:20351121
+DTEND;VALUE=DATE:20351121
+END:VEVENT
+END:VCALENDAR
