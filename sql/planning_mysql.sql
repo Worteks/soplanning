@@ -166,7 +166,7 @@ CREATE TABLE `planning_periode` (
 
 CREATE TABLE `planning_lieu` (
   `lieu_id` varchar(10) collate latin1_general_ci NOT NULL default '',
-  `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
+  `nom` varchar(50) collate latin1_general_ci NOT NULL default '',
   `commentaire` TEXT collate latin1_general_ci default NULL,
   `exclusif` TINYINT NULL DEFAULT '0' COLLATE 'latin1_general_ci',
   PRIMARY KEY  (`lieu_id`)
