@@ -172,9 +172,6 @@ while($lineTmp = $lines->fetch()) {
 			$nomTache .= ' : ' . $periode->titre;
 		}
 		$nomTache .= ' (' . $periode->nom_user . ')';
-		if(!is_null($periode->nom_lieu)) {
-			$nomLieu = $periode->nom_lieu;
-		}
 		$e = $v->newComponent('vevent');
 		$e->setProperty('categories' , 'PLANNING');
 		$v->setProperty( 'X-WR-TIMEZONE', date_default_timezone_get());
@@ -201,7 +198,7 @@ while($lineTmp = $lines->fetch()) {
 		$e->setProperty('summary' , $nomTache);
 		$e->setProperty('description', $periode->notes);
 		if(!is_null($periode->nom_lieu)) {
-			$e->setProperty('location', $nomLieu);
+			$e->setProperty('location', $periode->nom_lieu);
 		}
 		$periode->getData();
 	}
