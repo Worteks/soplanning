@@ -206,6 +206,6 @@ if(isset($_GET['debug'])) {
 	die;
 }
 
-$v->returnCalendar();
+$v->returnCalendar(TRUE);
 
 ?>
