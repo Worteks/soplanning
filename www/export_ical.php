@@ -111,10 +111,11 @@ while($lineTmp = $lines->fetch()) {
 
 	// on charge les jours occupés pour cette ligne
 	$periodes = new GCollection('Periode');
-	$sql = "SELECT planning_periode.*, planning_user.*, planning_user.nom AS nom_user, planning_projet.nom AS nom_projet
+	$sql = "SELECT planning_periode.*, planning_user.*, planning_user.nom AS nom_user, planning_projet.nom AS nom_projet, planning_lieu.nom as nom_lieu
 			FROM planning_periode
 			INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id
-			INNER JOIN planning_projet ON planning_periode.projet_id = planning_projet.projet_id ";
+			INNER JOIN planning_projet ON planning_periode.projet_id = planning_projet.projet_id
+			LEFT JOIN planning_lieu ON planning_periode.lieu_id = planning_lieu.lieu_id ";
 	if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe_id)) {
 		// on filtre sur les projets de l'équipe de ce user
 		$sql .= " INNER JOIN planning_user AS pu ON planning_periode.user_id = pu.user_id ";
@@ -171,6 +172,9 @@ while($lineTmp = $lines->fetch()) {
 			$nomTache .= ' : ' . $periode->titre;
 		}
 		$nomTache .= ' (' . $periode->nom_user . ')';
+		if(!is_null($periode->nom_lieu)) {
+			$nomLieu = $periode->nom_lieu;
+		}
 		$e = $v->newComponent('vevent');
 		$e->setProperty('categories' , 'PLANNING');
 		$v->setProperty( 'X-WR-TIMEZONE', date_default_timezone_get());
@@ -196,7 +200,9 @@ while($lineTmp = $lines->fetch()) {
 
 		$e->setProperty('summary' , $nomTache);
 		$e->setProperty('description', $periode->notes);
-
+		if(!is_null($periode->nom_lieu)) {
+			$e->setProperty('location', $nomLieu);
+		}
 		$periode->getData();
 	}
 }
