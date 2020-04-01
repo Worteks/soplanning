@@ -366,6 +366,7 @@
 							<a class="dropdown-item" href="export_gantt.php" target="_blank"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> {#ganttExport#|xss_protect}</a>
 							<a class="dropdown-item" href="export_pdf_calendrier.php" target="_blank"><i class="fa fa-fw fa-calendar-o" aria-hidden="true"></i> {#calendarExport#|xss_protect}</a>
 							<a class="dropdown-item" href="javascript:xajax_choixIcal();undefined;"><i class="fa fa-fw fa-envelope-o" aria-hidden="true"></i> {#icalExport#|xss_protect}</a>
+							<a class="dropdown-item" href="export_csv_cir_cii.php"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>{#CSVExportCirCii#|xss_protect}</a>
 						</div>
 					</div>
 					{* DIV POUR CHOIX DIMENSION CASE ET AFFICHAGE LARGE REDUIT *}
