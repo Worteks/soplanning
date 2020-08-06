@@ -43,7 +43,7 @@
 	<div class="form-group row">
 		<label class="col-md-3 col-form-label">{#icalExport_delai#} :</label>
 		<div class="col-md-6 form-inline">
-			<select id="anciennete" name="anciennete" onchange="xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());">
+			<select id="anciennete" name="anciennete" onchange="xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());" class="form-control">
 				<option value="0">0 {#winPeriode_mois#} {#seulement_taches_a_venir#}</option>
 				<option value="1">1 {#winPeriode_mois#}</option>
 				<option value="3" selected="selected">3 {#winPeriode_mois#}</option>

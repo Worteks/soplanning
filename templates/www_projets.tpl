@@ -1,5 +1,6 @@
 {* Smarty *}
 {include file="www_header.tpl"}
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -113,7 +114,7 @@
 						<div class="input-group">
 							<input type="text" class="form-control" name="rechercheProjet" value="{$rechercheProjet|default:""}" placeholder="{#taches_groupeRecherche#}" />
 							<span class="input-group-append">
-									<button type="submit" class="btn {if $rechercheProjet != ""}btn-danger{else}btn-default{/if}"><i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i></button>
+								<button type="submit" class="btn {if $rechercheProjet != ""}btn-danger{else}btn-default{/if}"><i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i></button>
 							</span>
 						</div>
 					</div>
@@ -127,19 +128,32 @@
 		<div class="col-md-12">
 			<div class="soplanning-box mt-2">
 				<table class="table table-striped table-hover" id="projectTab">
+					<thead>
 					<tr>
-						<td colspan="4">
-							{if $order eq "nom"}
+						<th colspan="" class="d-none d-md-table-cell">{$projets|@count} {#projet_liste_projet#}</th>
+						<th class="">
+							{if $order eq "projet_id"}
 								{if $by eq "asc"}
-									<a href="?order=nom&by=desc">{#projet_liste_projet#} ({$projets|@count})</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
+									<a href="?order=projet_id&by=desc">{#winProjet_identifiant#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
 								{else}
-									<a href="?order=nom&by=asc">{#projet_liste_projet#} ({$projets|@count})</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
+									<a href="?order=projet_id&by=asc">{#winProjet_identifiant#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
 								{/if}
 							{else}
-								<a href="?order=nom&by={$by}">{#projet_liste_projet#} ({$projets|@count})</a>
+								<a href="?order=projet_id&by={$by}">{#winProjet_identifiant#}</a>
 							{/if}
-						</td>
-						<td class="projectTabColCreator">
+						</th>
+						<th class="">
+							{if $order eq "nom"}
+								{if $by eq "asc"}
+									<a href="?order=nom&by=desc">{#winProjet_nomProjet#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
+								{else}
+									<a href="?order=nom&by=asc">{#winProjet_nomProjet#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
+								{/if}
+							{else}
+								<a href="?order=nom&by={$by}">{#winProjet_nomProjet#}</a>
+							{/if}
+						</th>
+						<th class="projectTabColCreator">
 							{if $order eq "nom_createur"}
 								{if $by eq "asc"}
 									<a href="?order=nom_createur&by=desc">{#projet_liste_createur#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -149,8 +163,8 @@
 							{else}
 								<a href="?order=nom_createur&by={$by}">{#projet_liste_createur#}</a>
 							{/if}
-						</td>
-						<td class="d-none d-md-table-cell">
+						</th>
+						<th class="d-none d-md-table-cell">
 							{if $order eq "charge"}
 								{if $by eq "asc"}
 									<a href="?order=charge&by=desc">{#projet_liste_charge#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -160,8 +174,8 @@
 							{else}
 								<a href="?order=charge&by={$by}">{#projet_liste_charge#}</a>
 							{/if}
-						</td>
-						<td class="d-none d-md-table-cell">
+						</th>
+						<th class="d-none d-md-table-cell">
 							{if $order eq "livraison"}
 								{if $by eq "asc"}
 									<a href="?order=livraison&by=desc">{#projet_liste_livraison#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -171,19 +185,21 @@
 							{else}
 								<a href="?order=livraison&by={$by}">{#projet_liste_livraison#}</a>
 							{/if}
-						</td>
-						<td class="projectTabColComment">
+						</th>
+						<th class="projectTabColComment">
 							{#projet_liste_commentaires#}
-						</td>
+						</th>
 					</tr>
+					</thead>
+					<tbody>
 					<tr>
-						<td colspan="8" class="project-group-head">{#projet_liste_sansGroupes#}</td>
+						<td colspan="7" class="project-group-head">{#projet_liste_sansGroupes#}</td>
 					</tr>
 					{assign var=groupeCourant value=""}
 					{foreach from=$projets item=projet}
 						{if $projet.groupe_id neq $groupeCourant}
 							<tr>
-							<td colspan="8" class="project-group-head">{$projet.nom_groupe|xss_protect}</td>
+							<td colspan="7" class="project-group-head">{$projet.nom_groupe|xss_protect}</td>
 						{/if}
 						<tr>
 							<td class="w140">
@@ -197,17 +213,17 @@
 								<a href="{if $projet.lien|strpos:"http" !== 0 && $projet.lien|strpos:"\\" !== 0}http://{/if}{$projet.lien}" title="{#winProjet_gotoLien#|xss_protect}" target="_blank"><i class="fa fa-globe fa-lg fa-fw" aria-hidden="true"></i></a>
 								{else}
 								{/if}
-							</td>
-							<td><span class="pastille-projet" style="background-color:#{$projet.couleur};color:{"#"|cat:$projet.couleur|buttonFontColor}">{$projet.projet_id}</span></td>
-							<td>
 								{if $smarty.const.CONFIG_PLANNING_AFFICHAGE_STATUS eq 'aucun'}
 									{elseif $smarty.const.CONFIG_PLANNING_AFFICHAGE_STATUS eq 'nom'}{$projet.statut_nom}
 									{elseif $smarty.const.CONFIG_PLANNING_AFFICHAGE_STATUS eq 'pourcentage'}
 									<div class="progress tooltipster" title="{$projet.statut_nom}">
 											<div class="progress-bar" style="width: {$projet.statut_pourcentage}%;background-color:#{$projet.statut_couleur};color:{"#"|cat:$projet.couleur|buttonFontColor}">{$projet.statut_pourcentage}%</div>
 									</div>
-									{elseif $smarty.const.CONFIG_PLANNING_AFFICHAGE_STATUS eq 'pastille'}<div class="pastille-statut tooltipster" style="background-color:#{$projet.statut_couleur}" title="{$projet.statut_nom}"></div>
+									{elseif $smarty.const.CONFIG_PLANNING_AFFICHAGE_STATUS eq 'pastille'}<div class="pastille-statut tooltipster" style="background-color:#{$projet.statut_couleur};display:inline-block;margin-left:20px" title="{$projet.statut_nom}"></div>
 								{/if}
+							</td>
+							<td>
+								<span class="pastille-projet" style="background-color:#{$projet.couleur};color:{"#"|cat:$projet.couleur|buttonFontColor}">{$projet.projet_id}</span>
 							</td>
 							<td>
 								{$projet.nom|xss_protect}
@@ -221,10 +237,17 @@
 									<a href="planning.php?livraison={$projet.livraison|sqldate2userdate}">{$projet.livraison|sqldate2userdate}</a>
 								{/if}
 							</td>
-							<td class="wrap projectTabColComment">{$projet.iteration|xss_protect}</td>
+							<td class="wrap projectTabColComment">
+								{assign var=cooltip value=$smarty.config.user_liste_NBPeriodes|cat:" : "|cat:$projet.totalPeriodes}
+								
+								<span class="fa fa-info-circle fa-lg fa-fw cursor-help tooltipster" aria-hidden="true" title="{$cooltip}"></span>
+								&nbsp;&nbsp;&nbsp;
+								{$projet.iteration|xss_protect}
+							</td>
 						</tr>
 						{assign var=groupeCourant value=$projet.groupe_id}
 					{/foreach}
+				</tbody>
 				</table>
 			</div>
 		</div>
@@ -247,6 +270,5 @@
 	});
 	{/literal}
 </script>
-<script src="{$BASE}/assets/plugins/select2-4.0.6/dist/js/select2.min.js"></script>
-<script src="{$BASE}/assets/plugins/select2-4.0.6/dist/js/i18n/{$lang}.js"></script>
+
 {include file="www_footer.tpl"}

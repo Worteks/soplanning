@@ -197,7 +197,7 @@ foreach ($donneesOrdonnee as $user_id => $valeurs) {
 	//${'ligne_'.$user_id}->value->Show();
 	//${'ligne_'.$user_id}->value->SetFormat('%01.2f');
 	$couleurUser = $userTmp->couleur;
-	if(is_null($couleurUser) || $couleurUser == 'FFFFFF') {
+	if(is_null($couleurUser) || strtoupper($couleurUser) == 'FFFFFF') {
 		$couleurUser = '000000';
 	}
 	${'ligne_'.$user_id}->SetColor('#' . $couleurUser);

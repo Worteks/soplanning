@@ -17,7 +17,7 @@
 			<input id="libelle" maxlength="50" type="text" value="{$ferie.libelle}" class="form-control" />
 		</div>
 	</div>
-	<div class="form-group row col-md-12 align-items-center">
+	<div class="form-group row col-md-12">
 		<label class="col-md-4 col-form-label">{#feries_couleurfond#} :</label>
 		<div class="col-md-6">
 			<div class="form-check">
@@ -38,10 +38,10 @@
 								{/foreach}
 							</datalist>
 						{else}
-							<select name="couleur2" id="couleur2" style="background-color:#{$ferie.couleur};color:{"#"|cat:$ferie.couleur|buttonFontColor}" class="form-control" >
-							{if $ferie.couleur eq ""}<option value="">{#winProjet_couleurchoix#}</option>{/if}
+						<select name="couleur2" id="couleur2" style="background-color:#{$ferie.couleur};color:{'#'|cat:$ferie.couleur|buttonFontColor}" class="form-control" >
+							{if $ferie.couleur neq ""}<option value="{$ferie.couleur}" style="background-color:#{$ferie.couleur};color:{'#'|cat:$ferie.couleur|buttonFontColor}" selected="selected">{$ferie.couleur}</option>{else}<option value="">{#winProjet_couleurchoix#}</option>{/if}
 							{foreach from=","|explode:$smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE item=couleurTmp}
-								<option value="{$couleurTmp|replace:'#':''}" style="background-color:{$couleurTmp};color:{$couleurTmp|buttonFontColor}" {if $couleurTmp eq "#"|cat:$ferie.couleur}selected="selected"{/if}>{$couleurTmp|replace:'#':''}</option>
+								<option value="{$couleurTmp}" style="background-color:{$couleurTmp};color:{$couleurTmp|buttonFontColor}" {if $couleurTmp eq "#"|cat:$user_form.couleur}selected="selected"{/if}>{$couleurTmp|xss_protect|replace:'#':''}</option>
 							{/foreach}
 						</select>
 						{/if}

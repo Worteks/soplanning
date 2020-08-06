@@ -199,8 +199,9 @@
 		<div class="col-md-12">
 			<div class="soplanning-box mt-2">
 				<table class="table table-striped table-hover" id="taskTab">
+					<thead>
 					<tr>
-						<td colspan="3">
+						<th colspan="3">
 							{if $order eq "nom"}
 								{if $by eq "asc"}
 									<a href="?order=nom&by=desc">{#taches_liste_taches#} ({$projets|@count})</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -210,8 +211,8 @@
 							{else}
 								<a href="?order=nom&by={$by}">{#taches_liste_taches#} ({$projets|@count})</a>
 							{/if}
-						</td>
-						<td class="taskTabColTitre">
+						</th>
+						<th class="taskTabColTitre">
 							{if $order eq "titre"}
 								{if $by eq "asc"}
 									<a href="?order=titre&by=desc">{#taches_tache#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -221,8 +222,8 @@
 							{else}
 								<a href="?order=titre&by={$by}">{#taches_tache#}</a>
 							{/if}
-						</td>
-						<td class="taskTabColCreator">
+						</th>
+						<th class="taskTabColCreator">
 							{if $order eq "nom_personne"}
 								{if $by eq "asc"}
 									<a href="?order=nom_personne&by=desc">{#taches_personne#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -232,9 +233,9 @@
 							{else}
 								<a href="?order=nom_personne&by={$by}">{#taches_personne#}</a>
 							{/if}
-						</td>
+						</th>
 
-						<td class="wrap d-none d-lg-table-cell">
+						<th class="wrap d-none d-lg-table-cell">
 							{if $order eq "date_debut"}
 								{if $by eq "asc"}
 									<a href="?order=date_debut&by=desc">{#taches_date_debut#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -244,8 +245,8 @@
 							{else}
 								<a href="?order=date_debut&by={$by}">{#taches_date_debut#}</a>
 							{/if}
-						</td>
-						<td class="wrap d-none d-lg-table-cell">
+						</th>
+						<th class="wrap d-none d-lg-table-cell">
 							{if $order eq "date_fin"}
 								{if $by eq "asc"}
 									<a href="?order=date_fin&by=desc">{#taches_date_fin#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -255,11 +256,12 @@
 							{else}
 								<a href="?order=date_fin&by={$by}">{#taches_date_fin#}</a>
 							{/if}
-						</td>
-						<td class="wrap d-none d-md-table-cell d-lg-table-cell">
+						</th>
+						<th class="wrap d-none d-md-table-cell d-lg-table-cell">
 							{#projet_liste_commentaires#}
-						</td>
+						</th>
 					</tr>
+					</thead>
 					<tbody>
 					{if $grouperpar eq 'project' }
 						{assign var=projetCourant value=""}

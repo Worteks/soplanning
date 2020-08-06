@@ -1,52 +1,49 @@
 {* Smarty *}
 {include file="www_header.tpl"}
-
-<div class="container-fluid">
 {include file="www_planning_filtre.tpl"}
 	{* le planning *}
-	<div class="row">
-		<div class="col-md-12" id="thirdLayer">
-			<div class="soplanning-box" id="divPlanning">
-				<div id="top-scroll">
-					<div id="top-scroll-inner">
-					</div>
-				</div>
+		<div class="position-relative" id="thirdLayer">
 				{if $fleches eq 1}
 					<div id="left-scroll">					
-						<i class="fa fa-chevron-left fa-2x" id="left-button" aria-hidden="true"></i>
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-chevron-left fa-2x" id="left-button" aria-hidden="true"></i>				
+						</span>
 					</div>
 				{/if}
-				<div id="divConteneurPlanning" onscroll="document.cookie='xposMois=' + document.getElementById('divConteneurPlanning').scrollLeft;">
+				<div id="divConteneurPlanning">
 					{$htmlTableau}
 				</div>
 				{if $fleches eq 1}
 					<div id="right-scroll">						
-						<i class="fa fa-chevron-right fa-2x" id="right-button" aria-hidden="true"></i>
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-chevron-right fa-2x" id="right-button" aria-hidden="true"></i>				
+						</span>
 					</div>
 				{/if}
-				</div>
-		</div>
-	</div>
+		 </div> 
 	{if isset($htmlRecap) and $htmlRecap neq ""}
-	<div class="row noprint">
-		<div class="col-md-12">
-			<div class="soplanning-box" id="divPlanningRecap">
+	<div class="w-100 noprint" id="divRecap">
+		<div >
+			<div id="divPlanningRecap" class="soplanning-box pt-0" >
 				{$htmlRecap}
 			</div>
 		</div>
 	</div>
+	{literal}
+	<script>
+	$(window).scroll(function(){
+    $('#divRecap').css({
+        'left': $(this).scrollLeft() + 0 
+		});
+	});
+	</script>
+	{/literal}
 	{/if}
-</div>
 <div id="divChoixDragNDrop" onMouseOut="masquerSousMenuDelai('divChoixDragNDrop');" onMouseOver="AnnuleMasquerSousMenu('divChoixDragNDrop');" onfocus="AnnuleMasquerSousMenu('divChoixDragNDrop')">
-	<a href="javascript:windowPatienter();xajax_moveCasePeriode(idCaseEnCoursDeplacement, idCaseDestination, false, 'seule');undefined;">{#planning_deplacer#}</a>
-	<br /><br />
-	<div id="divLienDeplacementToutesTaches">
-		<a href="javascript:windowPatienter();xajax_moveCasePeriode(idCaseEnCoursDeplacement, idCaseDestination, false, 'toutes');undefined;">{#planning_deplacer_toutestaches#}</a>
-		<br /><br />
-	</div>
+	<a href="javascript:windowPatienter();xajax_moveCasePeriode(idCaseEnCoursDeplacement, idCaseDestination, false, 'seule');undefined;">{#planning_deplacer#}<div title="{#action_aide_deplacer_seule#}" class="align-self-center cursor-help tooltipster" style="display:block;float:right;margin-left:0px;"><i class="fa fa-question-circle" aria-hidden="true"></i></div></a>
+	<a href="javascript:windowPatienter();xajax_moveCasePeriode(idCaseEnCoursDeplacement, idCaseDestination, false, 'toutes');undefined;">{#planning_deplacer_toutestaches#}<div title="{#action_aide_deplacer_toutestaches#}" class="align-self-center cursor-help tooltipster" style="display:block;float:right;margin-left:0px;"><i class="fa fa-question-circle" aria-hidden="true"></i></div></a>
 	<a href="javascript:windowPatienter();xajax_moveCasePeriode(idCaseEnCoursDeplacement, idCaseDestination, true);undefined;">{#planning_copier#}</a>
-	<br /><br />
-	<a href="javascript:masquerSousMenu('divChoixDragNDrop');">{#planning_annuler#}</a>
+	<a href="javascript:masquerSousMenu('divChoixDragNDrop');document.location.reload();">{#planning_annuler#}</a>
 </div>
 <script>
 {literal}
@@ -56,21 +53,7 @@ Reloader.init({/literal}{$smarty.const.CONFIG_REFRESH_TIMER}{literal});
 {if isset($direct_periode_id)}
 	addEvent(window, 'load', function(){literal}{{/literal}xajax_modifPeriode({$direct_periode_id}){literal}}{/literal});
 {/if}
-function resizeDivConteneur()
-{
-	var b = $("#tabContenuPlanning");
-	var pos = b.offset();
-	var h = pos.top;
-	var h2 = window.innerHeight;
-	var h3 = h2 - h - 65;
-	$('#divConteneurPlanning').css('max-height',h3);
-	var largertab=$('#divConteneurPlanning').width();
-	var largertab2=document.getElementById('tabContenuPlanning').offsetWidth + 18 + 'px';
-	document.getElementById('divConteneurPlanning').scrollLeft = xscroll;
-	document.getElementById('divConteneurPlanning').scrollTop = yscroll;
-	$("#top-scroll").width(largertab);
-	$("#top-scroll-inner").width(largertab2);
-}
+
 {* textes pour erreur dans fichier JS *}
 var js_choisirProjet = '{#js_choisirProjet#|xss_protect}';
 var js_choisirUtilisateur = '{#js_choisirUtilisateur#|xss_protect}';
@@ -128,28 +111,19 @@ var dateFin = {$dateFin|@json_encode};
 		{literal}
 			$('#left-scroll').show();
 			$('#right-scroll').show();
-			$('#divConteneurPlanning').css({'margin-left':'30px','margin-right':'30px'});
-			$('#top-scroll').css({'margin-left':'30px','margin-right':'30px'});
 			$('#right-button').click(function() {
-				$('#divConteneurPlanning').animate({
-				scrollLeft: "+=600px"
-				}, 300);
+				window.scrollBy({
+				    top: 0,
+					left: 800,
+					behavior : "smooth"
+				});
 			});
 			$('#left-button').click(function() {
-				$('#divConteneurPlanning').animate({
-				scrollLeft: "-=600px"
-				}, 300);
-			});
-		{/literal}
-		{/if}
-		{if $ascenceur eq 1}
-		{literal}
-			$('#top-scroll').show();
-			$('#top-scroll').scroll(function(){
-				$('#divConteneurPlanning').scrollLeft($('#top-scroll').scrollLeft());
-			});
-			$('#divConteneurPlanning').scroll(function(){
-				$('#top-scroll').scrollLeft($('#divConteneurPlanning').scrollLeft());
+				window.scrollBy({
+				    top: 0,
+					left: -800,
+					behavior : "smooth"
+				});
 			});
 		{/literal}
 		{/if}
@@ -161,49 +135,37 @@ var dateFin = {$dateFin|@json_encode};
 			$('#divConteneurPlanning').attr('style','overflow:visible');
 		{/literal}
 		{/if}		
-		{literal}
-		// Fixe les premières colonnes
-		$("#tabContenuPlanning").tableHeadFixer({
-			'left' : 1,
-			'z-index' : 10,
-		{/literal}
-		{if $entetesflottantes eq 0}
-		{literal}
-			'head' : false
-		{/literal}
-		{/if}
-		{literal}
-		});
-		{/literal}
-		// Entête flottantes
-		{if $entetesflottantes eq 1}
-		{literal}
-		$(window).resize(function(){
-			resizeDivConteneur();
-		});
-		{/literal}
-		{/if}
 		{if isset($droitAjoutPeriode) and $droitAjoutPeriode== true}
 	{literal}
 	// Affichage du formulaire période si clic sur case vide
-	$('#tabContenuPlanning td.week,#tabContenuPlanning td.weekend,#tabContenuPlanning .cellProject,#tabContenuPlanning .cellProjectBiseau').click(function(ev){
-	ev.preventDefault();
-	if ($(this).hasClass("cellProject") || $(this).hasClass("cellProjectBiseau") )
-		{
-		 cellClic(this.id,0);
-		}else cellClic(this.id,1);
-		return false;
+	$('#tabContenuPlanning td.week,#tabContenuPlanning td.weekend,#tabContenuPlanning .cellProject,#tabContenuPlanning .cellProjectBiseau1, #tabContenuPlanning .cellProjectBiseau2').click(function(ev){
+		ev.preventDefault();
+		if (!$(this).hasClass("read-only")){
+			if ($(this).hasClass("cellProject") || $(this).hasClass("cellProjectBiseau1")  || $(this).hasClass("cellProjectBiseau2")) {
+				cellClic(this.id,0);
+			} else {
+				cellClic(this.id,1);
+			}
+			return false;
+		};	
 	});
+	
+		
 	{/literal}
 {/if}
 	{literal}
+	function resizeDivConteneur()
+	{
+
+	}
+
 	// Gestion du cookie de positionnement
 	function writeCookie(displayMode){
 		if (displayMode == 'mois'){
-			document.cookie='yposMois=' + window.pageYOffset;
+			document.cookie='yposMoisWin=' + window.pageYOffset;
 			document.cookie='xposMoisWin=' + window.pageXOffset;
 		}else if (displayMode == 'jour'){
-			document.cookie='yposJours=' + window.pageYOffset;
+			document.cookie='yposJoursWin=' + window.pageYOffset;
 			document.cookie='xposJoursWin=' + window.pageXOffset;
 		}
 	}
@@ -225,75 +187,61 @@ var dateFin = {$dateFin|@json_encode};
 		document.cookie='dateDebut=' + dateDebut ;
 		document.cookie='dateFin=' + dateFin ;
 		document.cookie='xposMoisWin=0';
-		document.cookie='xposMois=0';
 		document.cookie='xposJoursWin=0';
-		document.cookie='xposJours=0';
 		document.cookie='yposMoisWin=0';
-		document.cookie='yposMois=0';
 		document.cookie='yposJoursWin=0';
-		document.cookie='yposJours=0';
 	}
 	// Récuperation
 	if (displayMode == 'mois')
 	{
 		{/literal}
-		{if isset($smarty.cookies.xposMois)}
-			var xscroll = {$smarty.cookies.xposMois};
-		{else}
-			var xscroll = 0;
-		{/if}
 		{if isset($smarty.cookies.xposMoisWin)}
 			var xscrollWin = {$smarty.cookies.xposMoisWin};
 		{else}
 			var xscrollWin = 0;
 		{/if}
-		{if isset($smarty.cookies.yposMois)}
-			var yscroll = {$smarty.cookies.yposMois};
+		{if isset($smarty.cookies.yposMoisWin)}
+			var yscrollWin = {$smarty.cookies.yposMoisWin};
 		{else}
-			var yscroll = 0;
+			var yscrollWin = 0;
 		{/if}
 		{literal}
 	}else if (displayMode == 'jour'){
 		{/literal}
-		{if isset($smarty.cookies.xposJours)}
-			var xscroll = {$smarty.cookies.xposJours};
-		{else}
-			var xscroll = 0;
-		{/if}
 		{if isset($smarty.cookies.xposJoursWin)}
 			var xscrollWin = {$smarty.cookies.xposJoursWin};
 		{else}
 			var xscrollWin = 0;
 		{/if}
-		{if isset($smarty.cookies.yposJours)}
-			var yscroll = {$smarty.cookies.yposJours};
+		{if isset($smarty.cookies.yposJoursWin)}
+			var yscrollWin = {$smarty.cookies.yposJoursWin};
 		{else}
-			var yscroll = 0;
+			var yscrollWin = 0;
 		{/if}
 		{literal}
 	}
-	resizeDivConteneur();
+	window.scroll(xscrollWin,yscrollWin);
 	window.onscroll = function() {writeCookie(displayMode)};
-	$('#divConteneurPlanning').scroll(function(){
-	document.cookie='xposMois=' + document.getElementById('divConteneurPlanning').scrollLeft;
-	document.cookie='yposMois=' + document.getElementById('divConteneurPlanning').scrollTop;
-	});
 	{/literal}
+			{literal}
+
+			resizeDivConteneur();
+		{/literal}
 	// Onload
 	jQuery(function() {
-	{if $smarty.session.isMobileOrTablet==0}
-	{literal}
-	// hack pour empecher fermeture du layer au click sur les boutons du calendrier1
-	$("#ui-datepicker-div").click( function(event) {
-		event.stopPropagation();
-	});
-	jQuery('#dropdownDateSelector .dropdown-menu').on({
-	"click":function(e){
-			e.stopPropagation();
-		}
-	});
-	{/literal}
-	{/if}
+		{if $smarty.session.isMobileOrTablet==0}
+		{literal}
+		// hack pour empecher fermeture du layer au click sur les boutons du calendrier1
+		$("#ui-datepicker-div").click( function(event) {
+			event.stopPropagation();
+		});
+		jQuery('#dropdownDateSelector .dropdown-menu').on({
+		"click":function(e){
+				e.stopPropagation();
+			}
+		});
+		{/literal}
+		{/if}
 	});
 </script>
 {include file="www_footer.tpl"}

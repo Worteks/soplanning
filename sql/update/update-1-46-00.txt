@@ -1,0 +1,11 @@
+
+ALTER TABLE `planning_user` ADD `date_creation` DATETIME DEFAULT NULL AFTER `login_actif`;
+
+UPDATE  `planning_user` SET `date_creation` = curdate();
+
+ALTER TABLE `planning_user` ADD `date_modif` DATETIME NULL AFTER `date_creation`;
+
+ALTER TABLE `planning_projet` CHANGE `nom` `nom` VARCHAR(50) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';
+
+UPDATE  `planning_config` SET  valeur ='1.46.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

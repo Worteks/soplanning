@@ -24,6 +24,7 @@ class Periode extends GObject
 		$this->fields['lieu_id'] = new GString('planning_periode', 'lieu_id', 10, TRUE, NULL);
 		$this->fields['ressource_id'] = new GString('planning_periode', 'ressource_id', 10, TRUE, NULL);
 		$this->fields['livrable'] = new GEnum('planning_periode', 'livrable', array('oui','non'), FALSE, 'non');
+		$this->fields['fichiers'] = new GString('planning_periode', 'fichiers', 65000, TRUE, NULL);
 		$this->fields['createur_id'] = new GString('planning_periode', 'createur_id', 20, TRUE, NULL);
 		$this->fields['date_creation'] = new GDatetime('planning_periode', 'date_creation', 19, TRUE, NULL);
 		$this->fields['modifier_id'] = new GString('planning_periode', 'modifier_id', 20, TRUE, NULL);
@@ -56,7 +57,7 @@ class Periode extends GObject
 				$this->date_modif = date('Y-m-d H:i:s');
 			}
 		}
-		if($this->lien == CONFIG_DEFAULT_PERIOD_LINK) {
+		if(defined('CONFIG_DEFAULT_PERIOD_LINK') && $this->lien == CONFIG_DEFAULT_PERIOD_LINK) {
 			$this->lien = NULL;
 		}
 		return parent::db_save($updateData, $insertData);
@@ -229,7 +230,10 @@ class Periode extends GObject
 				} else {
 					$parent = $this->periode_id;
 				}
-				$periode_tosave[]=array('debut'=>$debut,'fin'=>$fin,'parent'=>$parent);
+				if ($tmpDate < $dateFin)
+				{
+				 $periode_tosave[]=array('debut'=>$debut,'fin'=>$fin,'parent'=>$parent);
+				}
 				}
 		}else{
 			while ($dateFin < $tmpDate) {
@@ -480,8 +484,9 @@ class Periode extends GObject
 	}
 	
 	// applique les paramètres au parent et toutes les soeurs
-	public function updateOcurrences($nbJoursDecalDest = '') {
+	public function updateOcurrences($nbJoursDecalDest = '',$copie='false') {
 		$periodes = new Gcollection('Periode');
+		@file_put_contents(BASE . '/../debug.txt', 'update occurences\r\n');
 		if(is_null($this->parent_id)) {
 			// si c'est le parent alors on sélectionne tout les enfants
 			$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE parent_id = ' . val2sql($this->periode_id)); // modif suppression:  . ' AND date_debut > ' . val2sql($this->date_debut);
@@ -489,7 +494,7 @@ class Periode extends GObject
 			// si non, alors c'est déjà une récurrence, on sélectionne le parent et tous les enfants sauf la periode sélectionnée qui a déjà été mise à jour
 			if (is_null($this->link_id))
 			{
-				$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE ( (parent_id = ' . val2sql($this->parent_id) . ' AND periode_id <> ' . val2sql($this->periode_id) . ' OR periode_id = ' . val2sql($this->parent_id) . ')');
+				$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE ((parent_id = ' . val2sql($this->parent_id) . ' AND periode_id <> ' . val2sql($this->periode_id) . ') OR periode_id = ' . val2sql($this->parent_id) . ')');
 			// si c'est une tâche liée, on sélectionne toutes les occurences
 			}else
 			{
@@ -513,7 +518,6 @@ class Periode extends GObject
 		$nbJoursDecalNeg = $nbJoursDecalDest*-1; //on inverse le signe si negatif car le calcul de date ne prend que des nombres positifs
 		
 		while($periode = $periodes->fetch()) {
-		
 		// modif calcul du nombre de jour de la période pour report sur la nouvelle date
 		if (!is_null($periode->date_fin)) {
 			if ($nbJoursDecalDest>0){
@@ -529,14 +533,18 @@ class Periode extends GObject
 			}elseif ($nbJoursDecalDest<0) {
 				$periode->date_debut = calculerDateDebut($periode->date_debut, $nbJoursDecalNeg);
 			}
+		}
+			if ($copie=='true')
+			{
+				$periode->user_id = $this->user_id ;
 			}
 			$periode->projet_id = $this->projet_id;
 			$periode->titre = $this->titre;
-			//$periode->user_id = $periode->user_id ;
 			$periode->link_id = $this->link_id;
 			$periode->statut_tache = $this->statut_tache;
 			$periode->notes = $this->notes;
 			$periode->lien = $this->lien;
+			$periode->fichiers = $this->fichiers;			
 			$periode->lieu_id = $this->lieu_id;
 			$periode->ressource_id = $this->ressource_id;
 			$periode->custom = $this->custom;
@@ -544,6 +552,7 @@ class Periode extends GObject
 			$periode->date_modif = date('Y-m-d H:i:s');
 			$periode->db_save();
 		}
+
 	}
 
 	// supprime la tache, sa mere et ses soeurs
@@ -592,6 +601,7 @@ class Periode extends GObject
 	
 	// envoi un mail en cas de creation/modification de tache
 	public function envoiNotification($action = false, $repetition = false) {
+
 		$userAssigne = new User();
 		if(!$userAssigne->db_load(array('user_id', '=', $this->user_id))) {
 			return false;
@@ -600,9 +610,14 @@ class Periode extends GObject
 		if(!$projet->db_load(array('projet_id', '=', $this->projet_id))) {
 			return false;
 		}
-
 		if($userAssigne->notifications == 'oui' && !is_null($userAssigne->email)) {
 			$smarty = new MySmarty();
+			
+			$status = new GCollection('Status');
+		    $status->db_load(array('affichage', 'IN', array('t', 'tp'),'status_id','=',$this->statut_tache));
+			$nom_status=$status->getSmartyData();
+			$smarty->assign('status', $nom_status[0]['nom']);
+			
 			$smarty->assign('periode', $this->getData());
 			$smarty->assign('projet', $projet->getData());
 			
@@ -612,8 +627,16 @@ class Periode extends GObject
 				$smarty->assign('heure_fin',$tmp[1]);
 			}
 			
+			if (!is_null($this->fichiers)) {
+					$fichiers = explode(";", $this->fichiers);
+					$smarty->assign('fichiers', $fichiers);
+			} else {
+					$smarty->assign('fichiers', null);
+			}
+
 			if(CONFIG_SOPLANNING_URL != "") {
 				$smarty->assign('lienTache', CONFIG_SOPLANNING_URL . '/process/login.php?direct_periode_id=' . $this->periode_id . '&date=' . date('Y-m-d') . '&hash=' . md5($this->periode_id . '!¤' . date('Y-m-d') . '¤' . CONFIG_SECURE_KEY));
+				$smarty->assign('base', CONFIG_SOPLANNING_URL);
 			}
 			
 			$createur = new User();
@@ -639,6 +662,10 @@ class Periode extends GObject
 						$smarty->assign('heure_debut_old',$tmp[0]);
 						$smarty->assign('heure_fin_old',$tmp[1]);
 					}
+					$status = new GCollection('Status');
+					$status->db_load(array('affichage', 'IN', array('t', 'tp'),'status_id','=',$oldPeriode->statut_tache));
+					$nom_status_old=$status->getSmartyData();
+					$smarty->assign('oldStatus', $nom_status_old[0]['nom']);
 					$smarty->assign('oldPeriode', $oldPeriode->getData());
 					$oldProjet = new Projet();
 					$oldProjet->db_load(array('projet_id', '=', $oldPeriode->projet_id));
@@ -647,7 +674,6 @@ class Periode extends GObject
 					$corps = $smarty->getHtml('mail_modif_tache.tpl');
 				}
 			}
-
 			$mail = new Mailer($userAssigne->email, $sujet, $corps, true);
 			try {
 				$result = $mail->send();
@@ -659,9 +685,5 @@ class Periode extends GObject
 		}
 		return true;
 	}
-	
-	
-	
 }
-
 ?>

@@ -57,4 +57,10 @@ $xajax->registerFunction('periode_change_projet');
 $xajax->registerFunction('purgerAudit');
 $xajax->registerFunction('modifAudit');
 $xajax->registerFunction('restaureAudit');
+$xajax->registerFunction('projet_decalage_form');
+$xajax->registerFunction('projet_decalage_submit');
+
+$xajax->registerFunction('periode_scinder_form');
+$xajax->registerFunction('periode_scinder_submit');
+
 ?>

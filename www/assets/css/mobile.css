@@ -87,6 +87,7 @@
 	
 /* smartphone : iphone 6*/
 @media ( min-width : 325px ) and ( max-width : 400px ) {
+		#divConteneurPlanning {overflow:auto!important;width:200px;}
 	.ms-options{min-width: auto !important;}
 	.col-md-12 {padding-left: 0px;padding-right: 0px;}
 	.row {margin-right: 0px !important}
@@ -95,10 +96,7 @@
 	.modalBig {width: 95% !important;}
 	.modal-body{padding:10px !important}
 	.cursor-help{display:none}
-	
-	/* Login */
-	/*.form-control{width:100% !important;}*/
-	
+		
 	/* Planning */
 	#planning-dateselector tr{display:inline !important;}	
 	#divPlanningMainFilter{text-align:justify !important}
@@ -369,7 +367,6 @@
 /* smartphone, phablets, tablets */
 @media ( max-width : 860px ) {
 	.form-horizontal .btn-primary {margin-left: 0px !important;}
-	.btn-group {margin-right:0px !important;}
 	.form-horizontal .control-label, .radio, .input {font-weight: bold;}
 	.tab-content .form-group {margin-right:10px;}
 	.col-md-4{padding-left: 0px;}
@@ -391,8 +388,6 @@
 	.container{padding-left:5px;padding-right:5px;}
 	.navbar-static-top{margin-bottom:10px;}
 	.dropdown-menu-hover{display:none !important;}
-	.soplanning-box{padding:7px;text-align:left;}
-
 	.w12 {width:auto}
 	.w25 {width:auto}
 	.w40 {width:auto}

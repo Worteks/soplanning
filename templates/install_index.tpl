@@ -15,8 +15,8 @@
 		<link rel="mask-icon" href="{$BASE}/safari-pinned-tab.svg" color="#5bbad5" />
 		<meta name="msapplication-TileColor" content="#da532c" />
 		<meta name="theme-color" content="#ffffff" />
-		<link href="{$BASE}/assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-		<link href="{$BASE}/assets/plugins/bootstrap-4.3.1/css/bootstrap-theme.min.css" rel="stylesheet" />
+		<link href="{$BASE}/assets/plugins/bootstrap-4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="{$BASE}/assets/plugins/bootstrap-4.5.0/css/bootstrap-theme.min.css" rel="stylesheet" />
 		<link type="text/css" href="../assets/css/styles.css" rel="stylesheet" />
 		<link type="text/css" href="../assets/css/simplePage.css" rel="stylesheet" />
 		{$xajax}

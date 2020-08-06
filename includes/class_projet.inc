@@ -8,7 +8,7 @@ class Projet extends GObject
 		$this->table = 'planning_projet';
 		
 		$this->fields['projet_id'] = new GString('planning_projet', 'projet_id', 20, FALSE, '');
-		$this->fields['nom'] = new GString('planning_projet', 'nom', 30, FALSE, '');
+		$this->fields['nom'] = new GString('planning_projet', 'nom', 50, FALSE, '');
 		$this->fields['iteration'] = new GString('planning_projet', 'iteration', 255, TRUE, NULL);
 		$this->fields['couleur'] = new GString('planning_projet', 'couleur', 6, FALSE, '');
 		$this->fields['charge'] = new GFloat('planning_projet', 'charge', 11, TRUE, NULL);

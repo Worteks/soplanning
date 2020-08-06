@@ -94,7 +94,7 @@ while ($periode = $periodes->fetch()) {
 				if(!is_null($heures)){
 					$texte .= $heures['duree_details_heure_debut'] . ' - ' . $heures['duree_details_heure_fin'] . '";"';
 				} else{
-					$texte .=  '";"';
+					$texte .= $smarty->getConfigVars('journee') . '";"';
 				}
 				$texte .=  str_replace('"', "'", $periode->nom_personne) . '";"';
 				$texte .= str_replace('"', "'", $periode->nom_projet) . '";"';
@@ -116,8 +116,12 @@ while ($periode = $periodes->fetch()) {
 		$heures = $periode->getHeureDebutFin();
 		if(!is_null($heures)){
 			$texte .= $heures['duree_details_heure_debut'] . ' - ' . $heures['duree_details_heure_fin'] . '";"';
-		} else{
-			$texte .=  '";"';
+		} elseif($periode->duree_details == 'AM') {
+			$texte .=  $smarty->getConfigVars('tab_matin') .'";"';
+		} elseif($periode->duree_details == 'PM') {
+			$texte .=  $smarty->getConfigVars('tab_apresmidi') . '";"';
+		} else {
+			$texte .= $smarty->getConfigVars('journee') . '";"';
 		}
 		$texte .=  str_replace('"', "'", $periode->nom_personne) . '";"';
 		$texte .= str_replace('"', "'", $periode->nom_projet) . '";"';

@@ -13,32 +13,32 @@
 	{/literal}
 </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #eeeeee" bgcolor="#eeeeee">
+<body style="margin: 0; padding: 0;" >
 				
 <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
 <tr>
-	<td align="center" style="padding: 37px 0; background-color: #eeeeee;" bgcolor="#eeeeee">
+	<td align="center" style="padding: 37px 0;">
 		<div style="padding: 0 0 10px">
-			<table cellpadding="0" cellspacing="0" border="0" style="margin: 0; border: 1px solid #dddddd; color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd; background-color: #EEEEEE; " width="90%">
+			<table cellpadding="0" cellspacing="0" border="0" style="margin: 0; border: 1px solid #dddddd; color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd;" width="90%">
 			<tr>
 				<td>
 					<table cellpadding="0" cellspacing="0" border="0" style="margin: 0; border-collapse: collapse;" width="100%">
 					<tr>
-						<td style="color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd; background-color: #EEEEEE;  padding: 5px 0;" align="left">
+						<td style="color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd; background-color: #EEEEEE;  padding: 5px 0;" align="left" width="100%">
 							<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd; background-color: #EEEEEE; ">
 							<tr>
 								<td width="10px"></td>
 								<td width="90%" style="vertical-align: top; padding: 5px 0; ">
-									<table cellpadding="0" cellspacing="0" style="border-collapse:collapse; text-align: center; width: 100% ">
+									<table cellpadding="0" cellspacing="0" style="border-collapse:collapse; text-align: center; width: 100%;min-width:250px;">
 									<tr>
-										<td style="border-collapse:collapse;color: #444444; font-family: arial; font-size: 18px; font-weight:bold" >
+										<td style="border-collapse:collapse;color: #444444; font-family: arial; font-size: 18px; font-weight:bold;width: 100%" >
 											{if $smarty.const.CONFIG_SOPLANNING_URL != ''}
 												{if $smarty.const.CONFIG_SOPLANNING_LOGO != ''}
-													<a class="navbar-brand navbar-brand-logo" href="{$CONFIG_SOPLANNING_URL}"><img src="./upload/logo/{$smarty.const.CONFIG_SOPLANNING_LOGO}" alt='logo' class="logo" />
+													<a class="navbar-brand navbar-brand-logo" href="{$smarty.const.CONFIG_SOPLANNING_URL}"><img src="{$smarty.const.CONFIG_SOPLANNING_URL}/upload/logo/{$smarty.const.CONFIG_SOPLANNING_LOGO}" alt='logo' class="logo" />
 												{else}
 													<a class="navbar-brand" href="{$smarty.const.CONFIG_SOPLANNING_URL}">
 												{/if}
-													{$smarty.const.CONFIG_SOPLANNING_TITLE}
+												{$smarty.const.CONFIG_SOPLANNING_TITLE}
 												</a>
 											{else}
 												{$smarty.const.CONFIG_SOPLANNING_TITLE}
@@ -49,10 +49,10 @@
 								</td>
 							</tr>
 							</table>
-							<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd; background-color: #EEEEEE; ">
+							<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;color: #444444; font-family: arial; font-size: 14px; border-color: #dddddd; background-color: #EEEEEE; ">
 							<tr>
 								<td width="10px"></td>
 								<td width="90%" style="vertical-align: top; padding: 5px 0; ">
-									<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd; background-color: #EEEEEE; " width="100%">
+									<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;color: #444444; font-family: arial; border-color: #dddddd; background-color: #EEEEEE; " width="100%">
 									<tr>
-										<td style="padding:5px 0 5px 5px;line-height:normal;color: #444444; font-family: arial; font-size: 12px; border-color: #dddddd; background-color: #EEEEEE; ">
+										<td style="padding:5px 0 5px 5px;line-height:normal;color: #444444; font-family: arial; border-color: #dddddd; background-color: #EEEEEE; ">

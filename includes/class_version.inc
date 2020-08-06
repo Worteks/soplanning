@@ -98,16 +98,14 @@ class Version
 			}
 		}
 
+		// ecriture du fichier database.inc
+		$contenuFichier = '<?php' . CRLF . CRLF . '// Database Parameters' . CRLF . '$cfgHostname = \'' . $cfgHostname . '\';' . CRLF . '$cfgDatabase = \'' . $cfgDatabase . '\';' . CRLF . '$cfgUsername = \'' . $cfgUsername . '\';' . CRLF . '$cfgPassword = \'' . $cfgPassword . '\';' . CRLF . '$cfgSqlType = \'mysql\';' . CRLF . '$cfgPrefix = \'' . $cfgPrefix . '\';' . CRLF . '?>';
+		if(!file_put_contents(BASE . '/../database.inc', $contenuFichier)) {
+			return 'database_config_file_failed';
+		}
+
 		$reqs = explode(";",$requetes);// on sépare les requetes
 		foreach($reqs as $req){
-
-			// textes issus des traductions pour des données de test par langue
-			$tabReplace = array('winProjet_statutArchive', 'winProjet_statutAbandon', 'winProjet_statutFait', 'winProjet_statutEnCours', 'winProjet_statutAFaire', 'demo_projet_1', 'demo_projet_2', 'demo_projet_3', 'demo_user_1', 'demo_user_2', 'demo_user_3');
-			reset($tabReplace);
-			foreach ($tabReplace as $motCle){
-				$req = str_replace('#' . $motCle . '#',$smarty->getConfigVars($motCle),$req);				
-			}
-
 			if (trim($req) != "" && !db_query($req)){
 				if(strpos(mysqli_error($cfgConnection), "already exists") !== FALSE) {
 					// si base de donnes deja existante, on lance pas d'erreur et on passe à  la mise à jour du fichier de DB
@@ -118,11 +116,8 @@ class Version
 			}
 		}
 
-		// ecriture du fichier database.inc
-		$contenuFichier = '<?php' . CRLF . CRLF . '// Database Parameters' . CRLF . '$cfgHostname = \'' . $cfgHostname . '\';' . CRLF . '$cfgDatabase = \'' . $cfgDatabase . '\';' . CRLF . '$cfgUsername = \'' . $cfgUsername . '\';' . CRLF . '$cfgPassword = \'' . $cfgPassword . '\';' . CRLF . '$cfgSqlType = \'mysql\';' . CRLF . '$cfgPrefix = \'' . $cfgPrefix . '\';' . CRLF . '?>';
-		if(!file_put_contents(BASE . '/../database.inc', $contenuFichier)) {
-			return 'database_config_file_failed';
-		}
+		$this->installDemoData();
+
 		return true;
 	}
 
@@ -199,12 +194,6 @@ class Version
 				foreach($reqs as $req){	// et on les execute
 					//echo '<br>' . $req . '<br>';
 
-					$req = str_replace('#winPeriode_statut_a_faire#',$smarty->getConfigVars('winPeriode_statut_a_faire'),$req);
-					$req = str_replace('#winPeriode_statut_en_cours#',$smarty->getConfigVars('winPeriode_statut_en_cours'),$req);
-					$req = str_replace('#winPeriode_statut_fait#',$smarty->getConfigVars('winPeriode_statut_fait'),$req);
-					$req = str_replace('#winPeriode_statut_abandon#',$smarty->getConfigVars('winPeriode_statut_abandon'),$req);
-					$req = str_replace('#winPeriode_statut_archive#',$smarty->getConfigVars('winProjet_statutArchive'),$req);
-
 					if (trim($req)!= "" && !db_query($req)){
 						$output .= "<br>Failed to upgrade database, please contact <a href='mailto:support@soplanning.org'>support@soplanning.org</a> with full details."; // stop si erreur
 						$output .= '<br/>upgrade failed :<br/> ' . $tmpVersionFinal;
@@ -274,6 +263,9 @@ class Version
 		if(!is__writable(COMPIL_DIR)) {
 			die('<br/><br/><center><b>Error : please add read/write rights on "' . COMPIL_DIR . '" directory</b></center>');
 		}
+		if(!is__writable(UPLOAD_DIR)) {
+			die('<br/><br/><center><b>Error : please add read/write rights on "' . UPLOAD_DIR . '" directory</b></center>');
+		}
 		return true;
 	}
 
@@ -290,7 +282,7 @@ class Version
 	}
 
 	private function versionFormatee($version) {
-		if(strlen($version == 5)){
+		if(strlen($version) == 5){
 			$tmpVersionFinal = substr($version, 0,1) . '.' . substr($version, 1, 2) . '.' . substr($version, 3, 2);
 		} else{
 			$tmpVersionFinal = substr($version, 0,1) . '.' . substr($version, 1, 2);	
@@ -303,6 +295,12 @@ class Version
 			return true;
 		}
 		return 'gd_missing';
+	}
+
+	private function installDemoData(){
+		$file = BASE . "/../includes/demo_data.inc";
+		include_once($file);
+		return true;
 	}
 }
 ?>

@@ -84,7 +84,6 @@ a,a:focus,a:active,a:hover {
 	background-color: #9C27B0;
 	color: #FFFFFF;
 	font-size:16px;
-	line-height: 20px;
 	padding:0px;
 	z-index: 100;
 	background-clip: padding-box
@@ -95,7 +94,6 @@ a,a:focus,a:active,a:hover {
 	background-color: #AB47BC;
 	color: #FFFFFF;
 	font-size:14px;
-	line-height: 20px;
 	padding-top:6px;
 	padding-bottom:6px;
 	z-index: 100;
@@ -106,7 +104,6 @@ a,a:focus,a:active,a:hover {
 {
 	background-color: #AB47BC;
 	color: #FFFFFF;
-	line-height: 20px;
 	font-weight: normal;
 	padding:3px;
 	z-index: 100;
@@ -117,7 +114,6 @@ a,a:focus,a:active,a:hover {
 {
 	background-color: #AB47BC;
 	color: #FFFFFF;
-	line-height: 20px;
 	padding:3px;
 	z-index: 100;
 	background-clip: padding-box
@@ -127,6 +123,7 @@ a,a:focus,a:active,a:hover {
 {
 	color:#FFFFFF;
 	text-decoration:none;
+	white-space: nowrap;	
 }
 
 .planning_head_week a
@@ -134,6 +131,7 @@ a,a:focus,a:active,a:hover {
 	color:#FFFFFF;
 	text-decoration:none;
 	padding:3px;
+	white-space: nowrap;
 }
 
 .planning_head_day a
@@ -141,12 +139,14 @@ a,a:focus,a:active,a:hover {
 	color:#FFFFFF;
 	text-decoration:none;
 	padding: 3px;
+	white-space: nowrap;	
 }
 
 .planning_head_dayname a
 {
 	color:#FFFFFF;
 	text-decoration:none;
+	white-space: nowrap;	
 }
 
 .planning_head_month a:hover
@@ -187,12 +187,12 @@ a,a:focus,a:active,a:hover {
 	color: #FFFFFF;
 	font-size:12px;
 	font-weight: normal;
-	line-height: 20px;
 	padding-top:6px;
 	padding-bottom:6px;
 	padding-left:4px;
 	padding-right:4px;
-	background-clip: padding-box
+	background-clip: padding-box;
+	white-space: nowrap;
 }
 
 .planning_switch {
@@ -239,23 +239,6 @@ a,a:focus,a:active,a:hover {
 .btn-outline-light:not(:disabled):not(.disabled).active, .btn-outline-light:not(:disabled):not(.disabled):active
 {
 	background-color: #AB47BC;
-}
-
-/* Conteneur Planning */
-
-#top-scroll::-webkit-scrollbar,#divConteneurPlanning::-webkit-scrollbar {
-    width: 12px;
-}
-
-#top-scroll::-webkit-scrollbar-track,#divConteneurPlanning::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 2px #8E24AA;
-    border-radius: 10px;
-}
-
-#top-scroll::-webkit-scrollbar-thumb,#divConteneurPlanning::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 2px #8E24AA;
-	background-color:#9C27B0;
 }
 
 /* Pagination */
@@ -342,14 +325,16 @@ a,a:focus,a:active,a:hover {
 .planningContent td.week {
 	background-color: #ffffff;
 	font-size: 9px;
+	z-index: 0;
+	padding:2px;
 }
 
-.planningContent td.week:hover {
+.planningContent td.week:hover:not(.read-only) {
 	background-color: #F3E5F5;
 	cursor: pointer;
 }
 
-.planningContent td.week:active {
+.planningContent td.week:active:not(.read-only) {
 	background-color: #9C27B0;
 	cursor: pointer;
 }
@@ -359,7 +344,9 @@ a,a:focus,a:active,a:hover {
 	font-size: 9px;
 	filter:alpha(opacity=60);
 	-moz-opacity:.60;
-	opacity:.60
+	opacity:.60;
+	position:relative;
+	z-index:0;
 }
 
 .planningContent td.feries,.feries {
@@ -367,20 +354,29 @@ a,a:focus,a:active,a:hover {
 	font-size: 9px;
 	filter:alpha(opacity=60);
 	-moz-opacity:.60;
-	opacity:.60
+	opacity:.60;
+	position:relative;
+	z-index:0;
 }
 
 /* planning team div separation */
-.planning_team_div
+.planning_team_div, .planning_team_div_hour
 {
 	background-color:#AB47BC !important;
 	color:#ffffff !important;
 	border-top: 1px solid #ebeff2 !important;
 	border-bottom: 1px solid #ebeff2 !important;
-	border-left:0px !important;
-	border-right:0px !important;
-	padding-left:5px !important;
-	padding-right:5px !important;
+}
+
+th.planning_team_div, th.planning_team_div_hour
+{
+    border-right:1px solid #AB47BC !important;
+	z-index:7!important;
+}
+
+td.planning_team_div, td.planning_team_div_hour
+{
+    border-left:1px solid #AB47BC !important;
 }
 
 /* tableau */
@@ -389,8 +385,8 @@ a,a:focus,a:active,a:hover {
 	vertical-align: middle;
 	text-align: center;
 	border:1px solid #ebeff2;
-	line-height: 20px;
 	height: 30px;
+	background-clip: padding-box;	
 }
 
 .planningContent {
@@ -403,7 +399,7 @@ a,a:focus,a:active,a:hover {
 }
 
 /* project cell */
-.cellProject,.cellProjectBiseau {
+.cellProject,.cellProjectBiseau1,.cellProjectBiseau2 {
 	position: relative;
 	cursor: pointer;
 	padding-top: 1px;
@@ -418,12 +414,21 @@ a,a:focus,a:active,a:hover {
 	line-height: 100%;
 	border-radius: 3px 3px 3px 3px;
 }
-.cellProjectBiseau:before{
+.cellProjectBiseau1:before{
 	content: attr(data-content);
 	position:absolute;
 	text-align: left;
 	width:100%;
 	clip-path: polygon(33% 0, 100% 0, 100% 100%, 50% 100%);
+	color:black;
+}
+
+.cellProjectBiseau2:before{
+	content: attr(data-content);
+	position:absolute;
+	text-align: left;
+	width:100%;
+	clip-path: polygon(0 0, 31% 0, 61% 100%, 0 100%);
 	color:black;
 }
 
@@ -448,6 +453,7 @@ a,a:focus,a:active,a:hover {
 .planningContent td.today {
 	background-color: #9C27B0;
 	color: #ffffff;
+	z-index: 0;
 }
 
 
@@ -462,7 +468,6 @@ a,a:focus,a:active,a:hover {
 	padding-left:5px;
 	padding-right:5px;
 	min-width:120px;
-	z-index:100 !important;
 }
 
 .planningFirstRowCol {

@@ -18,6 +18,56 @@ SO Planning - Readme
 
 ---------------------------
 
+v1.47 (21/07/20)
+
+- You can now upload files in tasks !
+- new feature in order to cut tasks in 2 parts when covering several days. The task is splitted in 2 tasks, from each side of the selected date
+- sticky header for the planning, now you will use browser scrollbars (more fluent and instinctive)
+- added planning advanced filters and sorting choice in cookies (saved even when disconnected)
+- added planning filters on people/projects/places/resources in cookies (saved even when disconnected)
+- added task status in notification email
+- added new optional line in the planning, in order to view total number of tasks per day
+- 3 new rights for teams : you can now give specific rights on users for their team, and combine with existing rights. 
+   1) a user can now manage other users profile (create/modify/delete) from his team with the relevant right
+   2) a user can have his planning view limited on people of his team
+   3) a user can modify only tasks assigned to people in his team
+- In project list, you can click on calendar button in order to access directly to project planning (filtered in the selected project). Now start and end dates of the planning are changed based on first and last task of this project
+- Project list : filter on group or text search are now keep in memory/session
+- updated spanish version
+- Improved starting hour management/calculation when using detailed view in planning
+- Added tooltip information on projects page, in order to display number of tasks for each project
+- You can now "enlarge" tasks : by drap n' droping the last day of a task, it will enlarge the task to the destination date. Working only with last day of a task covering several days
+- security update an several external libraries
+- Security update about "remember me" feature and unique keys
+- Bugfix on tasks and projects status selection on the planning
+- Bugfix on task copy (tasks were linked although they shouldn't be)
+- bugfix on colorpicker for statutes
+- Bugfix on task move when using option "one assignment max per day"
+- Bugfix on project dropdown menu for tasks
+- bugfix on colorpicker when limited colors
+- bugfix on ICAL when using characters with accents
+
+
+v1.46.00 (03/03/20)
+
+- New feature, ability to shift a whole project
+- Added better timepicker in task form
+- Added "remember me" feature to the login page
+- Summary below planning now displayed by default
+- Autoresize for task comment input 
+- Task cell bevel in the right side depending on AM/PM
+- PHP 7.2 deprecated code replaced SQL injection vulnerability fixed
+- New italian translation version (+help)
+- Added Brazilian portuguese language
+- Improvement on PDF display
+- Option for weekend / days off now hide days/columns when activated
+- Correction bug drag & drop
+- Bugfix on PDF export
+- Manage accent in LDAP connection
+- Bugfix on project statutes
+- Bugfix : lines are now hidden in summary (below the planning) when "hide empty lines" is activated
+- Several security issues fixed
+
 v1.45 (19/08/219)
 
 - new form decicated to task creation ! This form is lighter than the modification form and will save time when creating several tasks.

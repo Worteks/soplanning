@@ -1,6 +1,18 @@
 {* Smarty *}
 <form class="form-horizontal" method="get" action="export_pdf.php" target="_blank">
 	<div class="form-group row">
+		<label class="col-md-3 col-form-label">{#tab_dateDebut#} :</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control datepicker" name="date_debut_pdf" id="date_debut_pdf" maxlength="10" value="{$smarty.session.date_debut_affiche}" />
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-md-3 col-form-label">{#tab_dateFin#} :</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control datepicker" name="date_fin_pdf" id="date_fin_pdf" maxlength="10" value="{$smarty.session.date_fin_affiche}" />
+		</div>
+	</div>
+	<div class="form-group row">
 		<label class="col-md-3 col-form-label">{#PDFExport_orientation#} :</label>
 		<div class="col-md-4">
 			<select name="pdf_orientation" id="orientation" class="form-control">

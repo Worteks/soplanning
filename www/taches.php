@@ -390,6 +390,10 @@ $sql .= "	WHERE visible_planning = 'oui' ";
 if ($user->checkDroit('tasks_view_only_own')) {
 	$sql .= " AND pu.user_id = " . val2sql($user->user_id);
 }
+// Si filtre sur son équipe
+if($user->checkDroit('droits_tasks_view_team_users')) {
+	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
+}
 $sql .=	" ORDER BY groupe_nom, pu.nom";
 $users->db_loadSQL($sql);
 $smarty->assign('users', $users->getSmartyData());

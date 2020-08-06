@@ -17,20 +17,20 @@
 	<div class="form-group row col-md-12 mt-2" id="optionsRow">
 		<div class="col-3">
 			<div  class="nav flex-column nav-pills soplanning-box" role="tablist" aria-orientation="vertical" id="myTab">
-				<a class="nav-link active" id="param-global-tab" data-toggle="pill" href="#param-global" role="tab" aria-controls="param-global" aria-selected="true">{#options_configGenerale#}</a>
+				<a class="nav-link {if !isset($smarty.get.tab) || $smarty.get.tab eq ""}active{/if}" id="param-global-tab" data-toggle="pill" href="#param-global" role="tab" aria-controls="param-global" aria-selected="true">{#options_configGenerale#}</a>
 				<a class="nav-link" id="param-modules-tab" data-toggle="pill" href="#param-modules" role="tab" aria-controls="param-modules" aria-selected="false">{#options_modules#}</a>
 				<a class="nav-link" id="param-planning-tab" data-toggle="pill" href="#param-planning" role="tab" aria-controls="param-planning" aria-selected="false">{#options_planning#}</a>
 				<a class="nav-link" id="param-taches-tab" data-toggle="pill" href="#param-taches" role="tab" aria-controls="param-taches" aria-selected="false">{#options_taches#}</a>
 				<a class="nav-link" id="param-divers-tab" data-toggle="pill" href="#param-divers" role="tab" aria-controls="param-divers" aria-selected="false">{#options_divers#}</a>
 				<a class="nav-link" id="param-smtp-tab" data-toggle="pill" href="#param-smtp" role="tab" aria-controls="param-smtp" aria-selected="false">{#options_smtp#}</a>
 				<a class="nav-link" id="param-testmail-tab" data-toggle="pill" href="#param-testmail" role="tab" aria-controls="param-testmail" aria-selected="false">{#options_envoyerMailTest#}</a>
-				<a class="nav-link" id="param-audit-tab" data-toggle="pill" href="#param-audit" role="tab" aria-controls="param-audit" aria-selected="false">{#options_audit#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-audit"}active{/if}" id="param-audit-tab" data-toggle="pill" href="#param-audit" role="tab" aria-controls="param-audit" aria-selected="false">{#options_audit#}</a>
 			</div >
 		</div>
 		<div class="col-9">
 			<div class="soplanning-box">
 				<div class="tab-content">
-					<div class="tab-pane fade show active" id="param-global" role="tabpanel" aria-labelledby="param-global-tab">
+					<div class="tab-pane fade show {if !isset($smarty.get.tab) || $smarty.get.tab eq ""}active{/if}" id="param-global" role="tabpanel" aria-labelledby="param-global-tab">
 						<form action="process/options.php" method="POST" class="form-horizontal" enctype="multipart/form-data" id="setupForm">
 							<fieldset>
 								<legend>
@@ -250,6 +250,16 @@
 									</div>
 								</div>
 								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-4 col-form-label">{#options_differencier_weekend#} :</label>
+									<div class="col-3">
+										<select name="PLANNING_DIFFERENCIE_WEEKEND" class="form-control">
+											<option value="1" {if $smarty.const.CONFIG_PLANNING_DIFFERENCIE_WEEKEND eq 1}selected="selected"{/if}>{#options_differencier_weekend_1#}</option>
+											<option value="0" {if $smarty.const.CONFIG_PLANNING_DIFFERENCIE_WEEKEND eq 0}selected="selected"{/if}>{#options_differencier_weekend_0#}</option>
+										</select>
+									</div>
+									<div title="{#options_aide_differencier_weekend#}" class="cursor-help tooltipster"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
 									<label class="col-md-4 col-form-label">{assign var=heuresAffichees value=","|explode:$smarty.const.CONFIG_HOURS_DISPLAYED} {#options_heuresIncluses#} :</label>
 									<div class="col-md-8 form-inline">
 										<div class="form-check form-check-inline">
@@ -381,16 +391,6 @@
 									<div class="col-2">
 										<input name="DEFAULT_NB_ROWS_DISPLAYED" {if $smarty.session.isMobileOrTablet==1}type="number" class="form-control"{else}type="text" class="form-control"{/if} value="{$smarty.const.CONFIG_DEFAULT_NB_ROWS_DISPLAYED}" />
 									</div>
-								</div>
-								<div class="form-group row col-md-12 align-items-center">
-									<label class="col-md-4 col-form-label">{#options_differencier_weekend#} :</label>
-									<div class="col-2">
-										<select name="PLANNING_DIFFERENCIE_WEEKEND" class="form-control">
-											<option value="0" {if $smarty.const.CONFIG_PLANNING_DIFFERENCIE_WEEKEND eq 0}selected="selected"{/if}>{#non#}</option>
-											<option value="1" {if $smarty.const.CONFIG_PLANNING_DIFFERENCIE_WEEKEND eq 1}selected="selected"{/if}>{#oui#}</option>
-										</select>
-									</div>
-										<div title="{#options_aide_differencier_weekend#}" class="cursor-help tooltipster"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
 								</div>
 								<div class="form-group row col-md-12 align-items-center">
 									<label class="col-md-4 col-form-label">{#options_statusAffichage#} :</label>
@@ -782,7 +782,7 @@
 							</fieldset>
 						</form>
 					</div>
-					<div class="tab-pane" id="param-audit">
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-audit"}active{/if}" id="param-audit">
 						<form action="process/options.php" method="POST" class="form-horizontal">
 							<fieldset>
 								<legend>

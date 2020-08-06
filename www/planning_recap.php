@@ -3,25 +3,36 @@
 	// TABLEAU RECAP DES PROJETS
 	//////////////////////////
 	$html_recap = '<table id="divProjectTable" class="table table-striped">' . CRLF;
-	$html_recap .= '	<thead>' . CRLF;
+	$html_recap .= '	<tbody>' . CRLF;
 	$html_recap .= '	<tr>' . CRLF;
 	$html_recap .= '		<th class="w50"></th>' . CRLF;
 	$html_recap .= '		<th class="planningTabName">' . $smarty->getConfigVars('tab_projet2') . '</th>' . CRLF;
 	$html_recap .= '		<th class="planningTabTask">' . $smarty->getConfigVars('tab_periode2') . '</th>' . CRLF;
 	$html_recap .= '		<th class="w220 planningTabCharge">' . $smarty->getConfigVars('tab_charge') . '</th>' . CRLF;
 	$html_recap .= '	</tr>' . CRLF;
-	$html_recap .= '	</thead>' . CRLF;
-	$html_recap .= '	<tbody>' . CRLF;	
 	foreach ($planning['lignes'] as $cle => $infos)
 	{
-		
+		// Calcul des jours occupés
+		$joursOccupes = array();
+		if (isset($planning['taches'][$infos['id']])) {
+			foreach ($planning['taches'][$infos['id']] as $cleTmp => $tache) {
+				foreach ($tache as $t) {
+					$joursOccupes[$cle][]=$t;
+				}
+			}
+		}
+		// si option de masquer les lignes vides est activée, on masque la ligne si elle est vide
+		if($masquerLigneVide == 1 && count($joursOccupes) == 0) {
+			continue;
+		}
+
 		$html_recap .= '	<tr>' . CRLF;
 		$couleurTexte = buttonFontColor('#' . $infos['couleur']);
-		$tooltipProjet = '<b>' . $smarty->getConfigVars('tab_projet') . '</b> : ' . $infos['nom'] . '(' . $infos['id'] . ')<br />' ;
+		$tooltipProjet = '<b>' . $smarty->getConfigVars('tab_projet') . '</b> : ' . xss_protect($infos['nom']) . '(' . $infos['id'] . ')<br />' ;
 
 		$html_recap .= '<td onClick="javascript:Reloader.stopRefresh();'.$infos['url_modif'].';undefined;" class="w25"><span data-tooltip-content="#tooltipprojet-'.$infos['id'].'" class="smallFontSize pastille-projet tooltipster" style="background-color:#' . $infos['couleur'] . ';color:'. $couleurTexte.'">' . $infos['id'] . '</span></td>' . CRLF;
 		$html_recap .= "<div class='tooltip-html'><div id='tooltipprojet-".$infos['id']."'>$tooltipProjet</div></div>". '</td>' . CRLF;
-		$html_recap .= '<td class="planningTabName"><b>' . $infos['nom'] . '</b>';
+		$html_recap .= '<td class="planningTabName"><b>' . xss_protect($infos['nom']) . '</b>';
 		$html_recap .= '<td class="vbottom planningTabTask">';
 		// Si aucune tâche
 		if (!isset($planning['taches'][$cle]))
@@ -69,7 +80,7 @@
 					{
 						$html_recap .= '<div class="pastille-statut tooltipster" style="float:left;margin-right:7px;background-color:#'.$infos_tache['statut_couleur'].'" title="'.$infos_tache['statut_nom'].'"></div>';
 					}
-					$html_recap .= '<b>'.$infos['nom'];
+					$html_recap .= '<b>'.xss_protect($infos['nom']);
 					
 					if (!is_null($infos_tache['titre'])) {
 						$html_recap .= ' - ' . xss_protect($infos_tache['titre']);

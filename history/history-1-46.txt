@@ -1,0 +1,23 @@
+v1.46
+
+- New feature, ability to shift a whole project
+- Added better timepicker in task form
+- Added "remember me" feature to the login page
+- Summary below planning now displayed by default
+- Autoresize for task comment input 
+- Task cell bevel in the right side depending on AM/PM
+- PHP 7.2 deprecated code replaced SQL injection vulnerability fixed
+- New italian translation version (+help)
+- Added Brazilian portuguese language
+- Improvement on PDF display
+- Option for weekend / days off now hide days/columns when activated
+- Correction bug drag & drop
+- Bugfix on PDF export
+- Manage accent in LDAP connection
+- Bugfix on project statutes
+- Bugfix : lines are now hidden in summary (below the planning) when "hide empty lines" is activated
+- Several security issues fixed
+
+
+
+

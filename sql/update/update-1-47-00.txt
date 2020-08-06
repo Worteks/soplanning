@@ -1,0 +1,11 @@
+
+UPDATE  `planning_user` SET  cle = MD5(RAND()) WHERE  `user_id` =  'ADM';
+UPDATE  `planning_user` SET  cle = MD5(RAND()) WHERE  `user_id` =  'publicspl';
+
+ 
+ALTER TABLE `planning_periode` ADD COLUMN  `fichiers` TEXT collate latin1_general_ci default NULL;
+
+
+
+UPDATE  `planning_config` SET  valeur ='1.47.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

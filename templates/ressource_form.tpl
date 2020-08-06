@@ -17,13 +17,13 @@
 	<div class="form-group row col-md-12 align-items-center">
 		<label for="ressource_nom" class="col-md-4 col-form-label">{#ressource_nom#} :</label>
 		<div class="col-md-5">
-			<input name="ressource_nom" id="ressource_nom" type="text" class="form-control" maxlength="50" value="{$ressource.nom}" />
+			<input name="ressource_nom" id="ressource_nom" type="text" class="form-control" maxlength="50" value="{$ressource.nom|xss_protect}" />
 		</div>
 	</div>
 	<div class="form-group row col-md-12 align-items-center">
 		<label for="ressource_commentaire" class="col-md-4 col-form-label">{#ressource_commentaire#} :</label>
 		<div class="col-md-7">
-			<textarea name="ressource_commentaire" id="ressource_commentaire" class="form-control" maxlength="255" type="text">{$ressource.commentaire}</textarea>
+			<textarea name="ressource_commentaire" id="ressource_commentaire" class="form-control" maxlength="255" type="text">{$ressource.commentaire|xss_protect}</textarea>
 		</div>
 	</div>
 	<div class="form-group row col-md-12 align-items-center">

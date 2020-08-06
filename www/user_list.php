@@ -11,7 +11,7 @@ require BASE . '/../includes/header.inc';
 $_POST = sanitize($_POST);
 $_GET = sanitize($_GET);
 
-if(!$user->checkDroit('users_manage_all')) {
+if(!$user->checkDroit('users_manage_all') && !$user->checkDroit('users_manage_team')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
 	header('Location: index.php');
 	exit;
@@ -33,12 +33,12 @@ if (isset($_GET['filtreEquipe'])) {
 	$filtreEquipe = array();
 }
 
-if (isset($_GET['by'])) {
+if (isset($_GET['by']) && in_array($_GET['by'], array('asc', 'desc'))) {
 	$by = $_GET['by'];
 } elseif (isset($_SESSION['user_by'])) {
 	$by = $_SESSION['user_by'];
 } else {
-	$by = 'ASC';
+	$by = 'asc';
 }
 
 if(isset($_GET['desactiverfiltreEquipe'])) {
@@ -67,11 +67,11 @@ if(isset($_POST['rechercheUser']))
 
 $users = new GCollection('User');
 
-$sql = 'SELECT distinct pu.nom, pu.email, pu.user_id, pu.login, pu.visible_planning, pu.couleur, pu.droits, pug.nom AS nom_groupe, pu.adresse, pu.telephone, pu.mobile, pu.metier, pu.commentaire, pu.date_dernier_login, pu.login_actif, COUNT(pp.periode_id) AS totalPeriodes
-                    from planning_user pu
-                    LEFT JOIN planning_periode pp ON pu.user_id = pp.user_id
-					LEFT JOIN planning_user_groupe pug ON pug.user_groupe_id = pu.user_groupe_id
-					WHERE pu.user_id <> "publicspl" ';
+$sql = 'SELECT distinct pu.nom, pu.email, pu.user_id, pu.login, pu.visible_planning, pu.couleur, pu.droits, pug.nom AS nom_groupe, pu.adresse, pu.telephone, pu.mobile, pu.metier, pu.commentaire, pu.date_dernier_login, pu.login_actif, pu.date_creation, pu.date_modif, COUNT(pp.periode_id) AS totalPeriodes
+		FROM planning_user pu
+		LEFT JOIN planning_periode pp ON pu.user_id = pp.user_id
+		LEFT JOIN planning_user_groupe pug ON pug.user_groupe_id = pu.user_groupe_id
+		WHERE pu.user_id <> "publicspl" ';
 if(count($filtreEquipe) > 0) {
 	$sql .= "		AND (pu.user_groupe_id IN ('" . implode("','", $filtreEquipe) . "')";
 	if(in_array('gu0', $filtreEquipe)) {
@@ -79,10 +79,13 @@ if(count($filtreEquipe) > 0) {
 	}
 	$sql .= ' )';
 }
-if($filtreUser<>"")
-{	
+if($filtreUser<>""){	
 	$sql .= "		AND ( (pu.nom like '%$filtreUser%') or (pu.login like '%$filtreUser%') or (pu.user_id like '%$filtreUser%') or (pu.email like '%$filtreUser%')  or (pu.adresse like '%$filtreUser%') or (pu.telephone like '%$filtreUser%') or (pu.mobile like '%$filtreUser%') or (pu.metier like '%$filtreUser%') or (pu.commentaire like '%$filtreUser%'))";
 }	
+if ($user->checkDroit('users_manage_team'))
+	{
+			$sql .= " AND pu.user_groupe_id = " . val2sql($user->user_groupe_id);			
+	}
 $sql .= '			GROUP BY pu.nom, pu.user_id, pu.login, pu.visible_planning, pu.couleur, pu.droits, nom_groupe
                     ORDER BY '. $order . ' ' . $by;
 $users->db_loadSQL($sql);

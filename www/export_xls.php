@@ -66,7 +66,12 @@ while ($tmpDate <= $dateFin) {
 	if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
 		$sClass = 'week';
 	} else {
-		$sClass = 'weekend';
+		if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+			$sClass = 'weekend';
+		} else {
+			$tmpDate->modify('+1 day');
+			continue;
+		}
 	}
 	/*
 	if( $tmpDate->format('Y-m-d') == date('Y-m-d')) {
@@ -371,8 +376,13 @@ while($ligneTmp = $lines->fetch()) {
 	while ($tmpDate <= $dateFin) {
 		// d�finit le style pour case semaine et WE
 		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
-			$classTD = 'weekend';
-			$opacity = 'filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25';
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+				$classTD = 'weekend';
+				$opacity = 'filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25';
+			} else {
+				$tmpDate->modify('+1 day');
+				continue;
+			}
 		} else {
 			$classTD = 'week';
 			$opacity = '';

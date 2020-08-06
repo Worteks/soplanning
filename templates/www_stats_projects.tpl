@@ -33,7 +33,7 @@
 							{if $userCourant.user_groupe_id neq $groupeTemp}
 								<optgroup label="{$userCourant.groupe_nom}">
 							{/if}
-							<option value="{$userCourant.user_id}" {if in_array($userCourant.user_id, $stats_projects.users)}selected="selected"{/if}>{$userCourant.nom} ({$userCourant.user_id})</option>
+							<option value="{$userCourant.user_id}" {if in_array($userCourant.user_id, $stats_projects.users)}selected="selected"{/if}>{$userCourant.nom|xss_protect} ({$userCourant.user_id})</option>
 							{if $userCourant.user_groupe_id neq $groupeTemp}
 								</optgroup>
 							{/if}
@@ -51,7 +51,7 @@
 							{if $projetCourant.groupe_id neq $groupeTemp}
 								<optgroup label="{$projetCourant.groupe_nom}">
 							{/if}
-							<option value="{$projetCourant.projet_id}" {if in_array($projetCourant.projet_id, $stats_projects.projets)}selected="selected"{/if}>{$projetCourant.nom} ({$projetCourant.projet_id})</option>
+							<option value="{$projetCourant.projet_id}" {if in_array($projetCourant.projet_id, $stats_projects.projets)}selected="selected"{/if}>{$projetCourant.nom|xss_protect} ({$projetCourant.projet_id})</option>
 							{if $projetCourant.groupe_id neq $groupeTemp}
 								</optgroup>
 							{/if}

@@ -17,13 +17,13 @@
 		<div class="col-md-12">
 			<div class="soplanning-box mt-2">
 				{if $status|@count > 0}
-					<table class="table table-striped table-hover" id="locationTab">
+					<table class="table table-striped table-hover" id="statusTab">
 						<tr>
 							<th class="w100">&nbsp;</th>
 							<th>
 								<b>{#status_nom#}</b>
 							</th>
-							<th class="d-none d-md-block d-lg-block">
+							<th class="d-none d-sm-table-cell d-md-table-cell d-lg-table-cell">
 								<b>{#status_commentaire#}</b>
 							</th>
 							<th class="text-center d-none d-sm-table-cell d-md-table-cell d-lg-table-cell">
@@ -41,10 +41,10 @@
 									<a href="{$BASE}/process/planning.php?filtreSurStatus={$statusTmp.status_id}" title="{#planning_filtre_sur_status#|escape}"><i class="fa fa-globe fa-lg fa-fw" aria-hidden="true"></i></a>
 								</td>
 								<td>
-									{$statusTmp.nom}&nbsp;
+									{$statusTmp.nom|xss_protect}&nbsp;
 								</td>
 								<td class="d-none d-md-block d-lg-block">
-									{$statusTmp.commentaire}
+									{$statusTmp.commentaire|xss_protect}
 								</td>
 								<td class="text-center d-none d-sm-table-cell d-md-table-cell d-lg-table-cell">
 									{$statusTmp.pourcentage}

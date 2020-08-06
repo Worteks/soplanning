@@ -77,6 +77,9 @@ if ($_SESSION['baseColonne']=="users" and ($base_ligne=="heures")) {
 	$dateFin = initDateTime($_SESSION['date_fin_affiche']);
 	$smarty->assign('dateDebut', $dateDebut->format(CONFIG_DATE_LONG));
 	$smarty->assign('dateDebutTexte', $smarty->getConfigVars('day_' . $dateDebut->format('w')) . ' ' . $dateDebut->format(CONFIG_DATE_LONG));
+	$smarty->assign('dateDebutTexte1', $smarty->getConfigVars('day_' . $dateDebut->format('w')));
+	$smarty->assign('dateDebutTexte2', $dateDebut->format(CONFIG_DATE_LONG));
+
 } else {
 	if(isset($_COOKIE['date_debut_affiche'])) {
 		$_SESSION['date_debut_affiche'] = $_COOKIE['date_debut_affiche'];
@@ -89,7 +92,9 @@ if ($_SESSION['baseColonne']=="users" and ($base_ligne=="heures")) {
 	}
 	$smarty->assign('dateDebut', $dateDebut->format(CONFIG_DATE_LONG));
 	$smarty->assign('dateDebutTexte', $smarty->getConfigVars('day_' . $dateDebut->format('w')) . ' ' . $dateDebut->format(CONFIG_DATE_LONG));
-
+	$smarty->assign('dateDebutTexte1', $smarty->getConfigVars('day_' . $dateDebut->format('w')));
+	$smarty->assign('dateDebutTexte2', $dateDebut->format(CONFIG_DATE_LONG));
+	
 	// Date de fin d'affichage du planning
 	if(isset($_COOKIE['date_fin_affiche'])) {
 		$_SESSION['date_fin_affiche'] = $_COOKIE['date_fin_affiche'];
@@ -105,6 +110,8 @@ if ($_SESSION['baseColonne']=="users" and ($base_ligne=="heures")) {
 
 $smarty->assign('dateFin', $dateFin->format(CONFIG_DATE_LONG));
 $smarty->assign('dateFinTexte', $smarty->getConfigVars('day_' . $dateFin->format('w')) . ' ' . $dateFin->format(CONFIG_DATE_LONG));
+$smarty->assign('dateFinTexte1', $smarty->getConfigVars('day_' . $dateFin->format('w')));
+$smarty->assign('dateFinTexte2', $dateFin->format(CONFIG_DATE_LONG));
 $dateToday = new Datetime();
 $smarty->assign('dateToday', $dateToday->format(CONFIG_DATE_LONG));
 // Intervalle actuel
@@ -133,22 +140,6 @@ if(isset($_GET['livraison'])) {
 	}
 }
 
-// Ascenceur vertical
-if(isset($_COOKIE['ascenceur'])) {
-	$_SESSION['ascenceur'] = $_COOKIE['ascenceur'];
-} elseif (!isset($_SESSION['ascenceur'])) {
-	$_SESSION['ascenceur'] = 1;
-}
-$smarty->assign('ascenceur', $_SESSION['ascenceur']);
-
-// Entête flottantes
-if(isset($_COOKIE['entetesflottantes'])) {
-	$_SESSION['entetesflottantes'] = $_COOKIE['entetesflottantes'];
-} elseif (!isset($_SESSION['entetesflottantes'])) {
-	$_SESSION['entetesflottantes'] = 1;
-}
-$smarty->assign('entetesflottantes', $_SESSION['entetesflottantes']);
-
 // Fleches
 if(isset($_COOKIE['fleches'])) {
 	$_SESSION['fleches'] = $_COOKIE['fleches'];
@@ -158,7 +149,9 @@ if(isset($_COOKIE['fleches'])) {
 $smarty->assign('fleches', $_SESSION['fleches']);
 
 // Filtre Groupe Projet
-if(!isset($_SESSION['filtreGroupeProjet'])) {
+if(isset($_COOKIE['filtreGroupeProjet'])) {
+	$_SESSION['filtreGroupeProjet'] = json_decode($_COOKIE['filtreGroupeProjet']);
+} elseif (!isset($_SESSION['filtreGroupeProjet'])) {
 	$_SESSION['filtreGroupeProjet'] = array();
 }
 $smarty->assign('filtreGroupeProjet', $_SESSION['filtreGroupeProjet']);
@@ -170,13 +163,17 @@ if(!isset($_SESSION['filtreGroupeUser'])) {
 $smarty->assign('filtreGroupeUser', $_SESSION['filtreGroupeUser']);
 
 // Filtre Groupe Lieu
-if(!isset($_SESSION['filtreGroupeLieu'])) {
+if(isset($_COOKIE['filtreGroupeLieu'])) {
+	$_SESSION['filtreGroupeLieu'] = json_decode($_COOKIE['filtreGroupeLieu']);
+} elseif (!isset($_SESSION['filtreGroupeLieu'])) {
 	$_SESSION['filtreGroupeLieu'] = array();
 }
 $smarty->assign('filtreGroupeLieu', $_SESSION['filtreGroupeLieu']);
 
 // Filtre Groupe Ressource
-if(!isset($_SESSION['filtreGroupeRessource'])) {
+if(isset($_COOKIE['filtreGroupeRessource'])) {
+	$_SESSION['filtreGroupeRessource'] = json_decode($_COOKIE['filtreGroupeRessource']);
+} elseif (!isset($_SESSION['filtreGroupeRessource'])) {
 	$_SESSION['filtreGroupeRessource'] = array();
 }
 $smarty->assign('filtreGroupeRessource', $_SESSION['filtreGroupeRessource']);
@@ -198,7 +195,9 @@ if(!isset($_SESSION['filtreTexte'])) {
 $smarty->assign('filtreTexte', $_SESSION['filtreTexte']);
 
 // Filtre par statut de tache
-if(!isset($_SESSION['filtreStatutTache'])) {
+if(isset($_COOKIE['filtreStatutTache'])) {
+	$_SESSION['filtreStatutTache'] = json_decode($_COOKIE['filtreStatutTache']);
+} elseif (!isset($_SESSION['filtreStatutTache'])) {
 	if(isset($_SESSION['status_taches_par_defaut'])){
 		$_SESSION['filtreStatutTache'] = $_SESSION['status_taches_par_defaut'];
 	} else{
@@ -208,7 +207,9 @@ if(!isset($_SESSION['filtreStatutTache'])) {
 $smarty->assign('filtreStatutTache', $_SESSION['filtreStatutTache']);
 
 // Filtre par statut de projet
-if(!isset($_SESSION['filtreStatutProjet'])) {
+if(isset($_COOKIE['filtreStatutProjet'])) {
+	$_SESSION['filtreStatutProjet'] = json_decode($_COOKIE['filtreStatutProjet']);
+} elseif (!isset($_SESSION['filtreStatutProjet'])) {
 	if(isset($_SESSION['status_projets_par_defaut'])){
 		$_SESSION['filtreStatutProjet'] = $_SESSION['status_projets_par_defaut'];
 	} else{
@@ -218,30 +219,51 @@ if(!isset($_SESSION['filtreStatutProjet'])) {
 $smarty->assign('filtreStatutProjet', $_SESSION['filtreStatutProjet']);
 
 // Tri Planning User
-if((isset($_COOKIE['triPlanningUser']) && (in_array($_COOKIE['triPlanningUser'], $triPlanningPossibleUser) || in_array($_COOKIE['triPlanningUser'], $triPlanningPossibleProjet)))) {
+if((isset($_COOKIE['triPlanningUser']) && (in_array($_COOKIE['triPlanningUser'], $triPlanningPossibleUser)))) {
 	$_SESSION['triPlanningUser'] = $_COOKIE['triPlanningUser'];
-}
-if((isset($_SESSION['triPlanningUser']) && !in_array($_SESSION['triPlanningUser'], $triPlanningPossibleUser) && !in_array($_SESSION['triPlanningUser'], $triPlanningPossibleProjet)) || !isset($_SESSION['triPlanningUser'])) {
+}else
+{
 	$_SESSION['triPlanningUser'] = 'nom asc';
 }
 $smarty->assign('triPlanningPossibleUser', $triPlanningPossibleUser);
+$smarty->assign('triPlanningUser', $_SESSION['triPlanningUser']);
 
 // Tri planning Projet
-if((isset($_COOKIE['triPlanningProjet']) && (in_array($_COOKIE['triPlanningProjet'], $triPlanningPossibleUser) || in_array($_COOKIE['triPlanningProjet'], $triPlanningPossibleProjet)))) {
+if((isset($_COOKIE['triPlanningProjet']) && (in_array($_COOKIE['triPlanningProjet'], $triPlanningPossibleProjet)))) {
 	$_SESSION['triPlanningProjet'] = $_COOKIE['triPlanningProjet'];
-}
-if((isset($_SESSION['triPlanningProjet']) && !in_array($_SESSION['triPlanningProjet'], $triPlanningPossibleUser) && !in_array($_SESSION['triPlanningProjet'], $triPlanningPossibleProjet)) || !isset($_SESSION['triPlanningProjet'])) {
+}else
+{
 	$_SESSION['triPlanningProjet'] = 'nom asc';
 }
 $smarty->assign('triPlanningPossibleProjet', $triPlanningPossibleProjet);
+$smarty->assign('triPlanningProjet', $_SESSION['triPlanningProjet']);
 
-// Tri planning Autre
-if((isset($_COOKIE['triPlanningAutre']) && (in_array($_COOKIE['triPlanningAutre'], $triPlanningPossibleAutre)))) {
-	$_SESSION['triPlanningAutre'] = $_COOKIE['triPlanningAutre'];
+// Tri planning Lieux
+if(isset($_COOKIE['triPlanningLieu']) && (in_array($_COOKIE['triPlanningLieu'], $triPlanningPossibleAutre))) {
+	$_SESSION['triPlanningLieu'] = $_COOKIE['triPlanningLieu'];
+}else
+{
+	$_SESSION['triPlanningLieu'] = 'nom asc';
 }
-if((isset($_SESSION['triPlanningAutre']) && !in_array($_SESSION['triPlanningAutre'], $triPlanningPossibleAutre) && !in_array($_SESSION['triPlanningAutre'], $triPlanningPossibleAutre)) || !isset($_SESSION['triPlanningAutre'])) {
-	$_SESSION['triPlanningAutre'] = 'nom asc';
+$smarty->assign('triPlanningLieu', $_SESSION['triPlanningLieu']);
+
+// Tri planning Ressources
+if(isset($_COOKIE['triPlanningRessource']) && (in_array($_COOKIE['triPlanningRessource'], $triPlanningPossibleAutre))) {
+	$_SESSION['triPlanningRessource'] = $_COOKIE['triPlanningRessource'];
+}else
+{
+	$_SESSION['triPlanningRessource'] = 'nom asc';
 }
+$smarty->assign('triPlanningRessource', $_SESSION['triPlanningRessource']);
+
+// Tri planning Agenda
+if(isset($_COOKIE['triPlanningAgenda']) && (in_array($_COOKIE['triPlanningAgenda'], $triPlanningPossibleAutre))) {
+	$_SESSION['triPlanningAgenda'] = $_COOKIE['triPlanningAgenda'];
+}else
+{
+	$_SESSION['triPlanningAgenda'] = 'nom asc';
+}
+$smarty->assign('triPlanningAgenda', $_SESSION['triPlanningAgenda']);
 $smarty->assign('triPlanningPossibleAutre', $triPlanningPossibleAutre);
 
 // Tri planning par défaut
@@ -249,8 +271,12 @@ if($_SESSION['baseLigne'] == "projets") {
 	$_SESSION['triPlanning'] = $_SESSION['triPlanningProjet'];
 }elseif($_SESSION['baseLigne'] == "users"){
 	$_SESSION['triPlanning'] = $_SESSION['triPlanningUser'];
-}else { 
-	$_SESSION['triPlanning'] = $_SESSION['triPlanningAutre'];
+}elseif($_SESSION['baseLigne'] == "lieux"){
+	$_SESSION['triPlanning'] = $_SESSION['triPlanningLieu'];
+}elseif($_SESSION['baseLigne'] == "ressources"){
+	$_SESSION['triPlanning'] = $_SESSION['triPlanningRessource'];
+}elseif($_SESSION['baseLigne'] == "heures"){
+	$_SESSION['triPlanning'] = $_SESSION['triPlanningAgenda'];
 }
 $smarty->assign('triPlanning', $_SESSION['triPlanning']);
 
@@ -294,7 +320,7 @@ if(isset($_COOKIE['afficherTableauRecap'])) {
 if (isset($_SESSION['afficherTableauRecap'])) {
 	$afficherTableauRecap = $_SESSION['afficherTableauRecap'];
 } else {
-	$afficherTableauRecap = 0;
+	$afficherTableauRecap = 1;
 	$_SESSION['afficherTableauRecap'] = $afficherTableauRecap;
 }
 $smarty->assign('afficherTableauRecap', $afficherTableauRecap);
@@ -311,7 +337,24 @@ if (isset($_SESSION['afficherLigneTotal'])) {
 }
 $smarty->assign('afficherLigneTotal', $afficherLigneTotal);
 
-$_SESSION['planningView'] = 'mois';
+if(isset($_COOKIE['afficherLigneTotalTaches'])) {
+	$_SESSION['afficherLigneTotalTaches'] = $_COOKIE['afficherLigneTotalTaches'];
+}
+if (isset($_SESSION['afficherLigneTotalTaches'])) {
+	$afficherLigneTotalTaches = $_SESSION['afficherLigneTotalTaches'];
+} else {
+	$afficherLigneTotalTaches = 0;
+	$_SESSION['afficherLigneTotalTaches'] = $afficherLigneTotalTaches;
+}
+$smarty->assign('afficherLigneTotalTaches', $afficherLigneTotalTaches);
+
+if ($_SESSION['baseColonne']=="jours")
+{
+	$_SESSION['planningView'] = 'mois';
+}elseif ($_SESSION['baseColonne']=="heures")
+{
+	$_SESSION['planningView'] = 'jour';
+}else $_SESSION['planningView'] = 'mois';
 
 // Affichage large ou reduit
 if(isset($_SESSION['dimensionCase']) and in_array($_SESSION['dimensionCase'],array('large','reduit'))) {
@@ -337,21 +380,7 @@ if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe
 	// on filtre sur les projets de l'équipe de ce user
 	$sql .= " LEFT JOIN planning_user AS pu ON pd.user_id = pu.user_id ";
 }
-$sql .= "WHERE 
-		(
-			(
-				(
-					(pd.date_debut <= '" . $dateDebut->format('Y-m-d') . "'
-					AND pd.date_fin >= '" . $dateDebut->format('Y-m-d') . "')
-					OR
-					(pd.date_debut <= '" . $dateFin->format('Y-m-d') . "'
-					AND pd.date_debut >= '" . $dateDebut->format('Y-m-d') . "')
-				)
-";
-// Si filtre sur statut de projet
-if(count($_SESSION['filtreStatutProjet']) > 0) {
-	$sql.= " AND pp.statut IN ('" . implode("','", $_SESSION['filtreStatutProjet']) . "')";
-}
+$sql .= "WHERE (0 = 0";
 if($user->checkDroit('tasks_view_own_projects')) {
 	// on filtre sur les projets dont le user courant est propriétaire ou assigné
 	$sql .= " AND (pp.createur_id = " . val2sql($user->user_id) . " OR pd.user_id = " . val2sql($user->user_id) . ")";
@@ -363,8 +392,12 @@ if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe
 if ($user->checkDroit('tasks_view_only_own')) {
 	$sql .= " AND pd.user_id = " . val2sql($user->user_id);
 }
-
-$sql .= " ) OR pp.createur_id = " . val2sql($user->user_id) . ')';
+$sql .= ')';
+$sql .= " OR pp.createur_id = " . val2sql($user->user_id);
+// Si filtre sur statut de projet
+if(count($_SESSION['filtreStatutProjet']) > 0) {
+	$sql.= " AND pp.statut IN ('" . implode("','", $_SESSION['filtreStatutProjet']) . "')";
+}
 $sql.= " GROUP BY pp.nom, pp.projet_id
 		ORDER BY pg.nom, pp.nom";
 $projetsFiltre->db_loadSQL($sql);
@@ -377,6 +410,17 @@ if($user->checkDroit('tasks_view_own_projects')) {
 }
 if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe_id)) {
 	$listeProjetsPossibles = $projetsFiltre->get('projet_id');
+}
+
+// calcul des heures de début et de fin en fonction des heures cochées dans les params
+$tabTranchesHoraires = explode(',', CONFIG_HOURS_DISPLAYED);
+$heureDebutMatin = $tabTranchesHoraires[0] . ':00';
+$heureDebutAprem = '13:00';
+foreach ($tabTranchesHoraires as $tmp){
+	if($tmp > 13){
+		$heureDebutAprem = $tmp . '.00';
+		break;
+	}
 }
 
 ////// DONNEES POUR LES FILTRES
@@ -395,6 +439,10 @@ if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe
 }
 if ($user->checkDroit('tasks_view_only_own')) {
 	$sql .= " AND pu.user_id = " . val2sql($user->user_id);
+}
+// Si filtre sur son équipe
+if($user->checkDroit('droits_tasks_view_team_users')) {
+	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
 }
 $sql .=	" ORDER BY groupe_nom, pu.nom";
 $usersFiltre->db_loadSQL($sql);
@@ -424,12 +472,11 @@ if (CONFIG_SOPLANNING_OPTION_RESSOURCES == 1)
 
 // liste des status pour tâches
 $status = new GCollection('Status');
-$sql = "SELECT status_id,nom FROM planning_status WHERE affichage in ('t','tp') and affichage_liste=1 order by priorite asc";
-$status->db_loadSQL($sql);
+$status->db_load(array('affichage', 'IN', array('t', 'tp')), array('priorite' => 'ASC', 'nom' => 'ASC'));
 $smarty->assign('listeStatusTaches', $status->getSmartyData());
+$liste_status=$status->getSmartyData();
 
 // liste des status pour projets
 $status = new GCollection('Status');
-$sql = "SELECT status_id,nom FROM planning_status WHERE affichage in ('p','tp') and affichage_liste=1 order by priorite asc";
-$status->db_loadSQL($sql);
+$status->db_load(array('affichage', 'IN', array('p', 'tp')), array('priorite' => 'ASC', 'nom' => 'ASC'));
 $smarty->assign('listeStatusProjets', $status->getSmartyData());
