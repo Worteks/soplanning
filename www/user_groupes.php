@@ -10,7 +10,7 @@ require BASE . '/../includes/header.inc';
 $_POST = sanitize($_POST);
 $_GET = sanitize($_GET);
 
-if(!$user->checkDroit('users_manage_all')) {
+if(!$user->checkDroit('users_manage_all') && !$user->checkDroit('users_manage_team')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
 	header('Location: index.php');
 	exit;
@@ -24,7 +24,7 @@ if (isset($_GET['order']) && in_array($_GET['order'], array('nom'))) {
 	$order = 'nom';
 }
 
-if (isset($_GET['by'])) {
+if (isset($_GET['by']) && in_array($_GET['by'], array('nom'))) {
 	$by = $_GET['by'];
 } elseif (isset($_SESSION['user_groupe_by'])) {
 	$by = $_SESSION['user_groupe_by'];
@@ -34,11 +34,22 @@ if (isset($_GET['by'])) {
 
 $groupes = new GCollection('User_groupe');
 
+if($user->checkDroit('users_manage_team'))
+{
+$groupes->db_loadSQL('SELECT distinct g.user_groupe_id, g.nom, COUNT(u.user_id) as "totalUsers"
+						FROM planning_user_groupe g LEFT JOIN planning_user u ON g.user_groupe_id = u.user_groupe_id
+						WHERE g.user_groupe_id='.$_SESSION['user_groupe_id'].'
+						GROUP BY g.user_groupe_id, g.nom
+						ORDER BY '. $order . ' ' . $by);
+$smarty->assign('users_manage_team', 1);
+}else 
+{
 $groupes->db_loadSQL('SELECT distinct g.user_groupe_id, g.nom, COUNT(u.user_id) as "totalUsers"
 						FROM planning_user_groupe g LEFT JOIN planning_user u ON g.user_groupe_id = u.user_groupe_id
 						GROUP BY g.user_groupe_id, g.nom
 						ORDER BY '. $order . ' ' . $by);
-
+$smarty->assign('users_manage_team', 0);
+}
 $groupes->setPagination(1000);
 
 $smarty->assign('order', $order);

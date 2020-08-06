@@ -63,6 +63,10 @@ if(is_array($_SESSION['filtreUser']) && count($_SESSION['filtreUser']) > 0) {
 }else{
 	$sql .= " WHERE pu.visible_planning='oui'";
 }
+// Si filtre sur son équipe
+if($user->checkDroit('droits_tasks_view_team_users')) {
+	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
+}
 if (isset($_SESSION['triPlanningUser']))
 {
 $sql .= " ORDER BY " . $_SESSION['triPlanningUser'];
@@ -77,9 +81,9 @@ $nbRealUsers = $realUsers->getCount();
 // on charge les jours occupés pour toutes les lignes
 $periodes = new GCollection('Periode');
 $sql = "SELECT planning_periode.*,planning_projet.statut, planning_status.nom as status_nom,  planning_status.barre as statut_barre,planning_status.gras as statut_gras,planning_status.italique as statut_italique,planning_status.souligne as statut_souligne, planning_status.couleur as statut_couleur,planning_status.pourcentage as statut_pourcentage, pu.nom as user_nom, pu.couleur as user_couleur,
-		planning_projet.nom as projet_nom, planning_projet.couleur as projet_couleur, pg.nom AS groupe_nom,  pu.*, pug.nom AS team_nom,
+		planning_projet.nom as projet_nom, planning_projet.couleur as projet_couleur, pg.nom AS groupe_nom, pu.*,pug.nom AS team_nom,
 		pl.nom as lieu_nom, pr.nom as ressource_nom, planning_projet.charge as charge, planning_projet.createur_id AS projet_createur_id,
-		puc.nom AS nom_createur, pum.nom AS nom_modifier,
+		puc.nom AS nom_createur, pum.nom AS nom_modifier, planning_periode.date_creation, planning_periode.date_modif,
 		CASE 
 		   WHEN planning_periode.duree_details = 'AM' THEN '08:00:00;08:01:00' 
 		   WHEN planning_periode.duree_details = 'PM' THEN '14:00:00;14:01:00' 
@@ -108,6 +112,10 @@ $sql .= "	WHERE planning_periode.projet_id = planning_projet.projet_id and (
 // Si filtre sur user
 if(is_array($_SESSION['filtreUser']) && count($_SESSION['filtreUser']) > 0) {
 	$sql.= " AND planning_periode.user_id IN ('" . implode("','", $_SESSION['filtreUser']) . "')";
+}
+// Si filtre sur son équipe
+if($user->checkDroit('droits_tasks_view_team_users')) {
+	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
 }
 // Si filtre sur groupe projet
 if(count($_SESSION['filtreGroupeProjet']) > 0) {
@@ -146,7 +154,7 @@ if($_SESSION['filtreTexte'] != "") {
 	$sql.= " AND (convert(planning_periode.notes using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR convert(planning_periode.lien using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') ." OR convert(planning_periode.titre using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR convert(planning_periode.custom using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR planning_periode.projet_id LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR convert(planning_periode.user_id using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " )";
 }
 $periodes->db_loadSQL($sql);
-// echo $sql;die;
+//echo $sql;die;
 $nbLignesTotal = $periodes->getCount();
 
 // on trie par la date de début
@@ -175,7 +183,7 @@ if ($base_ligne == 'users')
 		{
 			$url="xajax_modifUser('".urlencode($infosUser['user_id'])."')";
 		}else $url="";
-		$planning['lignes'][$infosUser['user_id']]=array('id'=>$infosUser['user_id'],'nom'=>$infosUser['nom'],'couleur'=>$infosUser['couleur'],'team_nom'=>$infosUser['team_nom'],'url_modif'=>$url);
+		$planning['lignes'][$infosUser['user_id']]=array('id'=>$infosUser['user_id'],'nom'=>$infosUser['nom'],'couleur'=>$infosUser['couleur'],'team_nom'=>$infosUser['team_nom'],'team_id'=>$infosUser['user_groupe_id'],'url_modif'=>$url);
 	}
 }
 
@@ -207,8 +215,10 @@ if ($base_ligne == 'projets')
 		}else $url="";
 		$planning['lignes'][$infosJour['projet_id']]=array('id'=>$infosJour['projet_id'],'nom'=>$infosJour['projet_nom'],'couleur'=>$infosJour['projet_couleur'],'groupe_nom'=>$infosJour['groupe_nom'],'url_modif'=>$url);
 	}
-	if ($_SESSION['triPlanning']=="nom asc") array_sort_by_column($planning['lignes'],"nom",SORT_ASC);
-	if ($_SESSION['triPlanning']=="nom desc") array_sort_by_column($planning['lignes'],"nom",SORT_DESC);	
+	if ($_SESSION['triPlanning']=="nom asc") array_sort_by_columns($planning['lignes'],"nom",SORT_ASC);
+	if ($_SESSION['triPlanning']=="nom desc") array_sort_by_columns($planning['lignes'],"nom",SORT_DESC);	
+	if (strpos($_SESSION['triPlanning'],"groupe_nom asc") !== FALSE && strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_ASC, "nom", SORT_ASC);
+	if (strpos($_SESSION['triPlanning'],"groupe_nom desc") !== FALSE && strpos($_SESSION['triPlanning'],"nom desc") !==FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_DESC, "nom", SORT_DESC);
 }
 
 // Ligne lieux
@@ -221,8 +231,8 @@ if ($base_ligne == 'lieux')
 		if (empty($infosJour['lieu_nom'])) $infosJour['lieu_nom']=$smarty->getConfigVars('sans_lieux');
 		$planning['lignes'][$infosJour['lieu_id']]=array('id'=>$infosJour['lieu_id'],'nom'=>$infosJour['lieu_nom'],'couleur'=>null,'url_modif'=>"xajax_modifLieu('".urlencode($infosJour['lieu_id'])."')");
 	}
-	if ($_SESSION['triPlanning']=="nom asc") array_sort_by_column($planning['lignes'],"nom",SORT_ASC);
-	if ($_SESSION['triPlanning']=="nom desc") array_sort_by_column($planning['lignes'],"nom",SORT_DESC);
+	if (strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_ASC);
+	if (strpos($_SESSION['triPlanning'],"nom desc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_DESC);
 }
 
 // Ligne ressources
@@ -235,8 +245,8 @@ if ($base_ligne == 'ressources')
 		if (empty($infosJour['ressource_nom'])) $infosJour['ressource_nom']=$smarty->getConfigVars('sans_ressources');
 		$planning['lignes'][$infosJour['ressource_id']]=array('id'=>$infosJour['ressource_id'],'nom'=>$infosJour['ressource_nom'],'couleur'=>null,'url_modif'=>"xajax_modifRessource('".urlencode($infosJour['ressource_id'])."')");
 	}
-	if ($_SESSION['triPlanning']=="nom asc") array_sort_by_column($planning['lignes'],"nom",SORT_ASC);
-	if ($_SESSION['triPlanning']=="nom desc") array_sort_by_column($planning['lignes'],"nom",SORT_DESC);
+	if (strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_ASC);
+	if (strpos($_SESSION['triPlanning'],"nom desc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_DESC);	
 }
 
 // Ligne heures
@@ -251,7 +261,9 @@ if ($base_ligne == 'heures')
 //////////////////////////
 // CREATION DU TABLEAU PERIODE
 //////////////////////////
-$totalParJour = array();
+$totalHoraireParJour = array();
+$totalNbTachesHoraireParJour = array();
+$totalNbTachesParJour = array();
 $totauxJourUsers = array();
 
 // Parcours de l'ensemble des périodes pour en définir les lignes et les cases remplies
@@ -336,6 +348,7 @@ while ($p = $periodes->fetch()) {
 			'date_debut'=>$infosJour['date_debut'],
 			'date_fin'=>$infosJour['date_fin'],
 			'user_nom'=>$infosJour['user_nom'],
+			'team_id'=>$infosJour['user_groupe_id'],
 			'team_nom'=>$infosJour['team_nom'],
 			'projet_nom'=>$infosJour['projet_nom'],
 			'notes'=>$infosJour['notes'],
@@ -404,16 +417,16 @@ while ($p = $periodes->fetch()) {
 		}
 		switch($type_cellule)
 		{
-			case 'code_projet': $cellule['nom_cellule']=xss_protect($infosJour['projet_id']);break;
-			case 'code_personne': $cellule['nom_cellule']=xss_protect($infosJour['user_id']);break;
-			case 'code_lieu': $cellule['nom_cellule']=xss_protect($infosJour['lieu_id']);break;
-			case 'code_ressource': $cellule['nom_cellule']=xss_protect($infosJour['ressource_id']);break;
-			case 'nom_projet': $cellule['nom_cellule']=xss_protect($infosJour['projet_nom']);break;
-			case 'nom_personne': $cellule['nom_cellule']=xss_protect($infosJour['user_nom']);break;
-			case 'nom_lieu': $cellule['nom_cellule']=xss_protect($infosJour['lieu_nom']);break;
-			case 'nom_ressource': $cellule['nom_cellule']=xss_protect($infosJour['ressource_nom']);break;
-			case 'nom_tache': $cellule['nom_cellule']=xss_protect($infosJour['titre']);break;
-			case 'vide': $cellule['nom_cellule']=xss_protect(" ");break;
+			case 'code_projet': $cellule['nom_cellule']= $infosJour['projet_id'];break;
+			case 'code_personne': $cellule['nom_cellule']= $infosJour['user_id'];break;
+			case 'code_lieu': $cellule['nom_cellule']= $infosJour['lieu_id'];break;
+			case 'code_ressource': $cellule['nom_cellule']= $infosJour['ressource_id'];break;
+			case 'nom_projet': $cellule['nom_cellule']= $infosJour['projet_nom'];break;
+			case 'nom_personne': $cellule['nom_cellule']= $infosJour['user_nom'];break;
+			case 'nom_lieu': $cellule['nom_cellule']= $infosJour['lieu_nom'];break;
+			case 'nom_ressource': $cellule['nom_cellule']= $infosJour['ressource_nom'];break;
+			case 'nom_tache': $cellule['nom_cellule']= $infosJour['titre'];break;
+			case 'vide': $cellule['nom_cellule']= " ";break;
 		}
 
 		if (isset($infosJour['duree_details_heure_debut']))
@@ -541,14 +554,17 @@ while ($p = $periodes->fetch()) {
 			// on additionne le total des jours
 			if (CONFIG_PLANNING_HIDE_WEEKEND_TASK == 1 || (CONFIG_PLANNING_HIDE_WEEKEND_TASK == 0 && $weekend==false))
 			{
-				if(!isset($totalParJour[$tmpDate->format('Ymd')])) {
-				$totalParJour[$tmpDate->format('Ymd')] = '00:00';
+				if(!isset($totalHoraireParJour[$tmpDate->format('Ymd')])) {
+					$totalNbTachesParJour[$tmpDate->format('Ymd')] = 0;
+					$totalHoraireParJour[$tmpDate->format('Ymd')] = '00:00';
 				}
+				
 				if($infosJour['date_fin'] != '') {
-					$totalParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalParJour[$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_DAY, false));
+					$totalHoraireParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalHoraireParJour[$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_DAY, false));
 				} else {
-				$totalParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalParJour[$tmpDate->format('Ymd')], usertime2sqltime($infosJour['duree'], false));
+				$totalHoraireParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalHoraireParJour[$tmpDate->format('Ymd')], usertime2sqltime($infosJour['duree'], false));
 				}
+				$totalNbTachesParJour[$tmpDate->format('Ymd')] += 1;
 			}
 
 		// boucle sur les jours
@@ -724,7 +740,7 @@ while ($p = $periodes->fetch()) {
 						for ($h = $heureDebut; $h < $heureFin; $h++)
 						{
 							// Heure pleine
-							if ($h>=round($heureDebutSelect) and $h<$heureFinSelect)
+							if ($h>=round($heureDebutSelect,0,PHP_ROUND_HALF_DOWN) and $h<$heureFinSelect)
 							{
 								$heure=sprintf("%'.02d:00", $h);
 								$planning['taches_horaires'][$heure][$cle][]=$infosJour['periode_id'];
@@ -763,192 +779,193 @@ while ($p = $periodes->fetch()) {
 				}
 				if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {$weekend=true;}else $weekend=false;
 				// on additionne le total des jours
-					if(!isset($totalParJour[$infosJour['user_id']])) {
-					$totalParJour[$infosJour['user_id']] = '00:00';
+					if(!isset($totalHoraireParJour[$infosJour['user_id']])) {
+						$totalHoraireParJour[$infosJour['user_id']] = '00:00';
+						$totalNbTachesParJour[$infosJour['user_id']] = 0;
 					}
 					if($infosJour['date_fin'] != '') {
-					$totalParJour[$infosJour['user_id']] = ajouterDuree($totalParJour[$infosJour['user_id']], usertime2sqltime(CONFIG_DURATION_DAY, false));
+						$totalHoraireParJour[$infosJour['user_id']] = ajouterDuree($totalHoraireParJour[$infosJour['user_id']], usertime2sqltime(CONFIG_DURATION_DAY, false));
 					} else {
-					$totalParJour[$infosJour['user_id']] = ajouterDuree($totalParJour[$infosJour['user_id']], usertime2sqltime($infosJour['duree'], false));
+						$totalHoraireParJour[$infosJour['user_id']] = ajouterDuree($totalHoraireParJour[$infosJour['user_id']], usertime2sqltime($infosJour['duree'], false));
 					}
+					$totalNbTachesParJour[$infosJour['user_id']] += 1;
 			}
 		}
 	}
 	
 	// Mode colonne heures
 	// traitement de chaque heure (construction du planning en mode heures)
-	if ($base_colonne=='heures')
-	{
-			$premierTranche=$planning['heures'][0];
-			$derniereTranche=end($planning['heures']);	
-			while ($tmpDate <= $dateFin_planning) 
-			{
-					// Si on est sur un jour complet, on rempli l'ensemble des tranches horaires
-					if (empty($infosJour['duree_details']))
+	if ($base_colonne=='heures') {
+
+		$premierTranche=$planning['heures'][0];
+		$derniereTranche=end($planning['heures']);	
+
+		while ($tmpDate <= $dateFin_planning) {		
+			// Si on est sur un jour complet, on rempli l'ensemble des tranches horaires
+			if (empty($infosJour['duree_details'])) {
+				foreach ($planning['heures'] as $heure) {
+					// tâches par user et jour
+					if ($base_ligne=='users') 
+						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par projet et jour
+					if ($base_ligne=='projets')
+						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par lieux et jour
+					if ($base_ligne=='lieux')
+						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par ressources et jour
+					if ($base_ligne=='ressources')
+						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+				}
+			
+			// Si on est sur une durée fixe
+			} elseif ($infosJour['duree_details']=="duree") {
+				$dureeFixe=convertHourToDecimal($infosJour['duree']);
+				$heureDebut=convertHourToDecimal($planning['heures'][0]);
+				$heureFin=$heureDebut + $dureeFixe;
+				for ($h = $heureDebut; $h < $heureFin; $h++) {
+					// Heure pleine
+					$heure=sprintf("%'.02d:00", $h);
+					// tâches par user et jour
+					if ($base_ligne=='users') 
+						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par projet et jour
+					if ($base_ligne=='projets')
+						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par lieux et jour
+					if ($base_ligne=='lieux')
+						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par ressources et jour
+					if ($base_ligne=='ressources')
+						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+				}
+			
+			// Si on est sur une demie-journée AM
+			} elseif ($infosJour['duree_details']=='AM') {
+				$dureeAM=convertHourToDecimal(CONFIG_DURATION_AM);
+				$heureDebut=convertHourToDecimal($planning['heures'][0]);
+				$heureFin=$heureDebut + $dureeAM;
+				for ($h = $heureDebut; $h < $heureFin; $h++)
+				{
+					// Heure pleine
+					$heure=sprintf("%'.02d:00", $h);
+					// tâches par user et jour
+					if ($base_ligne=='users') 
+						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par projet et jour
+					if ($base_ligne=='projets')
+						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par lieux et jour
+					if ($base_ligne=='lieux')
+						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par ressources et jour
+					if ($base_ligne=='ressources')
+						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+				}
+
+			// Si on est sur une demie-journée PM
+			} elseif ($infosJour['duree_details']=='PM') {
+				$dureePM=convertHourToDecimal(CONFIG_DURATION_PM);
+				$heureFin=convertHourToDecimal(end($planning['heures']))+0.5;
+				$heureDebut=$heureFin-$dureePM;
+				for ($h = $heureDebut; $h < $heureFin; $h++)
+				{
+					// Heure pleine
+					$heure=sprintf("%'.02d:00", $h);
+					// tâches par user et jour
+					if ($base_ligne=='users') 
+						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par projet et jour
+					if ($base_ligne=='projets')
+						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par lieux et jour
+					if ($base_ligne=='lieux')
+						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+					// tâches par ressources et jour
+					if ($base_ligne=='ressources')
+						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+				}					
+			// Si on est sur des heures précises			
+			} else {
+				$heureExploded=explode(';',$infosJour['duree_details']);
+				$heureDebut=convertHourToDecimal($planning['heures'][0]);
+				$heureFin=convertHourToDecimal(end($planning['heures']))+0.5;
+				$heureDebutSelect=convertHourToDecimal($heureExploded[0]);
+				$heureFinSelect=convertHourToDecimal($heureExploded[1]);
+				for ($h = $heureDebut; $h < $heureFin; $h++)
+				{
+					// Heure pleine
+					if ($h>=round($heureDebutSelect,0,PHP_ROUND_HALF_DOWN) and $h<$heureFinSelect)
 					{
-						foreach ($planning['heures'] as $heure) 
-						{
-							// tâches par user et jour
-							if ($base_ligne=='users') 
-								$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+					// Heure pleine
+					$heure=sprintf("%'.02d:00", $h);
+					// tâches par user et jour
+					if ($base_ligne=='users') 
+						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 
-							// tâches par projet et jour
-							if ($base_ligne=='projets')
-								$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+					// tâches par projet et jour
+					if ($base_ligne=='projets')
+						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 
-							// tâches par lieux et jour
-							if ($base_ligne=='lieux')
-								$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+					// tâches par lieux et jour
+					if ($base_ligne=='lieux')
+						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 
-							// tâches par ressources et jour
-							if ($base_ligne=='ressources')
-								$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-						}
-					// Si on est sur une durée fixe
-					}elseif ($infosJour['duree_details']=="duree")
-					{
-						$dureeFixe=convertHourToDecimal($infosJour['duree']);
-						$heureDebut=convertHourToDecimal($planning['heures'][0]);
-						$heureFin=$heureDebut + $dureeFixe;
-						for ($h = $heureDebut; $h < $heureFin; $h++)
-						{
-							// Heure pleine
-							$heure=sprintf("%'.02d:00", $h);
-							// tâches par user et jour
-							if ($base_ligne=='users') 
-								$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par projet et jour
-							if ($base_ligne=='projets')
-								$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par lieux et jour
-							if ($base_ligne=='lieux')
-								$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par ressources et jour
-							if ($base_ligne=='ressources')
-								$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-						}
-					// Si on est sur une demie-journée AM
-					}elseif ($infosJour['duree_details']=='AM')
-					{
-						$dureeAM=convertHourToDecimal(CONFIG_DURATION_AM);
-						$heureDebut=convertHourToDecimal($planning['heures'][0]);
-						$heureFin=$heureDebut + $dureeAM;
-						for ($h = $heureDebut; $h < $heureFin; $h++)
-						{
-							// Heure pleine
-							$heure=sprintf("%'.02d:00", $h);
-							// tâches par user et jour
-							if ($base_ligne=='users') 
-								$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par projet et jour
-							if ($base_ligne=='projets')
-								$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par lieux et jour
-							if ($base_ligne=='lieux')
-								$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par ressources et jour
-							if ($base_ligne=='ressources')
-								$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-						}
-					// Si on est sur une demie-journée PM
-					}elseif ($infosJour['duree_details']=='PM')
-					{
-						$dureePM=convertHourToDecimal(CONFIG_DURATION_PM);
-						$heureFin=convertHourToDecimal(end($planning['heures']))+0.5;
-						$heureDebut=$heureFin-$dureePM;
-						for ($h = $heureDebut; $h < $heureFin; $h++)
-						{
-							// Heure pleine
-							$heure=sprintf("%'.02d:00", $h);
-							// tâches par user et jour
-							if ($base_ligne=='users') 
-								$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par projet et jour
-							if ($base_ligne=='projets')
-								$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par lieux et jour
-							if ($base_ligne=='lieux')
-								$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par ressources et jour
-							if ($base_ligne=='ressources')
-								$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-						}					
-					// Si on est sur des heures précises			
-					}else 
-					{
-						$heureExploded=explode(';',$infosJour['duree_details']);
-						$heureDebut=convertHourToDecimal($planning['heures'][0]);
-						$heureFin=convertHourToDecimal(end($planning['heures']))+0.5;
-						$heureDebutSelect=convertHourToDecimal($heureExploded[0]);
-						$heureFinSelect=convertHourToDecimal($heureExploded[1]);
-						for ($h = $heureDebut; $h < $heureFin; $h++)
-						{
-							// Heure pleine
-							if ($h>=round($heureDebutSelect) and $h<$heureFinSelect)
-							{
-							// Heure pleine
-							$heure=sprintf("%'.02d:00", $h);
-							// tâches par user et jour
-							if ($base_ligne=='users') 
-								$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par projet et jour
-							if ($base_ligne=='projets')
-								$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par lieux et jour
-							if ($base_ligne=='lieux')
-								$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-							// tâches par ressources et jour
-							if ($base_ligne=='ressources')
-								$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-							}
-						}
+					// tâches par ressources et jour
+					if ($base_ligne=='ressources')
+						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 					}
-				
-				// calcul des totaux jours
-				if(!isset($totalParJour[$tmpDate->format('Ymd')])) {
-					$totalParJour[$tmpDate->format('Ymd')] = '00:00';
+					
 				}
-				if($infosJour['date_fin'] != '') {
-					$totalParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalParJour[$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_DAY, false));
-				} else {
-					$totalParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalParJour[$tmpDate->format('Ymd')], usertime2sqltime($infosJour['duree'], false));
-				}
-				
-							// calcul des totaux jours
-			if(!isset($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')])) {
-				$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = '00:00';
+			}
+			
+			// calcul des totaux jours
+			if(!isset($totalHoraireParJour[$tmpDate->format('Ymd')])) {
+				$totalHoraireParJour[$tmpDate->format('Ymd')] = '00:00';
+				$totalNbTachesParJour[$tmpDate->format('Ymd')] = 0;
 			}
 			if($infosJour['date_fin'] != '') {
-				$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_DAY, false));
+				$totalHoraireParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalHoraireParJour[$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_DAY, false));
 			} else {
-				if ($infosJour['duree_details']=="AM")
-				{
-					$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_AM, false));
-				}elseif ($infosJour['duree_details']=="PM")
-				{
-					$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_PM, false));
+				$totalHoraireParJour[$tmpDate->format('Ymd')] = ajouterDuree($totalHoraireParJour[$tmpDate->format('Ymd')], usertime2sqltime($infosJour['duree'], false));
+			}
+			$totalNbTachesParJour[$tmpDate->format('Ymd')] +=1;
+			
+		// calcul des totaux jours
+		if(!isset($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')])) {
+			$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = '00:00';
+		}
+		if($infosJour['date_fin'] != '') {
+			$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_DAY, false));
+		} else {
+			if ($infosJour['duree_details']=="AM")
+			{
+				$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_AM, false));
+			}elseif ($infosJour['duree_details']=="PM")
+			{
+				$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime(CONFIG_DURATION_PM, false));
 
-				}else
-				{
-					$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime($infosJour['duree'], false));
-				}
+			}else
+			{
+				$totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')] = ajouterDuree($totauxJourUsers[$infosJour['user_id']][$tmpDate->format('Ymd')], usertime2sqltime($infosJour['duree'], false));
 			}
-				
-			// boucle sur les jours
-			$tmpDate->modify('+1 day');
-			}
+		}
+			
+		// boucle sur les jours
+		$tmpDate->modify('+1 day');
+		}
 	}
 }
 
@@ -1002,7 +1019,7 @@ if (isset($planning['taches_horaires']))
 		}
 	}
 }
-			
+		
 //////////////////////////
 // ENTETES DU PLANNING
 //////////////////////////
@@ -1021,20 +1038,20 @@ if ($base_colonne=='jours')
 	$tmp2Date = clone $tmpDate;
 	$tmp2Date->modify('+' . $nbJours . 'days');
 	$tmpMoisDateFin = $tmp2Date->format(CONFIG_DATE_LONG);
+	$dernierJourSemaineInclus = $DAYS_INCLUDED[count($DAYS_INCLUDED)-1];
+
 	while ($tmpDate <= $dateFin) {
 		$planning['colonnes'][]=$tmpDate->format('Y-m-d');
 		if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 			$sClass = 'week';
 			$weekend = false;
 		} else {
-			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)
-			{
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
 				$weekend = true;
-			}else
-			{
-				$sClass = 'week';
-				$weekend = true;
+			} else {
+				$tmpDate->modify('+1 day');
+				continue;
 			}
 		}
 		if( $tmpDate->format('Y-m-d') == date('Y-m-d')) {
@@ -1044,7 +1061,7 @@ if ($base_colonne=='jours')
 		$tmp2Date = clone $tmpDate;
 		$tmp2Date->modify('+' . $nbJours . 'days');
 		$tmpJourDateFin = $tmp2Date->format(CONFIG_DATE_LONG);
-		$headerNomJours .= '<th class="planning_head_dayname ' . $sClass . '"><div><a href="process/planning.php?date_debut_affiche='.$tmpJourDateDebut.'&date_fin_affiche='.$tmpJourDateFin.'">' . strtoupper(substr($smarty->getConfigVars('day_' . $tmpDate->format('w')), 0, 1)) . '</a></div></th>' . CRLF;
+		$headerNomJours .= '<th class="planning_head_dayname ' . $sClass . '"><a href="process/planning.php?date_debut_affiche='.$tmpJourDateDebut.'&date_fin_affiche='.$tmpJourDateFin.'">' . strtoupper(substr($smarty->getConfigVars('day_' . $tmpDate->format('w')), 0, 1)) . '</a></th>' . CRLF;
 		$headerNumeroJours .= '<th class="planning_head_day ' . $sClass . '"><a href="process/planning.php?date_debut_affiche='.$tmpJourDateDebut.'&date_fin_affiche='.$tmpJourDateFin.'">' . $tmpDate->format('j') . '</a></th>' . CRLF;
 		$nomMoisCourant = $smarty->getConfigVars('month_' . $tmpDate->format('n'));
 		if ($nomMoisCourant . ' ' . $tmpDate->format('Y') == $tmpMois) {
@@ -1059,7 +1076,7 @@ if ($base_colonne=='jours')
 			$tmpMoisDateFin = $tmp2Date->format(CONFIG_DATE_LONG);
 		}
 		// gestion des semaines
-		if ($tmpDate->format('w') == 0) {
+		if ((CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 0 && $tmpDate->format('w') == $dernierJourSemaineInclus) || $tmpDate->format('w') == 0) {
 			// calcul du date de debut et fin de semaine
 			$dateTime = strtotime( $tmpDate->format('d-m-Y'));
 			$tmpSemaineDateDebut = date(CONFIG_DATE_LONG, strtotime('monday this week', $dateTime));
@@ -1086,17 +1103,17 @@ if ($base_colonne=='jours')
 		$headerSemaines .= '<th class="planning_head_week" colspan="' . ($colspanSemaine-1) . '"><a href="process/planning.php?date_debut_affiche='.$tmpSemaineDateDebut.'&date_fin_affiche='.$tmpSemaineDateFin.'">' . $smarty->getConfigVars('planning_semaine') .	' ' . $tmpDate->format('W') . '</a></th>' . CRLF;
 	}
 	$html .= '<table class="planningContent" id="tabContenuPlanning">' . CRLF;
-	$html .= '<thead><tr>' . CRLF;
-	$html .= '<th id="tdUser_0" rowspan="4" class="planning_switch planningFirstRowCol"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' .CRLF;
+	$html .= '<thead><tr id="planning_header_month">' . CRLF;
+	$html .= '<th id="tdUser_0" rowspan="4" class="planning_switch planningFirstRowCol" scope="row"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' .CRLF;
 	$html .= $headerMois . CRLF;
 	$html .= '</tr>' . CRLF;
-	$html .= '<tr>' . CRLF;
+	$html .= '<tr id="planning_header_week">' . CRLF;
 	$html .= $headerSemaines . CRLF;
 	$html .= '</tr>' . CRLF;
-	$html .= '<tr>' . CRLF;
+	$html .= '<tr id="planning_header_dayname">' . CRLF;
 	$html .= $headerNomJours . CRLF;
 	$html .= '</tr>' . CRLF;
-	$html .= '<tr>' . CRLF;
+	$html .= '<tr id="planning_header_day">' . CRLF;
 	$html .= $headerNumeroJours . CRLF;
 	$html .= '</tr></thead><tbody>' . CRLF;
 	// FIN ENTETES DU TABLEAU (MOIS, SEMAINE ET JOUR)	
@@ -1111,33 +1128,27 @@ if ($base_colonne=='heures')
 		$largeurCase = 34;
 	}
 	$html .= '<table class="planningContent" id="tabContenuPlanning"><thead>' . CRLF;
-	$html .= '<tr>' . CRLF;
-	$html .= '<th id="tdUser_0" rowspan="2" class="planning_switch planningFirstRowCol"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' . CRLF;
+	$html .= '<tr id="planning_header_week_hour">' . CRLF;
+	$html .= '<th id="tdUser_0" rowspan="2" class="planning_switch planningFirstRowCol" scope="row"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' . CRLF;
 	$tmpDateFin = clone $dateFin;
 	$tmpDate = clone $dateDebut;
-	while ($tmpDate <= $dateFin) 
-	{
+	while ($tmpDate <= $dateFin) {
 		$planning['colonnes'][]=$tmpDate->format('Y-m-d');
-		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED)) 
-		{
-			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)
-			{
+		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED)) {
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
 				$weekend = true;
-			}else
-			{
-				$sClass = 'week';
-				$weekend = true;
+			}else {
+				$tmpDate->modify('+1 day');
+				continue;
 			}
 		} elseif (array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
-			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)
-			{
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
 				$weekend = true;
-			}else
-			{
-				$sClass = 'week';
-				$weekend = true;
+			}else {
+				$tmpDate->modify('+1 day');
+				continue;
 			}
 		} else {
 			$weekend = false;
@@ -1165,32 +1176,38 @@ if ($base_colonne=='heures')
 		$tmpDate->modify('+1 day');
 	}
 	$html .= '</tr>' . CRLF;
+	$html .= '<tr id="planning_header_hour">' . CRLF;
 	$tmpDate = clone $dateDebut;
 	// On réinitialise la dateFin
 	$dateFin = clone $tmpDateFin;
-	while ($tmpDate <= $dateFin) 
-	{
+	while ($tmpDate <= $dateFin) {
 		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED)) {
-			$tmpDate->modify('+1 day');
-			// IMPORTANT : on modifie la date de fin pour tenir compte des jours à sauter
-			$dateFin->modify('+1 day');
-			continue;
-		} elseif (array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) 
-		{
-			$sClass = 'weekend';
-			$weekend = true;
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+				$sClass = 'weekend';
+				$weekend = true;
+			}else {
+				$tmpDate->modify('+1 day');
+				continue;
+			}
+		} elseif (array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+				$sClass = 'weekend';
+				$weekend = true;
+			}else {
+				$tmpDate->modify('+1 day');
+				continue;
+			}
 		} else {
-			$sClass = 'weekend';
 			$weekend = false;
+			$sClass = 'week';
 		}
-		if( $tmpDate->format('Y-m-d') == date('Y-m-d')) 
+		if($tmpDate->format('Y-m-d') == date('Y-m-d')) 
 		{
 			$sClass .= ' today';
 		}
 		
 		reset($tabTranchesHoraires);
-		foreach ($tabTranchesHoraires as $trancheHeureCourante) 
-		{
+		foreach ($tabTranchesHoraires as $trancheHeureCourante) {
 			$trancheFin = $trancheHeureCourante + 1;
 			if($trancheFin == 24) 
 			{
@@ -1210,8 +1227,8 @@ if ($base_colonne=='users')
 	$html .= '<thead><tr>' . CRLF;
 	if ($base_colonne=="users" && $base_ligne=="heures" ) 
 	{
-		$html .= '<th id="tdUser_0" colspan="2" class="planning_switch planningFirstRowCol"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' .CRLF;
-	}else $html .= '<th id="tdUser_0" class="planning_switch planningFirstCol"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' .CRLF;
+		$html .= '<th id="tdUser_0" colspan="2" class="planning_switch planningFirstRowCol" scope="row"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' .CRLF;
+	}else $html .= '<th id="tdUser_0" class="planning_switch planningFirstCol" scope="row"><div class="text-center"><a id="lienInverse" href="'.$linkswitch.'"><i class="fa fa-exchange fa-3x fa-lg" aria-hidden="true" style="color:white;"></i></a></div></th>' .CRLF;
 	while ($u = $realUsers->fetch())
 	{
 		$infosUser = $u->getSmartyData();
@@ -1232,10 +1249,8 @@ $nbLine = 1;
 $groupeCourant = false;
 $idGroupeCourant = -1;
 $smarty->assign('nbPagesLignes', ceil($nbLignesTotal/$nbLignes));
-
 foreach ($planning['lignes'] as $ligne)
 {
-
 	// every xx lines, repeat days/month/etc rows
 	if(CONFIG_PLANNING_REPEAT_HEADER > 0) {
 		if (($nbLine % CONFIG_PLANNING_REPEAT_HEADER) == 0) {
@@ -1261,32 +1276,23 @@ foreach ($planning['lignes'] as $ligne)
 	
 	// gestion de l'affichage des groupes (de user ou projet) dans le planning
 	if(strpos($_SESSION['triPlanning'], 'groupe_nom') !== FALSE || strpos($_SESSION['triPlanning'], 'team_nom') !== FALSE) {
+		if ($base_colonne=='jours')
+		{
+			$nb_colonnes=count($planning['colonnes']);
+			$classTeamDiv="planning_team_div";
+		}else 
+		{	
+			$classTeamDiv="planning_team_div_hour";
+			$nb_colonnes=(count($planning['heures']) * count($planning['colonnes']) );
+		}
 		if($base_ligne=="projets") 
 		{
 			if($ligne['groupe_nom'] !== $groupeCourant) 
 			{
 				$html .= '<tr>' . CRLF;
-				$html .= '<td class="planning_team_div" id="tdUser_' . $idGroupeCourant . '">&nbsp;' . ($ligne['groupe_nom'] != '' ? xss_protect($ligne['groupe_nom']) : $smarty->getConfigVars('planning_pasDeGroupe')) . '&nbsp;' . CRLF;
-				$html .= '</td>' . CRLF;
-
-						if ($base_colonne<>"heures")
-						{
-							foreach ($planning['colonnes'] as $cle_colonne) 
-							{
-								//$html .= '<td class="planning_team_div">&nbsp;</td>' . CRLF;
-								$html .= '<td class="planning_team_div"></td>' . CRLF;
-							}
-						}else
-						{
-							foreach ($planning['colonnes'] as $jour_colonne) 
-							{
-								foreach ($planning['heures'] as $h) 
-								{
-									//$html .= '<td class="planning_team_div">&nbsp;</td>' . CRLF;
-									$html .= '<td class="planning_team_div"></td>' . CRLF;
-								}	
-							}
-						}
+				$html .= '<th class="'.$classTeamDiv.'" id="tdUser_' . $idGroupeCourant . '" scope="row" style="z-index:7 !important;">&nbsp;' . ($ligne['groupe_nom'] != '' ? xss_protect($ligne['groupe_nom']) : $smarty->getConfigVars('planning_pasDeGroupe')) . '&nbsp;' . CRLF;
+				$html .= '</th>' . CRLF;
+				$html .= '<td class="'.$classTeamDiv.'" colspan="'.$nb_colonnes.'">&nbsp;</td>' . CRLF;
 				$html .= '</tr>' . CRLF;
 				$idGroupeCourant--;
 			}
@@ -1294,25 +1300,9 @@ foreach ($planning['lignes'] as $ligne)
 		} elseif($base_ligne=="users") {
 			if($ligne['team_nom'] !== $groupeCourant) {
 				$html .= '<tr>' . CRLF;
-				$html .= '<td class="planning_team_div" id="tdUser_' . $idGroupeCourant . '">&nbsp;' . ($ligne['team_nom'] != '' ? xss_protect($ligne['team_nom']) : $smarty->getConfigVars('planning_pasDeTeam')) . '&nbsp;' . CRLF;
-				$html .= '</td>' . CRLF;
-						if ($base_colonne<>"heures")
-						{
-							foreach ($planning['colonnes'] as $cle_colonne) 
-							{
-								$html .= '<td class="planning_team_div"></td>' . CRLF;
-							}
-						}else
-						{
-							foreach ($planning['colonnes'] as $jour_colonne) 
-							{
-								foreach ($planning['heures'] as $h) 
-								{
-									$html .= '<td class="planning_team_div"></td>' . CRLF;
-								}	
-							}
-						}
-
+				$html .= '<th class="'.$classTeamDiv.'" id="tdUser_' . $idGroupeCourant . '" scope="row" style="z-index:7 !important;">&nbsp;' . ($ligne['team_nom'] != '' ? xss_protect($ligne['team_nom']) : $smarty->getConfigVars('planning_pasDeTeam')) . '&nbsp;' . CRLF;
+				$html .= '</th>' . CRLF;
+				$html .= '<td class="'.$classTeamDiv.'" colspan="'.$nb_colonnes.'">&nbsp;</td>' . CRLF;
 				$html .= '</tr>' . CRLF;
 				$idGroupeCourant--;
 			}
@@ -1379,16 +1369,16 @@ foreach ($planning['lignes'] as $ligne)
 		// Dans le cas d'une ligne horaire, on n'affiche pas la demie-heure
 		if (preg_match("/\:30/",$infosJour['nom'])) 
 		{
-			$html .= "<th class='planningFirstColMin'>30</th>";
+			$html .= "<th class='planningFirstColMin' scope='row'>30</th>";
 		}else
 		{
 			$h=str_replace(":00","h",$infosJour['nom']);
-			$html .= "<th class='planningFirstColHour' rowspan='2'>".$h."</th>";
-			$html .= "<th class='planningFirstColMin'>00</th>";
+			$html .= "<th class='planningFirstColHour' rowspan='2' scope='row'>".$h."</th>";
+			$html .= "<th class='planningFirstColMin' scope='row'>00</th>";
 		}
 	}else
 	{
-		$html .= '<td id="tdUser_' . ($nbLine-1) . '" ' . ((!is_null($ligne['couleur']) && $ligne['couleur'] != 'FFFFFF') ? ' style="background-color:#'.$ligne['couleur']. ';color:' . buttonFontColor('#' . $ligne['couleur']) . '"' : '') . ' class="planningFirstCol">&nbsp;';
+		$html .= '<th id="tdUser_' . ($nbLine-1) . '" ' . ((!is_null($ligne['couleur']) && $ligne['couleur'] != 'FFFFFF') ? ' style="background-color:#'.$ligne['couleur']. ';color:' . buttonFontColor('#' . $ligne['couleur']) . '"' : '') . ' class="planningFirstCol" scope="row">&nbsp;';
 		
 		// si le user a le droit, on permet de cliquer pour afficher la fiche de l'item (user ou projet)
 		if (!empty($ligne['url_modif']))
@@ -1400,7 +1390,17 @@ foreach ($planning['lignes'] as $ligne)
 			$html .= '<span style="color:' . (!is_null($ligne['couleur']) && $ligne['couleur'] != 'FFFFFF' ? buttonFontColor('#' . $ligne['couleur']) . '' : '#ffffff') . '"';
 			$html .= '>'.$infosJour['nom'].'</span>';
 		}
-		$html .= '</td>' . CRLF;		
+		// dropdown choice for project actions
+		if ($base_ligne=="projets" && !$user->checkDroit('tasks_readonly')) {
+			$html .= '<div class="btn-group dropright" style="position:absolute;right:0;">';
+			$html .= '
+					<button class="btn dropdown-toggle" data-toggle="dropdown" id="p'.$ligne['id'].'" style="height:15px;border:0px;padding-top:0px;padding-left:6px;padding-right:6px;padding-bottom:22px"></button>
+					<div class="dropdown-menu" aria-labelledby="p'.$ligne['id'].'">
+						<a class="dropdown-item" href="javascript:xajax_projet_decalage_form(\'' . $ligne['id'] . '\');undefined;"><i class="fa fa-fw fa-arrows-h" aria-hidden="true"></i> ' . $smarty->getConfigVars('decaler_taches') . '</a>			
+					</div>';
+			$html .= '</div>';
+		}
+		$html .= '</th>' . CRLF;
 	}
 
 	////////////////////////////////////////////////////
@@ -1437,36 +1437,30 @@ foreach ($planning['lignes'] as $ligne)
 				// Définition du style pour case semaine et WE
 				if ((!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) && $base_colonne<>"users") 
 				{
-					if (array_key_exists($current_date, $joursFeries))
-					{
-						if (empty($joursFeries[$current_date]['couleur']))
-						{
-							$classTD = 'feries';
-						}else $styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+					if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+						if (empty($joursFeries[$current_date]['couleur'])) {
+							$classTD = 'week feries';
+						} else {
+							$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+							$weekend = true;
+						}
+					}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+						$classTD = 'week weekend';
 						$weekend = true;
-					}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)
-					{
-						$classTD = 'weekend';
-						$weekend = true;
-					}else
-					{
-						$classTD = 'week';
-						$weekend = true;
+					}else {
+						continue;
 					}
 				} else {
 					$classTD = 'week';
 					$weekend = false;
 				}
-
-				// Si la date est un jour férié
+				
+			// Si la date est un jour férié
 				$ferie = false;
-				if (array_key_exists($current_date, $joursFeries)) 
-				{
+				if (array_key_exists($current_date, $joursFeries)) {
 					$ferieObj = new Ferie();
-					if($ferieObj->db_load(array('date_ferie', '=', $current_date)) && trim($ferieObj->libelle) != "") 
-					{
-						if (CONFIG_PLANNING_MASQUER_FERIES == 0)
-						{
+					if($ferieObj->db_load(array('date_ferie', '=', $current_date)) && trim($ferieObj->libelle) != "") {
+						if (CONFIG_PLANNING_MASQUER_FERIES == 0) {
 							$tooltip = '<b>' . $ferieObj->libelle . '</b>';
 							$ferie = '<div class="cellHolidays tooltipster" title="'.$tooltip.'">' . $smarty->getConfigVars('planning_ferie') . '</div>' . CRLF;
 						}
@@ -1474,17 +1468,25 @@ foreach ($planning['lignes'] as $ligne)
 				}
 				$largeuritems=8;
 				// Si la date contient une tâche (jour avec au moins une case remplie)
-				if (isset($joursOccupes[$current_date])) 
-				{
+				if (isset($joursOccupes[$current_date])) {
+					
 					// Affichage de la case
+                    $idCase="td_" . $ligneId . "_" . $current_date2;
 					$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '"';
-					if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')) 
-					{
+					if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task') || $user->checkDroit('tasks_modify_team')) {
 						$droitAjoutPeriode = true;
+						
+						// Cellule en lecture seule si equipe différente et droit de modification de son équipe seulement
+						if ( $user->checkDroit('tasks_readonly') || ($user->checkDroit('tasks_modify_team') && isset($ligne['team_id']) && $ligne['team_id'] <> $_SESSION['user_groupe_id']) )
+						{
+							$dragndropzone = '';
+							$classTD.=" read-only";
+						}else $dragndropzone = 'ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDropZone(event);"';
 					}else {
 						$droitAjoutPeriode = false;
+						$dragndropzone = '';
 					}
-					$html .= ' '. $styleTD. ' class="' . $classTD . (($current_date == date('Y-m-d')) ? ' today' : '') . '" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDropZone(event);">' . CRLF;
+					$html .= ' '. $styleTD. ' class="' . $classTD . (($current_date == date('Y-m-d')) ? ' today' : '') . '" '.$dragndropzone.' >' . CRLF;
 
 					// Si férié, on affiche l'objet férié
 					if($ferie !== false) 
@@ -1506,7 +1508,7 @@ foreach ($planning['lignes'] as $ligne)
 							$nbVides = (array_search($jour['periode_id'], $ordreJourPrec)-$niveauCourant);
 							for($i=1; $i<=$nbVides; $i++) 
 							{
-								$html .= '<div class="cellProject cellEmpty"></div>' . CRLF;
+								$html .= '<div class="cellProject cellEmpty" ondrop="drop(event)" ondragleave="leaveDropZone(event);"></div>' . CRLF;
 								$niveauCourant++;
 							}
 							$niveauCourant++;
@@ -1526,26 +1528,34 @@ foreach ($planning['lignes'] as $ligne)
 					$ordreJourCourant = array();
 
 					// Espace vide pour permettre de cliquer en dessous d'une case assignée
-					$html.= '<div class="cellEmpty"></div>';
+					if ($user->checkDroit('tasks_modify_team') && $jour['team_id'] <> $_SESSION['user_groupe_id'])
+					{
+					}else $html.= '<div class="cellEmpty" ondrop="drop(event)" ondragleave="leaveDropZone(event)" data-parent="'.$idCase.'"></div>';
 					$html .= '</td>' . CRLF;
-				} else 
-				{
-					// Cas d'un jour vide
-					$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '"';
-					if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')) 
-					{
+				
+				} else {
+					if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')|| $user->checkDroit('tasks_modify_team')) {
 						$droitAjoutPeriode = true;
-					} else 
-					{
+					} else {
 						$droitAjoutPeriode = false;
 					}
-					$html .= ' '. $styleTD. ' class="' . $classTD . (($current_date == date('Y-m-d')) ? ' today' : '') . '" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDropZone(event);">';
+
+					// Cellule en lecture seule si equipe différente et droit de modification de son équipe seulement
+					if ( $user->checkDroit('tasks_readonly') || ($user->checkDroit('tasks_modify_team') && array_key_exists('team_id',$ligne) && $ligne['team_id'] <> $_SESSION['user_groupe_id'])) {						
+						$classTD.=" read-only";
+						$dragndropzone = '';
+					}else {
+						$dragndropzone = 'ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDropZone(event);"';
+					}
+					
+					// Cas d'un jour vide
+					$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '"';
+					$html .= ' '. $styleTD. ' class="' . $classTD . (($current_date == date('Y-m-d')) ? ' today' : '') . '" '.$dragndropzone.' >';
 					if($ferie !== false) 
 					{
 						$html .= $ferie;
 					} else 
 					{
-						//$html .= '&nbsp;';
 						$html .= '';
 					}
 					$html .= '</td>' . CRLF;
@@ -1567,23 +1577,19 @@ foreach ($planning['lignes'] as $ligne)
 				$current_week = $datePivot->format('w');
 				$styleTD = '';
 				// Définition du style pour case semaine et WE
-				if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) 
-				{
-					if (array_key_exists($current_date, $joursFeries))
-					{
-						if (empty($joursFeries[$current_date]['couleur']))
-						{
-							$classTD = 'feries';
-						}else $styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+				if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+					if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+						if (empty($joursFeries[$current_date]['couleur'])) {
+							$classTD = 'week feries';
+						}else {
+							$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+							$weekend = true;
+						}
+					}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+						$classTD = 'week weekend';
 						$weekend = true;
-					}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)
-					{
-						$classTD = 'weekend';
-						$weekend = true;
-					}else
-					{
-						$classTD = 'week';
-						$weekend = true;
+					}else {
+						continue;
 					}
 				} else {
 					$classTD = 'week';
@@ -1611,12 +1617,14 @@ foreach ($planning['lignes'] as $ligne)
 				{
 					if (isset($joursOccupes[$current_date][$heure]))
 					{
-						$current_date2 = $datePivot->format('Ymd')."_".$heure."_00";
-						$niveauCourant = 0;
+						$heure1=str_replace(":","_",$heure);
+						$heure2=date('H:i', strtotime($heure.'+1 hour'));
+						$current_date2 = $datePivot->format('Ymd')."_".$heure1;
+						$niveauCourant = 0;		
 
 						// Affichage de la case
-						$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '_'.str_replace(":","_",$heure).'"';
-						if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')) 
+						$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '_'.str_replace(":","_",$heure2).'"';
+						if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')|| $user->checkDroit('tasks_modify_team'))
 						{
 							$droitAjoutPeriode = true;
 						}else {
@@ -1642,13 +1650,14 @@ foreach ($planning['lignes'] as $ligne)
 									//	continue;
 									//}
 									
+									
 									// Generation des cellules vides pour aligner les cases d'une meme periode			
 									if(in_array($jour['periode_id'], $ordreJourPrec) && $niveauCourant != array_search($jour['periode_id'], $ordreJourPrec)) 
 									{
 										$nbVides = (array_search($jour['periode_id'], $ordreJourPrec)-$niveauCourant);
 										for($i=1; $i<=$nbVides; $i++) 
 										{
-											$html .= '<div class="cellProject cellEmpty"></div>' . CRLF;
+											$html .= '<div class="cellProject cellEmpty" ondragleave="leaveDropZone(event);"></div>' . CRLF;
 											$niveauCourant++;
 										}
 										$niveauCourant++;
@@ -1668,17 +1677,16 @@ foreach ($planning['lignes'] as $ligne)
 							$ordreJourCourant = array();
 
 							// Espace vide pour permettre de cliquer en dessous d'une case assignée
-							$html.= '<div class="cellEmpty"></div>';
+							$html.= '<div class="cellEmpty" ondrop="drop(event)" ondragleave="leaveDropZone(event);"></div>';
 							$html .= '</td>' . CRLF;
-						} else 
-						{
+						
+						} else {
+							
 							// Cas d'un jour vide
-							$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '_'. str_replace(":","_",$heure) .'"';
-							if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')) 
-							{
+							$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '_'. str_replace(":","_",$heure2) .'"';
+							if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')|| $user->checkDroit('tasks_modify_team')) {
 								$droitAjoutPeriode = true;
-							} else 
-							{
+							} else {
 								$droitAjoutPeriode = false;
 							}
 							$html .= ' '. $styleTD. ' class="' . $classTD . (($current_date == date('Y-m-d')) ? ' today' : '') . '" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDropZone(event);">';
@@ -1691,15 +1699,17 @@ foreach ($planning['lignes'] as $ligne)
 							}
 							$html .= '</td>' . CRLF;
 						}
-					}else 
-						{
+					
+					}else {
+							$heure1=str_replace(":","_",$heure);
+							$heure2=date('H:i', strtotime($heure.'+1 hour'));
+							$current_date2 = $datePivot->format('Ymd')."_".$heure1;
 							// Cas d'un jour vide
-							$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '_'. str_replace(":","_",$heure) .'"';
-							if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')) 
-							{
+							$html .= '<td ' . ' id="td_' . $ligneId . '_' . $current_date2 . '_'. str_replace(":","_",($heure2)) .'"';
+							if($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task')|| $user->checkDroit('tasks_modify_team')) {
 								$droitAjoutPeriode = true;
-							} else 
-							{
+
+							} else {
 								$droitAjoutPeriode = false;
 							}
 							$html .= ' '. $styleTD. ' class="' . $classTD . (($current_date == date('Y-m-d')) ? ' today' : '') . '" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDropZone(event);">';
@@ -1724,7 +1734,7 @@ foreach ($planning['lignes'] as $ligne)
 if($afficherLigneTotal == 1) {
 	
 	// Affichage du libellé
-	$html .= '<tr><td id="tdTotal">' . $smarty->getConfigVars('tab_totalJour') . '</td>' .CRLF;
+	$html .= '<tr><th id="tdTotal" scope="row">' . $smarty->getConfigVars('tab_totalJour') . '</td>' .CRLF;
 	if ($base_ligne=='heures')
 	{
 		$html .= '<td id="tdTotal2"></td>' .CRLF;
@@ -1760,21 +1770,18 @@ if($afficherLigneTotal == 1) {
 			// définit le style pour case semaine et WE
 			$styleTD='';
 			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
-				if (array_key_exists($current_date, $joursFeries))
-				{
-					if (empty($joursFeries[$current_date]['couleur']))
-					{
+				if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+					if (empty($joursFeries[$current_date]['couleur'])) {
 						$classTD = 'feries';
-					}else $styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-					$weekend = true;
-				}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)
-				{
+					} else {
+						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+						$weekend = true;
+					}
+				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 					$classTD = 'weekend';
 					$weekend = true;
-				}else
-				{
-					$classTD = 'week';
-					$weekend = true;
+				} else {
+					continue;
 				}
 			} else {
 				$classTD = 'week';
@@ -1782,11 +1789,10 @@ if($afficherLigneTotal == 1) {
 			}
 
 			if( $current_date == date('Y-m-d')) {$classTD .= ' today';}
-			if(isset($totalParJour[$current_date2])) 
-			{
+			if(isset($totalHoraireParJour[$current_date2])) {
 				$capitalCharge=$nbRealUsers*convertHourToDecimal(CONFIG_DURATION_DAY);
 				if($capitalCharge != 0){
-					$ratioCharge=round(decimalHours($totalParJour[$current_date2])/$capitalCharge,1);
+					$ratioCharge=round(decimalHours($totalHoraireParJour[$current_date2])/$capitalCharge,1);
 				}else{
 					$ratioCharge=0;
 				}
@@ -1801,13 +1807,12 @@ if($afficherLigneTotal == 1) {
 					$symboleH1='/';
 					$symboleH2='';
 				}
-				if($dimensionCase=='large') 
-				{
+				if($dimensionCase=='large') {
 					if($ratio == 0) {
-						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalParJour[$current_date2];
+						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalHoraireParJour[$current_date2];
 						$html .= '</div><div class="jaugeTD"><div class="jauge0"></div></div></td>' . CRLF;
 					} else{
-						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalParJour[$current_date2];
+						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalHoraireParJour[$current_date2];
 						$html .= '</div><div class="jaugeTD"><div class="jauge0">';
 						$html .= '<div class="jauge' . $ratio . '">';
 						if ($ratio == 10) {
@@ -1815,13 +1820,11 @@ if($afficherLigneTotal == 1) {
 						}
 						$html .= '</div></div></div></td>' . CRLF;
 					}
-				} else
-				{
-					$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell">' . $totalParJour[$current_date2];
+				} else {
+					$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell">' . $totalHoraireParJour[$current_date2];
 					$html .= '</td>' . CRLF;
 				}	
-			} else 
-			{
+			} else {
 				$html .= '<td '. $styleTD. ' class="' . $classTD . '"></td>' . CRLF;
 			}
 		}
@@ -1841,33 +1844,32 @@ if($afficherLigneTotal == 1) {
 			$styleTD='';
 			// définit le style pour case semaine et WE
 			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
-				if (array_key_exists($current_date, $joursFeries))
-				{
-					if (empty($joursFeries[$current_date]['couleur']))
-					{
+				if (array_key_exists($current_date, $joursFeries)) {
+					if (empty($joursFeries[$current_date]['couleur'])) {
 						$classTD = 'feries';
-					}else $styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-					$weekend = true;
-				}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)
-				{
+					}else {
+						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+						$weekend = true;
+					}
+				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)	{
 					$classTD = 'weekend';
 					$weekend = true;
-				}else
-				{
-					$classTD = 'week';
-					$weekend = true;
+				} else {
+					continue;
 				}
 			} else {
 				$classTD = 'week';
 				$weekend = false;
 			}
 
-			if( $current_date == date('Y-m-d')) {$classTD .= ' today';}
-			if(isset($totalParJour[$current_date2])) 
-			{
+			if( $current_date == date('Y-m-d')) {
+				$classTD .= ' today';
+			}
+			
+			if(isset($totalHoraireParJour[$current_date2])) {
 				$capitalCharge=$nbRealUsers*convertHourToDecimal(CONFIG_DURATION_DAY);
 				if($capitalCharge != 0){
-					$ratioCharge=round(decimalHours($totalParJour[$current_date2])/$capitalCharge,1);
+					$ratioCharge=round(decimalHours($totalHoraireParJour[$current_date2])/$capitalCharge,1);
 				}else{
 					$ratioCharge=0;
 				}
@@ -1882,13 +1884,12 @@ if($afficherLigneTotal == 1) {
 					$symboleH1='/';
 					$symboleH2='';
 				}
-				if($dimensionCase=='large') 
-				{
+				if($dimensionCase=='large') {
 					if($ratio == 0) {
-						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalParJour[$current_date2];
+						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalHoraireParJour[$current_date2];
 						$html .= '</div><div class="jaugeTD"><div class="jauge0"></div></div></td>' . CRLF;
-					} else{
-						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalParJour[$current_date2];
+					} else {
+						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalHoraireParJour[$current_date2];
 						$html .= '</div><div class="jaugeTD"><div class="jauge0">';
 						$html .= '<div class="jauge' . $ratio . '">';
 						if ($ratio == 10) {
@@ -1896,20 +1897,147 @@ if($afficherLigneTotal == 1) {
 						}
 						$html .= '</div></div></div></td>' . CRLF;
 					}
-				} else
-				{
-					$html .= '<td '. $styleTD. ' colspan="'.$nbheures.'" class="' . $classTD . ' sumCell">' . $totalParJour[$current_date2];
+				} else {
+					$html .= '<td '. $styleTD. ' colspan="'.$nbheures.'" class="' . $classTD . ' sumCell">' . $totalHoraireParJour[$current_date2];
 					$html .= '</td>' . CRLF;
 				}	
-			} else 
-			{
+			} else {
 				$html .= '<td '. $styleTD. ' colspan="'.$nbheures.'" class="' . $classTD . '"></td>' . CRLF;
 			}
 		}
 	$html .= '</tr>';
 	}
-
 }
+
+if($afficherLigneTotalTaches == 1) {
+	
+	// Affichage du libellé
+	$html .= '<tr><th id="tdTotalTaches" scope="row">' . $smarty->getConfigVars('tab_totalJourTaches') . '</th>' .CRLF;
+	if ($base_ligne=='heures')
+	{
+		$html .= '<td id="tdTotal3"></td>' .CRLF;
+	}
+	
+	// on boucle sur la durée de l'affichage
+	if ($base_colonne<>"heures")
+	{
+		foreach ($planning['colonnes'] as $cle_colonne) 
+		{
+			if ($base_colonne=="jours")
+			{
+				$datePivot = new DateTime($cle_colonne);
+				$current_date = $datePivot->format('Y-m-d');
+				$current_date2 = $datePivot->format('Ymd');
+				$current_week = $datePivot->format('w');
+			}
+			if ($base_colonne=="users")
+			{
+				$datePivot = clone $dateDebut;
+				$current_date = $cle_colonne;
+				$current_date2 = $cle_colonne;
+				$current_week = $cle_colonne;
+			}
+			if ($base_colonne=="heures")
+			{
+				$datePivot = new DateTime($cle_colonne);
+				$current_date = $datePivot->format('Y-m-d');
+				$current_date2 = $datePivot->format('Ymd');
+				$current_week = $datePivot->format('w');
+			}
+		
+			// définit le style pour case semaine et WE
+			$styleTD='';
+			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+				if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+					if (empty($joursFeries[$current_date]['couleur'])) {
+						$classTD = 'feries';
+					} else {
+						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+						$weekend = true;
+					}
+				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+					$classTD = 'weekend';
+					$weekend = true;
+				} else {
+					continue;
+				}
+			} else {
+				$classTD = 'week';
+				$weekend = false;
+			}
+
+			if( $current_date == date('Y-m-d')) {$classTD .= ' today';}
+			if(isset($totalNbTachesParJour[$current_date2])) {
+				if($dimensionCase=='large') {
+					if($ratio == 0) {
+						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalNbTachesParJour[$current_date2];
+						$html .= '</div><div class="jaugeTD"><div class="jauge0"></div></div></td>' . CRLF;
+					}
+				} else {
+					$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell">' . $totalNbTachesParJour[$current_date2];
+					$html .= '</td>' . CRLF;
+				}	
+			} else {
+				$html .= '<td '. $styleTD. ' class="' . $classTD . '"></td>' . CRLF;
+			}
+		}
+	$html .= '</tr>';
+	}
+	
+	// on boucle sur la durée de l'affichage
+	if ($base_colonne=="heures")
+	{
+		$nbheures=count($planning['heures']);
+		foreach ($planning['colonnes'] as $cle_colonne) 
+		{
+			$datePivot = new DateTime($cle_colonne);
+			$current_date = $datePivot->format('Y-m-d');
+			$current_date2 = $datePivot->format('Ymd');
+			$current_week = $datePivot->format('w');
+			$styleTD='';
+			// définit le style pour case semaine et WE
+			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+				if (array_key_exists($current_date, $joursFeries)) {
+					if (empty($joursFeries[$current_date]['couleur'])) {
+						$classTD = 'feries';
+					}else {
+						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+						$weekend = true;
+					}
+				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)	{
+					$classTD = 'weekend';
+					$weekend = true;
+				} else {
+					continue;
+				}
+			} else {
+				$classTD = 'week';
+				$weekend = false;
+			}
+
+			if( $current_date == date('Y-m-d')) {
+				$classTD .= ' today';
+			}
+			
+			if(isset($totalNbTachesParJour[$current_date2])) {
+				if($dimensionCase=='large') {
+					if($ratio == 0) {
+						$html .= '<td '. $styleTD. ' class="' . $classTD . ' sumCell"><div class="sumLargeCell">' . $totalNbTachesParJour[$current_date2];
+						$html .= '</div><div class="jaugeTD"><div class="jauge0"></div></div></td>' . CRLF;
+					}
+				} else {
+					$html .= '<td '. $styleTD. ' colspan="'.$nbheures.'" class="' . $classTD . ' sumCell">' . $totalNbTachesParJour[$current_date2];
+					$html .= '</td>' . CRLF;
+				}	
+			} else {
+				$html .= '<td '. $styleTD. ' colspan="'.$nbheures.'" class="' . $classTD . '"></td>' . CRLF;
+			}
+		}
+	$html .= '</tr>';
+	}
+}
+
+
 $html .= '</tbody></table>' . CRLF;
 
 // anchor for show/hide, move the page to be the entire project table

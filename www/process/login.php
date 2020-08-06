@@ -24,7 +24,7 @@ function retrieve_ldap_password($login, $password){
     # Bind
     $bind = @ldap_bind($ldap, $ldapBindUser, $ldapBindPassword);
     
-    $errno = @ldap_errno($ldap);
+	$errno = @ldap_errno($ldap);
     if ( $errno ) {
         $result = "ldaperror";
         $err = "LDAP - Bind error $errno  (".@ldap_error($ldap).")";
@@ -51,7 +51,8 @@ function retrieve_ldap_password($login, $password){
 			}
 			else {    
 				# Bind with password
-				$bind = @ldap_bind($ldap, $userdn, $password);
+				//$bind = @ldap_bind($ldap, $userdn, $password);
+				$bind = @ldap_bind($ldap, $userdn, utf8_encode($password));    
 				$errno = @ldap_errno($ldap);
 				if ( $errno ) {
 					$result = "badcredentials";
@@ -84,6 +85,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout') {
 	unset($_SESSION['user_id']);
 	session_regenerate_id();
 	@session_destroy();
+	setcookie('direct_auth', '', time() - 3600, '/');
+
 	if(CONFIG_LOGOUT_REDIRECT != '') {
 		header('Location: ' . CONFIG_LOGOUT_REDIRECT);
 		exit;
@@ -103,7 +106,7 @@ function active_directory_login($username, $password){
 	ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
 
 	$ldaprdn = $username . "@" . $ADDomain;
-	$bind = @ldap_bind($ldap, $ldaprdn, $password);
+	$bind = @ldap_bind($ldap, $ldaprdn, utf8_encode($password));
 	
 	if(!$bind) {
 		$ldaprdn = $ADDomain . "\\" . $username;
@@ -185,19 +188,12 @@ if($user->login_actif == 'non'){
 	exit;	
 }
 
-// Préférence de sélection par défaut
-chargerSessionStatutsDefaut();
-
-$_SESSION['user_id'] = $user->user_id;
-$user->date_dernier_login = date('Y-m-d H:i:s');
-$user->db_save();
-
-// Audit
-if (CONFIG_SOPLANNING_OPTION_AUDIT == 1 && CONFIG_SOPLANNING_OPTION_AUDIT_CONNEXIONS == 1) {
-	logAction('C');
+if(isset($_POST['remember']) && $user->user_id != 'publicspl'){
+	$cle = $user->user_id . ';' . date('Y-m-d H:i:s') . ';' . sha1($user->user_id . date('Y-m-d H:i:s') . $user->cle);
+	setcookie('direct_auth', $cle, time()+60*60*24*45, '/');
 }
-	
-$user->setSessionPref();
+
+$user->initPostLogin();
 
 // Préférence de vue planning
 if (isset($_SESSION['preferences']['vuePlanning']) && ($_SESSION['preferences']['vuePlanning']=="vueTaches") && (CONFIG_SOPLANNING_OPTION_TACHES == 1)) {

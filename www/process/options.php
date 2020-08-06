@@ -416,7 +416,7 @@ if(isset($_POST['PLANNING_DUREE_CRENEAU_HORAIRE'])) {
 
 
 if(isset($_POST['DEFAULT_NB_MONTHS_DISPLAYED'])) {
-	if(is_numeric($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) && round($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) > 0) {
+	if(is_numeric($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) && round($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) > 0  && round($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) < 50) {
 		$config = new Config();
 		$config->db_load(array('cle', '=', 'DEFAULT_NB_MONTHS_DISPLAYED'));
 		$config->valeur = $_POST['DEFAULT_NB_MONTHS_DISPLAYED'];
@@ -436,7 +436,7 @@ if(isset($_POST['DEFAULT_NB_MONTHS_DISPLAYED'])) {
 }
 
 if(isset($_POST['DEFAULT_NB_DAYS_DISPLAYED'])) {
-	if(is_numeric($_POST['DEFAULT_NB_DAYS_DISPLAYED']) && round($_POST['DEFAULT_NB_DAYS_DISPLAYED']) > 0) {
+	if(is_numeric($_POST['DEFAULT_NB_DAYS_DISPLAYED']) && round($_POST['DEFAULT_NB_DAYS_DISPLAYED']) > 0  && round($_POST['DEFAULT_NB_DAYS_DISPLAYED']) < 30) {
 		$config = new Config();
 		$config->db_load(array('cle', '=', 'DEFAULT_NB_DAYS_DISPLAYED'));
 		$config->valeur = $_POST['DEFAULT_NB_DAYS_DISPLAYED'];
@@ -780,13 +780,14 @@ if(isset($_POST['REFRESH_TIMER'])) {
 }
 
 if(isset($_POST['PROJECT_COLORS_POSSIBLE'])) {
-	if(strlen($_POST['PROJECT_COLORS_POSSIBLE']) == 0 || strlen($_POST['PROJECT_COLORS_POSSIBLE']) > 6) {
+	if(strlen($_POST['PROJECT_COLORS_POSSIBLE']) == 0 || strlen($_POST['PROJECT_COLORS_POSSIBLE']) > 6) { 
 		$config = new Config();
 		$config->db_load(array('cle', '=', 'PROJECT_COLORS_POSSIBLE'));
 		if(strlen($_POST['PROJECT_COLORS_POSSIBLE']) == 0) {
 			$config->valeur = null;
 		} else {
-			$config->valeur = $_POST['PROJECT_COLORS_POSSIBLE'];
+			$liste_couleurs=preg_replace('/\s/','',$_POST['PROJECT_COLORS_POSSIBLE']);
+			$config->valeur = $liste_couleurs;
 		}
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';

@@ -152,7 +152,7 @@ while($lineTmp = $lines->fetch()) {
 	}
 	if (isset($_GET['users'])) {
 		// on filtre sur les projets de l'équipe de ce user
-		$liste = explode('-', $_GET['users']);
+		$liste = explode('-', str_replace(array("'", '"'), array('', ''), $_GET['users']));
 		if(count($liste) > 0) {
 			$listeFinale = implode("','", $liste);
 			$sql .= " AND planning_periode.user_id IN ('" . $listeFinale . "')";
@@ -194,8 +194,8 @@ while($lineTmp = $lines->fetch()) {
 			$e->setProperty('dtend', substr($periode->date_fin, 0, 4), substr($periode->date_fin, 5, 2), substr($periode->date_fin, 8, 2), 18, 00, 00);
 		}
 
-		$e->setProperty('summary' , $nomTache);
-		$e->setProperty('description', $periode->notes);
+		$e->setProperty('summary' , utf8_encode($nomTache));
+		$e->setProperty('description', $smarty->getConfigVars('tab_commentaires') . ' : ' . utf8_encode($periode->notes));
 
 		$periode->getData();
 	}

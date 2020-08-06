@@ -15,11 +15,15 @@ $js = '';
 
 $joursFeries = getJoursFeries();
 
+if (!controlDate($_GET['date_debut_pdf']) || !controlDate($_GET['date_fin_pdf'])) {
+	echo $smarty->getConfigVars('feries_dateNonValide');
+}
+
 // PARAM?TRES ////////////////////////////////
 $dateDebut = new DateTime();
 $dateFin = new DateTime();
-$dateDebut->setDate(substr($_SESSION['date_debut_affiche'],6,4), substr($_SESSION['date_debut_affiche'],3,2), substr($_SESSION['date_debut_affiche'],0,2));
-$dateFin->setDate(substr($_SESSION['date_fin_affiche'],6,4), substr($_SESSION['date_fin_affiche'],3,2), substr($_SESSION['date_fin_affiche'],0,2));
+$dateDebut->setDate(substr($_GET['date_debut_pdf'],6,4), substr($_GET['date_debut_pdf'],3,2), substr($_GET['date_debut_pdf'],0,2));
+$dateFin->setDate(substr($_GET['date_fin_pdf'],6,4), substr($_GET['date_fin_pdf'],3,2), substr($_GET['date_fin_pdf'],0,2));
 
 $nbLignes = $_SESSION['nb_lignes'];
 $pageLignes = $_SESSION['page_lignes'];
@@ -66,7 +70,12 @@ while ($tmpDate <= $dateFin) {
 	if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 		$sClass = 'week';
 	} else {
-		$sClass = 'weekend';
+		if(CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1){
+			$sClass = 'weekend';
+		} else{
+			$tmpDate->modify('+1 day');
+			continue;
+		}
 	}
 	/*
 	if( $tmpDate->format('Y-m-d') == date('Y-m-d')) {
@@ -392,12 +401,18 @@ while($ligneTmp = $lines->fetch()) {
 		$styleTD = '';
 		// d?finit le style pour case semaine et WE
 		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
-			$current_date=$tmpDate->format('Y-m-d');
-			if (empty($joursFeries[$current_date]['couleur']))
-			{
-				$classTD = 'feries';
-			}else $styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-			$opacity = 'filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25';
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+				$current_date=$tmpDate->format('Y-m-d');
+				if (empty($joursFeries[$current_date]['couleur'])) {
+					$classTD = 'feries';
+				}else {
+					$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
+					$opacity = 'filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25';
+				}
+			} else {
+				$tmpDate->modify('+1 day');
+				continue;
+			}
 		} else {
 			$classTD = 'week';
 			$opacity = '';
@@ -409,7 +424,7 @@ while($ligneTmp = $lines->fetch()) {
 		}
 
 		if (CONFIG_PLANNING_MASQUER_FERIES == 0 && array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
-			// jours f?ri?s
+			// jours feries
 			$ferie = new Ferie();
 			if($ferie->db_load(array('date_ferie', '=', $tmpDate->format('Y-m-d'))) && trim($ferie->libelle) != "") {
 				$ferie = '<div class="cellHolidays">' . $smarty->getConfigVars('planning_ferie') . '</div>' . CRLF;
@@ -422,7 +437,7 @@ while($ligneTmp = $lines->fetch()) {
 			$html .= ' '.$styleTD.' class="' . $classTD . '">' . CRLF;
 
 			if(isset($ferie) && $ferie !== false) {
-				$html .= $ferie;
+				$html .= $ferie->libelle;
 			}
 			
 			
@@ -494,7 +509,7 @@ while($ligneTmp = $lines->fetch()) {
 					if(trim($nom) == ''){
 						$nom = '- - -';					
 					}
-					$html .= $nom;
+					$html .= substr($nom, 0, CONFIG_PLANNING_CODE_WIDTH);
 				}
 				$html .= '</div>';
 			}
@@ -504,7 +519,7 @@ while($ligneTmp = $lines->fetch()) {
 			$html .= '<td ' . $styleLigne . ' id="td_' . $ligneId . '_' . $tmpDate->format('Ymd') . '"';
 			$html .= ' '.$styleTD.' class="' . $classTD . '">';
 			if(isset($ferie) && $ferie !== false) {
-				$html .= $ferie;
+				$html .= $ferie->libelle;
 			}
 			$html .= '</td>' . CRLF;
 		}
@@ -520,7 +535,7 @@ if($pdf_orientation == 'paysage') {
 	$orientation = 'P';
 }
 
-$html = '<page orientation="' . $orientation . '"><style>' . file_get_contents('assets/css/export_pdf.css') .  file_get_contents('assets/css/themes/'.CONFIG_SOPLANNING_THEME) .'</style>' . $html . '</page>';
+$html = '<page orientation="' . $orientation . '"><style>' . file_get_contents('assets/css/themes/'.CONFIG_SOPLANNING_THEME) . file_get_contents('assets/css/export_pdf.css')  .'</style>' . $html . '</page>';
 
 if(isset($_GET['cb_inclure_recap'])) {
 	$html .= '<page pageset="old"><style>' . file_get_contents('assets/css/export_pdf.css') . '</style>';

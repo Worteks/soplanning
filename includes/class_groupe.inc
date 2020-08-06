@@ -29,6 +29,18 @@ class Groupe extends GObject
 		return parent::db_save($updateData, $insertData);
 	}
 
+	public function db_delete() {
+		$projets = new GCollection('Projet');
+		$projets->db_load(array('groupe_id', '=', $this->groupe_id));
+		while($projet = $projets->fetch()){
+			$projet->groupe_id = NULL;
+			$projet->db_save();
+		}
+
+		$return = parent::db_delete();
+		return $return;
+	}
+
 }
 
 ?>

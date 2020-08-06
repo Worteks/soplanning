@@ -8,8 +8,10 @@ $_POST = sanitize($_POST);
 $_GET = sanitize($_GET);
 
 // Conversion des dates en mode mobile au format french
- $_GET['date_fin_affiche'] = forceUserDateFormat($_GET['date_fin_affiche']);
- $_GET['date_debut_affiche'] = forceUserDateFormat($_GET['date_debut_affiche']);
+if(isset($_GET['date_fin_affiche'])){
+	$_GET['date_fin_affiche'] = forceUserDateFormat($_GET['date_fin_affiche']);
+	$_GET['date_debut_affiche'] = forceUserDateFormat($_GET['date_debut_affiche']);
+}
 
  if(isset($_GET['date_debut_custom']) && $_GET['date_debut_custom'] != '') {
 	$dateDebut = initDateTime($_GET['date_debut_affiche']);
@@ -200,29 +202,69 @@ if(isset($_POST['filtreGroupeProjet'])) {
 		}
 	}
 	$_SESSION['filtreGroupeProjet'] = $projetsFiltre;
+	setcookie('filtreGroupeProjet', json_encode($projetsFiltre), time()+60*60*24*500, '/');	
 }
 
 if(isset($_POST['filtreGroupeLieu'])) {
 	// si filtre sur les lieux, on boucle pour recuperer l'ensemble des lieux choisis
 	$filtre = $_POST['lieu'];
 	$_SESSION['filtreGroupeLieu'] = $filtre;
+	if (!empty($filtre))
+	{
+		setcookie('filtreGroupeLieu', json_encode($filtre), time()+60*60*24*500, '/');	
+	}else
+	{
+		// suppression des cookies
+		unset($_COOKIE["filtreGroupeLieu"]);
+		setcookie('filtreGroupeLieu', '', time() - 3600, '/');
+	}
 }
 
 if(isset($_POST['filtreGroupeRessource'])) {
 	// si filtre sur les ressources de tache, on boucle pour recuperer l'ensemble des ressources choisies
 	$filtre = $_POST['ressource'];
 	$_SESSION['filtreGroupeRessource'] = $filtre;
+	if (!empty($filtre))
+	{
+		setcookie('filtreGroupeRessource', json_encode($filtre), time()+60*60*24*500, '/');	
+	}else
+	{
+		// suppression des cookies
+		unset($_COOKIE["filtreGroupeRessource"]);
+		setcookie('filtreGroupeRessource', '', time() - 3600, '/');
+	}
 }
 
 if(isset($_GET['filtreSurRessource'])) {
 	$_SESSION['filtreGroupeRessource'] = array($_GET['filtreSurRessource']);
 }
+
 if(isset($_GET['filtreSurLieu'])) {
 	$_SESSION['filtreGroupeLieu'] = array($_GET['filtreSurLieu']);
 }
 
 if(isset($_GET['filtreSurProjet'])) {
 	$_SESSION['filtreGroupeProjet'] = array($_GET['filtreSurProjet']);
+	// we change planning dates to first and last task for this project
+	$sql = "SELECT MIN(date_debut) AS le_min, MAX(date_debut) AS le_max1, MAX(date_fin) AS le_max2
+			FROM planning_periode
+			WHERE projet_id = " . val2sql($_GET['filtreSurProjet']);
+	$res = db_query($sql);
+	$row = db_fetch_array($res);
+	if($row['le_min'] != ''){
+		$_SESSION['date_debut_affiche'] = sqldate2userdate($row['le_min']);
+		$_SESSION['date_fin_affiche'] = sqldate2userdate($row['le_min']);
+		if($row['le_max1'] != '') {
+			$_SESSION['date_fin_affiche'] = sqldate2userdate($row['le_max1']);
+		}
+		if($row['le_max2'] != '' && $row['le_max2'] > $row['le_max1']) {
+			$_SESSION['date_fin_affiche'] = sqldate2userdate($row['le_max2']);
+		}
+		setcookie('date_debut_affiche', $_SESSION['date_debut_affiche'], time()+60*60*24*500, '/');
+		setcookie('date_fin_affiche', $_SESSION['date_fin_affiche'], time()+60*60*24*500, '/');
+		header('Location: ../planning.php');
+		exit;
+	}
 }
 
 if(isset($_POST['filtreTexte'])) {
@@ -231,13 +273,18 @@ if(isset($_POST['filtreTexte'])) {
 
 if(isset($_GET['desactiverFiltreGroupeProjet'])) {
 	$_SESSION['filtreGroupeProjet'] = array();
+	setcookie('filtreGroupeProjet', '', time() - 3600, '/');
+	unset($_COOKIE["filtreGroupeProjet"]);
 }
 
 if(isset($_GET['desactiverFiltreAvances'])) {
 	$_SESSION['filtreGroupeLieu'] = array();
 	$_SESSION['filtreGroupeRessource'] = array();
-	//$_SESSION['filtreStatutTache'] = array();
-	//$_SESSION['filtreStatutProjet'] = array();
+	// suppression des cookies
+	unset($_COOKIE["filtreGroupeLieu"]);
+	unset($_COOKIE["filtreGroupeRessource"]);
+	setcookie('filtreGroupeLieu', '', time() - 3600, '/');
+	setcookie('filtreGroupeRessource', '', time() - 3600, '/');
 }
 
 if(isset($_GET['desactiverFiltreTexte'])) {
@@ -261,10 +308,11 @@ if(isset($_GET['filtreSurUser'])) {
 	$_SESSION['filtreUser'] = array($_GET['filtreSurUser']);
 }
 
-
 if(isset($_GET['desactiverFiltreUser'])) {
 	$_SESSION['filtreUser'] = array();
-	setcookie('filtreUser', implode(",", array()), time() + 60*60*24*365, '/');
+	// suppression des cookies
+	unset($_COOKIE["filtreUser"]);
+	setcookie('filtreUser', '', time() - 3600, '/');
 }
 
 if(isset($_GET['masquerLigneVide'])) {
@@ -279,41 +327,62 @@ if(isset($_GET['afficherLigneTotal'])) {
 	setcookie('afficherLigneTotal', $_SESSION['afficherLigneTotal'], time()+60*60*24*500, '/');
 }
 
+if(isset($_GET['afficherLigneTotalTaches'])) {
+	$_SESSION['afficherLigneTotalTaches'] = $_GET['afficherLigneTotalTaches'];
+	setcookie('afficherLigneTotalTaches', $_SESSION['afficherLigneTotalTaches'], time()+60*60*24*500, '/');
+}
+
 if(isset($_GET['afficherTableauRecap'])) {
 	$_SESSION['afficherTableauRecap'] = $_GET['afficherTableauRecap'];
 	setcookie('afficherTableauRecap', $_SESSION['afficherTableauRecap'], time()+60*60*24*500, '/');
 }
 
-if(isset($_POST['filtreStatutTache']) && isset($_POST['statutsTache'])) {
+if(isset($_POST['filtreStatutTache'])) {
 	// si filtre sur les statuts de tache, on boucle pour recuperer l'ensemble des projets choisis
 	$filtre = $_POST['statutsTache'];
 	// si tous les status sont cochés, revient à desactiver le filtre
 	$statuts = new GCollection('Status');
 	$statuts->db_load(array('affichage', 'IN', array('t', 'tp')));
-	if(count($filtre) >= $statuts->getCount()) {
+	if(count($filtre) >= $statuts->getCount() || !isset($_POST['statutsTache'])) {
 		$filtre = array();
+	}
+	if (!empty($filtre))
+	{
+		setcookie('filtreStatutTache', json_encode($filtre), time()+60*60*24*500, '/');	
+	}else
+	{
+		// suppression des cookies
+		unset($_COOKIE["filtreStatutTache"]);
+		setcookie('filtreStatutTache', '', time() - 3600, '/');
 	}
 	$_SESSION['filtreStatutTache'] = $filtre;
 }
 
-if(isset($_POST['filtreStatutProjet']) && isset($_POST['statutsProjet'])) {
+if(isset($_POST['filtreStatutProjet'])) {
 	// si filtre sur les statuts de projet, on boucle pour recuperer l'ensemble des projets choisis
 	$filtre = $_POST['statutsProjet'];
 	// si tous les status sont cochés, revient à desactiver le filtre
 	$statuts = new GCollection('Status');
 	$statuts->db_load(array('affichage', 'IN', array('p', 'tp')));
-	if(count($filtre) >= $statuts->getCount()) {
+	if(count($filtre) >= $statuts->getCount() || !isset($_POST['statutsProjet'])) {
 		$filtre = array();
 	}
 	$_SESSION['filtreStatutProjet'] = $filtre;
+	if (!empty($filtre))
+	{
+		setcookie('filtreStatutProjet', json_encode($filtre), time()+60*60*24*500, '/');	
+	}else
+	{
+		// suppression des cookies
+		unset($_COOKIE["filtreStatutProjet"]);
+		setcookie('filtreStatutProjet', '', time() - 3600, '/');
+	}
 }
 
 if(isset($_GET['baseLigne'])) {
 		$_SESSION['baseLigne'] = $_GET['baseLigne'];
-		$_GET['triPlanning'] = $triPlanningPossibleProjet[0];
 	} elseif (!isset($_SESSION['baseLigne'])) {
 		$_SESSION['baseLigne'] = 'users';
-		$_GET['triPlanning'] = $triPlanningPossibleUser[0];
 	}
 	setcookie('baseLigne', $_SESSION['baseLigne'], time()+60*60*24*500, '/');
 
@@ -327,35 +396,37 @@ if(isset($_GET['baseColonne'])) {
 	}; 
 setcookie('baseColonne', $_SESSION['baseColonne'], time()+60*60*24*500, '/');
 
-if(isset($_GET['ascenceur'])) {
-		$_SESSION['ascenceur'] = $_GET['ascenceur'];
-		setcookie('ascenceur', $_SESSION['ascenceur'], time()+60*60*24*500, '/');
-}
-if(isset($_GET['entetesflottantes'])) {
-		$_SESSION['entetesflottantes'] = $_GET['entetesflottantes'];
-		setcookie('entetesflottantes', $_SESSION['entetesflottantes'], time()+60*60*24*500, '/');
-}
 if(isset($_GET['fleches'])) {
 		$_SESSION['fleches'] = $_GET['fleches'];
 		setcookie('fleches', $_SESSION['fleches'], time()+60*60*24*500, '/');
 }
 
 //modif tri planning pour sauvegarde selection
-if(isset($_GET['triPlanning'])) {	
-	if((in_array($_GET['triPlanning'], $triPlanningPossibleUser) || in_array($_GET['triPlanning'], $triPlanningPossibleProjet))&&($_SESSION['baseLigne'] == "users")) {
+if(isset($_GET['triPlanning'])) {
+	if (($_SESSION['baseLigne'] == "users") &&  (in_array($_GET['triPlanning'], $triPlanningPossibleUser)))
+	{
 		$_SESSION['triPlanningUser'] = $_GET['triPlanning'];
-		// on le met également en cookie
-		setcookie('triPlanningUser', $_SESSION['triPlanningUser'], time()+60*60*24*500, '/');
+		setcookie('triPlanningUser', $_SESSION['triPlanningUser'], time()+60*60*24*500, '/');		
 	}
-	if((in_array($_GET['triPlanning'], $triPlanningPossibleUser) || in_array($_GET['triPlanning'], $triPlanningPossibleProjet))&&($_SESSION['baseLigne'] == "projets")) {
+	if (($_SESSION['baseLigne'] == "projets") &&  (in_array($_GET['triPlanning'], $triPlanningPossibleProjet)))
+	{
 		$_SESSION['triPlanningProjet'] = $_GET['triPlanning'];
-		// on le met également en cookie
-		setcookie('triPlanningProjet', $_SESSION['triPlanningProjet'], time()+60*60*24*500, '/');
+		setcookie('triPlanningProjet', $_SESSION['triPlanningProjet'], time()+60*60*24*500, '/');		
 	}
-	if((in_array($_GET['triPlanning'], $triPlanningPossibleAutre))&&($_SESSION['baseLigne'] == "lieux" ||$_SESSION['baseLigne'] == "ressources")) {
-		$_SESSION['triPlanningAutre'] = $_GET['triPlanning'];
-		// on le met également en cookie
-		setcookie('triPlanningAutre', $_SESSION['triPlanningAutre'], time()+60*60*24*500, '/');
+	if ($_SESSION['baseLigne'] == "lieux")
+	{
+		$_SESSION['triPlanningLieu'] = $_GET['triPlanning'];
+		setcookie('triPlanningLieu', $_SESSION['triPlanningLieu'], time()+60*60*24*500, '/');		
+	}
+	if ($_SESSION['baseLigne'] == "ressources")
+	{
+		$_SESSION['triPlanningRessource'] = $_GET['triPlanning'];
+		setcookie('triPlanningRessource', $_SESSION['triPlanningRessource'], time()+60*60*24*500, '/');		
+	}
+	if ($_SESSION['baseLigne'] == "heures")
+	{
+		$_SESSION['triPlanningAgenda'] = $_GET['triPlanning'];
+		setcookie('triPlanningAgenda', $_SESSION['triPlanningAgenda'], time()+60*60*24*500, '/');		
 	}
 }
 

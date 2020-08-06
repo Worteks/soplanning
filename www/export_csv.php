@@ -38,11 +38,21 @@ $dateBoutonSuperieur->modify('+1 month');
 $headerNomJours = '';
 $tmpDate = clone $dateDebut;
 
-header("Content-Type: application/force-download");
-header("Content-disposition: attachment; filename=planning_" . $dateDebut->format('Y-m-d') . "_" . $dateFin->format('Y-m-d') . ".csv");
+if(!isset($_GET['debug'])) {
+	header("Content-Type: application/force-download");
+	header("Content-disposition: attachment; filename=planning_" . $dateDebut->format('Y-m-d') . "_" . $dateFin->format('Y-m-d') . ".csv");
+}
+
 
 // GESTION DES ENTETES DU TABLEAU (MOIS, SEMAINE ET JOUR)
 while ($tmpDate <= $dateFin) {
+	if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
+		if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+		} else {
+			$tmpDate->modify('+1 day');
+			continue;
+		}
+	}
 	$headerNomJours .= $tmpDate->format('Y-m-d') . ';';
 	$tmpDate->modify('+1 day');
 }
@@ -236,6 +246,14 @@ while($lineTmp = $lines->fetch()) {
 	$tmpDate = clone $dateDebut;
 	// on boucle sur la durée de l'affichage
 	while ($tmpDate <= $dateFin) {
+		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
+			} else {
+				$tmpDate->modify('+1 day');
+				continue;
+			}
+		}
+
 		if (isset($joursOccupes[$tmpDate->format('Y-m-d')])) {
 			// si il y a des periodes pour le jour courant, on boucle pour toutes les afficher
 			foreach ($joursOccupes[$tmpDate->format('Y-m-d')] as $jour) {
@@ -296,6 +314,7 @@ while($lineTmp = $lines->fetch()) {
 	}
 	$html .= CRLF;
 }
+
 
 $smarty->assign('html', $html);
 $smarty->display('www_csv.tpl');

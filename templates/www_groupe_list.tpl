@@ -42,7 +42,7 @@
 		<div class="col-md-12">
 			<div class="soplanning-box mt-2">
 				{if $groupes|@count > 0}
-					<table class="table table-striped table-hover">
+					<table class="table table-striped table-hover" id="ProjectListTab">
 						<tr>
 							<th>&nbsp;</th>
 							<th>

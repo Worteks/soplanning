@@ -23,8 +23,8 @@
 		<div class="col-md-12">
 			<div class="soplanning-box mt-2">
 				{if $feries|@count > 0}
-					<table class="table table-striped table-hover">
-						<thead>
+					<table class="table table-striped table-hover" id="FeriesTab">
+						<tbody>
 						<tr>
 							<th class="w100">&nbsp;</th>
 							<th class="w100">
@@ -37,8 +37,6 @@
 								<b>{#feries_couleurfond#}</b>
 							</th>
 						</tr>
-						</thead>
-						<tbody>
 						{foreach name=feries item=ferie from=$feries}
 							<tr>
 								<td class="w100">

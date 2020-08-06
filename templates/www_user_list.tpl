@@ -76,9 +76,9 @@
 							<th class="userTabColId">
 								{if $order eq "user_id"}
 									{if $by eq "asc"}
-										<a href="{$BASE}/user_list.php?page=1&order=user_id&by=desc">{#user_liste_identifiant#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=user_id&by=desc">{#user_liste_identifiant#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
 									{else}
-										<a href="{$BASE}/user_list.php?page=1&order=user_id&by=asc">{#user_liste_identifiant#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=user_id&by=asc">{#user_liste_identifiant#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
 									{/if}
 								{else}
 									<a href="{$BASE}/user_list.php?page=1&order=user_id&by={$by}">{#user_liste_identifiant#}</a>
@@ -87,9 +87,9 @@
 							<th>
 								{if $order eq "nom"}
 									{if $by eq "asc"}
-										<a href="{$BASE}/user_list.php?page=1&order=nom&by=desc">{#user_liste_nom#} ({$users|@count})</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=nom&by=desc">{#user_liste_nom#} ({$users|@count})</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
 									{else}
-										<a href="{$BASE}/user_list.php?page=1&order=nom&by=asc">{#user_liste_nom#} ({$users|@count})</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=nom&by=asc">{#user_liste_nom#} ({$users|@count})</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
 									{/if}
 								{else}
 									<a href="{$BASE}/user_list.php?page=1&order=nom&by={$by}">{#user_liste_nom#} ({$users|@count})</a>
@@ -98,9 +98,9 @@
 							<th class="userTabColEmail">
 								{if $order eq "email"}
 									{if $by eq "asc"}
-										<a href="{$BASE}/user_list.php?page=1&order=email&by=desc">{#user_liste_email#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=email&by=desc">{#user_liste_email#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
 									{else}
-										<a href="{$BASE}/user_list.php?page=1&order=email&by=asc">{#user_liste_email#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=email&by=asc">{#user_liste_email#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
 									{/if}
 								{else}
 									<a href="{$BASE}/user_list.php?page=1&order=email&by={$by}">{#user_liste_email#}</a>
@@ -115,9 +115,9 @@
 							<th class="wrap d-none d-lg-table-cell">
 								{if $order eq "visible_planning"}
 									{if $by eq "asc"}
-										<a href="{$BASE}/user_list.php?page=1&order=visible_planning&by=desc">{#user_visiblePlanning#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=visible_planning&by=desc">{#user_visiblePlanning#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
 									{else}
-										<a href="{$BASE}/user_list.php?page=1&order=visible_planning&by=asc">{#user_visiblePlanning#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
+										<a href="{$BASE}/user_list.php?page=1&order=visible_planning&by=asc">{#user_visiblePlanning#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
 									{/if}
 								{else}
 									<a href="{$BASE}/user_list.php?page=1&order=visible_planning&by={$by}">{#user_visiblePlanning#}</a>
@@ -162,6 +162,13 @@
 									{assign var=cooltip value=$smarty.config.user_liste_NBPeriodes|cat:" : "|cat:$userTmp.totalPeriodes|cat:"<br>"|cat:$smarty.config.user_date_dernier_login|cat:" : "}
 									{assign var=dateLogin value=$userTmp.date_dernier_login|sqldatetime2userdatetime}
 									{assign var=cooltip value=$cooltip|cat:$dateLogin}
+									{assign var=cooltip value=$cooltip|cat:"<br>"|cat:$smarty.config.periode_date_creation|cat:" : "}
+									{assign var=dateCreation value=$userTmp.date_creation|sqldatetime2userdatetime}
+									{assign var=cooltip value=$cooltip|cat:$dateCreation}
+									{assign var=cooltip value=$cooltip|cat:"<br>"|cat:$smarty.config.periode_modifier|cat:" : "}
+									{assign var=dateModif value=$userTmp.date_modif|sqldatetime2userdatetime}
+									{assign var=cooltip value=$cooltip|cat:$dateModif}
+									
 									<span class="fa fa-info-circle fa-lg fa-fw cursor-help tooltipster" aria-hidden="true" title="{$cooltip}"></span>
 								</td>
 							</tr>

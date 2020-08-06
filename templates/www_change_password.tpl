@@ -1,6 +1,6 @@
 {include file="www_header.tpl"}
 <link href="assets/css/simplePage.css" rel="stylesheet">
-<br /><br /><br /><br />
+<br /><br />
 <div class="container">
 	<h3 class="text-center">
 		{if $smarty.const.CONFIG_SOPLANNING_LOGO != ''}
@@ -24,21 +24,21 @@
 			</div>
 		{/if}
 		<form action="process/login.php" method="post" class="form-horizontal box">
-			<div class="form-group">
-				<label class="col-md-2 control-label" for="cfgHostname">{#login_login#} :</label>
-				<div class="col-md-5">
-				<p class="form-control-static">{$userTmp.login}</p>
+			<div class="form-group row col-md-12">
+				<label for="login" class="col-md-4 col-sm-4 control-label">{#login_login#} :</label>
+				<div class="col-md-8 col-sm-8">
+					{$userTmp.login}
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-md-2 control-label" for="password">{#rappelPwdNouveauPassword#} :</label>
-				<div class="col-md-5">
+			<div class="form-group row col-md-12">
+				<label for="password" class="col-md-4 col-sm-4 control-label">{#rappelPwdNouveauPassword#} :</label>
+				<div class="col-md-8 col-sm-8">
 					<input type="password" size="20" name="password" class="form-control" id="password">
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-md-2 control-label"></label>
-				<div class="col-md-5">
+			<div class="form-group row col-md-12">
+				<label class="col-md-4 col-sm-4 control-label"></label>
+				<div class="col-md-8 col-sm-8">
 					<a class="btn btn-primary" href="javascript:xajax_nouveauPwd(document.getElementById('password').value);undefined;">{#changePwd#}</a>
 				</div>
 			</div>

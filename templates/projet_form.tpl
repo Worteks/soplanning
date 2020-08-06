@@ -15,7 +15,7 @@
 	<div class="form-group row col-md-12">
 		<label class="col-md-4 col-form-label">{#winProjet_nomProjet#} :</label>
 		<div class="col-md-6">
-			<input class="form-control" name="nom" id="nom" type="text" maxlength="30" value="{$projet.nom}" />
+			<input class="form-control" name="nom" id="nom" type="text" maxlength="50" value="{$projet.nom}" />
 		</div>
 	</div>
 	<div class="form-group row col-md-12">
@@ -41,8 +41,8 @@
 	</div>
 	<div class="form-group row col-md-12">
 		<label class="col-md-4 col-form-label">{#winProjet_charge#} :</label>
-		<div class="col-md-2">
-			<input type="number" class="form-control" name="charge" id="charge" maxlength="5" value="{$projet.charge}" />
+		<div class="col-md-3">
+			<input type="number" step="0.01" class="form-control" name="charge" id="charge" maxlength="5" value="{$projet.charge}" />
 		</div>
 		<div class="col-md-3 left-0">
 		{#winProjet_chargeJours#}
@@ -51,11 +51,11 @@
 	<div class="form-group row col-md-12">
 		<label class="col-md-4 col-form-label">{#winProjet_livraison#} :</label>
 		<div class="col-md-8">
-		{if $smarty.session.isMobileOrTablet==1}
-			<input type="date" class="form-control" name="livraison" id="livraison" value="{$projet.livraison|forceISODateFormat}" />
-		{else}
-			<input type="text" class="form-control datepicker" name="livraison" id="livraison" value="{$projet.livraison|sqldate2userdate}" />		
-		{/if}
+			{if $smarty.session.isMobileOrTablet==1}
+				<input type="date" class="form-control" name="livraison" id="livraison" value="{$projet.livraison|forceISODateFormat}" />
+			{else}
+				<input type="text" class="form-control datepicker" name="livraison" id="livraison" value="{$projet.livraison|sqldate2userdate}" />		
+			{/if}
 		</div>
 	</div>
 	<div class="form-group row col-md-12">
@@ -71,7 +71,7 @@
 						</datalist>
 				{else}
 					<select name="couleur2" id="couleur2" class="form-control" style="background-color:#{$projet.couleur};color:{'#'|cat:$projet.couleur|buttonFontColor}">
-						{if $projet.couleur eq ""}<option value="">{#winProjet_couleurchoix#}</option>{/if}
+						{if $projet.couleur neq ""}<option value="{$projet.couleur}" style="background-color:#{$projet.couleur};color:{'#'|cat:$projet.couleur|buttonFontColor}" selected="selected">{$projet.couleur}</option>{else}<option value="">{#winProjet_couleurchoix#}</option>{/if}
 						{foreach from=","|explode:$smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE item=couleurTmp}
 							<option value="{$couleurTmp|replace:'#':''}" style="background-color:{$couleurTmp};color:{$couleurTmp|buttonFontColor}" {if $couleurTmp eq "#"|cat:$projet.couleur}selected="selected"{/if}>{$couleurTmp|replace:'#':''}</option>
 						{/foreach}

@@ -6,7 +6,7 @@ CREATE TABLE `planning_config` (
   PRIMARY KEY (`cle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.45.00', 'Internal key for auto upgrade control');
+INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.47.00', 'Internal key for auto upgrade control');
 INSERT INTO `planning_config` VALUES('PLANNING_PAGES', '1,5,10,20,50,100', 'rows per page in the planning');
 INSERT INTO `planning_config` VALUES('PROJECT_COLORS_POSSIBLE', '', 'color choice limitation for planner (empty for no limit). Exemple :#ff0000,#aa8811,#446622');
 INSERT INTO `planning_config` VALUES('DEFAULT_NB_MONTHS_DISPLAYED', '2', 'Default number of months displayed in the planning');
@@ -88,7 +88,7 @@ CREATE TABLE `planning_groupe` (
 
 CREATE TABLE `planning_projet` (
   `projet_id` varchar(20) collate latin1_general_ci NOT NULL default '',
-  `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
+  `nom` varchar(50) collate latin1_general_ci NOT NULL default '',
   `iteration` varchar(255) collate latin1_general_ci default NULL,
   `couleur` varchar(6) collate latin1_general_ci NOT NULL default '',
   `charge` float default NULL,
@@ -128,6 +128,8 @@ CREATE TABLE `planning_user` (
   `date_dernier_login` DATETIME NULL,
   `preferences` text default NULL,
   `login_actif` ENUM('oui','non') CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT 'oui',
+  `date_creation` datetime DEFAULT NULL,
+  `date_modif` datetime DEFAULT NULL,
   PRIMARY KEY  (`user_id`),
   KEY `user_groupe_id` (`user_groupe_id`),
   CONSTRAINT `planning_user_ibfk_1` FOREIGN KEY (`user_groupe_id`) REFERENCES `planning_user_groupe` (`user_groupe_id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -150,6 +152,7 @@ CREATE TABLE `planning_periode` (
   `livrable` enum('oui','non') collate latin1_general_ci NOT NULL default 'non',
   `lieu_id` VARCHAR(10) NULL COLLATE 'latin1_general_ci' default NULL,
   `ressource_id` VARCHAR(10) NULL COLLATE 'latin1_general_ci' default NULL,
+  `fichiers` TEXT default NULL,
   `createur_id` varchar(20) collate latin1_general_ci NOT NULL,
   `date_creation` DATETIME NULL,
   `modifier_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NULL,
@@ -180,9 +183,6 @@ CREATE TABLE `planning_ressource` (
   PRIMARY KEY  (`ressource_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-INSERT INTO `planning_groupe` VALUES ('1', 'Production', null);
-INSERT INTO `planning_groupe` VALUES ('2', 'Web', null);
-INSERT INTO `planning_groupe` VALUES ('3', 'Mobile', null);
 
 CREATE TABLE `planning_right_on_user` (
   `right_id` int(11) NOT NULL,
@@ -217,11 +217,6 @@ ALTER TABLE `planning_right_on_user`
     PRIMARY KEY  (`status_id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-  INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`,`defaut`) VALUES ('a_faire', '#winProjet_statutAFaire#', '#winProjet_statutAFaire#','tp',0,1,1);
-  INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`,`defaut`) VALUES ('en_cours', '#winProjet_statutEnCours#', '#winProjet_statutEnCours#','tp',50,2,1);
-  INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`,`defaut`) VALUES ('fait', '#winProjet_statutFait#', '#winProjet_statutFait#','tp',100,3,1);
-  INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`,`defaut`) VALUES ('abandon', '#winProjet_statutAbandon#', '#winProjet_statutAbandon#','tp',0,4,1);
-  INSERT INTO `planning_status` (`status_id`, `nom`, `commentaire`,`affichage`,`pourcentage`,`priorite`,`defaut`) VALUES ('archive', '#winProjet_statutArchive#', '#winProjet_statutArchive#','p',100,4,1);
 
 CREATE TABLE `planning_audit` (
 	`audit_id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -246,15 +241,3 @@ CREATE TABLE `planning_audit` (
 )COLLATE='latin1_general_ci' ENGINE=InnoDB;
 
 
-INSERT INTO `planning_user` (`user_id`, `user_groupe_id`, `nom`, `login`, `password`, `email`, `visible_planning`, `couleur`, `droits`, `cle`, `notifications`, `adresse`, `telephone`, `mobile`, `metier`, `commentaire`, `date_dernier_login`, `preferences`, `login_actif`) VALUES
-('ADM', NULL, 'admin', 'admin', 'df5b909019c9b1659e86e0d6bf8da81d6fa3499e', NULL, 'oui', '000000', '["users_manage_all", "projects_manage_all", "projectgroups_manage_all", "tasks_modify_all", "tasks_view_all_projects", "lieux_all", "ressources_all", "parameters_all", "stats_users", "stats_projects", "audit_restore"]', '3b23d5b0759fe017325e0c31eee5beed', 'non', NULL, NULL, NULL, NULL, NULL, '2019-08-13 14:12:00', NULL, 'oui'),
-('publicspl', NULL, 'Guest', NULL, NULL, NULL, 'non', NULL, NULL, '', 'non', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'oui'),
-('user1', NULL, '#demo_user_1#', NULL, NULL, NULL, 'oui', 'ffeb3b', '["","","","tasks_readonly","tasks_view_all_projects","tasks_view_all_users","","","","","",""]', '532bfa3361ba040973d9915a45462179', 'non', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'oui'),
-('user2', NULL, '#demo_user_2#', NULL, NULL, NULL, 'oui', '4dabf5', '["","","","tasks_readonly","tasks_view_all_projects","tasks_view_all_users","","","","","",""]', '6be7b1bacc2465dc5deb7b64ab0e30bd', 'non', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'oui'),
-('user3', NULL, '#demo_user_3#', NULL, NULL, NULL, 'oui', '1fcb27', '["","","","tasks_readonly","tasks_view_all_projects","tasks_view_all_users","","","","","",""]', 'c1b96329b4ece7d42858fa244539b1c7', 'non', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'oui');
-
-
-INSERT INTO `planning_projet` (`projet_id`, `nom`, `iteration`, `couleur`, `charge`, `livraison`, `lien`, `statut`, `groupe_id`, `createur_id`) VALUES
-('test1', '#demo_projet_1#', NULL, 'ff784e', NULL, NULL, NULL, 'a_faire', NULL, 'ADM'),
-('test2', '#demo_projet_2#', NULL, '5bf3d0', NULL, NULL, NULL, 'a_faire', NULL, 'ADM'),
-('test3', '#demo_projet_3#', NULL, 'e6c843', NULL, NULL, NULL, 'a_faire', NULL, 'ADM');

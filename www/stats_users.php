@@ -164,6 +164,5 @@ if($user->checkDroit('tasks_modify_own_project')) {
 }
 $smarty->assign('listeProjets', $listeProjets->getSmartyData());
 $smarty->assign('xajax', $xajax->getJavascript("", "assets/js/xajax.js"));
-$smarty->assign('xajax', $xajax->getJavascript("", "assets/js/xajax.js"));
 $smarty->display('www_stats_users.tpl');
 ?>

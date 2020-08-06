@@ -23,12 +23,12 @@ $dateDebut = new DateTime();
 
 if (isset($_REQUEST['nb_mois']) && is_numeric($_REQUEST['nb_mois']) && round($_REQUEST['nb_mois']) > 0) {
 	$nbMois = $_REQUEST['nb_mois'];
-	$_SESSION['nb_mois'] = $_REQUEST['nb_mois'];
-} elseif (isset($_SESSION['nb_mois'])) {
-	$nbMois = $_SESSION['nb_mois'];
+	$_SESSION['projets_nb_mois'] = $_REQUEST['nb_mois'];
+} elseif (isset($_SESSION['projets_nb_mois'])) {
+	$nbMois = $_SESSION['projets_nb_mois'];
 } else {
 	$nbMois = 2;
-	$_SESSION['nb_mois'] = $nbMois;
+	$_SESSION['projets_nb_mois'] = $nbMois;
 }
 
 // French date forcing
@@ -68,7 +68,7 @@ if (isset($_REQUEST['filtrageProjet'])) {
 }
 $_SESSION['filtrageProjet'] = $filtrageProjet;
 
-if (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('nom_createur', 'nom', 'charge', 'livraison'))) {
+if (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('projet_id', 'nom_createur', 'nom', 'charge', 'livraison'))) {
 	$order = $_REQUEST['order'];
 } elseif (isset($_SESSION['projet_order'])) {
 	$order = $_SESSION['projet_order'];
@@ -76,12 +76,12 @@ if (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('nom_createu
 	$order = 'nom';
 }
 
-if (isset($_REQUEST['by'])) {
+if (isset($_GET['by']) && in_array($_GET['by'], array('asc','desc'))) {
 	$by = $_REQUEST['by'];
 } elseif (isset($_SESSION['projet_by'])) {
 	$by = $_SESSION['projet_by'];
 } else {
-	$by = 'ASC';
+	$by = 'asc';
 }
 
 // FIN PARAMÈTRES
@@ -112,19 +112,33 @@ if (isset($_REQUEST['filtreGroupeProjet'])) {
 	if(isset($_REQUEST['gp0'])) {
 		$filtreGroupeProjet[] = 'gp0';
 	}
-} elseif (isset($_SESSION['groupe_filtreGroupeProjet'])) {
-	$filtreGroupeProjet = $_SESSION['groupe_filtreGroupeProjet'];
+	$_SESSION['projets_filtreGroupeProjet'] = $filtreGroupeProjet;
+} elseif (isset($_SESSION['projets_filtreGroupeProjet'])) {
+	$filtreGroupeProjet = $_SESSION['projets_filtreGroupeProjet'];
 } else {
 	$filtreGroupeProjet = array();
 }
 
-if(isset($_REQUEST['rechercheProjet']) && $_REQUEST['rechercheProjet'] != ''){
-	$search = $_REQUEST['rechercheProjet'];
-	$search = explode( ' ', $search );
+if(isset($_REQUEST['rechercheProjet'])){
+	if($_REQUEST['rechercheProjet'] != ''){
+		$search = $_REQUEST['rechercheProjet'];
+		$_SESSION['projets_search'] = $search;
+	} else{
+		unset($_SESSION['projets_search']);
+		$search = '';
+	}
+} elseif (isset($_SESSION['projets_search'])) {
+	$search = $_SESSION['projets_search'];
+} else {
+	$search = '';
+}
+
+if($search != ''){
+	$searchParts = explode( ' ', $search );
 
 	$isLike = array('0');
 
-	foreach($search as $word){
+	foreach($searchParts as $word){
 		$isLike[] = 'planning_projet.nom LIKE '.val2sql('%' . $word . '%');
 		$isLike[] = 'planning_projet.iteration LIKE '.val2sql('%' . $word . '%');
 		$isLike[] = 'planning_projet.projet_id LIKE '.val2sql('%' . $word . '%');
@@ -132,9 +146,10 @@ if(isset($_REQUEST['rechercheProjet']) && $_REQUEST['rechercheProjet'] != ''){
 	}
 
 	$isLike = implode(" OR ", $isLike);
-	$sql = "SELECT planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur
+	$sql = "SELECT planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
 			FROM planning_projet
 			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
 			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
 			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id
 			WHERE (" . $isLike . ") 
@@ -145,17 +160,19 @@ if(isset($_REQUEST['rechercheProjet']) && $_REQUEST['rechercheProjet'] != ''){
 	if(in_array('gp0', $filtreGroupeProjet)) {
 		$sql .= '	OR planning_projet.groupe_id IS NULL ';
 	}
-	$sql .= ' )';
+	$sql .= ' ) ';
 	}			
 			
+	$sql .= ' GROUP BY planning_projet.projet_id ';
 	$sql .= "ORDER BY nom_groupe ASC," . $order . ' ' . $by;
-	$smarty->assign('rechercheProjet', $_REQUEST['rechercheProjet']);
+	$smarty->assign('rechercheProjet', $search);
 }  else {
 	// recuperation des projets couvrant la période
-	$sql = "SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur
+	$sql = "SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
 			FROM planning_projet
 			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut 
 			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
 			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id ";
 	if($filtrageProjet != 'tous') {
 		$sql .= "INNER JOIN planning_periode ON planning_periode.projet_id = planning_projet.projet_id AND ((planning_periode.date_debut <= '" . $dateDebut->format('Y-m-d') . "' AND planning_periode.date_fin >= '" . $dateDebut->format('Y-m-d') . "') OR (planning_periode.date_debut <= '" . $dateFin->format('Y-m-d') . "' AND planning_periode.date_debut >= '" . $dateDebut->format('Y-m-d') . "')) ";
@@ -169,6 +186,7 @@ if(isset($_REQUEST['rechercheProjet']) && $_REQUEST['rechercheProjet'] != ''){
 	}
 	$sql .= ' )';
 	}	
+	$sql .= ' GROUP BY planning_projet.projet_id ';
 	$sql .=" ORDER BY nom_groupe ASC," . $order . ' ' . $by;
 	$smarty->assign('rechercheProjet', '');
  }
@@ -177,8 +195,8 @@ $projets->db_loadSQL($sql);
 
 // liste des status
 $status = new GCollection('Status');
-$sql = "SELECT status_id,nom from planning_status where affichage in ('p','tp') and affichage_liste=1 order by priorite asc";
-$status->db_loadSQL($sql);
+$sql = "SELECT status_id,nom from planning_status where affichage in ('p','tp') order by priorite asc";
+$status->db_load(array('affichage', 'IN', array('p','tp'), array('priorite' => 'ASC')));
 $smarty->assign('listeStatus', $status->getSmartyData());
 
 $groupeProjets = new GCollection('Groupe');

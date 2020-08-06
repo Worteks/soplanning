@@ -19,6 +19,7 @@ $ldapBindPassword = '';
 
 // custom variables
 define('COMPIL_DIR', BASE . '/../smarty/templates_c/'); // templates compil directory, must have read/write access
+define('UPLOAD_DIR', BASE . '/../www/upload/files/'); // upload file directory, must have read/write access
 
 // number of results per page
 define('NB_RESULT_PER_PAGE', 30);
@@ -32,6 +33,7 @@ define('MIN_CELL_SIZE', '25');
 define('MAX_CELL_SIZE', '200');
 define('MIN_CODE_SIZE', '3');
 define('MAX_CODE_SIZE', '40');
+define('MAX_SIZE_UPLOAD', '20971520');
 define('DEBUG', false);  // put TRUE for debug
 define('DEV_MAIL', 'yourmail@domain.com');
 
@@ -40,7 +42,7 @@ define('DEV_MAIL', 'yourmail@domain.com');
 // ----------------------------------------------------------------------------
 
 if(DEBUG) {
-	error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+	error_reporting(E_ALL | E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT);
 } else {
 	error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
 }
@@ -48,7 +50,7 @@ if(DEBUG) {
 define('CRLF', "\n");
 
 require_once BASE . '/../smarty/libs/Smarty.class.php';
-function __autoload($nomClasse) {
+function autoloadSOPlanning($nomClasse) {
 	if($nomClasse == 'PHPMailer') {
 		require BASE . '/../phpmailer/class.phpmailer.php';
 	}elseif($nomClasse == 'SMTP') {
@@ -67,7 +69,7 @@ function __autoload($nomClasse) {
 		require BASE . '/../includes/class_' . strtolower($nomClasse) . '.inc';
 	}
 }
-spl_autoload_register("__autoload");
+spl_autoload_register("autoloadSOPlanning");
 require_once BASE . '/../vendor/autoload.php';
 
 // Librairies
@@ -169,15 +171,16 @@ $cfgAvailableLanguages = array(
 	'da'	=> array('da([-_][[:alpha:]]{2})?|danish', 'da'),
 	'hu'	=> array('hu([-_][[:alpha:]]{2})?|hungarian', 'hu'),
 	'pt'	=> array('pt([-_][[:alpha:]]{2})?|portuguese', 'pt'),
-	'pl'	=> array('pl([-_][[:alpha:]]{2})?|polish', 'pl')
+	'pl'	=> array('pl([-_][[:alpha:]]{2})?|polish', 'pl'),
+	'br'	=> array('pt-br?|brazilian', 'br')
 );
 
 $langueDefaut = 'en';
 $lang = $langueDefaut;
-if(isset($_GET) && !empty($_GET['language']) && in_array($_GET['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl'))){
+if(isset($_GET) && !empty($_GET['language']) && in_array($_GET['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl', 'br'))){
 	$_SESSION['language'] = $_GET['language'];
 	$lang = $_GET['language'];
-} elseif (isset($_SESSION['language']) && in_array($_SESSION['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl'))) {
+} elseif (isset($_SESSION['language']) && in_array($_SESSION['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl', 'br'))) {
 	$lang = $_SESSION['language'];
 } else {
 	$_SESSION['language'] = detectLanguage($langueDefaut);

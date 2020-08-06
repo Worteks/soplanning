@@ -8,7 +8,7 @@
 		<div class="col-md-12">
 			<div class="soplanning-box">
 				<div class="btn-group">
-					<a href="{$BASE}/options.php" class="btn btn-default" ><i class="fa fa-cogs fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuOptions#}</a>
+					<a href="{$BASE}/options.php?tab=param-audit" class="btn btn-default" ><i class="fa fa-cogs fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuOptions#}</a>
 				</div>
 				<div class="btn-group">
 					<a href="javascript:xajax_purgerAudit();undefined;"	onclick="javascript: return confirm('{#audit_purge_question#|xss_protect}')" class="btn btn-default" ><i class="fa fa-trash fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#audit_purge#}</a>
@@ -102,7 +102,7 @@
 									{$audits.date_modif}&nbsp;
 								</td>
 								<td>
-									{$audits.modif_nom}&nbsp;
+									{$audits.modif_nom|xss_protect}&nbsp;
 								</td>
 								<td class="wrap">
 									{if $audits.type=="MT"}{#action_modif_tache#} {$audits.periode_id} : {$audits.informations}{/if}
@@ -137,7 +137,7 @@
 								{$audits.date_debut}
 								</td>
 								<td class="wrap d-none d-lg-table-cell">
-								{$audits.periode_user_nom}
+								{$audits.periode_user_nom|xss_protect}
 								</td>								
 								<td class="wrap d-none d-lg-table-cell">
 									{if $audits.type=="MT"}{#nb_modifications#} : {$audits.nbmodifs}{/if}

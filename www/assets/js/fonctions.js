@@ -283,11 +283,11 @@ function videChampsFinTache(actif) {
 	var champs = new Array();
 	champs['date_fin'] = 'text';
 	/*champs['nb_jours'] = 'text';*/
-	/*champs['duree'] = 'text';*/
+	champs['duree'] = 'text';
 	champs['heure_debut'] = 'text';
 	champs['heure_fin'] = 'text';
-	/*champs['matin'] = 'checkbox';
-	champs['apresmidi'] = 'checkbox';*/
+	champs['matin'] = 'checkbox';
+	champs['apresmidi'] = 'checkbox';
 	for (var valeur in champs) {
 		if (valeur == actif) {
 			continue;
@@ -343,7 +343,7 @@ function initselect2(lang,choix,parentModal) {
 			width: 'resolve',
 			placeholder: choix
 			});
-	$('.select2-search__field').css('width', '100%');
+	$('.select2-search__field').css('width', '105%');
 	$.fn.modal.Constructor.prototype._enforceFocus = function() {};
 }
 
@@ -443,12 +443,10 @@ function loadjscssfile(filename, filetype){
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
-function cellClic(id,type)
-{
+function cellClic(id,type) {
 	Reloader.stopRefresh();
 	// Nouvelle tache
-	if (type==1)
-	{
+	if (type==1) {
 		var idtab=id.split('_');
 		var projet=idtab[1];
 		var annee=idtab[2].substring(0, 4);
@@ -458,9 +456,10 @@ function cellClic(id,type)
 		if (idtab[3] == null)
 		{
 			xajax_ajoutPeriode(datedebut, projet);
-		}else xajax_ajoutPeriode(datedebut, projet,'',idtab[3]);
-	}else
-	{
+		} else {
+			xajax_ajoutPeriode(datedebut, projet,'',idtab[3]);
+		}
+	}else {
 		var idtab=id.split('_');
 		xajax_modifPeriode(idtab[1]);
 	}
@@ -470,12 +469,32 @@ function cellClic(id,type)
 // Gestion du drag & drop
 function allowDrop(ev) {
 	ev.preventDefault();
-	$(ev.target).attr("drop-active", true);
+    var el = ev.target;
+    var parent = el.getAttribute("data-parent");
+    if (parent != null)
+    {
+        var el = document.getElementById(parent);
+        $('#'+parent).attr("drop-active", true);
+    }else
+    {
+        $(ev.target).attr("drop-active", true);
+    }
 }
 
 function leaveDropZone(ev) {
 	ev.preventDefault();
-	$(ev.target).removeAttr("drop-active");
+    var el = ev.target;
+    console.log(ev.dataTransfer);
+
+    var parent = el.getAttribute("data-parent");
+    if (parent != null)
+    {
+        var el = document.getElementById(parent);
+        $('#'+parent).removeAttr("drop-active", true);
+    }else
+    {
+       $(ev.target).removeAttr("drop-active", true);
+    }
 }
 
 function drag(ev) {
@@ -497,16 +516,20 @@ function drop(ev) {
 	ev.preventDefault();
 	var data = ev.dataTransfer.getData("Text");
 	var dragElement = ev;
-	ev.target.appendChild(document.getElementById(data));
-	$(ev.target).removeAttr("drop-active");
-	idCaseEnCoursDeplacement = data;
-	idCaseDestination = ev.target.id;
-	var el=document.getElementById('divChoixDragNDrop');
-	var offset=$('#'+idCaseDestination).offset();
-	el.style.position = 'absolute';
-	el.style.top = offset.top + 20 + "px";
-	el.style.left = offset.left + 20 + "px";
-	el.style.display = 'block';
+    if (ev.target.id != data)
+    {
+        console.log('data : '+data);
+	    ev.target.appendChild(document.getElementById(data));
+        $(ev.target).removeAttr("drop-active");
+	    idCaseEnCoursDeplacement = data;
+	    idCaseDestination = ev.target.id;
+	    var el=document.getElementById('divChoixDragNDrop');
+	    var offset=$('#'+idCaseDestination).offset();
+	    el.style.position = 'absolute';
+	    el.style.top = offset.top + 20 + "px";
+	    el.style.left = offset.left + 20 + "px";
+	    el.style.display = 'block';
+    }
 }
 
 function multiselecthide() {
@@ -519,3 +542,97 @@ function multiselecthide() {
 function desactiverRappelVersion () {
 	setCookie('infosVersionInactif', '1', 30, '/');
 }
+
+function fileUpload() {
+	$('#divPatienter2').removeClass('d-none');
+	var formData = new FormData();
+	var fileData = $('#fichier').prop('files');
+	var linkid = $('#link_id').val();
+	var periodeid = $('#periode_id').val();
+    var filename=$('#fichier')[0].files[0]['name'];
+	var filenamesize=$('#fichier')[0].files[0]['size'];
+	var max_size_upload=$('#max_size_upload').val();
+	if(filename && filenamesize < max_size_upload)
+	{
+		$('<div><a href="upload/files/'+linkid+'/'+filename+'" class="ellipsis fileupload" target="_blank" id="fichier_periode" style="float:left;">'+filename+'</a>&nbsp;<i class="fa fa-trash fa-fw" aria-hidden="true" onclick="fileRemove(\''+filename+'\',this.closest(\'div\'));" id="fileremovebutton" style="margin-top:4px;margin-left:4px;float:left;cursor:pointer;"></i></div>').insertBefore( $('#lastfile') );
+		var json_files="";
+		jQuery.each(jQuery('.fileupload'), function(i, file) {
+			if (json_files != '') { json_files = json_files + ';'; }
+			json_files = json_files + file.innerHTML;
+		});
+		$("#liste_fichiers").val(json_files);
+
+		if (fileData)
+		{	
+			jQuery.each(jQuery('#fichier').prop('files'), function(i, file) {
+				formData.append('fichier-'+i, file);
+			});
+			formData.append('linkid', linkid);
+			formData.append('periodeid', periodeid);
+			formData.append('fichiers', json_files);
+			formData.append('type', 'upload');
+			$.ajax({
+				url			: 'process/upload.php',
+				cache       : false,
+				contentType : false,
+				processData : false,
+				data        : formData,                         
+				type        : 'post',     
+				success		: function(message){
+								if (message)
+								{
+									alert(message);
+									return false;
+								}
+					}
+			});
+		}
+		$('#fichier').val('');
+	}else
+	{
+		alert($('#max_size_upload_error').val());
+	}
+		$('#divPatienter2').addClass('d-none');
+		return true;
+	};
+	
+	function fileRemove(fichier,div) {
+		var suppression_upload=$("#suppression_upload").val();
+		var json_files="";
+		var formData = new FormData();
+		var linkid = $('#link_id').val();
+		var periodeid = $('#periode_id').val();
+		
+		if(confirm(suppression_upload))
+		{
+			div.remove();
+			liste_fichiers=$("#liste_fichiers").val();
+			ret = liste_fichiers.replace('{"filename":"'+fichier+'"}','');
+			jQuery.each(jQuery('.fileupload'), function(i, file) {
+				if (json_files != '') { json_files = json_files + ';'; }
+				json_files = json_files + file.innerHTML;
+			});
+			$("#liste_fichiers").val(json_files);
+
+			formData.append('linkid', linkid);
+			formData.append('periodeid', periodeid);
+			formData.append('type', 'delete');
+			formData.append('fichier_to_delete',fichier);
+			formData.append('fichiers', json_files);
+			$.ajax({
+				url			: 'process/upload.php',
+				cache       : false,
+				contentType : false,
+				processData : false,
+				data        : formData,                         
+				type        : 'post',     
+				success		: function(message){
+					if (message)
+						{
+							alert(message);
+							return false;
+						}
+				}
+			});
+		}
+	}

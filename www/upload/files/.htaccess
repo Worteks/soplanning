@@ -1,0 +1,6 @@
+RewriteEngine On
+
+<Files *.*>
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+</Files>
