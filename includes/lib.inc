@@ -17,7 +17,7 @@ function afficherErreur($objResponse, $message) {
 }
 
 // dates au format YYYY-MM-DD
-function getNbJours($date_debut, $date_fin) {
+function getNbJours($date_debut, $date_fin, $skipDaysoff = true) {
 	global $lang;
 	$DAYS_INCLUDED = explode(',', CONFIG_DAYS_INCLUDED);
 	$joursFeriesTmp = getjoursFeries();
@@ -30,7 +30,7 @@ function getNbJours($date_debut, $date_fin) {
 	$dateDebut->setDate(substr($date_debut,0,4), substr($date_debut,5,2), substr($date_debut,8,2));
 	while($dateDebut->format('Y-m-d') < $date_fin) {
 		$dateDebut->modify('+1 days');
-		if (in_array($dateDebut->format('w'), $DAYS_INCLUDED) && !isset($joursFeries[$dateDebut->format('Y-m-d')])) {
+		if (!$skipDaysoff || (in_array($dateDebut->format('w'), $DAYS_INCLUDED) && !isset($joursFeries[$dateDebut->format('Y-m-d')]))) {
 			$nbJours++;
 		}
 	}
@@ -208,7 +208,7 @@ function usertime2sqltime($s, $formatComplet = 'ok') {
 	return $s;
 }
 
-// valide une date aux diff√©rents formats
+// valide une date aux diffÈrents formats
 function controlDate($date) {
 	switch($_SESSION['preferences']['dateformat'])
 	{
@@ -243,7 +243,7 @@ function val2sql($val)
 }
 
 
-// calcule la couleur (noir ou blanc) qui tranche le mieux avec celle pass√©e en parametre
+// calcule la couleur (noir ou blanc) qui tranche le mieux avec celle passÈe en parametre
 function buttonFontColor($bgcolor) {
 	$values_array = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F");
 
@@ -305,7 +305,7 @@ function buttonFontColor($bgcolor) {
 	return $fontColor;
 }
 
-// r?cup?re le message ? afficher, en concat√©nant un eventuel code d'erreur
+// r?cup?re le message ? afficher, en concatÈnant un eventuel code d'erreur
 function formatMessage($smartyTexte) {
 	global $lang;
 	$smartyTemp = new MySmarty('fr');
@@ -459,7 +459,7 @@ function detectionMobile() {
 // fonction pour affichage par jour
 function couvreTranche($dureeDetails, $trancheHoraire) {
 	if($dureeDetails == 'AM') {
-		// on demarre la couverture sur les premieres heures autoris√©es dans la config, jusqu'√† couvrir le nombre d'heures indiqu√© pour une matin√©e (config √©galement)
+		// on demarre la couverture sur les premieres heures autorisÈes dans la config, jusqu'‡ couvrir le nombre d'heures indiquÈ pour une matinÈe (config Ègalement)
 		$tabTranchesHoraires = explode(',', CONFIG_HOURS_DISPLAYED);
 		$tabTranchesHoraires = explode(',', CONFIG_HOURS_DISPLAYED);
 		for($i=1; $i<=CONFIG_DURATION_AM; $i++) {
@@ -470,7 +470,7 @@ function couvreTranche($dureeDetails, $trancheHoraire) {
 		return false;
 
 	} elseif ($dureeDetails == 'PM') {
-		// on demarre la couverture apr√®s que les heures du matin soient d√©duites
+		// on demarre la couverture aprËs que les heures du matin soient dÈduites
 		$tabTranchesHoraires = explode(',', CONFIG_HOURS_DISPLAYED);
 		for($i=1; $i<=CONFIG_DURATION_AM; $i++) {
 			$tmp = array_shift($tabTranchesHoraires);
@@ -483,7 +483,7 @@ function couvreTranche($dureeDetails, $trancheHoraire) {
 		return false;
 
 	} elseif ($dureeDetails == 'duree') {
-		// on couvre selon la dur√©e, sur les heures selectionn√©es
+		// on couvre selon la durÈe, sur les heures selectionnÈes
 		$tabTranchesHoraires = explode(',', CONFIG_HOURS_DISPLAYED);
 		for($i=1; $i<=CONFIG_DURATION_DAY; $i++) {
 			if(array_shift($tabTranchesHoraires) == $trancheHoraire) {
@@ -492,7 +492,7 @@ function couvreTranche($dureeDetails, $trancheHoraire) {
 		}
 
 	} elseif (strlen($dureeDetails) == 17) {
-		// on calcule si l'horaire de d√©but et de fin couvre.
+		// on calcule si l'horaire de dÈbut et de fin couvre.
 		$data = explode(';', $dureeDetails);
 		$heureDebut = $data[0];
 		$heureFin = $data[1];
@@ -510,7 +510,7 @@ function couvreTranche($dureeDetails, $trancheHoraire) {
 		return false;
 
 	} else {
-		// dans tous les autres cas on consid√®re que √ßa couvre
+		// dans tous les autres cas on considËre que Áa couvre
 		return true;
 	}
 }
@@ -548,7 +548,7 @@ function sanitize($input) {
 
 
 function checkConflitRessource($ressource,$date_debut,$date_fin,$duree_details,$user_id,$periode_id,$link_id) {
-		// V?rification de l'exclusivit√© de la ressource
+		// V?rification de l'exclusivitÈ de la ressource
 		if($ressource != '')
 		{
 	      $nressource = new Ressource();
@@ -587,8 +587,8 @@ function checkConflitRessource($ressource,$date_debut,$date_fin,$duree_details,$
             $sql .= " OR (date_fin IS NOT NULL AND date_debut <= " . val2sql($date_fin) . " AND date_debut >= " . val2sql($date_debut) . ")";
 			$sql .= " OR (date_fin IS NULL AND date_debut >= " . val2sql($date_debut) . " AND date_debut <= " . val2sql($date_fin) . "))";
             $sql .= " AND planning_periode.ressource_id = ".val2sql($ressource);
-			if (!empty($link_id)) $sql .= " AND link_id<>'$link_id'";
 		  }
+		  if (!empty($link_id)) $sql .= " AND link_id<>'$link_id'";
 	      if (!is_null($periode_id)) $sql.= " AND planning_periode.periode_id<> $periode_id ";
 	      $result = db_query($sql);
 	      if (db_num_rows($result)>0)
@@ -606,7 +606,7 @@ function checkConflitRessource($ressource,$date_debut,$date_fin,$duree_details,$
 	}
 
 function checkConflitLieu($lieu,$date_debut,$date_fin,$duree_details,$user_id,$periode_id,$link_id) {
-	// V?rification de l'exclusivit√© du lieu
+	// V?rification de l'exclusivitÈ du lieu
 	if($lieu != '')
 	{
 	  $nlieu = new Lieu();
@@ -636,7 +636,6 @@ function checkConflitLieu($lieu,$date_debut,$date_fin,$duree_details,$user_id,$p
 		$sql .= " WHERE	((date_fin IS NOT NULL AND date_debut <= " . val2sql($date_debut) . " AND date_fin >= " . val2sql($date_fin) . ")";
 		$sql .= " OR (date_fin IS NULL AND date_debut = " . val2sql($date_debut) . "))";
 		$sql .= " AND planning_periode.lieu_id = ".val2sql($lieu);
-		if (!empty($link_id)) $sql .= " AND (planning_periode.link_id is NULL or planning_periode.link_id<>'$link_id')";
 	 }else
 	 {
 		$sql = "SELECT *, planning_user.nom AS nom_user";
@@ -646,8 +645,8 @@ function checkConflitLieu($lieu,$date_debut,$date_fin,$duree_details,$user_id,$p
 		$sql .= " OR (date_fin IS NOT NULL AND date_debut <= " . val2sql($date_fin) . " AND date_debut >= " . val2sql($date_debut) . ")";
 		$sql .= " OR (date_fin IS NULL AND date_debut >= " . val2sql($date_debut) . " AND date_debut <= " . val2sql($date_fin) . "))";
 		$sql .= " AND planning_periode.lieu_id = ".val2sql($lieu);
-		if (!empty($link_id)) $sql .= " AND (planning_periode.link_id is NULL or planning_periode.link_id<>'$link_id')";
 	 }
+	 if (!empty($link_id)) $sql .= " AND link_id<>'$link_id'";
 	 if (!is_null($periode_id)) $sql.= " AND planning_periode.periode_id<> $periode_id ";
 	 $result = db_query($sql);
 	 if (db_num_rows($result)>0)
@@ -789,7 +788,7 @@ function upload_image($target,$fichier)
 				}
 			}else
 			{
-				$NouvelleLargeur = 40; //Largeur choisie √† 40 px mais modifiable
+				$NouvelleLargeur = 40; //Largeur choisie ‡ 40 px mais modifiable
 				$NouvelleHauteur = ( ($infosImg[1] * (($NouvelleLargeur)/$infosImg[0])) );
 				$NouvelleImage = imagecreatetruecolor($NouvelleLargeur , $NouvelleHauteur) or die ("Erreur");
 
@@ -888,7 +887,7 @@ function convertHourToDecimal($heure) {
 	$data = explode(':', $heure);
 	if(count($data) == 1) {
 		// we cast if necessary
-		return ($data[0] + 0);
+		return (round($data[0]) + 0);
 	}
 	return $data[0] + ($data[1]*5/3/100);
 }
@@ -948,21 +947,20 @@ function create_tooltip($tableau)
 		$cooltip .= '<br/><strong>' . $smarty->getConfigVars('winPeriode_livrable') . '</strong> : ' . (str_replace(array("\r\n", "\n", "\""), array("<br>", "<br>", "'"), $smarty->getConfigVars('oui')));
 	}
 	
-	// Statut de la t√¢che
+	// Statut de la t‚che
 	if($tableau['statut_tache'] != '') 
 	{
 		$cooltip .= '<br/><strong>' . $smarty->getConfigVars('winPeriode_statut') . '</strong> : ' . (str_replace(array("\r\n", "\n", "\""), array("<br>", "<br>", "'"), $tableau['status']));
 	}
 	
-	// Date de d√©but
+	// Date de dÈbut
 	$cooltip .= '<br/><strong>' . $smarty->getConfigVars('tab_dateDebut') . '</strong> : ' . sqldate2userdate($tableau['date_debut']);
 	
 	// Date de fin
 	if($tableau['date_fin'] != '') 
 	{
 		$cooltip .= '<br/><strong>'	. $smarty->getConfigVars('tab_dateFin') .	'</strong> : ' . sqldate2userdate($tableau['date_fin']);
-	} else 
-	{
+	} else {
 		$cooltip .= '<br/><strong>' . $smarty->getConfigVars('tab_duree') . '</strong> : ' . sqltime2usertime($tableau['duree']);
 		if(isset($tableau['duree_details_heure_debut'])) 
 		{
@@ -1002,7 +1000,7 @@ function create_tooltip($tableau)
 		$cooltip .= '<br/><strong>' . $smarty->getConfigVars('tab_commentaires') . '</strong> : ' . (str_replace(array("\r\n", "\n", "\""), array("<br>", "<br>", "'"), $tableau['notes']));
 	}
 	
-	// Champ personnalis√©
+	// Champ personnalisÈ
 	if($tableau['custom'] != '') 
 	{
 		$cooltip .= '<br/><strong>' . $smarty->getConfigVars('winPeriode_custom') . '</strong> : ' . (str_replace(array("\r\n", "\n", "\""), array("<br>", "<br>", "'"), $tableau['custom']));
@@ -1014,7 +1012,7 @@ function create_tooltip($tableau)
 		$cooltip .= '<br/><strong>' . $smarty->getConfigVars('tab_lien') . '</strong> : ' . (str_replace(array("\r\n", "\n", "\""), array("<br>", "<br>", "'"), $tableau['lien']));
 	}
 	
-	// Cr√©ateur
+	// CrÈateur
 	$cooltip.="<hr />";
 	if($tableau['nom_createur'] != '') 
 	{
@@ -1032,17 +1030,46 @@ function create_tooltip($tableau)
 // Generation du cellProject
 function createCellProject($infos)
 {
-	global $user,$base_ligne,$base_colonne,$dimensionCase,$weekend,$ferie,$current_date2,$totauxJourUsers,$TotalMaxJour,$ligne,$nbitems,$largeuritems,$planning,$totalHeuresUsers,$tabPadding,$max;
+	global $user,$base_ligne,$base_colonne,$dimensionCase,$weekend,$ferie,$current_date2,$totauxJourUsers,$TotalMaxJour,$ligne,$nbitems,$largeuritems,$planning,$totalHeuresUsers,$tabPadding,$max, $heureDebutMatin, $heureDebutAprem, $idCase;
 	$cellule="";
 	$classCell="cellProject";
-	
+
 	// Detection biseau
 	$dureecell=convertHourToDecimal($infos['duree']);
-	if (CONFIG_PLANNING_DIFFERENCIE_TACHE_PARTIELLE==1 and $base_ligne<>'heures' && $dureecell > 0 && $dureecell < 8)
+	$dureejour=convertHourToDecimal(CONFIG_DURATION_DAY);
+	if (CONFIG_PLANNING_DIFFERENCIE_TACHE_PARTIELLE == 1 and $base_ligne<>'heures' && $dureecell > 0 && $dureecell < $dureejour)
 	{
-		$biseau=true;
-		$classCell="cellProjectBiseau";
-	}else $biseau=false;
+		if($infos['duree_details'] == 'AM'){
+			$biseau = true;
+			$classCell="cellProjectBiseau1";
+		} elseif($infos['duree_details'] == 'PM'){
+			$biseau = true;
+			$classCell="cellProjectBiseau2";
+		} elseif($infos['duree'] > "04:00:00"){
+			$biseau = false;
+			$classCell = "cellProject";
+		} elseif($infos['duree'] <= "04:00:00"){
+			$biseau = true;
+			$classCell="cellProjectBiseau1";
+		} else{
+			if($infos['duree_details_heure_debut'] < "13:00:00"){
+				$biseau = true;
+				$classCell="cellProjectBiseau1";
+			} else{
+				$biseau = true;
+				$classCell="cellProjectBiseau2";
+			}
+		}
+	}else {
+		$biseau = false;
+		$classCell = "cellProject";
+	}
+
+	// Cellule en lecture seule si equipe diffÈrente et droit de modification de son Èquipe seulement
+	if($user->checkDroit('tasks_modify_team') && ( $infos['team_id'] != $_SESSION['user_groupe_id'])) {
+	 $classCell.=" read-only";
+	 $dragndropzone = '';
+	}else $dragndropzone = 'draggable="true" ondrop="drop(event)" ondragleave="leaveDropZone(event);"';
 	
 	// Texte de la cellule
 	$L0=(substr($infos['nom_cellule'], 0, CONFIG_PLANNING_CODE_WIDTH));
@@ -1061,8 +1088,8 @@ function createCellProject($infos)
 	}
 	$couleurTexte = buttonFontColor('#' . $couleurFond);
 
-	// D√©finition des classes de la cellule
-	// Masque les t√¢ches du week-end si l'option est activ√©e (uniquement pour le planning jour)
+	// DÈfinition des classes de la cellule
+	// Masque les t‚ches du week-end si l'option est activÈe (uniquement pour le planning jour)
 	if ($base_colonne=="heures" || $base_colonne=="users"){
 		$classHidden = "";
 	} else {
@@ -1073,13 +1100,13 @@ function createCellProject($infos)
 		}
 	}
 	
-	// Si une tache r√©p√©titive, on ajoute la classe rep
+	// Si une tache rÈpÈtitive, on ajoute la classe rep
 	if (!empty($infos['parent_id'])) {
 		$classHidden .= " tacherepetitive";
 	}
 	
-	// D√©finition de la case avec le code du projet avec d√©finition d'un style personalis√©
-	$cellule .= '<div id="c_' . $infos['periode_id'] . '_' . $current_date2 . '" draggable="true" class="'.$classCell.' tooltipster '.$classHidden.'" data-content="'.$L0.'" ondragstart="drag(event)"  title="'.$infos['tooltip'].'"	style="color:'.$couleurTexte.';background-color:#' . $couleurFond . ';';
+	// DÈfinition de la case avec le code du projet avec dÈfinition d'un style personalisÈ
+	$cellule .= '<div id="c_' . $infos['periode_id'] . '_' . $current_date2 . '" '.$dragndropzone.' class="'.$classCell.' tooltipster '.$classHidden.'" data-content="'.$L0.'" ondragstart="drag(event)"  title="'.$infos['tooltip'].'"	style="color:'.$couleurTexte.';background-color:#' . $couleurFond . ';';
 	// Cas affichage heures
 	if ($base_ligne=='heures')
 	{
@@ -1087,7 +1114,7 @@ function createCellProject($infos)
 		$hauteurcellule = CONFIG_PLANNING_LINE_HEIGHT + 0.8;
 	 }else $hauteurcellule = 20;
 	 
-	 // calcul d√©calage
+	 // calcul dÈcalage
 	 $padding=5;
 	 $ligneId=$ligne['nom'];
 	 if (isset($planning['taches_horaires_users'][$infos['user_id']][$ligneId]))
@@ -1121,107 +1148,87 @@ function createCellProject($infos)
 	 $hauteur = round($infos['dureeHeures']*2*$hauteurcellule,0);
 	 $cellule .= 'position:absolute;float:left;height:'.($hauteur + 1).'px;margin-left:'.$padding.'px';
 	 
-	 if($dimensionCase=='large') 
-		{
+	 if($dimensionCase=='large') {
 			$cellule .= ';min-width:130px;';
 		}
-
 	}
 	
-	// Cas des demies journ√©es (affichage d'une case tronqu√©e)
-	if($dimensionCase=='reduit') 
-	{
-		$dureecell=convertHourToDecimal($infos['duree']);
-		if (CONFIG_PLANNING_DIFFERENCIE_TACHE_PARTIELLE==1 and $base_ligne<>'heures' && $dureecell > 0 && $dureecell < 8) 
+	// Cas des demies journÈes (affichage d'une case tronquÈe)
+	if($dimensionCase=='reduit') {
+		if ($biseau==true)
 		{
-			$cellule .= 'background: linear-gradient(33deg, #' . $couleurFond . ' 0%, #' . $couleurFond . ' 50%, transparent 26%);';
+			if($classCell == "cellProjectBiseau1"){
+				$cellule .= 'background: linear-gradient(33deg, #' . $couleurFond . ' 0%, #' . $couleurFond . ' 50%, transparent 26%);';		
+			} elseif($classCell == "cellProjectBiseau2"){
+				$cellule .= 'background: linear-gradient(33deg, transparent 45%, #' . $couleurFond . ' 30%, #' . $couleurFond . ' 0%);';
+			}
 		}
 	}
 
-	// On barre le texte de la t√¢che
-	if($infos['statut_barre'] == '1') 
-	{
+	// On barre le texte de la t‚che
+	if($infos['statut_barre'] == '1') {
 			$cellule .= 'text-decoration:line-through;';
-	}; 
-	// On met le texte de la t√¢che en gras
-	if($infos['statut_gras'] == '1') 
-	{
+	}
+	// On met le texte de la t‚che en gras
+	if($infos['statut_gras'] == '1') {
 			$cellule .= 'font-weight:bold;';
-	}; 	
-	// On met le texte de la t√¢che en italique
-	if($infos['statut_italique'] == '1') 
-	{
+	}
+	// On met le texte de la t‚che en italique
+	if($infos['statut_italique'] == '1') {
 			$cellule .= 'font-style:italic;';
-	}; 	
-	// On met le texte de la t√¢che en souligne
-	if($infos['statut_souligne'] == '1') 
-	{
+	}
+	// On met le texte de la t‚che en souligne
+	if($infos['statut_souligne'] == '1') {
 			$cellule .= 'text-decoration:underline;';
-	}; 	
-
-	//if ($infos['lien'] != '')
-	//{
-		//si pas les droits mais qu'un lien existe on affiche curseur lien
-		//$cellule .= 'cursor:url(\'assets/img/pictos/weblink.png\')';
-	//}
-	$cellule .= '"';
-				
-	// Script d'ouverture du lien dans une nouvelle fen√™tre (en cas de lien)
-	if (!$user->checkDroit('tasks_modify_all') && !($user->checkDroit('tasks_modify_own_project') && $infos['projet_createur_id'] == $user->user_id) && !($user->checkDroit('tasks_modify_own_task') && ($infos['user_id'] == $user->user_id || $infos['projet_createur_id'] == $user->user_id)) && $infos['lien'] != '')
-	{
-		$cellule .=" onclick=\"javascript:window.open('".$infos['lien']."')\"";
 	}
 	
-	$cellule .=">";
+	$cellule .= '"';
+				
+	// Script d'ouverture du lien dans une nouvelle fenÍtre (en cas de lien)
+	if (!$user->checkDroit('tasks_modify_all') && !($user->checkDroit('tasks_modify_own_project') && $infos['projet_createur_id'] == $user->user_id) && !($user->checkDroit('tasks_modify_own_task') && ($infos['user_id'] == $user->user_id || $infos['projet_createur_id'] == $user->user_id)) && $infos['lien'] != '') {
+		$cellule .=" onclick=\"javascript:window.open('".$infos['lien']."')\"";
+	}
+    if (!empty($idCase))
+    {
+       $cellule .=" data-parent='$idCase'";
+    }
+	$cellule .=" >";
 
 	// Calcul du picto charge journaliere (case large)
-	if($dimensionCase=='large') 
-	{
+	if($dimensionCase=='large') {
 		$current_date2_explode=explode('_',$current_date2);
 		$current_date2=$current_date2_explode[0];
-		if ($base_ligne=="heures")
-		{
+		if ($base_ligne=="heures"){
 			$ratioCharge = round(decimalHours($totauxJourUsers[$current_date2][$infos['user_id']]) / $TotalMaxJour, 1);
-		}else
-		{
+		} else {
 			$ratioCharge = round(decimalHours($totauxJourUsers[$infos['user_id']][$current_date2]) / $TotalMaxJour, 1);
 		}
 		$ratio = round($ratioCharge * 10);
-		if ($ratio > 10) 
-		{
+		if ($ratio > 10) {
 			$ratio = 11;
 		}
-		if ($ratio == 0) 
-		{
-			if ($infos['lien'] != '') 
-			{
+		if ($ratio == 0) {
+			if ($infos['lien'] != '') {
 				$cellule .= '<div class="jauge0"></div>';
 				$cellule .= '<img src="assets/img/pictos/link.gif" class="picto-link" alt="" />';
-			} else 
-			{
+			} else {
 				$cellule .= '<div class="jauge0"></div>';
 			}
-		} else 
-		{
-				if ($infos['lien'] != '') 
-				{
+		} else {
+				if ($infos['lien'] != '') {
 					$cellule .= '<div class="jauge0">';
 					$cellule .= '<div class="jauge' . $ratio . '">';
-					if ($ratio == 10) 
-					{
+					if ($ratio == 10) {
 						$cellule .= '100';
 					}
 					$cellule .= '</div></div>';
-					if (CONFIG_PLANNING_DIFFERENCIE_TACHE_LIEN==1) 
-					{
+					if (CONFIG_PLANNING_DIFFERENCIE_TACHE_LIEN==1) {
 						$cellule .= '<i class="fa fa-share picto-link justify-content-end" aria-hidden="true"></i>';
 					}
-				} else 
-				{
+				} else {
 					$cellule .= '<div class="jauge0">';
 					$cellule .= '<div class="jauge' . $ratio . '">';
-					if ($ratio == 10) 
-					{
+					if ($ratio == 10) {
 						$cellule .= '100';
 					}
 					$cellule .= '</div></div>';
@@ -1230,37 +1237,37 @@ function createCellProject($infos)
 		}
 				
 		// Modif affichage simple ou complet
-		$L1 = '';
+		$L1='';
 		$L1=$infos['nom_cellule'];
 		$L2=$infos['titre'];
 
-		// Calcul de l'info du d√©but
-		if (isset($infos['duree_details_heure_debut']))
-		{
+		// Calcul de l'info du dÈbut
+		if (isset($infos['duree_details_heure_debut'])) {
 			$infoDebut=sqltime2usertime($infos['duree_details_heure_debut']);
-		}else
-		{
-			$infoDebut='09:00';
+		}elseif ($infos['duree_details'] == 'AM') {
+			$infoDebut = $heureDebutMatin;
+		}elseif ($infos['duree_details'] == 'PM') {
+			$infoDebut = $heureDebutAprem;
+		} else{
+			$infoDebut = $heureDebutMatin;
 		}
 				
-		// Calcul de la dur√©e
-		if (isset($infos['duree']))
-		{
+		// Calcul de la durÈe
+		if (isset($infos['duree'])) {
 			$affichageDuree=$infos['duree'];
-		}else
-		{
+		}else {
 			$affichageDuree= CONFIG_DURATION_DAY . ':00:00';
 		}
-		if ($L2=='')
-		{
+		if ($L2=='') {
 			$L2='...';
 		}
 					
-		// Si on est une case large, on affiche des informations d√©taill√©es
+		// Si on est une case large, on affiche des informations dÈtaillÈes
 		if($dimensionCase=='large')
 		{
-			$nom = substr($L1, 0, CONFIG_PLANNING_CODE_WIDTH_LARGE);
-			$nom.= '<div class="largeCode">'.substr($L2,0,CONFIG_PLANNING_CODE_WIDTH_LARGE).'</div>';
+			//mb_internal_encoding("UTF-8");
+			$nom = xss_protect(substr($L1, 0, CONFIG_PLANNING_CODE_WIDTH_LARGE));
+			$nom.= '<div class="largeCode">'.xss_protect(substr($L2,0,CONFIG_PLANNING_CODE_WIDTH_LARGE)).'</div>';
 			$nom.= '<div class="startDateCell">'.$infoDebut.'h</div>';
 			if ($base_ligne=="heures")
 			{
@@ -1273,10 +1280,9 @@ function createCellProject($infos)
 			$nom.= '<div class="percentCell">'.round(decimalHours($affichageDuree),1).'h/'.round(decimalHours($totauxJourUsers[$infos['user_id']][$current_date2]),1).'h</div>';
 			}
 			
-			// Dans le format r√©duit, c'est le seul code
-		}else
-		{
-			$nom = substr($L1, 0, CONFIG_PLANNING_CODE_WIDTH);
+			// Dans le format rÈduit, c'est le seul code
+		}else {
+			$nom = xss_protect(substr($L1, 0, CONFIG_PLANNING_CODE_WIDTH));
 			if (CONFIG_PLANNING_DIFFERENCIE_TACHE_LIEN==1 and $infos['lien'] != '') 
 			{
 				$cellule .= '<i class="fa fa-share picto-link justify-content-end" aria-hidden="true"></i>';
@@ -1311,8 +1317,26 @@ function array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
     array_multisort($sort_col, $dir, $arr);
 }
 
+// multisort array
+// Utilisation : array_sort_by_columns($donnÈes, 'champ1', SORT_DESC, 'champ2', SORT_ASC);
+function array_sort_by_columns() {
+    $args = func_get_args();
+    $data = array_shift($args);
+    foreach ($args as $n => $field) {
+        if (is_string($field)) {
+            $tmp = array();
+            foreach ($data as $key => $row)
+                $tmp[$key] = $row[$field];
+            $args[$n] = $tmp;
+            }
+    }
+    $args[] = &$data;
+    call_user_func_array('array_multisort', $args);
+    return array_pop($args);
+}
 
-// calcul dur√©e 
+
+// calcul durÈe 
 function calcul_duree_heures_non_masquees($heure_debut,$heure_fin) {
 	global $planning;
 
@@ -1322,7 +1346,7 @@ function calcul_duree_heures_non_masquees($heure_debut,$heure_fin) {
 	{
 		if (in_array(round($h,0),$tabTranchesHoraires)) $nbheures=$nbheures+0.5;
 	}
-	// Si la derni√®re heure est masqu√©e
+	// Si la derniËre heure est masquÈe
 	if(!in_array($heure_fin,$tabTranchesHoraires)) $nbheures=$nbheures+0.5;
 	return $nbheures;
 }
@@ -1385,20 +1409,20 @@ function logAction($typeaction,$infos=null) {
 
 
 function chargerSessionStatutsDefaut(){
-	// Pr√©f√©rence de s√©lection par d√©faut
+	// PrÈfÈrence de sÈlection par dÈfaut
 	$status = new GCollection('Status');
 	$status->db_load(array('defaut', '=', 1, 'affichage', 'IN', array('t', 'tp')));
 	foreach ($status->getSmartyData() as $s) {
 		$_SESSION['status_taches_par_defaut'][] = $s['status_id'];
 	}
-	if(isset($_SESSION['status_taches_par_defaut'])){
+	if(!isset($_SESSION['status_taches_par_defaut'])){
 		$statuts = new GCollection('Status');
 		$statuts->db_load(array('affichage', 'IN', array('t', 'tp')));
 		if(count($_SESSION['status_taches_par_defaut']) >= $statuts->getCount()) {
 			$_SESSION['status_taches_par_defaut'] = array();
 		}
 	} else{
-		// si aucun statut par d√©faut, on prend le premier
+		// si aucun statut par dÈfaut, on prend le premier
 		$status = new GCollection('Status');
 		$status->db_load(array('affichage', 'IN', array('t', 'tp')));
 		$_SESSION['status_taches_par_defaut'] = $status->get('status_id');
@@ -1417,4 +1441,41 @@ function chargerSessionStatutsDefaut(){
 			$_SESSION['status_projets_par_defaut'] = array();
 		}
 	}
+}
+
+ // Suppression d'un repertoire
+ function rrmdir($dir) {
+   if (is_dir($dir)) {
+     $objects = scandir($dir);
+     foreach ($objects as $object) {
+       if ($object != "." && $object != "..") {
+         if (filetype($dir."/".$object) == "dir") rmdir($dir."/".$object); else unlink($dir."/".$object);
+       }
+     }
+     reset($objects);
+     rmdir($dir);
+   }
+ }
+
+ function cprdir ($orig,$dest) {
+  if (file_exists($orig))
+  {
+     mkdir ($dest);
+    $dir = dir($orig);
+    while ($entry=$dir->read()) {
+        $pathOrig = "$orig/$entry";
+        $pathDest = "$dest/$entry";
+        // repertoire ->copie rÈcursive
+        if (is_dir($pathOrig) and (substr($entry,0,1)<>'.')) CopieRep ($pathOrig,$pathDest);
+        // fichier -> copie simple
+        if (is_file($pathOrig) and ($pathDest<>'') and ($fp=fopen($pathOrig,'rb'))) {
+            $buf = fread($fp,filesize($pathOrig));
+            $cop = fopen($pathDest,'ab+');
+            fputs ($cop,$buf);
+            fclose ($cop);
+            fclose ($fp);
+        }
+  }
+  $dir->close();
+  }
 }

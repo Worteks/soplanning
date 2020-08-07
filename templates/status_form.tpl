@@ -59,7 +59,7 @@
 	</div>
 	<div class="form-group row col-md-12 align-items-center">
 		<label class="col-md-5 col-form-label">{#status_couleur#} :</label>
-		<div class="col-md-2">
+		<div class="col-md-3">
 		{if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}
 				{if $smarty.session.isMobileOrTablet==1}
 					<input class="form-control color-input" name="couleur" id="couleur" maxlength="6" type="color" list="colors" value="#{if $status.couleur eq ''}{$couleurExStatus}{else}{$status.couleur}{/if}" />
@@ -69,8 +69,8 @@
 							{/foreach}
 						</datalist>
 				{else}
-				<select name="couleur2" id="couleur2" class="form-control" style="background-color:#{$status.couleur};color:{"#"|cat:$status.couleur|buttonFontColor}">
-				    {if $status.couleur eq ""}<option value="">{#status_couleurchoix#}</option>{/if}
+				<select name="couleur2" id="couleur2" class="form-control" style="background-color:#{$status.couleur};color:{'#'|cat:$status.couleur|buttonFontColor}">
+				    {if $status.couleur neq ""}<option value="{$status.couleur}" style="background-color:#{$status.couleur};color:{'#'|cat:$status.couleur|buttonFontColor}" selected="selected">{$status.couleur}</option>{else}<option value="">{#status_couleurchoix#}</option>{/if}
 					{foreach from=","|explode:$smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE item=couleurTmp}
 						<option value="{$couleurTmp|replace:'#':''}" style="background-color:{$couleurTmp};color:{$couleurTmp|buttonFontColor}" {if $couleurTmp eq "#"|cat:$status.couleur}selected="selected"{/if}>{$couleurTmp|replace:'#':''}</option>
 					{/foreach}
@@ -88,22 +88,22 @@
 			<div title="{#options_aide_couleur_statut#}" class="cursor-help tooltipster"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
 	</div>	
 	<div class="form-group row col-md-12 align-items-center">
-		<label class="col-md-5 col-form-label">{#status_format_texte#} :</label>
+		<label class="col-md-5 col-form-label">{#status_format_texte#} : </label>
 		<div class="col-md-5">
 			<div class="input-group">
-			<button type="button" id="button_bold" class="btn btn-default{if $status.gras eq 1} active{/if}" aria-label="Bold" onclick="$('#button_bold').toggleClass('active')">
+			<button type="button" id="button_bold" class="btn {if $status.gras eq 1}btn-info{else}btn-default{/if}" aria-label="Bold" onclick="boutonStyleStatut(this.id);">
 				<i class="fa fa-bold" aria-hidden="true";"></i>
 			</button>
-			<button type="button" id="button_italic" class="btn btn-default{if $status.italique eq 1} active{/if}" aria-label="Italic" onclick="$('#button_italic').toggleClass('active')">
+			<button type="button" id="button_italic" class="btn {if $status.italique eq 1}btn-info{else}btn-default{/if}" aria-label="Italic" onclick="boutonStyleStatut(this.id);">
 				<i class="fa fa-italic" aria-hidden="true"></i>
 			</button>
-			<button type="button" id="button_underline" class="btn btn-default{if $status.souligne eq 1} active{/if}" aria-label="Underline" onclick="$('#button_underline').toggleClass('active')">
+			<button type="button" id="button_underline" class="btn {if $status.souligne eq 1}btn-info{else}btn-default{/if}" aria-label="Underline" onclick="boutonStyleStatut(this.id);">
 				<i class="fa fa-underline" aria-hidden="true"></i>
 			</button>
-			<button type="button" id="button_strikethrough" class="btn btn-default{if $status.barre eq 1} active{/if}" aria-label="Strikethrough" onclick="$('#button_strikethrough').toggleClass('active')">
+			<button type="button" id="button_strikethrough" class="btn {if $status.barre eq 1}btn-info{else}btn-default{/if}" aria-label="Strikethrough" onclick="boutonStyleStatut(this.id);">
 				<i class="fa fa-strikethrough" aria-hidden="true"></i>
 			</button>
-			</div> 			
+			</div>		
 		</div>
 	</div>
 	<div class="form-group row col-md-12 align-items-center">
@@ -147,7 +147,7 @@
 		<label class="col-md-5"></label>
 		<div class="col-md-5">
 			<br />
-			<input type="button" value="{#enregistrer#|escape:"html"}" class="btn btn-primary" onClick="xajax_submitFormStatus('{$status.status_id}', $('#status_id').val(), $('#nom').val(), $('#commentaire').val(), $('#affichage option:selected').val(), $('#button_strikethrough').hasClass('active'),$('#button_bold').hasClass('active'),$('#button_italic').hasClass('active'),$('#button_underline').hasClass('active'), $('#defaut option:selected').val(), $('#affichage_liste option:selected').val(), $('#pourcentage option:selected').val(), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur').val(){/if}, $('#priorite option:selected').val())" />
+			<input type="button" value="{#enregistrer#|escape:"html"}" class="btn btn-primary" onClick="xajax_submitFormStatus('{$status.status_id}', $('#status_id').val(), $('#nom').val(), $('#commentaire').val(), $('#affichage option:selected').val(), $('#button_strikethrough').hasClass('btn-info'),$('#button_bold').hasClass('btn-info'),$('#button_italic').hasClass('btn-info'),$('#button_underline').hasClass('btn-info'), $('#defaut option:selected').val(), $('#affichage_liste option:selected').val(), $('#pourcentage option:selected').val(), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur').val(){/if}, $('#priorite option:selected').val())" />
 		</div>
 	</div>
 </form>
@@ -159,4 +159,9 @@
 		boundary: 'window'
 	});
 	{/literal}
+
+function boutonStyleStatut(clic) {
+	$('#' + clic).toggleClass('btn-info');
+	$('#' + clic).toggleClass('btn-default');
+}
 </script>

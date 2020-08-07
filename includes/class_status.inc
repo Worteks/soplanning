@@ -15,7 +15,7 @@ class Status extends GObject
 		$this->fields['gras'] = new GString('planning_status', 'gras', 2, TRUE, NULL);
 		$this->fields['italique'] = new GString('planning_status', 'italique', 2, TRUE, NULL);
 		$this->fields['souligne'] = new GString('planning_status', 'souligne', 2, TRUE, NULL);
-		$this->fields['defaut'] = new GString('planning_status', 'defaut', 2, TRUE, NULL);
+		$this->fields['defaut'] = new GString('planning_status', 'defaut', 2, TRUE, 1);
 		$this->fields['affichage_liste'] = new GString('planning_status', 'affichage_liste', 2, TRUE, 1);
 		$this->fields['pourcentage'] = new GFloat('planning_status', 'pourcentage', 4, TRUE, 0);
 		$this->fields['couleur'] = new GString('planning_status', 'couleur', 6, TRUE, '');

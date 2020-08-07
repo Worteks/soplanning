@@ -41,7 +41,7 @@
 				</div>
 				<label class="col-form-label col-md-2">{#user_password#} :</label>
 				<div class="col-md-4">
-					<input id="tmp_pa" class="form-control" type="password" value="" maxlength="20" autocomplete="off" />
+					<input id="tmp_pa" class="form-control" type="password" value="" maxlength="50" autocomplete="off" />
 				</div>
 	</div>
 	<div class="form-group row col-md-12">
@@ -69,7 +69,11 @@
 					<label class="form-check-label" for="droit1">{#droits_aucundroitUser#}</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="users_manage" id="users_manage_all" value="users_manage_all" {if in_array("users_manage_all", $user_form.tabDroits)}checked="checked"{/if}>
+					<input class="form-check-input" type="radio" name="users_manage" id="users_manage_team" value="users_manage_team" {if in_array("users_manage_team", $user_form.tabDroits)}checked="checked"{/if}>
+					<label class="form-check-label" for="users_manage_team">{#droits_gererUsersTeam#}</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="users_manage" id="users_manage_all" value="users_manage_all" {if in_array("users_manage_all", $user_form.tabDroits)}checked="checked"{/if} {if in_array("users_manage_team", $user_form.tabDroits)}disabled{/if}>
 					<label class="form-check-label" for="users_manage_all">{#droits_gererTousUsers#}</label>
 				</div>
 			</div>
@@ -103,13 +107,17 @@
 					<label class="col-form-label col-md-3">{#droits_modifPlanning#} :</label>
 					<div class="col-form-label">					
 					<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="planning_modif" id="droit3" value="tasks_readonly" {if in_array("tasks_readonly", $user_form.tabDroits) || (!in_array("tasks_modify_all", $user_form.tabDroits) && !in_array("tasks_modify_own_project", $user_form.tabDroits) && !in_array("tasks_modify_own_task", $user_form.tabDroits))}checked="checked"{/if}>
+							<input class="form-check-input" type="radio" name="planning_modif" id="tasks_readonly" value="tasks_readonly" {if in_array("tasks_readonly", $user_form.tabDroits) || (!in_array("tasks_modify_all", $user_form.tabDroits) && !in_array("tasks_modify_own_project", $user_form.tabDroits) && !in_array("tasks_modify_own_task", $user_form.tabDroits))}checked="checked"{/if}>
 							<label class="form-check-label" for="tasks_readonly">{#droits_planningLectureSeule#}</label>
-						</div>						
+						</div>	
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="planning_modif" id="tasks_modify_all" value="tasks_modify_all" {if in_array("tasks_modify_all", $user_form.tabDroits)}checked="checked"{/if}>
 							<label class="form-check-label" for="tasks_modify_all">{#droits_planningTousProjets#}</label>
-						</div><br />					
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="planning_modif" id="tasks_modify_team" value="tasks_modify_team" {if in_array("tasks_modify_team", $user_form.tabDroits)}checked="checked"{/if}>
+							<label class="form-check-label" for="tasks_modify_team">{#droits_planningEquipe#}</label>
+						</div><br />				
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="planning_modif" id="tasks_modify_own_project" value="tasks_modify_own_project" {if in_array("tasks_modify_own_project", $user_form.tabDroits)}checked="checked"{/if}>
 							<label class="form-check-label" for="tasks_modify_own_project">{#droits_planningProjetsProprio#}</label>
@@ -146,6 +154,10 @@
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="planning_view_users" id="tasks_view_all_users" value="tasks_view_all_users" {if in_array("tasks_view_all_users", $user_form.tabDroits) || !in_array("tasks_view_all_users", $user_form.tabDroits)}checked="checked"{/if} onChange="{literal}if(this.checked){document.getElementById('divSpecificUsers').style.display='none';}{/literal}">
 							<label class="form-check-label" for="tasks_view_all_users">{#droits_tasks_view_all_users#}</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="planning_view_users" id="droits_tasks_view_team_users" value="droits_tasks_view_team_users" {if in_array("droits_tasks_view_team_users", $user_form.tabDroits)}checked="checked"{/if} onChange="{literal}if(this.checked){document.getElementById('divSpecificUsers').style.display='none';}{/literal}">
+							<label class="form-check-label" for="droits_tasks_view_team_users">{#droits_tasks_view_team_users#}</label>
 						</div>
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="planning_view_users" id="tasks_view_specific_users" value="tasks_view_specific_users" {if in_array("tasks_view_specific_users", $user_form.tabDroits)}checked="checked"{/if} onChange="{literal}if(this.checked){document.getElementById('divSpecificUsers').style.display='inline-block';}{/literal}">
@@ -214,6 +226,7 @@
 						<label class="form-check-label" for="ressources_all">{#droits_ressourcesAcces#}</label>
 					</div>
 			</div>
+			{if !(in_array("users_manage_team", $user_form.tabDroits))}
 			<div class="row">
 					<label class="col-form-label col-md-3">{#droits_audit#} :</label>
 					<div class="form-check form-check-inline">
@@ -250,7 +263,8 @@
 						<input class="form-check-input" type="checkbox" name="stats_projects" id="stats_projects" value="stats_projects" {if in_array("stats_projects", $user_form.tabDroits)}checked="checked"{/if}>
 						<label class="form-check-label" for="stats_projects">{#droits_stats_projects#}</label>
 					</div>
-			</div>	
+			</div>
+			{/if}
 		</div>
 		<div class="tab-pane container fade" id="perso">
 			<div class="form-group row">
@@ -284,7 +298,7 @@
 					<input class="form-check-input" type="radio" name="notifications" id="notificationsNon" value="non" {if $user_form.notifications eq "non"}checked="checked"{/if}>
 					<label class="form-check-label" for="notificationsNon">{#non#}</label>
 				</div>
-				<label class="col-form-label offset-md-2 col-md-3">{#user_couleur#} :</label>
+				<label class="col-form-label offset-md-2 col-md-4">{#user_couleur#} :</label>
 				<div>
 					{if $smarty.session.couleurExUser neq ""}
 						{assign var=couleurExUser value=$smarty.session.couleurExUser}
@@ -296,14 +310,14 @@
 							<input name="couleur_user" id="couleur_user" maxlength="6" type="color" list="colors" value="#{if $projet.couleur eq ''}{$couleurExProjet}{else}{$projet.couleur}{/if}" />
 							<datalist id="colors">
 								{foreach from=","|explode:$smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE item=couleurTmp}
-								<option>{$couleurTmp|xss_protect}</option>
+								<option>{$couleurTmp}</option>
 								{/foreach}
 							</datalist>
 						{else}
-							<select name="couleur2" id="couleur2" style="background-color:#{$user_form.couleur};color:{"#"|cat:$user_form.couleur|buttonFontColor}" class="form-control" >
-							{if $user_form.couleur eq ""}<option value="">{#winProjet_couleurchoix#}</option>{/if}
+							<select name="couleur2" id="couleur2" style="background-color:#{$user_form.couleur};color:{'#'|cat:$user_form.couleur|buttonFontColor}" class="form-control" >
+							{if $user_form.couleur neq ""}<option value="#{$user_form.couleur}" style="background-color:#{$user_form.couleur};color:{'#'|cat:$user_form.couleur|buttonFontColor}" selected="selected">{$user_form.couleur}</option>{else}<option value="">{#winProjet_couleurchoix#}</option>{/if}
 							{foreach from=","|explode:$smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE item=couleurTmp}
-								<option value="{$couleurTmp|replace:'#':''}" style="background-color:{$couleurTmp};color:{$couleurTmp|buttonFontColor}" {if $couleurTmp eq "#"|cat:$user_form.couleur}selected="selected"{/if}>{$couleurTmp|xss_protect|replace:'#':''}</option>
+								<option value="{$couleurTmp}" style="background-color:{$couleurTmp};color:{$couleurTmp|buttonFontColor}" {if $couleurTmp eq "#"|cat:$user_form.couleur}selected="selected"{/if}>{$couleurTmp|xss_protect|replace:'#':''}</option>
 							{/foreach}
 						</select>
 						{/if}
@@ -313,17 +327,13 @@
 				</div>
 			</div>
 
-			{if $user_form.saved eq 0}
-				<div class="form-group">
-					<div class="col-md-6">
-						<label class="checkbox-inline">
-							<input type="checkbox" id="envoiMailPwd" name="envoiMailPwd" value="true" />{#user_mailPwd#}
-						</label>
-					</div>
+			<div class="form-group">
+				<div class="col-md-6">
+					<label class="checkbox-inline">
+						<input type="checkbox" id="envoiMailPwd" name="envoiMailPwd" value="true" />{#user_mailPwd#}
+					</label>
 				</div>
-			{else}
-				<input type="hidden" id="envoiMailPwd" name="envoiMailPwd" value="false" />
-			{/if}
+			</div>
 		</div>	
         <div class="tab-pane container fade" id="infos">
 			<div class="form-group row">

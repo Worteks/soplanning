@@ -1,9 +1,7 @@
 <?php
 
 class User extends GObject
-{
-	private $listeDroits = array('users_manage_all', 'projects_manage_all', 'projects_manage_own', 'projectgroups_manage_all', 'tasks_readonly', 'tasks_modify_all', 'tasks_modify_own_project', 'tasks_modify_own_task', 'tasks_view_all_projects', 'tasks_view_own_projects', 'tasks_view_team_projects', 'tasks_view_only_own', 'parameters_all', 'stats_users', 'stats_projects', 'tasks_view_all_users', 'tasks_view_specific_users');
-	
+{	
 	private $tabDroits = array();
 	private $tabPreferences = array();
 	public static $tabScrolls = array('H', 'HV', 'NONE');
@@ -22,7 +20,7 @@ class User extends GObject
 		$this->fields['couleur'] = new GString('planning_user', 'couleur', 6, TRUE, 'FFFFFF');
 		$this->fields['droits'] = new GString('planning_user', 'droits', 65000, TRUE, NULL);
 		$this->fields['cle'] = new GString('planning_user', 'cle', 40, FALSE, md5(rand(0, 10000000)));
-		$this->fields['notifications'] = new GEnum('planning_user', 'notifications', array('oui','non'), FALSE, 'non');
+		$this->fields['notifications'] = new GEnum('planning_user', 'notifications', array('oui','non'), FALSE, 'oui');
 		$this->fields['adresse'] = new GString('planning_user', 'adresse', 255, TRUE, NULL);
 		$this->fields['telephone'] = new GString('planning_user', 'telephone', 20, TRUE, NULL);
 		$this->fields['mobile'] = new GString('planning_user', 'mobile', 20, TRUE, NULL);
@@ -31,6 +29,8 @@ class User extends GObject
 		$this->fields['date_dernier_login'] = new GDatetime('planning_user', 'date_dernier_login', '19', TRUE, NULL);
         $this->fields['preferences'] = new GString('planning_user', 'preferences', 65000, TRUE, NULL);
 		$this->fields['login_actif'] = new GEnum('planning_user', 'login_actif', array('oui','non'), FALSE, 'oui');
+		$this->fields['date_creation'] = new GDatetime('planning_user', 'date_creation', '19', false, date('Y-m-d H:i:s'));
+		$this->fields['date_modif'] = new GDatetime('planning_user', 'date_modif', '19', TRUE, NULL);
 		$this->primaryKeys = array('user_id');
 		parent::__construct();
 	}
@@ -78,7 +78,8 @@ class User extends GObject
 		}
 		$corps = $smarty->getHtml('mail_changer_pwd.tpl');
 		$mail = new Mailer($this->email, $sujet, $corps);
-		return $mail->send();
+		$send = $mail->send();
+		return $send;
 	}
 
 	public function checkDroit($droit) {
@@ -213,6 +214,24 @@ class User extends GObject
 				setcookie('date_fin_affiche_tache', $_SESSION['date_fin_affiche'], time()+60*60*24*500, '/');
 			}
 		}
+		return true;
+	}
+
+	public function initPostLogin(){
+		// Préférence de sélection par défaut
+		chargerSessionStatutsDefaut();
+
+		$_SESSION['user_id'] = $this->user_id;
+		$_SESSION['user_groupe_id']= $this->user_groupe_id;
+		$this->date_dernier_login = date('Y-m-d H:i:s');
+		$this->db_save();
+
+		// Audit
+		if (CONFIG_SOPLANNING_OPTION_AUDIT == 1 && CONFIG_SOPLANNING_OPTION_AUDIT_CONNEXIONS == 1) {
+			logAction('C');
+		}
+			
+		$this->setSessionPref();
 		return true;
 	}
 }

@@ -7,7 +7,9 @@
 			<div class="soplanning-box">
 				<div class="btn-group">
 					<a href="{$BASE}/user_list.php" class="btn btn-default" ><i class="fa fa-address-card-o fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuGestionUsers#}</a>
+					{if $users_manage_team neq 1}
 					<a href="javascript:xajax_modifUserGroupe();undefined;" class="btn btn-default"><i class="fa fa-users fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuCreerUserGroupe#}</a>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -16,7 +18,7 @@
 		<div class="col-md-12">
 			<div class="soplanning-box mt-2">
 				{if $groupes|@count > 0}
-					<table class="table table-striped table-hover">
+					<table class="table table-striped table-hover" id="teamTab">
 						<tr>
 							<th>&nbsp;</th>
 							<th>

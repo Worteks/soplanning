@@ -21,7 +21,7 @@
 	<div class="form-group row">
 		<label class="col-md-4 col-form-label">{#user_password#} :</label>
 		<div class="col-md-5">
-			<input id="password_tmp" type="password" class="form-control" value="" maxlength="20" />
+			<input id="password_tmp" type="password" class="form-control" value="" maxlength="50" />
 		</div>
 	</div>
 	<div class="form-group row">
@@ -54,6 +54,7 @@
 				<option value="es" {if $lang eq "es"}selected="selected"{/if}>Spanish</option>
 				<option value="de" {if $lang eq "de"}selected="selected"{/if}>German</option>
 				<option value="pt" {if $lang eq "pt"}selected="selected"{/if}>Portuguese</option>
+				<option value="br" {if $lang eq "br"}selected="selected"{/if}>Brazilian Portuguese</option>
 				<option value="pl" {if $lang eq "pl"}selected="selected"{/if}>Polish</option>
 				<option value="da" {if $lang eq "da"}selected="selected"{/if}>Danish</option>
 				<option value="hu" {if $lang eq "hu"}selected="selected"{/if}>Hungarian</option>

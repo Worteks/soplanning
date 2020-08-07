@@ -3,6 +3,10 @@
 require_once('./base.inc');
 require_once(BASE . '/../config.inc');
 
+if(isset($_COOKIE['direct_auth'])){
+	header('Location: ' . BASE . '/planning.php');
+	exit;
+}
 
 // redirection possible vers l'installeur / upgrade
 $checkInstall = $version->checkInstall();
@@ -22,6 +26,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_id'] != '') {
 		{
 			$_SESSION['baseColonne'] = 'heures';
 		}
+		$_SESSION['user_groupe_id']=$user->user_groupe_id;
 		header('Location: planning.php');
 		exit;
 	}

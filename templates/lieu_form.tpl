@@ -18,13 +18,13 @@
 	<div class="form-group row col-md-12 align-items-center">
 		<label class="col-md-4 col-form-label">{#lieu_nom#} :</label>
 		<div class="col-md-5">
-			<input name="nom" id="nom" class="form-control" type="text" maxlength="50" value="{$lieu.nom}" />
+			<input name="nom" id="nom" class="form-control" type="text" maxlength="50" value="{$lieu.nom|xss_protect}" />
 		</div>
 	</div>
 	<div class="form-group row col-md-12 align-items-center">
 		<label class="col-md-4 col-form-label">{#lieu_commentaire#} :</label>
 		<div class="col-md-7">
-			<textarea name="commentaire" id="commentaire" class="form-control" maxlength="255">{$lieu.commentaire}</textarea>
+			<textarea name="commentaire" id="commentaire" class="form-control" maxlength="255">{$lieu.commentaire|xss_protect}</textarea>
 		</div>
 	</div>
 	<div class="form-group row col-md-12 align-items-center">

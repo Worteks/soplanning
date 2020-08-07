@@ -1,5 +1,4 @@
-	<div class="row noprint">
-		<div class="col-md-12 mb-2" id="firstLayer">
+		<div class="w-100 position-fixed" id="firstLayer">
 			<div class="soplanning-box form-inline pt-0" id="divPlanningDateSelector">
 				<div class="btn-group cursor-pointer pt-2" id="btnDateNow">
 					<a class="btn btn-default tooltipster" title="{#aujourdhui#}{$dateToday}" onClick="document.location='process/planning.php?raccourci_date=aujourdhui'" id="buttonDateNowSelector"><i class="fa fa-home fa-lg fa-fw" aria-hidden="true"></i></a>
@@ -9,9 +8,9 @@
 						<form action="process/planning.php" method="GET" class="form-inline" id="formChoixDates">
 						<a href="#" id="buttonDateSelector" class="btn dropdown-toggle btn-default" data-toggle="dropdown">
 							<b>
-							{$dateDebutTexte}
+							<span class="d-none d-sm-inline-block">{$dateDebutTexte1}&nbsp;</span>{$dateDebutTexte2}
 							{if $baseLigne neq "heures"}
-								- {$dateFinTexte}
+								- <span class="d-none d-sm-inline-block">{$dateFinTexte1}&nbsp;</span>{$dateFinTexte2}
 							{/if}
 							</b>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
 						</a>
@@ -74,28 +73,24 @@
 				</form>
 				</div>
 					<div class="btn-group ml-md-2 pt-2 cursor-pointer" id="btnDateSelector">
-						<a class="btn btn-default" onClick="document.location='process/planning.php?raccourci_date=-{$nbJours}';" id="buttonDatePrevSelector"><i class="fa fa-chevron-left fa-lg fa-fw" aria-hidden="true"></i> {$dateBoutonInferieur}</a>
-						<a class="btn btn-default" onClick="document.location='process/planning.php?raccourci_date=+{$nbJours}';" id="buttonDateNextSelector">{$dateBoutonSuperieur} <i class="fa fa-chevron-right fa-lg fa-fw" aria-hidden="true"></i></a>
+						<a class="btn btn-default" onClick="document.location='process/planning.php?raccourci_date=-{$nbJours}';" id="buttonDatePrevSelector"><i class="fa fa-chevron-left fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-xl-inline-block">{$dateBoutonInferieur}</span></a>
+						<a class="btn btn-default" onClick="document.location='process/planning.php?raccourci_date=+{$nbJours}';" id="buttonDateNextSelector"><span class="d-none d-xl-inline-block">{$dateBoutonSuperieur}</span> <i class="fa fa-chevron-right fa-lg fa-fw" aria-hidden="true"></i></a>
 					</div>
 					{if !in_array("tasks_readonly", $user.tabDroits)}
 						<div class="btn-group ml-md-4 pt-2" id="btnAddTask">
 							<a class="btn btn-info" href="javascript:Reloader.stopRefresh();xajax_ajoutPeriode();undefined;">
-								{if !$smarty.server.HTTP_USER_AGENT|strstr:"MSIE 8.0"}
-									<i class="fa fa-calendar-plus-o fa-lg fa-fw" aria-hidden="true"></i>
-								{/if}
-								<span class="d-none d-md-inline-block">&nbsp;{#menuAjouterPeriode#}</span>
+								<i class="fa fa-calendar-plus-o fa-lg fa-fw" aria-hidden="true"></i>
+								&nbsp;{#menuAjouterPeriode#}
 							</a>
 						</div>
 					{/if}
 			</div>
 		</div>
-	</div>
-	<div class="row noprint">
-		<div class="col-md-12 mb-2" id="secondLayer">
-			<div class="soplanning-box pt-0 form-inline" id="divPlanningMainFilter">
+		<div class="w-100 position-fixed" id="secondLayer">
+			<div class="soplanning-box form-inline pt-0" id="divPlanningMainFilter">
 					{* DIV POUR CHOIX AFFICHAGE *}
 					<div class="btn-group pt-2" id="dropdownTypePlanning">
-						<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" ><i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i><span id='label_tierpar'>&nbsp;&nbsp;{#planning_affichage#}</span>&nbsp;<span class="caret"></span></button>
+						<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" ><i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-md-inline-block">&nbsp;&nbsp;{#planning_affichage#}</span>&nbsp;<span class="caret"></span></button>
 						<div class="dropdown-menu">
 							{if $smarty.session.baseLigne eq 'users'}
 								<a class="dropdown-item" href="process/planning.php?baseLigne=users">
@@ -186,7 +181,16 @@
 								<a class="dropdown-item" href="process/planning.php?baseLigne={$smarty.session.baseLigne}&baseColonne={$smarty.session.baseColonne}&afficherLigneTotal=1">
 								<i style="margin-left:19px;">&nbsp;</i>
 							{/if}
-							{#planningAfficherTotalJour#}</a>
+							{#planningAfficherTotal#}</a>
+							
+							{if $smarty.session.afficherLigneTotalTaches eq 1}
+								<a class="dropdown-item" href="process/planning.php?baseLigne={$smarty.session.baseLigne}&baseColonne={$smarty.session.baseColonne}&afficherLigneTotalTaches=0">
+								<i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;
+							{else}
+								<a class="dropdown-item" href="process/planning.php?baseLigne={$smarty.session.baseLigne}&baseColonne={$smarty.session.baseColonne}&afficherLigneTotalTaches=1">
+								<i style="margin-left:19px;">&nbsp;</i>
+							{/if}
+							{#planningAfficherTotalTaches#}</a>
 
 							{if $smarty.session.afficherTableauRecap eq 1}
 								<a class="dropdown-item" href="process/planning.php?baseLigne={$smarty.session.baseLigne}&baseColonne={$smarty.session.baseColonne}&afficherTableauRecap=0">
@@ -244,9 +248,12 @@
 					{* DIV POUR CHOIX FILTRE AVANCES *}
 					<div class="btn-group pt-2" id="dropdownAdvancedFilter">
 						<form action="process/planning.php" method="POST">
-						<button class="btn {if ($filtreGroupeLieu|@count >0) or ($filtreGroupeRessource|@count >0)}btn-danger{else}btn-default{/if} dropdown-toggle" data-toggle="dropdown" onclick="javascript:multiselecthide();" data-display="static"><i class="fa fa-flask fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-md-inline-block">&nbsp;{#filtres_avances#}&nbsp;</span><span class="caret"></span></button>
+						<button class="btn {if ($filtreGroupeLieu|@count >0) or ($filtreGroupeRessource|@count >0)}btn-danger{else}btn-default{/if} dropdown-toggle" data-toggle="dropdown" onclick="javascript:multiselecthide();" data-display="static"><i class="fa fa-flask fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-xl-inline-block">&nbsp;{#filtres_avances#}&nbsp;</span><span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							{if ($filtreGroupeLieu|@count >0) or ($filtreGroupeRessource|@count >0)}<a href="process/planning.php?desactiverFiltreAvances=1" class="btn btn-danger btn-sm margin-left-10">{#formFiltreAvancesDesactiver#}</a>{/if}
+							<li>
+								<input type="submit" value="{#submit#}" class="btn btn-default ml-2" />
+								{if ($filtreGroupeLieu|@count >0) or ($filtreGroupeRessource|@count >0)}<a href="process/planning.php?desactiverFiltreAvances=1" class="btn btn-danger btn-sm margin-left-10">{#formFiltreAvancesDesactiver#}</a>{/if}
+							</li>
 							<li class="divider"></li>
 							<li>
 								<table onClick="event.cancelBubble=true;" class="planning-filter">
@@ -257,7 +264,7 @@
 											<div class="form-horizontal col-md-12">
 											{foreach from=$listeStatusTaches item=statust}
 											<label class="checkbox">
-												<input type="checkbox" id="{$statust.status_id}" name="statutsTache[]" value="{$statust.status_id}" {if in_array($statust.status_id, $filtreStatutTache)}checked="checked"{/if} />&nbsp;{$statust.nom}
+												<input type="checkbox" id="{$statust.status_id}" name="statutsTache[]" value="{$statust.status_id}" {if in_array($statust.status_id, $filtreStatutTache) || $filtreStatutTache|count eq 0}checked="checked"{/if} />&nbsp;{$statust.nom}
 											</label>
 											{/foreach}
 											</div>
@@ -268,7 +275,7 @@
 											<div class="form-horizontal col-md-12">
 											{foreach from=$listeStatusProjets item=statusp}
 											<label class="checkbox">
-												<input type="checkbox" id="statut_projet_{$statusp.status_id}" name="statutsProjet[]" value="{$statusp.status_id}" {if in_array($statusp.status_id, $filtreStatutProjet)}checked="checked"{/if} />&nbsp;{$statusp.nom}
+												<input type="checkbox" id="statut_projet_{$statusp.status_id}" name="statutsProjet[]" value="{$statusp.status_id}" {if in_array($statusp.status_id, $filtreStatutProjet) || $filtreStatutProjet|count eq 0}checked="checked"{/if} />&nbsp;{$statusp.nom}
 											</label>
 											{/foreach}
 											</div>
@@ -328,13 +335,12 @@
 									</tr>
 								</table>
 							</li>
-							<li><input type="submit" value="{#submit#}" class="btn btn-default ml-2" /></li>
 						</ul>
 						</form>
 					</div>
 					{* DIV POUR TRI AFFICHAGE *}
 					<div class="btn-group pt-2" id="dropdownTri">
-						<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" onclick="javascript:multiselecthide();"><i class="fa fa-sort-amount-desc fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-md-inline-block">&nbsp;&nbsp;{#formTrierPar#}</span>&nbsp;<span class="caret"></span></button>
+						<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" onclick="javascript:multiselecthide();"><i class="fa fa-sort-amount-desc fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-xl-inline-block">&nbsp;&nbsp;{#formTrierPar#}</span>&nbsp;<span class="caret"></span></button>
 						<div class="dropdown-menu">
 							{if $baseLigne eq "projets"}
 								{foreach from=$triPlanningPossibleProjet item=triTemp}
@@ -356,7 +362,7 @@
 					</div>
 					{* DIV POUR CHOIX EXPORT *}
 					<div class="btn-group pt-2" id="dropdownExport">
-						<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" onclick="javascript:multiselecthide();"><i class="fa fa-cloud-download fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-md-inline-block">&nbsp;&nbsp;{#choix_export#}</span>&nbsp;<span class="caret"></span></button>
+						<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" onclick="javascript:multiselecthide();"><i class="fa fa-cloud-download fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-xl-inline-block">&nbsp;&nbsp;{#choix_export#}</span>&nbsp;<span class="caret"></span></button>
 						<div class="dropdown-menu" style="">
 							<a class="dropdown-item" href="javascript:window.print();"><i class="fa fa-fw fa-print" aria-hidden="true"></i> {#printAll#|xss_protect}</a>
 							<a class="dropdown-item" href="export_csv.php"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i> {#CSVExport#|xss_protect}</a>
@@ -377,15 +383,7 @@
 							<a class="btn btn-default" title="{#menuPlanningReduit#}" href="process/planning.php?dimensionCase=reduit"><i class="fa fa-search-minus fa-lg fa-fw" aria-hidden="true"></i></a>
 						{/if}
 						<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-sort fa-lg fa-fw" aria-hidden="true"></i></button>
-						<div class="dropdown-menu">
-							{if $ascenceur eq '1'}
-								<a class="dropdown-item" href="{$BASE}/process/planning.php?ascenceur=0">
-								<i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;
-							{else}
-								<a class="dropdown-item" href="{$BASE}/process/planning.php?ascenceur=1"><i style="margin-left:19px;">&nbsp;</i>
-							{/if}
-							{#scrolls_v#}</a>
-						
+						<div class="dropdown-menu">						
 							{if $fleches eq '1'}
 								<a class="dropdown-item" href="{$BASE}/process/planning.php?fleches=0">
 								<i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -393,19 +391,11 @@
 								<a class="dropdown-item" href="{$BASE}/process/planning.php?fleches=1"><i style="margin-left:19px;">&nbsp;</i>
 							{/if}
 							{#scrolls_fleches#}</a>
-
-							{if $entetesflottantes eq '1'}
-								<a class="dropdown-item" href="{$BASE}/process/planning.php?entetesflottantes=0">
-								<i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;
-							{else}
-								<a class="dropdown-item" href="{$BASE}/process/planning.php?entetesflottantes=1"><i style="margin-left:19px;">&nbsp;</i>
-							{/if}
-							{#entetes_flottantes#}</a>
 						</div>
 					</div>
 
 					{* DIV POUR RECHERCHE TEXTE *}
-					<div class="btn-group pt-2" id="searchboxPlanning">
+					<div class="btn-group pt-2 d-none d-xl-inline-block" id="searchboxPlanning">
 						<form action="process/planning.php" method="POST">
 							<div class="input-group">
 								<input type="text" class="tooltipster form-control input-sm" name="filtreTexte" value="{$filtreTexte|xss_protect}" maxlength="50" title="{#formFiltreTexte#|escape}" id="filtreTexte" />
@@ -426,4 +416,3 @@
 					</div>
 			</div>
 		</div>
-	</div>

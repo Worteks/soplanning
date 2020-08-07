@@ -1,6 +1,7 @@
 {* Smarty *}
-<form class="form-horizontal" method="POST" target="_blank" id="periodForm">
+<form class="form-horizontal" method="POST" target="_blank" id="periodForm2">
 	<input type="hidden" id="periode_id" name="periode_id" value="{$periode.periode_id}" />
+	<input type="hidden" id="link_id" name="link_id" value="{$link_id}" />	
 	<input type="hidden" id="saved" name="saved" value="{$periode.saved}" />
 	<input type="hidden" id="updateoccurrences" name="updateoccurrences" value="true" />
 	<div class="container-fluid">
@@ -26,7 +27,7 @@
 							{/if}
 							<optgroup label="{$nomgroupe}"></optgroup>
 						{/if}
-						<option value="{$projetTmp.projet_id}" {if $periode.projet_id eq $projetTmp.projet_id}selected="selected"{/if} {if isset($projet_id_choisi) && $projet_id_choisi eq $projetTmp.projet_id}selected="selected"{/if}>{$projetTmp.nom} ({$projetTmp.projet_id}) {if $projetTmp.livraison neq ''} - S{$projetTmp.livraison}{/if}</option>
+						<option value="{$projetTmp.projet_id}" {if $periode.projet_id eq $projetTmp.projet_id}selected="selected"{/if} {if isset($projet_id_choisi) && $projet_id_choisi eq $projetTmp.projet_id}selected="selected"{/if}>{$projetTmp.nom|xss_protect} ({$projetTmp.projet_id}) {if $projetTmp.livraison neq ''} - S{$projetTmp.livraison}{/if}</option>
 					{/foreach}
 				</select>
 			</div>
@@ -99,13 +100,13 @@
 			<div class="row col-md-12 form-inline {if $periode.duree_details eq ''}d-none{/if}" id="divFinChoixDuree">
 				<div class="offset-md-2 col-md-3">
 					{#winPeriode_ouNBHeures#} <span title="{#winPeriode_FormatDuree#|xss_protect}" class="cursor-help tooltipster">&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span> :
-					<input type="time" class="form-control" name="duree" id="duree" size="3" value="{if $periode.duree_details eq 'duree'}{$periode.duree|sqltime2usertime}{/if}" onFocus="if(this.value == '')this.value='{$smarty.const.CONFIG_DURATION_DAY|usertime2sqltime:"short"}';" onChange="videChampsFinTache(this.id);" tabindex="12" />
+					<input type="text" class="form-control" name="duree" id="duree" size="3" value="{if $periode.duree_details eq 'duree'}{$periode.duree|sqltime2usertime}{/if}" onFocus="if(this.value == '')this.value='{$smarty.const.CONFIG_DURATION_DAY|usertime2sqltime:"short"}';" onChange="videChampsFinTache(this.id);" tabindex="12"  maxlength="5" autocomplete="off" />
 				</div>
 				<div class="col-md-7">
 					{#winPeriode_heureDebut#} <span title="{#winPeriode_FormatDuree#|xss_protect}" class="cursor-help tooltipster">&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span> :
-					<input type="time" class="form-control" id="heure_debut" id="heure_debut" size="3"  value="{if isset($periode.duree_details_heure_debut)}{$periode.duree_details_heure_debut|sqltime2usertime}{/if}" onChange="heurefinSynchro(this.value,{$smarty.const.CONFIG_PLANNING_DUREE_CRENEAU_HORAIRE});" tabindex="13" />
+					<input type="text" class="form-control" id="heure_debut" id="heure_debut" size="3"  value="{if isset($periode.duree_details_heure_debut)}{$periode.duree_details_heure_debut|sqltime2usertime}{/if}" onChange="heurefinSynchro(this.value,{$smarty.const.CONFIG_PLANNING_DUREE_CRENEAU_HORAIRE});" tabindex="13"  maxlength="5" autocomplete="off" />
 					{#winPeriode_heureFin#} <span title="{#winPeriode_FormatDuree#|xss_protect}" class="cursor-help tooltipster">&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span> :
-					<input type="time" class="form-control" id="heure_fin" size="3" value="{if isset($periode.duree_details_heure_fin)}{$periode.duree_details_heure_fin|sqltime2usertime}{/if}" onChange="videChampsFinTache(this.id);" tabindex="14" />
+					<input type="text" class="form-control" id="heure_fin" size="3" value="{if isset($periode.duree_details_heure_fin)}{$periode.duree_details_heure_fin|sqltime2usertime}{/if}" onChange="videChampsFinTache(this.id);" tabindex="14" maxlength="5" autocomplete="off" />
 				</div>
 				<div class="offset-md-5 col-md-6 form-inline">				
 					<div class="form-check form-check-inline">
@@ -383,7 +384,7 @@
 					<select name="lieu" id="lieu" class="form-control {if $smarty.session.isMobileOrTablet!=1}select2{/if}" tabindex="19" style="width:100%" >
 						<option value=""></option>
 						{foreach from=$listeLieux item=lieuTmp}
-							<option value="{$lieuTmp.lieu_id}" {if $periode.lieu_id eq $lieuTmp.lieu_id} selected="selected" {/if}>{$lieuTmp.nom}</option>
+							<option value="{$lieuTmp.lieu_id}" {if $periode.lieu_id eq $lieuTmp.lieu_id} selected="selected" {/if}>{$lieuTmp.nom|xss_protect}</option>
 						{/foreach}
 					</select>
 				</div>
@@ -394,7 +395,7 @@
 					<select name="ressource" id="ressource" class="form-control {if $smarty.session.isMobileOrTablet!=1}select2{/if}" tabindex="20" style="width:100%" >
 						<option value=""></option>
 						{foreach from=$listeRessources item=ressourceTmp}
-							<option value="{$ressourceTmp.ressource_id}" {if $periode.ressource_id eq $ressourceTmp.ressource_id} selected="selected" {/if}>{$ressourceTmp.nom}</option>
+							<option value="{$ressourceTmp.ressource_id}" {if $periode.ressource_id eq $ressourceTmp.ressource_id} selected="selected" {/if}>{$ressourceTmp.nom|xss_protect}</option>
 						{/foreach}
 					</select>
 				</div>
@@ -410,17 +411,37 @@
 
 		<div class="form-group row col-md-12">
 			<label class="col-md-2 col-form-label">{#winPeriode_lien#} :</label>
-			<div class="col-md-10 form-inline">
-				<input {if $smarty.session.isMobileOrTablet==1}type="url"{else}type="text"{/if} class="form-control col-md-11{if $periode.lien neq ""} input-withicon{/if}" name="lien" id="lien" maxlength="2000" value="{$periode.lien}" tabindex="22" />
+			<div class="col-md-4 form-inline align-items-start">
+				<input {if $smarty.session.isMobileOrTablet==1}type="url"{else}type="text"{/if} class="form-control {if $periode.lien neq ""}col-md-10 input-withicon{else}col-md-12{/if}" name="lien" id="lien" maxlength="2000" value="" tabindex="22" />
 				{if $periode.lien neq ""}
-					<span title='{#winPeriode_gotoLien#|xss_protect}' onclick="window.open('{if ($periode.lien|strpos:"http" !== FALSE || $periode.lien|strpos:"ftp" !== FALSE) && $periode.lien|strpos:"\\" !== FALSE}http://{/if}{$periode.lien}', '_blank')" target="_blank" class="btn btn-default tooltipster ml-1"><i class="fa fa-share-square-o" aria-hidden="true"></i></span>
+					<span title='{#winPeriode_gotoLien#|xss_protect}' onclick="window.open('{if ($periode.lien|strpos:"http" !== FALSE || $periode.lien|strpos:"ftp" !== FALSE) && $periode.lien|strpos:"\\" !== FALSE}http://{/if}'+document.getElementById('lien').value, '_blank')" target="_blank" class="btn btn-default tooltipster ml-1"><i class="fa fa-share-square-o" aria-hidden="true"></i></span>
 				{/if}
+			</div>
+			<label class="col-md-2 col-form-label">{#winPeriode_fichier#} :</label>
+			<div class="col-md-4 form-inline">
+				<form enctype="multipart/form-data" id="fichier_form">
+					<span id="file-select-button" class="col-form-label"><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;
+						{#upload_fichier_joindre#}<img id="divPatienter2" src="assets/img/pictos/loading16.gif" class="d-none ml-2" alt="" />
+					</span>					
+					<input name="fichier" id="fichier" type="file" style="float:left;width:220px;display:none;" />
+					{foreach from=$fichiers item=fichier}
+						<div>
+							<a href="upload/files/{$link_id}/{$fichier}" target="_blank" class="ellipsis fileupload" id="fichier_periode" style="float:left;">{$fichier}</a>
+							&nbsp;<i class="fa fa-trash fa-fw" aria-hidden="true" onclick="fileRemove('{$fichier}',this.closest('div'));" id="fileremovebutton" style="margin-top:4px;margin-left:4px;float:left;cursor:pointer;"></i>
+						</div>
+					{/foreach}
+					<a id="lastfile"></a>
+				</form>
+				<input type="hidden" name="liste_fichiers" id="liste_fichiers" value="{$periode.fichiers}">
+				<input type="hidden" name="suppression_upload" id="suppression_upload" value="{#upload_fichier_suppression#}">
+				<input type="hidden" name="max_size_upload" id="max_size_upload" value="{$smarty.const.MAX_SIZE_UPLOAD}">				
+				<input type="hidden" name="max_size_upload_error" id="max_size_upload_error" value="{#upload_fichier_erreur_taille#}">				
 			</div>
 		</div>
 		<div class="form-group row col-md-12">
 			<label class="col-md-2 col-form-label">{#winPeriode_commentaires#} :</label>
 			<div class="col-md-10">
-				<textarea class="form-control" rows="1" id="notes" name="notes" tabindex="23" >{$periode.notes_xajax|xss_protect}</textarea>
+				<textarea class="form-control" rows="1" id="notes" name="notes" tabindex="23" style="min-height:50px;max-height:200px"></textarea>
 			</div>
 		</div>
 		<div class="form-group row col-md-12">
@@ -445,20 +466,28 @@
 			{else}
 				<input type="hidden" id="notif_email" value="false">
 			{/if}
-			<div class="btn-group" role="group">
-				{if $audit_id neq ''}
-				<a href="javascript:xajax_modifAudit('{$audit_id}');undefined;" class="btn btn-default" ><i class="fa fa-history fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#audit_restaurer#}</a>
-				{/if}
-				<button type="button" id="butSubmitPeriode" class="btn btn-primary" tabindex="24" onClick="$('#divPatienter').removeClass('d-none');this.disabled=true;users_ids=getSelectValue('user_id2');xajax_submitFormPeriode('{$periode.periode_id}', $('#projet_id').val(), users_ids, $('#date_debut').val(), $('#conserver_duree').is(':checked'), $('#date_fin').val(), $('#nb_jours').val(), $('#duree').val(), $('#heure_debut').val(), $('#heure_fin').val(), $('#matin').is(':checked'), $('#apresmidi').is(':checked'), $('#repetition option:selected').val(), $('#dateFinRepetitionJour').val(),$('#dateFinRepetitionSemaine').val(),$('#dateFinRepetitionMois').val(), $('#nbRepetitionJour option:selected').val(),$('#nbRepetitionSemaine option:selected').val(),$('#nbRepetitionMois option:selected').val(),getRadioValue('jourSemaine'),getRadioValue('exceptionRepetition'),$('#appliquerATous').is(':checked'), $('#statut_tache').val(),$('#lieu option:selected').val(), $('#ressource option:selected').val(), $('#livrable').val(), $('#titre').val(), $('#notes').val(), $('#lien').val(), $('#custom').val(), $('#notif_email').is(':checked'), $('#updateoccurrences').val());">{#winPeriode_valider#|xss_protect}</button>
 
+			<div class="btn-group" role="group">
+				<button type="button" id="butSubmitPeriode" class="btn btn-primary" tabindex="24" onClick="$('#divPatienter').removeClass('d-none');this.disabled=true;users_ids=getSelectValue('user_id2');xajax_submitFormPeriode('{$periode.periode_id}', $('#projet_id').val(), users_ids, $('#date_debut').val(), $('#conserver_duree').is(':checked'), $('#date_fin').val(), $('#nb_jours').val(), $('#duree').val(), $('#heure_debut').val(), $('#heure_fin').val(), $('#matin').is(':checked'), $('#apresmidi').is(':checked'), $('#repetition option:selected').val(), $('#dateFinRepetitionJour').val(),$('#dateFinRepetitionSemaine').val(),$('#dateFinRepetitionMois').val(), $('#nbRepetitionJour option:selected').val(),$('#nbRepetitionSemaine option:selected').val(),$('#nbRepetitionMois option:selected').val(),getRadioValue('jourSemaine'),getRadioValue('exceptionRepetition'),$('#appliquerATous').is(':checked'), $('#statut_tache').val(),$('#lieu option:selected').val(), $('#ressource option:selected').val(), $('#livrable').val(), $('#titre').val(), $('#notes').val(), $('#lien').val(), $('#custom').val(), $('#liste_fichiers').val(), $('#link_id').val(), $('#notif_email').is(':checked'), $('#updateoccurrences').val());">{#winPeriode_valider#|xss_protect}</button>
 				{if $periode.periode_id neq 0}
-					<button type="button" class="btn btn-default" onClick="if(confirm('{#winPeriode_dupliquer#|xss_protect} ?'))xajax_ajoutPeriode('', '', {$periode.periode_id});">{#winPeriode_dupliquer#}</button>
-					<button type="button" class="btn btn-warning" onClick="if(confirm('{#winPeriode_confirmSuppr#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, false, $('#notif_email').is(':checked'));">{#winPeriode_supprimer#}</button>
-					{if isset($estFilleOuParente)}
-						<button type="button" class="btn btn-default" onClick="if(confirm('{#winPeriode_confirmSupprRepetition#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, true, $('#notif_email').is(':checked'));">{#winPeriode_supprimer_repetition#}</button>
-						<button type="button" class="btn btn-default" onClick="if(confirm('{#winPeriode_confirmSupprRepetition#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, 'avant', $('#notif_email').is(':checked'));">{#winPeriode_supprimer_repetition_avant#}</button>
-						<button type="button" class="btn btn-default" onClick="if(confirm('{#winPeriode_confirmSupprRepetition#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, 'apres', $('#notif_email').is(':checked'));">{#winPeriode_supprimer_repetition_apres#}</button>
-					{/if}
+					<button type="button" class="btn btn-warning" onClick="if(confirm('{#winPeriode_confirmSuppr#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, false, $('#notif_email').is(':checked'));undefined;">{#winPeriode_supprimer#}</button>
+				{/if}
+				{if $periode.periode_id neq 0}
+					<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" onclick="javascript:multiselecthide();"><span class="d-none d-md-inline-block">&nbsp;&nbsp;{#periode_plus#}</span>&nbsp;<span class="caret"></span></button>
+					<div class="dropdown-menu" style="">
+						<a class="dropdown-item" href="javascript:if(confirm('{#winPeriode_dupliquer#|xss_protect} ?'))jQuery('#myBigModal').modal('toggle');xajax_ajoutPeriode('', '', {$periode.periode_id});undefined;"><i class="fa fa-fw fa-copy" aria-hidden="true"></i> {#winPeriode_dupliquer#|xss_protect}</a>
+						{if $periode.date_fin neq ""}
+							<a class="dropdown-item" href="javascript:xajax_periode_scinder_form({$periode.periode_id});undefined;"><i class="fa fa-fw fa-cut" aria-hidden="true"></i> {#periode_scinder#|xss_protect}</a>
+						{/if}
+						{if $audit_id neq ''}
+							<a href="javascript:xajax_modifAudit('{$audit_id}');undefined;" class="dropdown-item" ><i class="fa fa-history fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#audit_restaurer#}</a>
+						{/if}
+						{if isset($estFilleOuParente)}
+							<a class="dropdown-item" href="javascript:if(confirm('{#winPeriode_confirmSupprRepetition#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, true, $('#notif_email').is(':checked'));undefined;"><i class="fa fa-fw fa-remove" aria-hidden="true"></i> {#winPeriode_supprimer_repetition#|xss_protect}</a>
+							<a class="dropdown-item" href="javascript:if(confirm('{#winPeriode_confirmSupprRepetition#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, 'avant', $('#notif_email').is(':checked'));undefined;"><i class="fa fa-fw fa-remove" aria-hidden="true"></i> {#winPeriode_supprimer_repetition_avant#|xss_protect}</a>
+							<a class="dropdown-item" href="javascript:if(confirm('{#winPeriode_confirmSupprRepetition#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, 'apres', $('#notif_email').is(':checked'));undefined;"><i class="fa fa-fw fa-remove" aria-hidden="true"></i> {#winPeriode_supprimer_repetition_apres#|xss_protect}</a>
+						{/if}
+					</div>
 				{/if}
 			</div>
 			<div id="divPatienter" class="d-none justify-content-end form-group" style="position:absolute;right:0;"><img src="assets/img/pictos/loading16.gif" alt="" /></div>
@@ -472,17 +501,36 @@
 		placement: 'auto',
 		boundary: 'window'
 	});
-	$("#heure_debut").timepicker({
-		'show2400': 'true',
-		'timeFormat': 'H\\:i',
-		'step':'{/literal}{$smarty.const.CONFIG_PLANNING_DUREE_CRENEAU_HORAIRE}{literal}',
-		'scrollDefault': '09:00'
+
+	$('#file-select-button').click(function(){
+		$('input[type=file]').click();
 	});
-	$("#heure_fin").timepicker({
-		'show2400': 'true',
-		'timeFormat': 'H\\:i',
-		'step':'{/literal}{$smarty.const.CONFIG_PLANNING_DUREE_CRENEAU_HORAIRE}{literal}',
-		'scrollDefault': '10:00',
+
+	$('input[type=file]').change(function() { 
+		fileUpload(); 
 	});
+	
+	$("#myBigModal").on("hidden.bs.modal", function () {
+	 var periode_id=$('#periode_id').val();
+	 var fichiers=$('#fichiers').val();
+	 var linkid=$('#link_id').val();	 
+	 if (periode_id == 0 && fichiers!="" )
+	 {
+			var formData = new FormData();
+			formData.append('linkid', linkid);
+			formData.append('type', 'deletenew');
+			formData.append('fichiers', fichiers);
+			formData.append('periodeid', 0);
+			$.ajax({
+				url			: 'process/upload.php',
+				cache       : false,
+				contentType : false,
+				processData : false,
+				data        : formData,                         
+				type        : 'post'
+			});
+	 }
+	});
+
 	{/literal}
 </script>
