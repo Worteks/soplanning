@@ -27,7 +27,7 @@
 					&nbsp;	
 					<div class="btn-group">
 						<div class="input-group">
-							<input type="text" class="form-control input-sm" name="rechercheProjet" value="{$rechercheProjet|default:""}" />
+							<input type="text" class="form-control input-sm" name="rechercheProjet" value="{$rechercheProjet|xss_protect|default:""}" />
 							<div class="input-group-append">
 								<button type="submit" class="btn btn-sm {if $rechercheProjet != ""}btn-danger{else}btn-default{/if}"><i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i></button>
 							</div>

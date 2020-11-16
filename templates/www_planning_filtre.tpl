@@ -1,4 +1,4 @@
-		<div class="w-100 position-fixed" id="firstLayer">
+		<div class="vw-100 position-fixed" id="firstLayer">
 			<div class="soplanning-box form-inline pt-0" id="divPlanningDateSelector">
 				<div class="btn-group cursor-pointer pt-2" id="btnDateNow">
 					<a class="btn btn-default tooltipster" title="{#aujourdhui#}{$dateToday}" onClick="document.location='process/planning.php?raccourci_date=aujourdhui'" id="buttonDateNowSelector"><i class="fa fa-home fa-lg fa-fw" aria-hidden="true"></i></a>
@@ -80,13 +80,13 @@
 						<div class="btn-group ml-md-4 pt-2" id="btnAddTask">
 							<a class="btn btn-info" href="javascript:Reloader.stopRefresh();xajax_ajoutPeriode();undefined;">
 								<i class="fa fa-calendar-plus-o fa-lg fa-fw" aria-hidden="true"></i>
-								&nbsp;{#menuAjouterPeriode#}
+								<span class="d-none d-xl-inline-block" >{#menuAjouterPeriode#}</span>
 							</a>
 						</div>
 					{/if}
 			</div>
 		</div>
-		<div class="w-100 position-fixed" id="secondLayer">
+		<div class="vw-100 position-fixed" id="secondLayer">
 			<div class="soplanning-box form-inline pt-0" id="divPlanningMainFilter">
 					{* DIV POUR CHOIX AFFICHAGE *}
 					<div class="btn-group pt-2" id="dropdownTypePlanning">

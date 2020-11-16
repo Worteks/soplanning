@@ -1,0 +1,4 @@
+
+
+UPDATE  `planning_config` SET  valeur ='1.47.01' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

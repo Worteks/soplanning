@@ -99,7 +99,7 @@ $g3->db_save();
 $userPublic = new User();
 $userPublic->user_id = 'publicspl';
 $userPublic->nom = 'Guest';
-$userPublic->login = 'admin';
+$userPublic->login = NULL;
 $userPublic->visible_planning = 'non';
 $userPublic->couleur = '000000';
 $userPublic->cle = MD5(RAND());

@@ -197,9 +197,11 @@ while($lineTmp = $lines->fetch()) {
 
 		$e->setProperty('summary' , utf8_encode($nomTache));
 		$e->setProperty('description', $smarty->getConfigVars('tab_commentaires') . ' : ' . utf8_encode($periode->notes));
-		if(!is_null($periode->nom_lieu)) {
-			$e->setProperty('location', utf8_encode($periode->nom_lieu));
+
+    if(!is_null($periode->nom_lieu)) {
+			$e->setProperty('location', $periode->nom_lieu);
 		}
+
 		$periode->getData();
 	}
 }
@@ -209,6 +211,6 @@ if(isset($_GET['debug'])) {
 	die;
 }
 
-$v->returnCalendar();
+$v->returnCalendar(TRUE);
 
 ?>

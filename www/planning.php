@@ -329,7 +329,7 @@ while ($p = $periodes->fetch()) {
 		{
 			$dureePM=convertHourToDecimal(CONFIG_DURATION_PM);
 			$heureFin=convertHourToDecimal(end($planning['heures']));			
-			$heureDebut=$heureFin-$dureePM;
+			$heureDebut=$heureFin - $dureePM;
 			$heureDebutTxt=$heureDebut;
 			$dureeHeures=calcul_duree_heures_non_masquees($heureDebut,$heureFin);
 		}else 
@@ -342,7 +342,7 @@ while ($p = $periodes->fetch()) {
 			$dureeHeures=calcul_duree_heures_non_masquees($heureDebut,$heureFin);
 		}
 		// Calcule des créneaux masqués
-		
+
 		$cellule=array(
 			'id'=>$infosJour['periode_id'],
 			'date_debut'=>$infosJour['date_debut'],
@@ -388,7 +388,9 @@ while ($p = $periodes->fetch()) {
 			'date_modif'=>$infosJour['date_modif'],
 			'user_couleur'=>$infosJour['user_couleur'],
 			'projet_couleur'=>$infosJour['projet_couleur'],
-			'dureeHeures'=>$dureeHeures);
+			'dureeHeures'=>$dureeHeures,
+			'heure_debut'=>$heureDebut,
+			'heure_fin'=>$heureFin);
 		if( $base_ligne=='projets') {
 			$cellule['nom_cellule']=xss_protect($infosJour['user_id']);
 			$cellule['couleur']=xss_protect($infosJour['user_couleur']);
@@ -552,7 +554,7 @@ while ($p = $periodes->fetch()) {
 			if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {$weekend=true;}else $weekend=false;
 			
 			// on additionne le total des jours
-			if (CONFIG_PLANNING_HIDE_WEEKEND_TASK == 1 || (CONFIG_PLANNING_HIDE_WEEKEND_TASK == 0 && $weekend==false))
+			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1 || (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 0 && $weekend==false))
 			{
 				if(!isset($totalHoraireParJour[$tmpDate->format('Ymd')])) {
 					$totalNbTachesParJour[$tmpDate->format('Ymd')] = 0;

@@ -502,8 +502,13 @@
 		boundary: 'window'
 	});
 
-	$('#file-select-button').click(function(){
+	function file_upload_click()
+	{
 		$('input[type=file]').click();
+	}
+	
+	$('#file-select-button').click(function(){
+		file_upload_click();
 	});
 
 	$('input[type=file]').change(function() { 

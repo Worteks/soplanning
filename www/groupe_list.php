@@ -7,8 +7,8 @@ $smarty = new MySmarty();
 
 require BASE . '/../includes/header.inc';
 
-$_POST = sanitize($_POST);
 $_GET = sanitize($_GET);
+$_POST = sanitize($_POST);
 
 if(!$user->checkDroit('projectgroups_manage_all')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
@@ -34,12 +34,12 @@ if (isset($_GET['order']) && in_array($_GET['order'], array('nom'))) {
 	$order = 'nom';
 }
 
-if (isset($_GET['by'])) {
+if (isset($_GET['by']) && in_array($_GET['by'], array('asc','desc'))) {
 	$by = $_GET['by'];
 } elseif (isset($_SESSION['groupe_by'])) {
 	$by = $_SESSION['groupe_by'];
 } else {
-	$by = 'ASC';
+	$by = 'asc';
 }
 
 // FIN PARAMÈTRES
