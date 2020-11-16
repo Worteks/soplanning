@@ -18,6 +18,14 @@ SO Planning - Readme
 
 ---------------------------
 
+v1.47.01 (05/11/20)
+
+- Bugfix on datepicker and timepicker, in some cases the position of the picker is not good
+- Bugfix for display on mobile
+- bugfix on uploaded files, drag and drop on task can fail due to joined files
+- Bugfix on task during less than 1 day. They are not visible (although they should be) when specific option - hide tasks covering weekend - is activated
+- Several security fixes
+
 v1.47 (21/07/20)
 
 - You can now upload files in tasks !
