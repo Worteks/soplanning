@@ -87,7 +87,6 @@
 	
 /* smartphone : iphone 6*/
 @media ( min-width : 325px ) and ( max-width : 400px ) {
-		#divConteneurPlanning {overflow:auto!important;width:200px;}
 	.ms-options{min-width: auto !important;}
 	.col-md-12 {padding-left: 0px;padding-right: 0px;}
 	.row {margin-right: 0px !important}
@@ -196,7 +195,6 @@
 	
 	/* Planning */
 	#label_affichage{display:inline !important}
-	#label_addtask{display:inline !important}
 	#label_tierpar{display:inline !important}
 	#label_export{display:inline !important}	
 	#buttonDateSelector{width:100% !important;}
@@ -428,6 +426,7 @@
       display:block !important;
   }
   .input-withicon{width:100%}
+  
 }
 
 input[type="date"]::-webkit-clear-button,

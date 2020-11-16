@@ -68,7 +68,7 @@
 					<div id="projectNbMonth" class="form-group form-inline">					
 					<label class="col-form-label">{#formNbMois#} :&nbsp;</label>
 						<div class="input-group">
-							<input type="text" name="nb_mois" class="form-control" size="1" value="{$nbMois}" />
+							<input type="text" name="nb_mois" class="form-control" size="1" value="{$nbMois|xss_protect}" />
 							<span class="input-group-append">
 								<button class="btn btn-default" type="submit"><i class="fa fa-arrow-right fa-lg fa-fw" aria-hidden="true"></i></button>
 							</span>
@@ -112,7 +112,7 @@
 
 					<div class="btn-group" id="projectSearchbox">
 						<div class="input-group">
-							<input type="text" class="form-control" name="rechercheProjet" value="{$rechercheProjet|default:""}" placeholder="{#taches_groupeRecherche#}" />
+							<input type="text" class="form-control" name="rechercheProjet" value="{$rechercheProjet|xss_protect|default:""}" placeholder="{#taches_groupeRecherche#}" />
 							<span class="input-group-append">
 								<button type="submit" class="btn {if $rechercheProjet != ""}btn-danger{else}btn-default{/if}"><i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i></button>
 							</span>

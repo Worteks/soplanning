@@ -60,7 +60,7 @@
 		</div>
 		<script src="{$BASE}/assets/plugins/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
 		<script src="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/i18n/datepicker-{$lang}.js"></script>
-		<script src="{$BASE}/assets/plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js"></script>
+		<script src="{$BASE}/assets/plugins/bootstrap-4.5.2/js/bootstrap.bundle.min.js"></script>
 		{$xajax}
 		<script>
 		{literal}
@@ -99,7 +99,8 @@
 		$('#footerbar').mouseleave(function(){showFooter=false;});
 		{/literal}
 		$(function(){
-			$(window).scroll(function() {              
+			$(window).scroll(function() {
+			$('.datepicker').datepicker('hide');			
 			$('#footerbar').show();
 			setTimeout(() => {  
 					if (showFooter===false)
@@ -108,7 +109,13 @@
 					}
 				}, 2500);
 		});
-})
+		
+		$('#myBigModal').on("scroll", function() {
+			$('.datepicker').datepicker('hide');
+			$('#ui-timepicker-div').hide(300);
+		});
+		
+		})
 		
 		</script>
 	</body>

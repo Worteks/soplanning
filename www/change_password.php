@@ -22,7 +22,7 @@ if(!isset($_GET['date']) || $_GET['date'] < date('Y-m-d')) {
 	exit;
 }
 
-if(!isset($_GET['hash']) || $_GET['hash'] != md5($_GET['user_id'] . '¤' . $_GET['date'] . '¤' . CONFIG_SECURE_KEY)) {
+if(!isset($_GET['hash']) || $_GET['hash'] != md5($_GET['user_id'] . '¤' . $_GET['date'] . '¤' . $userTmp->cle)) {
 	$_SESSION['message'] = 'Invalid URL';
 	header('Location: index.php');
 	exit;

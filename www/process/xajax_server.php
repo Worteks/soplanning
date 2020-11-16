@@ -384,7 +384,7 @@ function ajoutPeriode($dateDebut = '', $ligne_id = '', $periode_id = '', $heureD
 
     // liste des status
     $status = new GCollection('Status');
-    $status->db_load(array('affichage', 'IN', array('', 'tp')), array('priorite' => 'ASC', 'nom' => 'ASC'));
+    $status->db_load(array('affichage', 'IN', array('t', 'tp')), array('priorite' => 'ASC', 'nom' => 'ASC'));
     $smarty->assign('listeStatus', $status->getSmartyData());
 
     // status par défaut
@@ -743,7 +743,7 @@ function modifPeriode($periode_id)
     $objResponse->addScript('jQuery("#btnGotoLien").tooltip();');
     $objResponse->addScript('document.getElementById("projet_id").focus();');
     $objResponse->addScript('autosize(jQuery("#notes"));');
-    $objResponse->addScript('jQuery("#heure_debut").timepicker();');
+    $objResponse->addScript('jQuery("#heure_debut").timepicker({showOn: "focus"});');
     $objResponse->addScript('jQuery("#heure_fin").timepicker();');
     $objResponse->addScript('jQuery("#duree").timepicker();');
     return $objResponse->getXML();
@@ -942,6 +942,10 @@ function moveCasePeriode($casePeriode, $jourCible, $copie_periode = false, $scop
         }
         $periodeBackup = clone $periode; // modif ajout clonage de la periode
         $userCible = new User();
+		$projetCible = new Projet();
+		$lieuCible = new Lieu();
+		$ressourceCible = new Ressource();
+
         if (isset($duree_details)) {
             $periode->duree_details = $duree_details;
         }
@@ -969,10 +973,10 @@ function moveCasePeriode($casePeriode, $jourCible, $copie_periode = false, $scop
                     return $objResponse->getXML();
                 }
             }
-        } else {
+        } elseif($projetCible->db_load(array('projet_id', '=', $chaines2[1]))) {
             // si pas un user, veut dire que c'est peut-etre un projet (si affichage par projet et non par user)
             $projetCible = new Projet();
-            if (!$projetCible->db_load(array('projet_id', '=', $chaines2[1])) || $user->checkDroit('tasks_readonly') || ($user->checkDroit('tasks_modify_own_project') && $projetCible->createur_id != $user->user_id)) {
+            if ($user->checkDroit('tasks_readonly') || ($user->checkDroit('tasks_modify_own_project') && $projetCible->createur_id != $user->user_id)) {
                 $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_deplacementImpossible')));
                 $objResponse->addScript('location.reload();');
                 return $objResponse->getXML();
@@ -992,7 +996,11 @@ function moveCasePeriode($casePeriode, $jourCible, $copie_periode = false, $scop
                 $objResponse->addScript('location.reload();');
                 return $objResponse->getXML();
             }
-        }
+        } elseif($lieuCible->db_load(array('lieu_id', '=', $chaines2[1]))) {
+			// no specific check
+        } elseif($ressourceCible->db_load(array('ressource_id', '=', $chaines2[1]))) {
+			// no specific check
+		}
 
         if ($copie_periode == 'true') {
 
@@ -1008,9 +1016,9 @@ function moveCasePeriode($casePeriode, $jourCible, $copie_periode = false, $scop
             if ($multiuser) {
                 $copie->link_id = $newid;
             }
-            if (isset($projetCible)) {
+            if ($projetCible->isSaved()) {
                 $copie->projet_id = $projetCible->projet_id;
-            } else {
+            } elseif($userCible->isSaved()) {
                 if ($type_move_user == true)
                 {
                     if ($copie->user_id == $user_init)
@@ -1018,6 +1026,10 @@ function moveCasePeriode($casePeriode, $jourCible, $copie_periode = false, $scop
                         $copie->user_id = $userCible->user_id;
                     }
                 }else $copie->user_id = $user_select;
+            } elseif($lieuCible->isSaved()){
+                $copie->lieu_id = $lieuCible->lieu_id;
+            } elseif($ressourceCible->isSaved()){
+                $copie->ressource_id = $ressourceCible->ressource_id;
             }
             $copie->parent_id = null;
             $copie->modifier_id = null;
@@ -1115,27 +1127,31 @@ function moveCasePeriode($casePeriode, $jourCible, $copie_periode = false, $scop
             }
 
         } else {
-            // mise à jour des infos de la période déplacée
-            if (isset($projetCible)) {
-                $periode->projet_id = $projetCible->projet_id;
-            } else {
-                // si c'est un déplacement de user, on génére un nouveau link_id
-                if ($type_move_user == true)
-                {
-                    if ($periode->user_id == $user_init)
-                    {
-                        $periode->user_id = $userCible->user_id;
-                    }else $periode->user_id = $user_select;
-                    if ($scope == "seule")
-                    {
-                        $old_upload_dir = UPLOAD_DIR.$periode->link_id;
-                        $periode->link_id = $newid;
-                        $new_upload_dir = UPLOAD_DIR.$newid;
-                        // copie des fichiers joints vu que la tâche est déliée des autres
-                        cprdir($old_upload_dir,$new_upload_dir);
-                    }
-                }else $periode->user_id = $user_select;
-            }
+			// mise à jour des infos de la période déplacée
+			if ($projetCible->isSaved()) {
+				$periode->projet_id = $projetCible->projet_id;
+			} elseif($userCible->isSaved()) {
+				// si c'est un déplacement de user, on génére un nouveau link_id
+				if ($type_move_user == true)
+				{
+					if ($periode->user_id == $user_init)
+					{
+						$periode->user_id = $userCible->user_id;
+					}else $periode->user_id = $user_select;
+					if ($scope == "seule")
+					{
+						$old_upload_dir = UPLOAD_DIR.$periode->link_id;
+						$periode->link_id = $newid;
+						$new_upload_dir = UPLOAD_DIR.$newid;
+						// copie des fichiers joints vu que la tâche est déliée des autres
+						cprdir($old_upload_dir,$new_upload_dir);
+					}
+				}else $periode->user_id = $user_select;
+			} elseif($lieuCible->isSaved()) {
+				$periode->lieu_id = $lieuCible->lieu_id;
+			} elseif($ressourceCible->isSaved()) {
+				$periode->ressource_id = $ressourceCible->ressource_id;
+			}
 
 			if(count($chaines2) < 4 && $scope == 'seule' && !is_null($periode->date_fin) && $jourOrigine == $periode->date_fin && $jourDestination > $periode->date_debut){
 				$periode->date_fin = $jourDestination;
@@ -1513,7 +1529,7 @@ function submitFormUser($user_id, $user_id_origine, $user_groupe_id, $nom, $emai
     } else {
         // si user existant on vérifie que les champs ne vont pas ?craser un existant (login et identifiant)
         $userTest = new USer();
-        if ($login != '' && $userTest->db_load(array('login', '=', $login, 'user_id', '<>', $user_form->user_id))) {
+        if ($login != '' && $userTest->db_load(array('login', '=', trim($login), 'user_id', '<>', $user_form->user_id))) {
             $objResponse->addAlert($smarty->getConfigVars('login_existant'));
             return $objResponse;
         }
@@ -1541,7 +1557,7 @@ function submitFormUser($user_id, $user_id_origine, $user_groupe_id, $nom, $emai
     $user_form->commentaire = ($commentaire != '' ? $commentaire : null);
 
     $user_form->user_groupe_id = ($user_groupe_id != '' ? $user_groupe_id : null);
-    $user_form->login = ($login != '' ? $login : null);
+    $user_form->login = (trim($login) != '' ? trim($login) : null);
     if ($password != '') {
         $user_form->password = sha1("¤" . $password . "¤");
         $user_form->cle = MD5(RAND());
@@ -2146,12 +2162,7 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
                 return $objResponse->getXML();
             }
         }
-        if (!$periode->db_save()) {
-            $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
-            $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
-            $objResponse->addAlert(addslashes($smarty->getConfigVars('erreur')));
-            return $objResponse;
-        }
+
         // on fait la notification ici et non dans le db_save() sinon ça va s'appliquer à toutes les taches filles
         // on envoie que si la personne assignée n'est pas la personne connectée
         if ($notif_email == 'true' && $periode->user_id != $user->user_id) {
@@ -2160,6 +2171,13 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
             } else {
                 $periode->envoiNotification('modification', $repetition);
             }
+        }
+
+		if (!$periode->db_save()) {
+            $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
+            $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+            $objResponse->addAlert(addslashes($smarty->getConfigVars('erreur')));
+            return $objResponse;
         }
 
         if ($repetition != '' && $repetition != 'undefined') {

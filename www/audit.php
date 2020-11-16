@@ -5,6 +5,10 @@ require(BASE . '/../config.inc');
 
 $smarty = new MySmarty();
 
+$_REQUEST = sanitize($_REQUEST);
+$_GET = sanitize($_GET);
+$_POST = sanitize($_POST);
+
 require BASE . '/../includes/header.inc';
 
 if(!$user->checkDroit('audit_restore_own') && !$user->checkDroit('audit_restore') ) {
@@ -40,6 +44,10 @@ if(isset($_POST['filtreGroupeProjetAudit'])) {
 	$projetsFiltre = array();
 	foreach ($_POST as $keyPost => $valPost) {
 		if(strpos($keyPost, 'projet_') === 0) {
+			$check = new Projet();
+			if(!$check->db_load(array('projet_id', '=', $valPost))){
+				continue;
+			}
 			$projetsFiltre[] = $valPost;
 		}
 	}
@@ -59,6 +67,10 @@ if(isset($_POST['filtreUserAudit'])) {
 	$usersFiltre = array();
 	foreach ($_POST as $keyPost => $valPost) {
 		if(strpos($keyPost, 'user_') === 0) {
+			$check = new User();
+			if(!$check->db_load(array('user_id', '=', $valPost))){
+				continue;
+			}
 			$usersFiltre[] = $valPost;
 		}
 	}
