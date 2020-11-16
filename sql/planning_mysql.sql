@@ -6,7 +6,7 @@ CREATE TABLE `planning_config` (
   PRIMARY KEY (`cle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.47.00', 'Internal key for auto upgrade control');
+INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.47.01', 'Internal key for auto upgrade control');
 INSERT INTO `planning_config` VALUES('PLANNING_PAGES', '1,5,10,20,50,100', 'rows per page in the planning');
 INSERT INTO `planning_config` VALUES('PROJECT_COLORS_POSSIBLE', '', 'color choice limitation for planner (empty for no limit). Exemple :#ff0000,#aa8811,#446622');
 INSERT INTO `planning_config` VALUES('DEFAULT_NB_MONTHS_DISPLAYED', '2', 'Default number of months displayed in the planning');

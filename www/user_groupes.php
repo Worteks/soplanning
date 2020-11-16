@@ -24,12 +24,12 @@ if (isset($_GET['order']) && in_array($_GET['order'], array('nom'))) {
 	$order = 'nom';
 }
 
-if (isset($_GET['by']) && in_array($_GET['by'], array('nom'))) {
+if (isset($_GET['by']) && in_array($_GET['by'], array('asc','desc'))) {
 	$by = $_GET['by'];
 } elseif (isset($_SESSION['user_groupe_by'])) {
 	$by = $_SESSION['user_groupe_by'];
 } else {
-	$by = 'ASC';
+	$by = 'asc';
 }
 
 $groupes = new GCollection('User_groupe');

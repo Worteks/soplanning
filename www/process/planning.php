@@ -198,6 +198,10 @@ if(isset($_POST['filtreGroupeProjet'])) {
 	$projetsFiltre = array();
 	foreach ($_POST as $keyPost => $valPost) {
 		if(strpos($keyPost, 'projet_') === 0) {
+			$check = new Projet();
+			if(!$check->db_load(array('projet_id', '=', $valPost))){
+				continue;
+			}
 			$projetsFiltre[] = $valPost;
 		}
 	}
@@ -244,6 +248,11 @@ if(isset($_GET['filtreSurLieu'])) {
 }
 
 if(isset($_GET['filtreSurProjet'])) {
+	$check = new Projet();
+	if(!$check->db_load(array('projet_id', '=', $_GET['filtreSurProjet']))){
+		header('Location: ../planning.php');
+		exit;
+	}
 	$_SESSION['filtreGroupeProjet'] = array($_GET['filtreSurProjet']);
 	// we change planning dates to first and last task for this project
 	$sql = "SELECT MIN(date_debut) AS le_min, MAX(date_debut) AS le_max1, MAX(date_fin) AS le_max2
@@ -296,6 +305,10 @@ if(isset($_POST['filtreUser'])) {
 	$UsersFiltre = array();
 	foreach ($_POST as $keyPost => $valPost) {
 		if(strpos($keyPost, 'user_') === 0) {
+			$check = new User();
+			if(!$check->db_load(array('user_id', '=', $valPost))){
+				continue;
+			}
 			$UsersFiltre[] = $valPost;
 		}
 	}

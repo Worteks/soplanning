@@ -5,7 +5,8 @@ require BASE . '/../includes/header.inc';
 $smarty = new MySmarty();
 
 $type=$_POST['type'];
-$linkid=$_POST['linkid'];
+// securize link_id
+$linkid=preg_replace( '/[^a-z0-9]+/', '0', strtolower($_POST['linkid']));
 $upload_dir = UPLOAD_DIR."$linkid/"; // upload directory 
 
 // Si on fait un upload de fichiers
@@ -13,7 +14,7 @@ if ($type=='upload')
 {
 	// Pour tous les fichiers, on tente de les uploader
 	for($i=0; $i<count($_FILES); $i++){	
-	$filename = utf8_decode($_FILES["fichier-$i"]['name']);
+	$filename = replaceAccents(utf8_decode($_FILES["fichier-$i"]['name']));
 	$tmp_dir = $_FILES["fichier-$i"]['tmp_name'];
 	$fileSize = $_FILES["fichier-$i"]['size'];
 	     
@@ -102,9 +103,9 @@ if (!empty($_POST['periodeid']))
 		// Mise à jour de la tâche actuelle
 		$periode = new Periode();
 		$periode->db_load(array('periode_id', '=', $_POST['periodeid']));		
-		if (!empty(trim($_POST['fichiers'])))
+		if (!empty($_POST['fichiers']))
 		{
-			$periode->fichiers=utf8_decode($_POST['fichiers']);
+			$periode->fichiers=replaceAccents($_POST['fichiers']);
 		}else 
 		{
 			$periode->fichiers = null;

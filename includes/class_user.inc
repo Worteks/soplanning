@@ -54,7 +54,7 @@ class User extends GObject
 		return TRUE;
 	}
 
-	public function check() {
+	public function check($excludePK = false) {
 		$check = parent::check();
 		if((preg_match("/^[a-zA-Z0-9]+$/", $this->user_id) == 0) || strlen($this->user_id) > 20) {
 			return 'user_user_idManquant';
@@ -70,11 +70,11 @@ class User extends GObject
 		$sujet = CONFIG_SOPLANNING_TITLE . ' - ' . $smarty->getConfigVars('mail_sujet_changerPwd');
 		if (CONFIG_SOPLANNING_URL != '')
 		{
-			$smarty->assign('lien', CONFIG_SOPLANNING_URL . '/change_password.php?user_id=' . $this->user_id . '&date=' . date('Y-m-d') . '&hash=' . md5($this->user_id . '¤' . date('Y-m-d') . '¤' . CONFIG_SECURE_KEY));
+			$smarty->assign('lien', CONFIG_SOPLANNING_URL . '/change_password.php?user_id=' . $this->user_id . '&date=' . date('Y-m-d') . '&hash=' . md5($this->user_id . '¤' . date('Y-m-d') . '¤' . $this->cle));
 		}else 
 		{
 			$urlSuggeree = getUrlInfo();
-			$smarty->assign('lien', $urlSuggeree['root'] . substr($urlSuggeree['currentDir'], 0, strlen($urlSuggeree['currentDir'])-8) . 'change_password.php?user_id=' . $this->user_id . '&date=' . date('Y-m-d') . '&hash=' . md5($this->user_id . '¤' . date('Y-m-d') . '¤' . CONFIG_SECURE_KEY));
+			$smarty->assign('lien', $urlSuggeree['root'] . substr($urlSuggeree['currentDir'], 0, strlen($urlSuggeree['currentDir'])-8) . 'change_password.php?user_id=' . $this->user_id . '&date=' . date('Y-m-d') . '&hash=' . md5($this->user_id . '¤' . date('Y-m-d') . '¤' . $this->cle));
 		}
 		$corps = $smarty->getHtml('mail_changer_pwd.tpl');
 		$mail = new Mailer($this->email, $sujet, $corps);

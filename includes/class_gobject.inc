@@ -407,15 +407,19 @@ abstract class GObject
      * @return	{ TRUE		if all fields are validate
 	 *			{ array()	with all keys not valid		
      */
-	public function check()
+	public function check($excludePK = false)
 	{
 		$err = array();
 		reset($this->fields);
 		foreach ($this->fields as $key => $val) {
 			if (($this->fields[$key]->table == $this->table) && ($val->isValid($this->$key) === FALSE)) {
+				if($excludePK && in_array($key, $this->primaryKeys)) {
+					continue;	
+				}
 				$err[] = $key;
 			} 
 		}
+
 		return (count($err) == 0 ? TRUE : $err);	
 	}
 
@@ -439,6 +443,14 @@ abstract class GObject
 	public function isSaved()
 	{
 		return $this->saved;
+	}
+
+	public function getFieldType($field) {
+		if(!array_key_exists($field, $this->fields)) {
+			return false;
+		}
+		$class = get_class($this->fields[$field]);
+		return $class;
 	}
 
 }

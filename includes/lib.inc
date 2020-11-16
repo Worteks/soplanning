@@ -1093,7 +1093,7 @@ function createCellProject($infos)
 	if ($base_colonne=="heures" || $base_colonne=="users"){
 		$classHidden = "";
 	} else {
-		if (CONFIG_PLANNING_HIDE_WEEKEND_TASK == 1 && ($weekend==true || $ferie!=false)) {
+		if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 0 && ($weekend==true || $ferie!=false)) {
 			$classHidden = " hidden";
 		} else {
 			$classHidden = "";
@@ -1112,9 +1112,9 @@ function createCellProject($infos)
 	{
 	 if (CONFIG_PLANNING_LINE_HEIGHT != '') {
 		$hauteurcellule = CONFIG_PLANNING_LINE_HEIGHT + 0.8;
-	 }else $hauteurcellule = 20;
+	 }else $hauteurcellule = 30;
 	 
-	 // calcul décalage
+	 // calcul de l'offset
 	 $padding=5;
 	 $ligneId=$ligne['nom'];
 	 if (isset($planning['taches_horaires_users'][$infos['user_id']][$ligneId]))
@@ -1145,8 +1145,45 @@ function createCellProject($infos)
 	 }
 	 
 	 // calcule de la hauteur de cellule
-	 $hauteur = round($infos['dureeHeures']*2*$hauteurcellule,0);
-	 $cellule .= 'position:absolute;float:left;height:'.($hauteur + 1).'px;margin-left:'.$padding.'px';
+	 $hauteur = round($infos['dureeHeures']*2*$hauteurcellule,0)-5;
+	 // On gère la demie-heure
+	 $minutes_debut=$infos['heure_debut']-floor($infos['heure_debut']);
+	 $minutes_fin=$infos['heure_fin']-floor($infos['heure_fin']);
+	 
+	 if ($minutes_debut > 0 and $minutes_debut < 0.5)
+	 {
+		$pourcentage=1-((0.5-$minutes_debut)/0.5);
+		$offset_start=($hauteurcellule*$pourcentage);	
+	 }
+	 if ($minutes_debut > 0.5 and $minutes_debut < 1)
+	 {
+		$pourcentage=1-(($minutes_debut-0.5)/0.5);
+		$offset_start=($hauteurcellule*$pourcentage);	
+	 }
+	 if ($minutes_fin > 0 and $minutes_fin < 0.5)
+	 {
+		$pourcentage=((0.5-$minutes_fin)/0.5);
+		$offset_end=($hauteurcellule*$pourcentage);	
+	 }
+	 if ($minutes_fin > 0.5 and $minutes_fin < 1)
+	 {
+		$pourcentage=(($minutes_fin-0.5)/0.5);
+		$offset_end=($hauteurcellule*$pourcentage);	
+	 }
+	 
+	 //if ($minutes_fin > 0.5)
+	 //{
+	 // $pourcentage=((1-$minutes_fin)/0.5);
+	 // $hauteur=$hauteur-($hauteurcellule*$pourcentage);
+	 //}
+	 //if ($minutes_fin < 0.5)
+	 //{
+	 // $pourcentage=((1-$minutes_fin)/0.5);
+	 // $hauteur=$hauteur-($hauteurcellule*$pourcentage);
+	  //$hauteur=$hauteur-($hauteurcellule*$pourcentage)-$hauteurcellule;
+	 //}
+	 $hauteur=$hauteur-$offset_start-$offset_end;
+	 $cellule .= 'position:absolute;float:left;height:'.($hauteur + 1).'px;margin-top:'.$offset_start.'px;margin-left:'.$padding.'px';
 	 
 	 if($dimensionCase=='large') {
 			$cellule .= ';min-width:130px;';
@@ -1339,15 +1376,39 @@ function array_sort_by_columns() {
 // calcul durée 
 function calcul_duree_heures_non_masquees($heure_debut,$heure_fin) {
 	global $planning;
-
 	$nbheures=0;
+	$minutes_fin=$heure_fin-floor($heure_fin);
+	$minutes_debut=$heure_debut-floor($heure_debut);
+
 	$tabTranchesHoraires = explode(',', CONFIG_HOURS_DISPLAYED);
-	for($h=$heure_debut;$h<$heure_fin;$h=$h+0.5)
+
+	if ($minutes_debut >= 0.5) 
 	{
-		if (in_array(round($h,0),$tabTranchesHoraires)) $nbheures=$nbheures+0.5;
+		$start=floor($heure_debut)+0.5;
+	}else $start=floor($heure_debut);
+	if ($minutes_fin > 0.5) 
+	{
+		$end=floor($heure_fin)+1;
+	}elseif ($minutes_fin > 0)
+	{
+		$end=floor($heure_fin)+0.5;
+	}else $end=floor($heure_fin);
+
+	for($h=$start;$h<$end;$h=$h+0.5)
+	{
+		if (in_array(round($h,0),$tabTranchesHoraires)) 
+		{
+			$nbheures=$nbheures+0.5;
+		}elseif ($h == ($end-0.5)) $nbheures=$nbheures+0.5;
 	}
+	//exit;
 	// Si la dernière heure est masquée
-	if(!in_array($heure_fin,$tabTranchesHoraires)) $nbheures=$nbheures+0.5;
+	
+	//if ($minutes_fin>0.5) $nbheures=$nbheures+0.5;
+	//if(!in_array($heure_fin,$tabTranchesHoraires)) $nbheures=$nbheures+0.5;
+
+//exit;
+	
 	return $nbheures;
 }
 
@@ -1457,25 +1518,26 @@ function chargerSessionStatutsDefaut(){
    }
  }
 
- function cprdir ($orig,$dest) {
-  if (file_exists($orig))
-  {
-     mkdir ($dest);
-    $dir = dir($orig);
-    while ($entry=$dir->read()) {
-        $pathOrig = "$orig/$entry";
-        $pathDest = "$dest/$entry";
-        // repertoire ->copie récursive
-        if (is_dir($pathOrig) and (substr($entry,0,1)<>'.')) CopieRep ($pathOrig,$pathDest);
-        // fichier -> copie simple
-        if (is_file($pathOrig) and ($pathDest<>'') and ($fp=fopen($pathOrig,'rb'))) {
-            $buf = fread($fp,filesize($pathOrig));
-            $cop = fopen($pathDest,'ab+');
-            fputs ($cop,$buf);
-            fclose ($cop);
-            fclose ($fp);
-        }
-  }
-  $dir->close();
-  }
+function cprdir($dir2copy,$dir_paste)
+{    
+	if (is_dir($dir2copy)) 
+	{   
+       if ($dh = opendir($dir2copy)) 
+	   {                     
+         while(($file = readdir($dh)) !== false) 
+	     {                          
+               if (!is_dir($dir_paste)) mkdir($dir_paste,777);                           
+			   if (is_dir($dir2copy.$file) && $file != '..'  && $file != '.') 
+					cprdir( $dir2copy.$file.'/' , $dir_paste.$file.'/');                                     
+		       elseif($file != '..'  && $file != '.') copy ( $dir2copy.$file , $dir_paste.$file );
+		 }
+		 closedir($dh);
+	   }               
+	}
+}
+
+function replaceAccents($str) {
+  $search = explode(",","ç,æ,œ,á,é,í,ó,ú,à,è,ì,ò,ù,ä,ë,ï,ö,ü,ÿ,â,ê,î,ô,û,å,ø,Ø,Å,Á,À,Â,Ä,È,É,Ê,Ë,Í,Î,Ï,Ì,Ò,Ó,Ô,Ö,Ú,Ù,Û,Ü,Ÿ,Ç,Æ,Œ");
+  $replace = explode(",","c,ae,oe,a,e,i,o,u,a,e,i,o,u,a,e,i,o,u,y,a,e,i,o,u,a,o,O,A,A,A,A,A,E,E,E,E,I,I,I,I,O,O,O,O,U,U,U,U,Y,C,AE,OE");
+  return str_replace($search, $replace, $str);
 }

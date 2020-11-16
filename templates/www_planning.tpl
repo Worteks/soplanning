@@ -5,24 +5,24 @@
 		<div class="position-relative" id="thirdLayer">
 				{if $fleches eq 1}
 					<div id="left-scroll">					
-						<span class="fa-stack fa-lg">
+						<span class="fa-stack">
 							<i class="fa fa-chevron-left fa-2x" id="left-button" aria-hidden="true"></i>				
 						</span>
 					</div>
 				{/if}
-				<div id="divConteneurPlanning">
+				<div id="divConteneurPlanning" style="width:99vw;">
 					{$htmlTableau}
 				</div>
 				{if $fleches eq 1}
 					<div id="right-scroll">						
-						<span class="fa-stack fa-lg">
+						<span class="fa-stack">
 							<i class="fa fa-chevron-right fa-2x" id="right-button" aria-hidden="true"></i>				
 						</span>
 					</div>
 				{/if}
 		 </div> 
 	{if isset($htmlRecap) and $htmlRecap neq ""}
-	<div class="w-100 noprint" id="divRecap">
+	<div class="vw-100 noprint" id="divRecap">
 		<div >
 			<div id="divPlanningRecap" class="soplanning-box pt-0" >
 				{$htmlRecap}
@@ -74,6 +74,7 @@ var dateFin = {$dateFin|@json_encode};
 		$("#filtreGroupeProjet").multiselect({
 			selectAll:false,
 			noUpdatePlaceholderText:true,
+			search   : true,
 			nameSuffix: 'projet',
 			desactivateUrl: 'process/planning.php?desactiverFiltreGroupeProjet=1',
 			placeholder: '{/literal}<i class="fa fa-book fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-md-inline-block">&nbsp;{#taches_filtreProjets#}</span>{literal}',
@@ -90,6 +91,7 @@ var dateFin = {$dateFin|@json_encode};
 		$("#filtreUser").multiselect({
 			selectAll:false,
 			noUpdatePlaceholderText:true,
+			search   : true,
 			nameSuffix: 'user',
 			desactivateUrl: 'process/planning.php?desactiverFiltreUser=1',
 			placeholder: '{/literal}<i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-md-inline-block">&nbsp;{#formChoixUser#}</span>{literal}',

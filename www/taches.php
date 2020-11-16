@@ -9,6 +9,8 @@ require BASE . '/../includes/header.inc';
 
 $_POST = sanitize($_POST);
 $_GET = sanitize($_GET);
+$_REQUEST = sanitize($_REQUEST);
+
 $_SESSION['lastURL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION['planningView'] = 'taches';
 
@@ -130,7 +132,7 @@ if (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('nom_personn
 }
 $_SESSION['taches_order'] = $order;
 
-if (isset($_REQUEST['by'])) {
+if (isset($_REQUEST['by']) && in_array($_REQUEST['by'], array('ASC','DESC'))) {
 	$by = $_REQUEST['by'];
 } elseif (isset($_SESSION['taches_by'])) {
 	$by = $_SESSION['taches_by'];

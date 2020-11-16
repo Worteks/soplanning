@@ -53,8 +53,10 @@ class Periode extends GObject
 			}
 		}else {
 			if($this->date_creation != date('Y-m-d H:i:s')) {
-				$this->modifier_id = $_SESSION['user_id'];
-				$this->date_modif = date('Y-m-d H:i:s');
+				if(isset($_SESSION['user_id'])){
+					$this->modifier_id = $_SESSION['user_id'];
+					$this->date_modif = date('Y-m-d H:i:s');
+				}
 			}
 		}
 		if(defined('CONFIG_DEFAULT_PERIOD_LINK') && $this->lien == CONFIG_DEFAULT_PERIOD_LINK) {
