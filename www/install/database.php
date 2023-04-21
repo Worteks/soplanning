@@ -25,7 +25,7 @@ $smarty = new MySmarty();
 $res = $version->importDatabase();
 
 if($res !== TRUE) {
-	$_SESSION['message'] = $res;
+	$_SESSION['erreur'] = $res;
 	header('Location: ' . BASE . '/install/');
 	exit;
 } else {

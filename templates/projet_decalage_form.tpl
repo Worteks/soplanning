@@ -36,7 +36,17 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<br />
-			<input id="butSubmitDecalage" type="button" class="btn btn-primary" value="{#enregistrer#|escape:"html"}" onclick="$('#divPatienter').removeClass('d-none');/*this.disabled=true*/; xajax_projet_decalage_submit('{$projet.projet_id}', document.getElementById('date_decalage').value, document.getElementById('date_nouvelle').value);"/>
+			<input id="butSubmitDecalage" type="button" class="btn btn-primary" value="{#enregistrer#|escape:"html"}" onclick="$('#divPatienter').removeClass('d-none');this.disabled=true; xajax_projet_decalage_submit('{$projet.projet_id}', document.getElementById('date_decalage').value, document.getElementById('date_nouvelle').value);"/>
 			<div id="divPatienter" class="d-none" style="margin-left:20px;display:inline-block"><img src="assets/img/pictos/loading16.gif" alt="" /></div>
 		</div>
 </form>
+
+<script>
+	{literal}
+	$('.tooltipster').tooltip({
+		html: true,
+		placement: 'auto',
+		boundary: 'window'
+	});
+	{/literal}
+</script>

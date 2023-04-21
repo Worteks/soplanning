@@ -1,14 +1,8 @@
 <?php
 
 require('./base.inc');
-require BASE . '/../config.inc';
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
-
-$_GET = sanitize($_GET);
-$_POST = sanitize($_POST);
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('projectgroups_manage_all')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';

@@ -65,31 +65,31 @@
 					</div>
 					
 					{if $filtrageProjet neq "tous"}
-					<div id="projectNbMonth" class="form-group form-inline">					
-					<label class="col-form-label">{#formNbMois#} :&nbsp;</label>
-						<div class="input-group">
-							<input type="text" name="nb_mois" class="form-control" size="1" value="{$nbMois|xss_protect}" />
+						<div id="projectNbMonth" class="form-group form-inline">					
+						<label class="col-form-label">{#formNbMois#} :&nbsp;</label>
+							<div class="input-group">
+								<input type="text" name="nb_mois" class="form-control" size="1" value="{$nbMois|xss_protect}" />
+								<span class="input-group-append">
+									<button class="btn btn-default" type="submit"><i class="fa fa-arrow-right fa-lg fa-fw" aria-hidden="true"></i></button>
+								</span>
+							</div>
+						</div>
+						<div id="projectFromDate" class="form-group form-inline">					
+						<label class="col-form-label">&nbsp;{#formDebut#} :&nbsp;</label>
+							<div class="input-group">
+							{if $smarty.session.isMobileOrTablet==1}
+								<input type="date" name="date_debut_affiche_projet" id="date_debut_affiche_projet" value="{$dateDebut|forceISODateFormat}" class="form-control" />
+							{else}
+								<input type="text" name="date_debut_affiche_projet" id="date_debut_affiche_projet" value="{$dateDebut}" class="form-control datepicker" />
+							{/if}
 							<span class="input-group-append">
-								<button class="btn btn-default" type="submit"><i class="fa fa-arrow-right fa-lg fa-fw" aria-hidden="true"></i></button>
-							</span>
+									<button class="btn btn-default" type="button"><i class="fa fa-arrow-right fa-lg fa-fw" aria-hidden="true"></i></button>
+								</span>
+							</div>
 						</div>
-					</div>
-					<div id="projectFromDate" class="form-group form-inline">					
-					<label class="col-form-label">&nbsp;{#formDebut#} :&nbsp;</label>
-						<div class="input-group">
-						{if $smarty.session.isMobileOrTablet==1}
-							<input type="date" name="date_debut_affiche_projet" id="date_debut_affiche_projet" value="{$dateDebut|forceISODateFormat}" class="form-control" />
-						{else}
-							<input type="text" name="date_debut_affiche_projet" id="date_debut_affiche_projet" value="{$dateDebut}" class="form-control datepicker" />
-						{/if}
-						<span class="input-group-append">
-								<button class="btn btn-default" type="button"><i class="fa fa-arrow-right fa-lg fa-fw" aria-hidden="true"></i></button>
-							</span>
-						</div>
-					</div>
-					<div id="projectToDate">
-					<label class="col-form-label">{#formInfoDateFin#} : {$dateFin}</label>
-					</div>	
+						<div id="projectToDate">
+						<label class="col-form-label">{#formInfoDateFin#} : {$dateFin}</label>
+						</div>	
 					{/if}
 			</div>
 		</div>
@@ -208,10 +208,12 @@
 									<a href="javascript:xajax_supprimerProjet('{$projet.projet_id}');undefined;" 
 									onclick="javascript: return confirm('{#projet_liste_confirmSuppr#|xss_protect}')"><i class="fa fa-trash-o fa-lg fa-fw" aria-hidden="true"></i></a>
 								{/if}
-								<a href="{$BASE}/process/planning.php?filtreSurProjet={$projet.projet_id}" title="{#planning_filtre_sur_projet#|xss_protect}"><i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i></a>
+								<a class="tooltipster" href="{$BASE}/process/planning.php?filtreSurProjet={$projet.projet_id}" title="{#planning_filtre_sur_projet#|xss_protect}"><i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i></a>
+								{if in_array("projects_manage_all", $user.tabDroits) || (in_array("projects_manage_own", $user.tabDroits) && $projet.createur_id eq $user.user_id)}
+									<a class="tooltipster" href="javascript:xajax_projet_copie_form('{$projet.projet_id}');undefined;" title="{#projet_copie_infobulle#|xss_protect}"><i class="fa fa-copy fa-lg fa-fw" aria-hidden="true"></i></a>
+								{/if}
 								{if $projet.lien <> ''}
-								<a href="{if $projet.lien|strpos:"http" !== 0 && $projet.lien|strpos:"\\" !== 0}http://{/if}{$projet.lien}" title="{#winProjet_gotoLien#|xss_protect}" target="_blank"><i class="fa fa-globe fa-lg fa-fw" aria-hidden="true"></i></a>
-								{else}
+									<a href="{if $projet.lien|strpos:"http" !== 0 && $projet.lien|strpos:"\\" !== 0}http://{/if}{$projet.lien}" title="{#winProjet_gotoLien#|xss_protect}" target="_blank"><i class="fa fa-globe fa-lg fa-fw" aria-hidden="true"></i></a>
 								{/if}
 								{if $smarty.const.CONFIG_PLANNING_AFFICHAGE_STATUS eq 'aucun'}
 									{elseif $smarty.const.CONFIG_PLANNING_AFFICHAGE_STATUS eq 'nom'}{$projet.statut_nom}
@@ -240,7 +242,7 @@
 							<td class="wrap projectTabColComment">
 								{assign var=cooltip value=$smarty.config.user_liste_NBPeriodes|cat:" : "|cat:$projet.totalPeriodes}
 								
-								<span class="fa fa-info-circle fa-lg fa-fw cursor-help tooltipster" aria-hidden="true" title="{$cooltip}"></span>
+								<span class="tooltipster" title="{$cooltip}"><i class="fa fa-info-circle fa-lg fa-fw cursor-help " aria-hidden="true"></i></span>
 								&nbsp;&nbsp;&nbsp;
 								{$projet.iteration|xss_protect}
 							</td>

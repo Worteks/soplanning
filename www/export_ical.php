@@ -29,12 +29,12 @@ if(isset($_GET['login'])) {
 	require BASE . '/../includes/header.inc';
 }
 
-$smarty = new MySmarty();
-
 $joursFeries = getJoursFeries();
 
 // PARAMETRES ////////////////////////////////
 $dateDebut = new DateTime();
+$smarty = new MySmarty();
+
 if (isset($_GET['age'])) {
 	$dateDebut->modify('-' . (int)$_GET['age'] . ' months');
 }

@@ -1,0 +1,5 @@
+
+-- UPDATE planning_user SET tutoriel = NULL;
+
+UPDATE  `planning_config` SET  valeur ='1.50.02' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

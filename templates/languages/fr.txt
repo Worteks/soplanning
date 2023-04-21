@@ -274,7 +274,7 @@ winPeriode_supprimer_repetition_avant = "Sup. avant"
 winPeriode_supprimer_repetition_apres = "Sup. apres"
 winPeriode_confirmSupprRepetition = "Etes-vous sûr de vouloir supprimer cette tâche et toutes ses répétitions ?"
 winPeriode_valider = "Valider"
-winPeriode_recurrente = "Cette planification est récurrente. Prochaine échéance : "
+winPeriode_recurrente = "Cette planification est récurrente.<br>Prochaine échéance : "
 winPeriode_appliquerATous = "Appliquer les modifications à toutes les répétitions"
 winPeriode_filtrage = "Filtrage"
 winPeriode_dupliquer = "Dupliquer"
@@ -356,7 +356,7 @@ js_choisirUtilisateur = "Veuillez choisir une personne"
 js_choisirDateDebut = "Veuillez choisir une date de début"
 js_saisirFormatDate = "Veuillez saisir des dates au format jj/mm/aaaa"
 js_dateFinInferieure = "La date de fin est inférieure ou égale à la date de début"
-js_saisirIDProjet = "Veuillez saisir un identifiant de projet"
+js_saisirIDProjet = "Veuillez saisir un identifiant de projet, lettres et chiffres uniquement"
 js_saisirNomProjet = "Veuillez saisir un nom de projet"
 js_saisirCouleur = "Veuillez saisir une couleur valide (6 chiffres)"
 js_saisirCharge = "Veuillez saisir une une charge en jour"
@@ -549,7 +549,7 @@ config_options_lieux = "Gestion des lieux"
 config_aide_options_lieux = "Permet d'ajouter la possibilité de renseigner un lieu lors de la création/modification d'une tâche"
 winPeriode_lieu = "Lieu"
 ajax_IDLieuNonValide = "Identifiant non valide"
-winPeriode_lieu_identifiantCarMax = "(10 car. max)"
+winPeriode_lieu_identifiantCarMax = "(20 car. max)"
 
 menuRessources = "Ressources"
 menuCreerRessource = "Ajouter une ressource"
@@ -566,7 +566,7 @@ config_options_ressources = "Gestion des ressources"
 config_aide_options_ressources = "Permet d'ajouter la possibilité de renseigner une ressource lors de la création/modification d'une tâche"
 winPeriode_ressource = "Ressource"
 ajax_IDRessourceNonValide = "Identifiant non valide"
-winPeriode_ressource_identifiantCarMax = "(10 car. max)"
+winPeriode_ressource_identifiantCarMax = "(20 car. max)"
 erreur_ressource_utilisee = "La ressource sélectionnée est déjà utilisée dans la période souhaitée"
 ajax_deplacementImpossible_erreurRessource = "Déplacement ou copie impossible : la ressource sélectionnée est déjà utilisée dans la période souhaitée"
 
@@ -1038,6 +1038,195 @@ upload_fichier_delete_ok = "Le fichier 'filename' a été supprimé !"
 upload_fichier_delete_ko = "Erreur de suppression du fichier 'filename' !"
 upload_fichier_suppression = "Etes-vous certain de vouloir supprimer ce fichier ?"
 upload_fichier_joindre = "Joindre un fichier"
+upload_fichier_non_autorise = "Le fichier 'filename' n'est pas autorisé !"
+upload_aucun_fichier_valide = "Aucun fichier valide à charger. Merci de vérifier votre fichier ou sauvegarde"
+upload_fichier_erreur_nom_fichier = "Erreur de chargement ! Pour être validé, Le fichier doit avoir le nom 'attendu' au lieu de 'filename'"
+upload_fichier_mauvais_format_fichier = "Mauvais format du fichier 'filename'. Procédure d'import arrêtée !"
+upload_fichier_erreur_version = "Erreur d'importation du fichier 'filename". Vous ne pouvez restaurer qu'une sauvegarde issue d'un SOPlanning de même version !"
+upload_erreur_champs = "Erreur sur les champs suivants : "
 
 action_aide_deplacer_toutestaches = "Choisir ce type de déplacement si vous souhaitez déplacer toutes les tâches filles ou liées. Si aucune tâche fille ou liée n'existe, seule la tâche sélectionnée sera déplacée.<br>Tâche fille : tâche(s) créée(s) suite à une répétition.<br>Tâche liée : tâche créée pour plusieurs personnes"
 action_aide_deplacer_seule = "Déplacez vers la nouvelle date de début souhaitée pour cette tâche. <br>A noter : si vous déplacer le dernier jour de la tâche, celle-ci sera étirée et non déplacée"
+
+menuImportExport = "Sauvegarde & Import"
+menuExport = "Sauvegarde"
+menuImport = "Import / restauration"
+export_titre = "Sauvegarde des données"
+export_choix_donnees = "Sélection des données à sauvegarder"
+export_choix_tout = "Toutes les données du planning"
+export_choix_configuration = "Données de paramétrage (paramétrage, status des tâches, jours fériés)"
+export_choix_projets = "Données Projets (projets & groupes projets)"
+export_choix_taches = "Données Tâches"
+export_choix_lieux = "Données Lieux"
+export_choix_ressources = "Données Ressources"
+export_choix_users = "Données Utilisateurs (utilisateurs, groupes utilisateurs & droits)"
+export_choix_fichiers = "Fichiers"
+export_nom_sauvegarde = "Nom du fichier de sauvegarde"
+sauvegarder = "Sauvegarder les données"
+
+import_titre = "Import/Restauration des données"
+import_choix_donnees = "Sélection des données à importer"
+import_type_fichier = "Choix restauration"
+import_type_fichier_csv = "Type fichier import"
+import_type_fichier_config = "Fichier Configuration"
+import_type_fichier_projet = "Fichier Projet"
+import_type_fichier_projet_groupe = "Fichier Groupe Projet"
+import_type_fichier_user = "Fichier Utilisateurs"
+import_type_fichier_user_groupe = "Fichier Equipes"
+import_type_fichier_lieu = "Fichier Lieu"
+import_type_fichier_ressource = "Fichier Ressource"
+import_type_fichier_tache = "Fichier Tâche"
+import_type_fichier_feries = "Fichier Fériés"
+import_type_fichier_status = "Fichier Statuts"
+import_type_fichier_sauvegarde = "Restaurer une sauvegarde"
+import_type_fichier_seul = "Importer depuis un fichier"
+import_fichier = "Nom du fichier"
+import_fichier_aide = "Sélectionner un nom de fichier de sauvegarde ou un fichier .csv"
+import_options = "Options d'import"
+import_options_ecrasement = "Remplacer les valeurs si l'enregistrement existe déjà"
+import_options_parametrage = "Lors de l'import des données Paramétrage, ne pas écraser les paramètres 'Configuration générale', 'Authentification Google' et 'API'"
+restaurer = "Restaurer les données"
+analyser_sauvegarde = "Analyser la sauvegarde"
+
+export_choix_tout = "Toutes les données du planning"
+export_choix_configuration = "Données de paramétrage (paramétrage, statuts des tâches, jours fériés)"
+export_choix_projets = "Données Projets (projets & groupes projets)"
+export_choix_taches = "Données Tâches"
+export_choix_lieux = "Données Lieux"
+export_choix_ressources = "Données Ressources"
+export_choix_users = "Données Utilisateurs (utilisateurs, groupes utilisateurs & droits)"
+
+import_resultat_titre = "Résultat de la restauration des données"
+import_element = "élément(s)"
+import_ecrasement = "Enregistrement existant ?"
+import_ecrasement_choix1 = "Pas de remplacement"
+import_ecrasement_choix2 = "Remplacer les valeurs"
+import_type_add = "Ajout"
+import_type_update = "Mise à jour"
+import_type_ignore = "Ignoré"
+import_type_enregistrement = "Type enregistrement"
+
+erreur_extraction_sauvegarde = "Erreur d'extraction de la sauvegarde ! Mauvais format ?"
+
+options_api = "Accès API"
+options_api_url = "Point d'accès REST"
+options_api_doc = "Documentation de l'API"
+options_api_key = "Nom de la clé (header)"
+options_api_value = "Valeur de la clé"
+ou = "OU"
+
+options_google_login = "Connexion via login Google"
+options_google_login_help = "Si vous souhaitez configurer la connexion à SOPlanning via la page de connexion de vos comptes google/Gmail (Oauth), connectez-vous sur <a target='_blank' href='https://console.cloud.google.com/apis/credentials/'>l'interface Cloud de Google</a> pour créer un nouveau projet et l'authentification associée. Vous pourrez y récupérer les informations nécessaires ci-dessous.<br> Vous trouverez sur le web différents <a target='_blank' href='https://www.webslesson.info/2019/09/how-to-make-login-with-google-account-using-php.html'>tutoriels</a> pour faire cela, sinon contactez-nous sur <a href='mailto:support@soplanning.org'>support@soplanning.org</a><br>A noter : la connexion classique par mot de passe sera toujours disponible"
+google_oauth_bouton = "Se connecter via Google / Gmail"
+google_sso_error_connection = "Une erreur est survenue lors de la connexion, contactez votre administrateur"
+google_sso_error_empty_email = "Votre compte google n'a aucun email associé"
+google_sso_error_no_account_for_email = "Aucun compte SOPlanning n'est lié à cet email"
+google_sso_error_several_accounts_for_email = "Plusieurs comptes SOPlanning sont liés à cet email, veuillez corriger et essayer à nouveau"
+google_sso_active = "Activer la connexion via Google"
+google_sso_return_url = "Url de retour à indiquer dans Google cloud"
+google_sso_return_url_need_setup = "<b>Veuillez configurer l'adresse de connexion à SOPlanning (onglet Configuration générale)</b>"
+google_sso_client_id = "ID client (à récupérer sur Google cloud)"
+google_sso_secret = "Clé secrete (à récupérer sur Google cloud)"
+
+options_2fa = "Authentification en 2 étapes"
+options_2fa_help = "L'authentification en 2 étapes utilise Google Authenticator. Si vous activez cette option, SOPlanning demandera un code à usage unique juste après l'étape de connexion.<br>Il suffira ensuite à l'utilisateur de récupérer le code sur son smartphone, après avoir installé l'application Google Authenticator, disponible sur Android et Iphone."
+google_2fa_active = "Activer la vérification en 2 étapes"
+google_2fa_scan_qrcode = "Veuillez télécharger l'application Google Authenticator sur votre smartphone, puis scanner le QRcode suivant sur Google Authenticator, vous pourrez ainsi récupérer le code ci-dessous"
+google_2fa_scan_code = "Code temporaire"
+google_2fa_code_failed = "Code erroné"
+google_2fa_code_help = "Veuillez saisir le code temporaire depuis votre application Google Authenticator.<br> Si vous n'avez plus accès à l'application, veuillez contacter l'administrateur de SOPlanning afin de réinitaliser votre compte."
+google_2fa_reset = "Réinitialiser la vérification en 2 étapes (Google Authenticator à configurer à nouveau)"
+options_2fa_not_compatible = "Cette fonctionnalité requiert PHP 7 ou supérieur"
+
+projet_copie_infobulle = "Copier ce projet et ses tâches"
+projet_copie_nom = "Nom du nouveau projet"
+projet_copie_projet_id = "Identifiant du nouveau projet"
+projet_copie_a_partir_de = "Copier à partir"
+projet_copie_radio_copie_a_partir_debut = "de la première tâche du projet"
+projet_copie_radio_copie_a_partir_date = "de la date suivante"
+projet_copie_jusqua = "jusqu'à"
+projet_copie_radio_copie_jusqua_fin = "la dernière tâche"
+projet_copie_radio_copie_jusqua_date = "la date suivante"
+projet_copie_demarrer = "Copier sur le nouveau projet au"
+projet_copie_demarrer_erreur = "Veuillez saisir une date de démarrage valide sur le nouveau projet"
+projet_copie_nom_copie_erreur = "Veuillez saisir le nom du nouveau projet"
+projet_copie_radio_copie_a_partir_date_erreur = "Veuillez saisir une date valide pour le début de votre sélection"
+projet_copie_radio_jusqua_date_erreur = "Veuillez saisir une date valide pour la fin de votre sélection"
+projet_copie_projet_id_copie_erreur = "Veuillez saisir un identifiant de projet valide, lettres et chiffres uniquement"
+
+titre_action_multiple_taches = "Action groupée"
+action_multi_concernees = "Tâches concernées"
+action_multi_supprimer = "Supprimer ces tâches"
+action_multi_annuler_selection = "Annuler ma sélection"
+action_multi_annuler_fermer = "Rajouter d'autres tâches"
+winPeriode_recurrente_fin = "Dernière échéance"
+
+tutoriel_titre = "Tutoriel de démarrage"
+tutoriel_demarrer = "Démarrer le tutoriel"
+tutoriel_precedent = "Précédent"
+tutoriel_suivant = "Suivant"
+tutoriel_ne_plus_afficher = "Ne plus afficher ce tutoriel"
+tutoriel_ne_plus_afficher_confirm = "Si vous confirmez, ce tutoriel ne s'affichera plus, jusqu'à la prochaine version de SOPlanning"
+tutoriel_contenu_1 = """
+Bienvenue dans SOPlanning !
+<br><br>
+Suivez ce tutoriel en quelques étapes pour découvrir des fonctionnalités particulières de SOPlanning.
+<br>
+SOPlanning étant assez intuitif vous devriez comprendre le fonctionnement basique en quelques minutes.
+<br><br>
+Après avoir pris connaissance de ces fonctionnalités vous pourrez les tester par vous même une fois ce tutoriel fermé.
+<br><br>
+Pour toute autre question, regardez l'aide (bouton dans la barre en haut), ou contactez-nous au support.
+"""
+tutoriel_contenu_2 = """
+<b>Création de tâche</b>
+<br><br>
+Pour créer une tâche vous pouvez cliquer sur le bouton correspondant au dessus du planning, ou cliquer directement sur une case.
+<br><br>
+Dans ce cas la date sera pré-remplie, ainsi que la ligne sur laquelle vous avez cliqué (la personne ou le projet selon l'affichage en cours).
+"""
+tutoriel_contenu_3 = """
+<b>Glisser / déposer</b>
+<br><br>
+Vous pouvez faire glisser une tâche d'une case à une autre. SOPlanning vous proposera alors de copier ou déplacer cette tâche sur le nouvel emplacement.
+<br><br>
+Cette fonctionnalité vous permettra ainsi de déplacer la tâche dans le temps, ou de changer de projet / personne assignée.
+"""
+tutoriel_contenu_4 = """
+<b>Sélection multiple</b>
+<br><br>
+Si vous maintenez la touche CTRL en même temps que vous cliquez sur une tâche, vous pourrez alors en sélectionner plusieurs tâches tant que vous maintenez CTRL.
+<br><br>
+Dès que vous relachez CTRL, une fenêtre vous permettra d'effectuer des actions sur les tâches sélectionnées.
+"""
+tutoriel_contenu_5 = """
+<b>Double flèche et les différentes vues du planning</b>
+<br><br>
+Vous pouvez voir une double flêche comme première "case" du planning. Ceci vous permet de facilement basculer de la vue par personne à la vue par projet.
+<br><br>
+Vous pouvez faire la même chose avec le menu "Affichage" situé au dessus du planning, et afficher les autres vues possibles.
+"""
+tutoriel_contenu_6 = """
+<b>Décalage de projet</b>
+<br><br>
+Lorsque vous affichez le planning "par projet", vous verrez une petite flêche derrière chaque nom de projet dans la colonne de gauche.
+<br><br>Ceci vous permettra d'accéder à la fonctionnalité de décalage des tâches en masse, en définissant la date de début du décalage, et la date vers laquelle décaler toutes les tâches correspondantes.
+"""
+tutoriel_contenu_7 = """
+<b>Récapitulatif du planning</b>
+<br><br>
+Sous le planning vous trouverez un récapitulatif de toutes les tâches visibles sur le planning, pour la période de temps sélectionnée.
+<br>
+Ceci vous permet de voir une version plus détaillée des tâches planifiées, avec un affichage en mode liste.
+<br><br>
+Vous pouvez masquer ce récapitulatif dans le menu "Affichage".
+"""
+tutoriel_contenu_8 = """
+<b>C'est à vous de jouer !</b>
+<br><br>
+Prenez en main l'outil par vous-même et n'hésitez pas à nous contacter pour toute question !
+"""
+
+user_masquerLigneVide = "Masquer les lignes vides du planning"
+user_afficherTableauRecap = "Afficher récapitulatif sous le planning"
+audit_inactif = "Attention : le module d'audit est inactif, veuillez d'abord l'activer dans l'onglet Configuration général"

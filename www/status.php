@@ -1,11 +1,14 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+if(!$user->checkDroit('parameters_all')) {
+	$_SESSION['erreur'] = 'droitsInsuffisants';
+	header('Location: ../index.php');
+	exit;
+}
 
 $status = new GCollection('Status');
 $status->db_load(array(), array('priorite' => 'ASC'));

@@ -2,10 +2,9 @@
 require 'base.inc';
 require BASE . '/../config.inc';
 require BASE . '/../includes/header.inc';
-$smarty = new MySmarty();
 
-$type=$_POST['type'];
-// securize link_id
+$type=$_POST['type'];;
+// securise link_id
 $linkid=preg_replace( '/[^a-z0-9]+/', '0', strtolower($_POST['linkid']));
 $upload_dir = UPLOAD_DIR."$linkid/"; // upload directory 
 

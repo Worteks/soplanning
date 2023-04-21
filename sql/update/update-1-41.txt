@@ -1,6 +1,4 @@
 
-UPDATE  `planning_config` SET  valeur ='1.41' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
-
 CREATE TABLE `planning_status` (
   `status_id` varchar(10) collate latin1_general_ci NOT NULL default '',
   `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
@@ -22,3 +20,6 @@ ALTER TABLE `planning_periode` CHANGE `statut_tache` `statut_tache` VARCHAR(10) 
 ALTER TABLE `planning_projet` CHANGE `statut` `statut` VARCHAR(10) collate latin1_general_ci NOT NULL DEFAULT 'a_faire';
 
 INSERT INTO `planning_config` VALUES('PLANNING_AFFICHAGE_STATUS', 'aucun', 'Show status');
+
+UPDATE  `planning_config` SET  valeur ='1.41' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

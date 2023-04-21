@@ -33,7 +33,7 @@ version_version_dispo = "Verfügbare Version"
 version_message = "Informationen"
 version_download = "Herunterladen"
 version_nePlusRappeler = "Nicht nochmal zeigen"
-version_client = "Already customer"
+version_client = "Bin schon Kunde"
 
 # menus
 menuPlanning = "Planung"
@@ -549,7 +549,7 @@ config_options_lieux = "Orte-Management"
 config_aide_options_lieux = "Benutzer erlauben, den Ort für Aufgaben auszuwählen"
 winPeriode_lieu = "Ort"
 ajax_IDLieuNonValide = "ID ungültig"
-winPeriode_lieu_identifiantCarMax = "(max. 10 Zeichen)"
+winPeriode_lieu_identifiantCarMax = "(max. 20 Zeichen)"
 
 menuRessources = "Ressourcen"
 menuCreerRessource = "Ressource hinzufügen"
@@ -566,7 +566,7 @@ config_options_ressources = "Ressourcen-Management"
 config_aide_options_ressources = "Benutzer erlauben beim Erstellen oder Ändern einer Aufgabe eine Ressource zu wählen"
 winPeriode_ressource = "Ressource"
 ajax_IDRessourceNonValide = "ID ungültig"
-winPeriode_ressource_identifiantCarMax = "(max. 10 Zeichen)"
+winPeriode_ressource_identifiantCarMax = "(max. 20 Zeichen)"
 erreur_ressource_utilisee = "Die gewählte Ressource wird schon benutzt in dieser Zeit"
 ajax_deplacementImpossible_erreurRessource = "Verschieben oder kopieren abgebrochen: Gewählte Ressource wird schon benutzt in dieser Zeit"
 
@@ -615,7 +615,7 @@ changeNotOKImageSize = """Upload gescheitert: max. Höhe 40 px, Breite 400 px, 1 
 changeNotOKImageErreur = """Upload gescheitert. Interner Fehler."""
 options_logo_supprimer = "Logo löschen"
 options_theme = "Farbschema"
-options_aide_theme = """Erstellen Sie ein eigenes Theme mit Wunschfarben im CSS-Format (technische Kenntnisse erforderlich) und speicher Sie es in www/assets/css/themes. Der Dateiname ist der Name des Themes."""
+options_aide_theme = """Erstellen Sie ein eigenes Theme mit Wunschfarben im CSS-Format (technische Kenntnisse erforderlich) und speichern Sie es in www/assets/css/themes. Der Dateiname ist der Name des Themes."""
 user_adress = "Adresse"
 user_phone = "Telefon"
 user_mobile = "Mobiltelefon"
@@ -642,10 +642,6 @@ config_aide_options_visiteur = "Gast kann Aufgaben hinzuzufügen oder ändern, auc
 loginTxt = "Login"
 soplanning_support = "Support"
 soplanning_donate = "Spenden"
-
-scrolls_hv = "Horizontal und vertikal verschieben"
-scrolls_h = "Horizontal verschieben"
-scrolls_none = "Nicht verschieben"
 
 option_masquer_projet_weekend = "Aufgaben an Wochenenden und Feiertagen anzeigen<br><img src='assets/img/pictos/help_hide_task_weekend.png' alt='' />"
 options_aide_hide_weekend_task = "Aufgaben werden an arbeitsfreien Tagen nicht angezeigt."
@@ -787,14 +783,11 @@ planningRessource = "nach Ressource"
 planningHorairePersonne = "Benutzer-Agenda"
 planningJours = "Tagesansicht"
 planningAfficherLignesVides = "Leere Zeilen anzeigen"
-planningAfficherTotalJour = "Tagessumme anzeigen"
 planningAfficherTableauRecap = "Tabelle anzeigen"
 planningHeures = "Stundenansicht"
 options_planning = "Planungsanzeige"
 
-scrolls_v = "Scrollbar auch oben"
 scrolls_fleches = "Navigationspfeile"
-entetes_flottantes = "Spaltenüberschrift fixieren"
 
 menu_aide = "Online-Hilfe"
 menu_modifier_profil = "Profil ändern"
@@ -818,18 +811,18 @@ planning_position = "Start-Datum für Planung"
 planning_position_last = "letztmaliges Datum"
 planning_position_today = "aktuelles Datum"
 planning_position_aide = "Legt fest, mit welchem Datum die Planungsanzeige nach dem Login startet"
-options_differencier_weekend = "Excluded days"
-options_aide_differencier_weekend = "Aloow to show/hide non-included days"
+options_differencier_weekend = "ausgeschlossene Tage"
+options_aide_differencier_weekend = "die ausgeschlossenen Tage zeigen oder ausblenden"
 
 compte_desactive = "Gesperrtes Konto"
 
 planning_deplacer_toutestaches = "Alle Aufgaben verschieben"
 option_taille_police_cellule = "Schriftgröße für Zellen"
 option_taille_police_cellule_defaut = "Standard (Theme-Größe)";
-option_taille_police_cellule_micro = "Very small (9px)";
-option_taille_police_cellule_mini = "Klein (10 px)";
-option_taille_police_cellule_medium = "Mittel (12 px)";
-option_taille_police_cellule_maxi = "Groß (14 px)";
+option_taille_police_cellule_micro = "sehr klein (9px)";
+option_taille_police_cellule_mini = "klein (10 px)";
+option_taille_police_cellule_medium = "mittel (12 px)";
+option_taille_police_cellule_maxi = "groß (14 px)";
 langue = "Sprache"
 
 status_format_texte = "Textformat für Zellen"
@@ -969,82 +962,272 @@ feries_couleurfond = "Farbe"
 feries_couleurtheme = "Farbe vom Theme"
 feries_couleurperso = "Farbe anpassen"
 
-warning_version = "Click to see more about new version"
+warning_version = "Für Info über die neue Version hier klicken"
 
-icalExport_delai = "Include past tasks from"
-seulement_taches_a_venir = "(only future tasks)"
-horaire_journee = "All day"
-horaire_matin = "Morning"
-horaire_apresmidi = "Atfernoon"
-horaire_custom = "Custom"
-horaire = "Schedule"
-date = "Date"
-date_de = "From"
-date_a = "To"
-ajax_titreNouvellePeriode = "New task"
-js_choisirTitre = "Please fill title"
-options_dureeCreneauHoraire = "Task schedule interval displayed"
-options_aide_dureeCreneauHoraire = "Customize interval between hours displayed while creating/modifying tasks.<br>Exemple for 2h interval :<br><img src='assets/img/pictos/help_creneau_horaire.png' alt='' />"
-minutes = "minutes"
-heure = "heure"
-heures = "heures"
-creneau_horaire = "Time slot"
+icalExport_delai = "Vergangene Aufgaben einschließen von"
+seulement_taches_a_venir = "(nur zukünftige Aufgaben)"
+horaire_journee = "ganztags"
+horaire_matin = "vormittags"
+horaire_apresmidi = "nachmittags"
+horaire_custom = "wählen"
+horaire = "Plan"
+date = "Datum"
+date_de = "von"
+date_a = "bis"
+ajax_titreNouvellePeriode = "Neue Aufgabe"
+js_choisirTitre = "Bitte Titel eingeben"
+options_dureeCreneauHoraire = "Anzeige des Planungsintervalls"
+options_aide_dureeCreneauHoraire = "Zeit-Intervall zwischen den angezeigten Stunden beim erstellen/ändern von Aufgaben.<br>Beispiel für 2h-Intervall:<br><img src='assets/img/pictos/help_creneau_horaire.png' alt='' />"
+minutes = "Minuten"
+heure = "Stunde"
+heures = "Stunden"
+creneau_horaire = "Zeitspanne"
 
-demo_projet_1 = "Test project 1"
-demo_projet_2 = "Test project 2"
-demo_projet_3 = "Test project 3"
-demo_user_1 = "Test people 1"
-demo_user_2 = "Test people 2"
-demo_user_3 = "Test people 3"
+demo_projet_1 = "Test Projekt 1"
+demo_projet_2 = "Test Projekt 2"
+demo_projet_3 = "Test Projekt 3"
+demo_user_1 = "Test Bearbeiter 1"
+demo_user_2 = "Test Bearbeiter 2"
+demo_user_3 = "Test Bearbeiter 3"
 demo_equipe_1 = "Team 1"
 demo_equipe_2 = "Team 2"
-demo_groupe_1 = "Project 1"
-demo_groupe_2 = "Project 2"
-demo_groupe_3 = "Project 3"
-demo_tache_1 = "Exemple task"
-demo_tache_2 = "Another exemple task"
+demo_groupe_1 = "Projekt 1"
+demo_groupe_2 = "Projekt 2"
+demo_groupe_3 = "Projekt 3"
+demo_tache_1 = "Beispielaufgabe"
+demo_tache_2 = "Andere Beispielaufgabe"
 
-ou_horaire = "or time"
+ou_horaire = "oder Zeit"
 
-user_email_password_completer_infos = "In order to send email for changing password, please fill login and email for the person"
-remember_checkbox = "Remember me"
+user_email_password_completer_infos = "Bitte Login und e-Mail für den Benutzer angeben, damit eine e-Mail zur Passwortänderung gesendet werden kann."
+remember_checkbox = "Login merken"
 
-options_differencier_weekend_1 = "display in grey"
-options_differencier_weekend_0 = "hide"
-journee = "day"
+options_differencier_weekend_1 = "in grau anzeigen"
+options_differencier_weekend_0 = "ausblenden"
+journee = "Tag"
 
-statut_supprimer_erreur_projets = "It is not possible to delete this status, it is linked to one or more projects"
-statut_supprimer_erreur_taches = "It is not possible to delete this status, it is linked to one or more tasks"
+statut_supprimer_erreur_projets = "Dieser Status kann nicht gelöscht werden, er ist einem oder mehreren Projekten zugeordnet."
+statut_supprimer_erreur_taches = "Dieser Status kann nicht gelöscht werden, er ist einer oder mehreren Aufgaben zugeordnet."
 
-decaler_taches = "Shift tasks"
-decaler_a_partir_du = "Shift from"
-decaler_tout_au = "Shit to "
-decaler_tout_au_aide = "All tasks found from start date will be shifted based on new date selected (number of days between those 2 dates). Days off and not-included days in soplanning will be escaped, tasks will be shifted accordingly."
+decaler_taches = "Aufgaben verschieben"
+decaler_a_partir_du = "Verschieben von"
+decaler_tout_au = "Verschieben nach "
+decaler_tout_au_aide = "Alle Aufgaben vom Startdatum werden um die Zahl der Tage zwischen Startdatum und dem neuen Datum verschoben. Feiertage und andere ausgeschlossene Tage werden nicht mitgerechnet."
 
 periode_plus = "Plus ..."
-periode_scinder = "Split"
-periode_scinder_texte = "Split on the following date"
-periode_scinder_dates = "Dates"
-periode_scinder_dates_hors_cadre = "Please fill a valid date regarding the selected task"
+periode_scinder = "Teilen"
+periode_scinder_texte = "An folgendem Datum teilen"
+periode_scinder_dates = "Daten"
+periode_scinder_dates_hors_cadre = "Bitte ein gültiges Datum für die ausgewählte Aufgabe angeben"
 
-planningAfficherTotal = "Show total line in hours"
-planningAfficherTotalTaches = "Show line for number of tasks"
-tab_totalJour = "Total nb hours / day"
-tab_totalJourTaches = "Total number of tasks / day"
-droits_gererUsersTeam = "Manage team"
-droits_tasks_view_team_users = "Team members"
-droits_planningEquipe = "For the members of his team"
+planningAfficherTotal = "Zeile für Gesamtstunden anzeigen"
+planningAfficherTotalTaches = "Zeile für Anzahl der Aufträge anzeigen"
+tab_totalJour = "Gesamtzahl Stunden/Tag"
+tab_totalJourTaches = "Gesamtzahl Aufgaben/Tag"
+droits_gererUsersTeam = "Team verwalten"
+droits_tasks_view_team_users = "Team-Mitglieder"
+droits_planningEquipe = "Für Mitglieder des Teams"
 
-winPeriode_fichier = "Files"
-upload_fichier_erreur_ecriture_repertoire = "Error while writing file. Please check rights or disk space !"
-upload_fichier_erreur_chargement_fichier = "Error while uploading file '%filename'"
-upload_fichier_erreur_taille = "Error while uploading : size must not exceed 10Mb"
-upload_fichier_existe_deja = "File 'filename' already exists !"
-upload_fichier_chargement_ok = "File 'filename' was added to the task !"
-upload_fichier_delete_ok = "File 'filename' was deleted !"
-upload_fichier_delete_ko = "Error while deleting file 'filename' !"
-upload_fichier_suppression = "Are you sure you want to delete this file ?"
-upload_fichier_joindre = "Join a file"
+winPeriode_fichier = "Dateien"
+upload_fichier_erreur_ecriture_repertoire = "Fehler beim schreiben der Datei. Bitte Schreibrechte oder Speicherplatz prüfen!"
+upload_fichier_erreur_chargement_fichier = "Fehler beim Hochladen der Datei '%filename'"
+upload_fichier_erreur_taille = "Fehler beim Hochladen: Dateigröße darf 10 MB nicht übersteigen"
+upload_fichier_existe_deja = "Datei 'filename' existiert schon!"
+upload_fichier_chargement_ok = "Datei 'filename' wurde der Aufgabe zugefügt."
+upload_fichier_delete_ok = "Datei 'filename' wurde gelöscht."
+upload_fichier_delete_ko = "Fehler beim Löschen der Datei 'filename' !"
+upload_fichier_suppression = "Soll diese Datei wirklich gelöscht werden?"
+upload_fichier_joindre = "Datei zufügen"
+upload_fichier_non_autorise = "Datei 'filename' ist nicht erlaubt!"
+upload_aucun_fichier_valide = "Keine Datei zum hochladen. Bitte Datei prüfen."
+upload_fichier_erreur_nom_fichier = "Ladefehler! Kann nur importiert werden, wenn die Datei korrekt benannt ist."
+upload_fichier_mauvais_format_fichier = "Falsches Dateiformat für 'filename'. Import abgebrochen!"
+upload_fichier_erreur_version = "Fehler beim Import von 'filename". Man kann nur von der gleichen SOPlanning-Version zurücksichern!"
+upload_erreur_champs = "Fehler in folgenden Feldern: "
 
-action_aide_deplacer_toutestaches = "Choose this type of move if you want to move all the repeated or linked tasks. If no repeated or linked task exists, only the selected task will be moved. <br> Repeated task: task created by using repeat option. <br> Related task: task created for several people "
-action_aide_deplacer_seule = "Move to the new start date desired for this task. <br> Please note: if you move the last day of the task, it will be stretched and not moved"
+action_aide_deplacer_toutestaches = "Wähle diese Art des Verschiebens, wenn alle wiederholten oder verbundenen Aufgaben verschoben werden sollen. Wenn keine wiederholten oder verbundenen Aufgaben existieren, wird nur die ausgewählte Aufgabe verschoben. <br> Wiederholte Aufgabe: Aufgabe, die mit der Wiederholungsoption erstellt wurde. <br> Verbundene Aufgabe: Aufgabe, die für mehrere Benutzer erstelt wurde."
+action_aide_deplacer_seule = "Verschiebe an den neuen gewünschten Start für diese Aufgabe. <br> Achtung: Beim Verschieben des letzten Tages der Aufgabe wird sie verlängert und nicht verschoben."
+
+menuImportExport = "Backup & Import"
+menuExport = "Backup"
+menuImport = "Import / zurücksichern"
+export_titre = "Daten-Backup"
+export_choix_donnees = "Auswahl der Daten, die gesichert werden sollen"
+export_choix_tout = "Alle Daten der Planung"
+export_choix_configuration = "Konfigurationsdaten (Konfiguration, Aufgabenstatus, Feiertage)"
+export_choix_projets = "Projekt-Daten (Projekte & Projektgruppen)"
+export_choix_taches = "Aufgaben-Daten"
+export_choix_lieux = "Orts-Daten"
+export_choix_ressources = "Ressourceen-Daten"
+export_choix_users = "Benutzerdaten (Benutzer, Benutzergruppen & Berechtigungen)"
+export_choix_fichiers = "Dateien"
+export_nom_sauvegarde = "Name der Backup-Datei"
+sauvegarder = "Daten speichern"
+
+import_titre = "Daten importieren / zurücksichern"
+import_choix_donnees = "Auswahl der zu importierenden Daten"
+import_type_fichier = "Restore choice"
+import_type_fichier_csv = "Import-Dateityp"
+import_type_fichier_config = "Konfigurationsdatei"
+import_type_fichier_projet = "Projektdatei"
+import_type_fichier_projet_groupe = "Projektgruppendatei"
+import_type_fichier_user = "Benutzerdatei"
+import_type_fichier_user_groupe = "Teamdatei"
+import_type_fichier_lieu = "Ortedatei"
+import_type_fichier_ressource = Ressourcendatei"
+import_type_fichier_tache = "Aufgabendatei"
+import_type_fichier_feries = "Feiertagsdatei"
+import_type_fichier_status = "Statusdatei"
+import_type_fichier_sauvegarde = "Backup zurücksichern"
+import_type_fichier_seul = "Aus Datei importieren"
+import_fichier = "Dateiname"
+import_fichier_aide = "Backupdatei oder .csv-Datei auswählen"
+import_options = "Import-Optionen"
+import_options_ecrasement = "Vorhandene Werte ersetzen?"
+import_options_parametrage1 = "Beim Import einer Konfiguration die 'Globalen Einstellungen' nicht überschreiben"
+restaurer = "Daten zurücksichern"
+analyser_sauvegarde = "Backup analysieren"
+
+export_choix_tout = "Alle Planungsdaten"
+export_choix_configuration = "Konfigurationsdaten (Konfiguration, Aufgabenstatus, Feiertage)"
+export_choix_projets = "Projekt-Daten (Projekte & Projektgruppen)"
+export_choix_taches = "Aufgaben-Daten"
+export_choix_lieux = "Orte-Daten"
+export_choix_ressources = "Ressourcen-Daten"
+export_choix_users = "Benutzer-Daten (Benutzer, Benutzergruppen & Berechtigungen)"
+
+import_resultat_titre = "Ergebnis der Rücksicherung"
+import_element = "Element(e)"
+import_ecrasement = "Existierende Aufzeichnung?"
+import_ecrasement_choix1 = "Kein Ersatz"
+import_ecrasement_choix2 = "Werte ersetzen"
+import_type_add = "Zufügen"
+import_type_update = "Update"
+import_type_ignore = "Ignoriert"
+import_type_enregistration = "Aufzeichnungstyp"
+
+erreur_extraction_sauvegarde = "Backup extraction error! Wrong format?"
+
+options_api = "API-Zugang"
+options_api_url = "REST access point"
+options_api_doc = "API-Dokumentation"
+options_api_key = "Schlüsselname (Header)"
+options_api_value = "Schlüsselwert"
+ou = "ODER"
+
+options_google_login = "Login mit Google"
+options_google_login_help = "Wenn Sie den SOPlanning-Login über ein Google-/Gmail-Konto (OAuth) einrichten wollen, verbinden Sie sich mit der <a target='_blank' href='https://console.cloud.google.com/apis/credentials/'> Google Cloud Platform</a> und erstellen Sie einen neuen Eintrag mit zugehöriger Authentifizierung. Sie finden die notwendigen Informationen weiter unten. <br> Es gibt im Internet verschiedene <a target='_blank' href='https://www.webslesson.info/2019/09/how-to-make-login-with-google-account-using-php.html'>Tutorials</a> dazu. Ansonsten kontaktieren Sie uns auf <a href='mailto:support@soplanning.org'>support@soplanning.org</a> <br> Hinweis: Der klassische Passwort-Login bleibt verfügbar."
+google_oauth_bouton = "Über Google/Gmail verbinden"
+google_sso_error_connection = "Beim Login trat ein Fehler auf, wenden Sie sich an Ihren Administrator."
+google_sso_error_empty_email = "Ihr Google-Konto hat keine zugehörige e-Mail-Adresse."
+google_sso_error_no_account_for_email = "Kein SOPlanning-Benutzerkonto hat diese e-Mail-Adresse."
+google_sso_error_several_accounts_for_email = "Mehrere SOPlanning-Benutzerkonten haben diese e-Mail-Adresse, bitte ändern Sie das und versuchen Sie es erneut."
+google_sso_active = "Login über Google aktivieren"
+google_sso_return_url = "Referenz-URL zur Anzeige in Google"
+google_sso_return_url_need_setup = "<b> Bitte die SOPlanning-Webadresse (URL) konfigurieren (unter 'Globale Einstellungen') </b>"
+google_sso_client_id = "Customer ID (von Google Cloud)"
+google_sso_secret = "Geheimer Schlüssel (von Google Cloud)"
+
+options_2fa = "2-Faktor-Authentifizierung"
+options_2fa_help = "Die 2-Faktor-Authentifizierung nutzt Google Authenticator. Wenn Sie diese Option aktivieren, wird SOPlanning nach dem Login nach einem Einmal-Code fragen. <br> Der Benutzer erhält dann einen Code von der Google Authenticator App auf dem Smartphone (für Android und iPhone erhältlich). "
+google_2fa_active = "2-Faktor-Authentifizierung aktivieren"
+google_2fa_scan_qrcode = "Bitte die Google Authenticator App auf dem Smartphone installieren, dann den folgenden QR-Code mit dem Google Authenticator scannen, dann den Code erhalten."
+google_2fa_scan_code = "Einmal-Code"
+google_2fa_code_failed = "Falscher Code"
+google_2fa_code_help = "Bitte den Einmal-Code von der Google Authenticator App eingeben. <br> Wenn Sie keinen Zugang mehr erhalten, bitten Sie den Administrator Ihr Benutzerkonto zurückzusetzen."
+google_2fa_reset = "Reset der 2-Faktor-Authentifizierung (Google Authenticator neu konfigurieren)" 
+options_2fa_not_compatible = "This feature requires PHP 7 or more"
+
+projet_copie_infobulle = "Copy this project and tasks"
+projet_copie_nom = "Name of new project"
+projet_copie_projet_id = "New project identifier"
+projet_copie_a_partir_de = "Copy from"
+projet_copie_radio_copie_a_partir_debut = "first task of this project"
+projet_copie_radio_copie_a_partir_date = "following date"
+projet_copie_jusqua = "until"
+projet_copie_radio_copie_jusqua_fin = "last task"
+projet_copie_radio_copie_jusqua_date = "following date"
+projet_copie_demarrer = "Copy on new project on"
+projet_copie_demarrer_erreur = "Please fill valid start date for the new project"
+projet_copie_nom_copie_erreur = "Please fill name of the new project"
+projet_copie_radio_copie_a_partir_date_erreur = "Please fill a valid date for start of your selection"
+projet_copie_radio_jusqua_date_erreur = "Please fill a valid date for end of your selection"
+projet_copie_projet_id_copie_erreur = "Please fill a valid project identifier (letters and digits only)"
+
+titre_action_multiple_taches = "Group action"
+action_multi_concernees = "Concerned tasks"
+action_multi_supprimer = "Delete those tasks"
+action_multi_annuler_selection = "Cancel my selection"
+action_multi_annuler_fermer = "Add other tasks"
+winPeriode_recurrente_fin = "Last occurence"
+
+tutoriel_titre = "Getting Started Tutorial"
+tutoriel_demarrer = "Start tutorial"
+tutoriel_precedent = "Previous"
+tutoriel_suivant = "Next"
+tutoriel_ne_plus_afficher = "Don't display anymore this tutorial"
+tutoriel_ne_plus_afficher_confirm = "If you confirm, this tutorial will not be shown anymore until next SOPlanning version"
+tutoriel_contenu_1 = """
+Welcome to SOPlanning!
+<br><br>
+Follow this tutorial in a few steps to discover specific features of SOPlanning.
+<br>
+SOPlanning being quite intuitive you should understand the basic operation in a few minutes.
+<br><br>
+After learning about these features, you can test them for yourself once this tutorial is closed.
+<br><br>
+For any other questions, look at the help (button in the bar at the top), or contact us at support.
+"""
+tutoriel_contenu_2 = """
+<b>Task creation</b>
+<br><br>
+To create a task you can click on the corresponding button above the schedule, or click directly on a box.
+<br><br>
+In this case the date will be pre-filled, as well as the line on which you clicked (the person or the project depending on the current display).
+"""
+tutoriel_contenu_3 = """
+<b>Drag / drop</b>
+<br><br>
+You can drag a task from one box to another. SOPlanning will then offer you to copy or move this task to the new location.
+<br><br>
+This feature will allow you to move the task in time, or change project / assigned person.
+"""
+tutoriel_contenu_4 = """
+<b>Multiple selection</b>
+<br><br>
+If you hold the CTRL key while you click on a task, then you can select multiple tasks from it as long as you hold CTRL.
+<br><br>
+As soon as you release CTRL, a window will allow you to perform actions on the selected tasks.
+"""
+tutoriel_contenu_5 = """
+<b>Double arrow and the different views of the schedule</b>
+<br><br>
+You can see a double arrow as the first "box" of the schedule. This allows you to easily switch from the person view to the project view.
+<br><br>
+You can do the same thing with the "Display" menu located above the schedule, and display the other possible views.
+"""
+tutoriel_contenu_6 = """
+<b>Project offset</b>
+<br><br>
+When viewing the schedule "by project", you will see a small arrow behind each project name in the left column.
+<br><br>This will allow you to access the bulk task shift functionality, setting the start date of the shift, and the date to shift all matching tasks to.
+"""
+tutoriel_contenu_7 = """
+<b>Summary of the schedule</b>
+<br><br>
+Below the schedule you will find a summary of all the tasks visible on the schedule, for the selected time period.
+<br>
+This allows you to see a more detailed version of scheduled tasks, with a list view.
+<br><br>
+You can hide this summary in the "Display" menu.
+"""
+tutoriel_contenu_8 = """
+<b>It's up to you!</b>
+<br><br>
+Take control of the tool for yourself and do not hesitate to contact us if you have any questions!
+"""
+
+user_masquerLigneVide = "Hide empty lines on planning"
+user_afficherTableauRecap = "Display summary below planning"
+audit_inactif = "Warning : Audit option is not activated, please enable it first on General settings"
+

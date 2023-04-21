@@ -1,5 +1,4 @@
 
-UPDATE  `planning_config` SET  valeur ='1.36' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
 
 ALTER TABLE  `planning_user` ADD  `date_dernier_login` DATETIME NULL ;
 
@@ -8,3 +7,5 @@ ALTER TABLE  `planning_periode` ADD  `date_creation` DATETIME NULL AFTER  `creat
 ALTER TABLE `planning_config` CHANGE COLUMN `valeur` `valeur` VARCHAR(1024) NULL DEFAULT NULL COLLATE 'latin1_general_ci' AFTER `cle`;
 ALTER TABLE `planning_projet` CHANGE COLUMN `statut` `statut` ENUM('a_faire','en_cours','fait','abandon','archive') NOT NULL DEFAULT 'a_faire' COLLATE 'latin1_general_ci' AFTER `livraison`;
 ALTER TABLE `planning_user` ADD COLUMN `preferences` TEXT NULL DEFAULT NULL AFTER `date_dernier_login`;
+
+UPDATE  `planning_config` SET  valeur ='1.36' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

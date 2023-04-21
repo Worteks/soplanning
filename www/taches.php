@@ -1,15 +1,8 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
-
-$_POST = sanitize($_POST);
-$_GET = sanitize($_GET);
-$_REQUEST = sanitize($_REQUEST);
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 $_SESSION['lastURL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION['planningView'] = 'taches';
@@ -25,7 +18,6 @@ if(isset($_COOKIE['date_debut_affiche_tache'])) {
 if (isset($_SESSION['date_debut_affiche_tache'])) {
 	$dateDebut = initDateTime($_SESSION['date_debut_affiche_tache']);	
 } else {
-	//$dateDebut->modify('-' . CONFIG_DEFAULT_NB_PAST_DAYS . ' days');
 	$_SESSION['date_debut_affiche_tache'] = $dateDebut->format(CONFIG_DATE_LONG);
 }
 
@@ -192,7 +184,6 @@ if(isset($_POST['filtreUser'])) {
 	$_SESSION['filtreUser'] = $projetsFiltre;
 }
 
-//print_r($_POST);
 if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 	$search = $_REQUEST['rechercheTaches'];
 	$search = explode( ' ', $search );
@@ -208,7 +199,7 @@ if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 	}
 
 	$isLike = implode(" OR ", $isLike);
-	$sql = "select planning_periode.*, planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user2.nom AS nom_personne , planning_user.nom AS nom_createur, planning_periode.lien as lien, ps.nom as status_nom 
+	$sql = "select planning_periode.*, planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user2.nom AS nom_personne , planning_user.nom AS nom_createur, planning_periode.lien as lien, ps.nom as status_nom, planning_user2.user_groupe_id
 			FROM planning_periode
 			LEFT JOIN planning_status ps ON planning_periode.statut_tache = ps.status_id
 			LEFT JOIN planning_projet ON planning_projet.projet_id = planning_periode.projet_id
@@ -236,7 +227,7 @@ if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 	if(count($_SESSION['filtreGroupeRessource']) > 0) {
 		$sql.= " AND planning_periode.ressource_id IN ('" . implode("','", $_SESSION['filtreGroupeRessource']) . "')";
 	}	
-	if(count($filtreGroupeProjet) > 0) {
+	if(!empty($filtreGroupeProjet)) {
 		$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", $filtreGroupeProjet) . "')";
 		if(in_array('gp0', $filtreGroupeProjet)) {
 			$sql .= '	OR planning_projet.groupe_id IS NULL ';
@@ -256,7 +247,7 @@ if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 
 }  else {
 
-	$sql = "select planning_periode.*, planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user2.nom AS nom_personne , planning_user.nom AS nom_createur, planning_periode.lien as lien, ps.nom as status_nom  
+	$sql = "select planning_periode.*, planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user2.nom AS nom_personne , planning_user.nom AS nom_createur, planning_periode.lien as lien, ps.nom as status_nom, planning_user2.user_groupe_id
 			FROM planning_periode
 			LEFT JOIN planning_projet ON planning_projet.projet_id = planning_periode.projet_id
 			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
@@ -292,7 +283,7 @@ if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 	if(count($_SESSION['filtreGroupeRessource']) > 0) {
 		$sql.= " AND planning_periode.ressource_id IN ('" . implode("','", $_SESSION['filtreGroupeRessource']) . "')";
 	}	
-	if(count($filtreGroupeProjet) > 0) {
+	if(!empty($filtreGroupeProjet)) {
 		$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", $filtreGroupeProjet) . "')";
 		if(in_array('gp0', $filtreGroupeProjet)) {
 			$sql .= '	OR planning_projet.groupe_id IS NULL ';
@@ -316,7 +307,6 @@ if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 	}
 	$smarty->assign('rechercheTaches', '');
 }
-//echo $sql;
 $projets->db_loadSQL($sql);
 
 // recuperation des projets couvrant la période, pour le filtre de projets

@@ -1,11 +1,8 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('stats_users')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
@@ -89,7 +86,7 @@ while ($periode = $periodes->fetch()) {
 
 	if(!is_null($periode->date_fin)) {
 		while($tmpDateTache <= $finTache) {
-			if(!in_array($tmpDateTache->format('w'), $DAYS_INCLUDED) || in_array($tmpDateTache->format('Y-m-d'), $joursFeries) || $tmpDateTache > $dateFinGraphe || $tmpDateTache < $dateDebutGraphe) {
+			if(!in_array($tmpDateTache->format('w'), $DAYS_INCLUDED) || array_key_exists($tmpDateTache->format('Y-m-d'), $joursFeries) || $tmpDateTache > $dateFinGraphe || $tmpDateTache < $dateDebutGraphe) {
 				$tmpDateTache->modify('+1 day');
 				continue;
 			}

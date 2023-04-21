@@ -14,14 +14,14 @@
 					{#stats_date_debut#}:
 				</label>
 				<div class="col-md-4">
-					<input name="date_debut" id="date_debut" style="width:80px;" type="text" value="{if isset($stats_users.date_debut)}{$stats_users.date_debut}{/if}" class="form-control datepicker" />
+					<input name="date_debut" id="date_debut" type="text" value="{if isset($stats_users.date_debut)}{$stats_users.date_debut}{/if}" class="form-control datepicker" />
 				</div>
 
 				<label class="col-md-2 col-form-label">
 					{#stats_date_fin#}
 				</label>
 				<div class="col-md-4">
-					<input name="date_fin" id="date_fin" style="width:80px;" type="text" value="{if isset($stats_users.date_fin)}{$stats_users.date_fin}{/if}" class="form-control datepicker" />
+					<input name="date_fin" id="date_fin" type="text" value="{if isset($stats_users.date_fin)}{$stats_users.date_fin}{/if}" class="form-control datepicker" />
 				</div>
 		</div>
 			<div class="form-group row col-md-12">

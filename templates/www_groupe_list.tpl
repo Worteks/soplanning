@@ -15,15 +15,16 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="soplanning-box mt-2">
-				<form method="GET" class="form-inline" id="filtreprojet">
+				<form method="GET" id="filtreprojet">
 				<label class="col-form-label nowrap">{#projet_liste_afficherGroupesProjets#} :&nbsp;</label>
 				<div class="form-group">
-						{foreach from=$listeStatus item=status}
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="statut[]" id="{$status.status_id}" value="{$status.status_id}" onclick="javascript:$('#filtreprojet').submit();" {if in_array($status.status_id, $listeStatuts)}checked="checked"{/if}>
-							<label class="form-check-label" for="{$status.status_id}">{$status.nom}</label>
-						</div>
-						{/foreach}
+					{foreach from=$listeStatus item=status}
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="statut[]" id="{$status.status_id}" value="{$status.status_id}" onclick="javascript:$('#filtreprojet').submit();" {if in_array($status.status_id, $listeStatuts)}checked="checked"{/if}>
+						<label class="form-check-label" for="{$status.status_id}">{$status.nom}</label>
+					</div>
+					{/foreach}
+
 					&nbsp;	
 					<div class="btn-group">
 						<div class="input-group">
@@ -75,7 +76,7 @@
 						{/foreach}
 						{if $nbPages > 1}
 							<tr>
-								<td colspan="7" align="right">
+								<td colspan="7" align="right" style="white-space:normal">
 									{if $currentPage > 1}<a href="{$BASE}/groupe_list.php?page={$currentPage-1}">&lt;&lt; {#action_precedent#}</a>&nbsp;&nbsp;{/if}
 									{section name=pagination loop=$nbPages}
 										{if $smarty.section.pagination.iteration == $currentPage}<b>{else}<a href="{$BASE}/groupe_list.php?page={$smarty.section.pagination.iteration}">{/if}

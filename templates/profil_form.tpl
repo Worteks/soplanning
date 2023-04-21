@@ -21,13 +21,13 @@
 	<div class="form-group row">
 		<label class="col-md-4 col-form-label">{#user_password#} :</label>
 		<div class="col-md-5">
-			<input id="password_tmp" type="password" class="form-control" value="" maxlength="50" />
+			<input id="password_tmp" type="password" class="form-control" value="" maxlength="50" autocomplete="off" />
 		</div>
 	</div>
 	<div class="form-group row">
 		<label class="col-md-4 col-form-label">{#user_email#} :</label>
 		<div class="col-md-5">
-			<input id="email_user" type="text" class="form-control" value="{$user_form.email|xss_protect}" maxlength="255" />
+			<input id="email_user" type="text" class="form-control" value="{$user_form.email|xss_protect}" maxlength="255" autocomplete="off" />
 		</div>
 	</div>
 	<div class="form-group row">
@@ -58,6 +58,7 @@
 				<option value="pl" {if $lang eq "pl"}selected="selected"{/if}>Polish</option>
 				<option value="da" {if $lang eq "da"}selected="selected"{/if}>Danish</option>
 				<option value="hu" {if $lang eq "hu"}selected="selected"{/if}>Hungarian</option>
+				<option value="id" {if $lang eq "id"}selected="selected"{/if}>Indonesian</option>
 			</select>
 		</div>
 	</div>
@@ -135,11 +136,30 @@
 		</div>
 		</div>
 	</div>	
+	<div class="form-group row">
+		<label class="col-md-4 col-form-label">{#user_masquerLigneVide#} :</label>
+		<div class="col-3">
+			<select name="masquerLigneVide" id="masquerLigneVide" class="form-control">
+				<option value="1" {if $user_form.tabPreferences.masquerLigneVide == 1}selected="selected"{/if}>{#oui#}</option>
+				<option value="0" {if !isset($user_form.tabPreferences.masquerLigneVide) || $user_form.tabPreferences.masquerLigneVide === "0"}selected="selected"{/if}>{#non#}</option>
+
+			</select>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-md-4 col-form-label">{#user_afficherTableauRecap#} :</label>
+		<div class="col-3">
+			<select name="afficherTableauRecap" id="afficherTableauRecap" class="form-control">
+				<option value="1" {if !isset($user_form.tabPreferences.afficherTableauRecap) || $user_form.tabPreferences.afficherTableauRecap == 1}selected="selected"{/if}>{#oui#}</option>
+				<option value="0" {if $user_form.tabPreferences.afficherTableauRecap === "0"}selected="selected"{/if}>{#non#}</option>
+			</select>
+		</div>
+	</div>
 	
 	<div class="form-group row">
 		<div class="col-md-4">&nbsp;</div>
 		<div class="col-md-4">
-			<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="xajax_submitFormProfil('{$user_form.user_id|xss_protect}', $('#email_user').val(), $('#password_tmp').val(), $('#dateformat').val(), $('#notificationsOui').is(':checked'),$('#positionToday').is(':checked'),$('#vueDefautPlanning').is(':checked'),$('#vueDefautPersonne').is(':checked'),$('#vueDefautMois').is(':checked'),$('#vueDefautLarge').is(':checked'));"/>
+			<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="xajax_submitFormProfil('{$user_form.user_id|xss_protect}', $('#email_user').val(), $('#password_tmp').val(), $('#dateformat').val(), $('#notificationsOui').is(':checked'),$('#positionToday').is(':checked'),$('#vueDefautPlanning').is(':checked'),$('#vueDefautPersonne').is(':checked'),$('#vueDefautMois').is(':checked'),$('#vueDefautLarge').is(':checked'), $('#masquerLigneVide').val(), $('#afficherTableauRecap').val());"/>
 		</div>
 	</div>
 </form>

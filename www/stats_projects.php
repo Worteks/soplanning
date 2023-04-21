@@ -1,12 +1,8 @@
 <?php
 
 require('./base.inc');
-require BASE . '/../config.inc';
-
-// Déclaration de smarty
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('stats_projects')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
@@ -26,10 +22,6 @@ PARAMETRES :
 - width et height du graphe
 
 */
-
-$_POST = sanitize($_POST);
-$_GET = sanitize($_GET);
-
 
 // PARAMÈTRES
 $dateDebut = new DateTime();

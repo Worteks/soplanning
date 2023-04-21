@@ -1,10 +1,10 @@
 <?php
-// Include
 require('./base.inc');
-require(BASE . '/../config.inc');
-$smarty = new MySmarty();
-require(BASE . '/../includes/header.inc');
-require(BASE . '/planning_param.php');
+require(BASE .'/../config.inc');
+
+require(BASE .'/../includes/header.inc');
+require(BASE .'/planning_param.php');
+
 
 $planning=array();
 $planning['lignes']=array();
@@ -14,6 +14,7 @@ $planning['projets']=array();
 $planning['periodes']=array();
 $planning['lieux']=array();
 $planning['ressources']=array();
+$planning['taches'] = array();
 
 //////////////////////////
 // RECHERCHE DES TRANCHES HORAIRES POSSIBLES
@@ -165,7 +166,7 @@ if ($base_ligne == "heures") {
 }
 
 $periodes->db_loadSQL($sql);
-//echo $sql;
+
 // FIN RECHERCHE DES PERIODES EN COURS
 
 //////////////////////////
@@ -215,38 +216,60 @@ if ($base_ligne == 'projets')
 		}else $url="";
 		$planning['lignes'][$infosJour['projet_id']]=array('id'=>$infosJour['projet_id'],'nom'=>$infosJour['projet_nom'],'couleur'=>$infosJour['projet_couleur'],'groupe_nom'=>$infosJour['groupe_nom'],'url_modif'=>$url);
 	}
-	if ($_SESSION['triPlanning']=="nom asc") array_sort_by_columns($planning['lignes'],"nom",SORT_ASC);
-	if ($_SESSION['triPlanning']=="nom desc") array_sort_by_columns($planning['lignes'],"nom",SORT_DESC);	
-	if (strpos($_SESSION['triPlanning'],"groupe_nom asc") !== FALSE && strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_ASC, "nom", SORT_ASC);
-	if (strpos($_SESSION['triPlanning'],"groupe_nom desc") !== FALSE && strpos($_SESSION['triPlanning'],"nom desc") !==FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_DESC, "nom", SORT_DESC);
+	if ($_SESSION['triPlanning'] == "nom asc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"nom",SORT_ASC);
+	if ($_SESSION['triPlanning'] == "nom desc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"nom",SORT_DESC);
+	if ($_SESSION['triPlanning'] == "projet_id asc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"id",SORT_ASC);	
+	if ($_SESSION['triPlanning'] == "projet_id desc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"id",SORT_DESC);	
+	if ($_SESSION['triPlanning'] == "groupe_nom asc, nom asc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_ASC, "nom", SORT_ASC);
+	if ($_SESSION['triPlanning'] == "groupe_nom asc, projet_id asc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_ASC, "id", SORT_ASC);
+	if ($_SESSION['triPlanning'] == "groupe_nom desc, nom desc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_DESC, "nom", SORT_DESC);
+	if ($_SESSION['triPlanning'] == "groupe_nom desc, projet_id desc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_DESC, "id", SORT_DESC);
 }
 
 // Ligne lieux
 if ($base_ligne == 'lieux') 
 {
-	// liste des lieux à partir des périodes remontées
-	while ($p = $periodes->fetch()) {
-		$infosJour = $p->getSmartyData();
-		// On force les valeurs nulles
-		if (empty($infosJour['lieu_nom'])) $infosJour['lieu_nom']=$smarty->getConfigVars('sans_lieux');
-		$planning['lignes'][$infosJour['lieu_id']]=array('id'=>$infosJour['lieu_id'],'nom'=>$infosJour['lieu_nom'],'couleur'=>null,'url_modif'=>"xajax_modifLieu('".urlencode($infosJour['lieu_id'])."')");
+	if($masquerLigneVide){
+		// liste des lieux à partir des périodes remontées
+		while ($p = $periodes->fetch()) {
+			$infosJour = $p->getSmartyData();
+			// On force les valeurs nulles
+			if (empty($infosJour['lieu_nom'])) $infosJour['lieu_nom']=$smarty->getConfigVars('sans_lieux');
+			$planning['lignes'][$infosJour['lieu_id']]=array('id'=>$infosJour['lieu_id'],'nom'=>$infosJour['lieu_nom'],'couleur'=>null,'url_modif'=>"xajax_modifLieu('".urlencode($infosJour['lieu_id'])."')");
+		}
+	} else{
+		$lieux = new GCollection('Lieu');
+		$lieux->db_load(array(), array('nom' => 'ASC'));
+		$planning['lignes']['']=array('id'=>'','nom'=>$smarty->getConfigVars('sans_lieux'),'couleur'=>null,'url_modif'=>"");
+		while($lieu = $lieux->fetch()){
+			$planning['lignes'][$lieu->lieu_id]=array('id'=>$lieu->lieu_id,'nom'=>$lieu->nom,'couleur'=>null,'url_modif'=>"xajax_modifLieu('".urlencode($lieu->lieu_id)."')");
+		}
 	}
-	if (strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_ASC);
-	if (strpos($_SESSION['triPlanning'],"nom desc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_DESC);
+	if (strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"nom",SORT_ASC);
+	if (strpos($_SESSION['triPlanning'],"nom desc") !== FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"nom",SORT_DESC);
 }
 
 // Ligne ressources
 if ($base_ligne == 'ressources')
 {	
-	// liste des ressources à partir des périodes remontées
-	while ($p = $periodes->fetch()) {
-		$infosJour = $p->getSmartyData();
-		// On force les valeurs nulles
-		if (empty($infosJour['ressource_nom'])) $infosJour['ressource_nom']=$smarty->getConfigVars('sans_ressources');
-		$planning['lignes'][$infosJour['ressource_id']]=array('id'=>$infosJour['ressource_id'],'nom'=>$infosJour['ressource_nom'],'couleur'=>null,'url_modif'=>"xajax_modifRessource('".urlencode($infosJour['ressource_id'])."')");
+	if($masquerLigneVide){
+		// liste des ressources à partir des périodes remontées
+		while ($p = $periodes->fetch()) {
+			$infosJour = $p->getSmartyData();
+			// On force les valeurs nulles
+			if (empty($infosJour['ressource_nom'])) $infosJour['ressource_nom']=$smarty->getConfigVars('sans_ressources');
+			$planning['lignes'][$infosJour['ressource_id']]=array('id'=>$infosJour['ressource_id'],'nom'=>$infosJour['ressource_nom'],'couleur'=>null,'url_modif'=>"xajax_modifRessource('".urlencode($infosJour['ressource_id'])."')");
+		}
+	} else{
+		$ressources = new GCollection('Ressource');
+		$ressources->db_load(array(), array('nom' => 'ASC'));
+		$planning['lignes']['']=array('id'=>'','nom'=>$smarty->getConfigVars('sans_ressources'),'couleur'=>null,'url_modif'=>"");
+		while($ressource = $ressources->fetch()){
+			$planning['lignes'][$ressource->ressource_id]=array('id'=>$ressource->ressource_id,'nom'=>$ressource->nom,'couleur'=>null,'url_modif'=>"xajax_modifRessource('".urlencode($ressource->ressource_id)."')");
+		}
 	}
-	if (strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_ASC);
-	if (strpos($_SESSION['triPlanning'],"nom desc") !== FALSE) array_sort_by_column($planning['lignes'],"nom",SORT_DESC);	
+	if (strpos($_SESSION['triPlanning'],"nom asc") !== FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"nom",SORT_ASC);
+	if (strpos($_SESSION['triPlanning'],"nom desc") !== FALSE) $planning['lignes']=array_sort_by_columns($planning['lignes'],"nom",SORT_DESC);	
 }
 
 // Ligne heures
@@ -908,26 +931,26 @@ while ($p = $periodes->fetch()) {
 				$heureFinSelect=convertHourToDecimal($heureExploded[1]);
 				for ($h = $heureDebut; $h < $heureFin; $h++)
 				{
+					//echo '<br>Heure : ' .$h .  ' - ' . $heureDebutSelect . ' - ' . round($heureDebutSelect,0,PHP_ROUND_HALF_DOWN) . ' - ' . $heureFinSelect;
 					// Heure pleine
-					if ($h>=round($heureDebutSelect,0,PHP_ROUND_HALF_DOWN) and $h<$heureFinSelect)
-					{
-					// Heure pleine
-					$heure=sprintf("%'.02d:00", $h);
-					// tâches par user et jour
-					if ($base_ligne=='users') 
-						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+					if ($h >= round($heureDebutSelect,0,PHP_ROUND_HALF_DOWN) && $h <= $heureFinSelect) {
+						// Heure pleine
+						$heure=sprintf("%'.02d:00", $h);
+						// tâches par user et jour
+						if ($base_ligne=='users') {
+							$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+						}
+						// tâches par projet et jour
+						if ($base_ligne=='projets')
+							$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 
-					// tâches par projet et jour
-					if ($base_ligne=='projets')
-						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+						// tâches par lieux et jour
+						if ($base_ligne=='lieux')
+							$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 
-					// tâches par lieux et jour
-					if ($base_ligne=='lieux')
-						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
-					// tâches par ressources et jour
-					if ($base_ligne=='ressources')
-						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+						// tâches par ressources et jour
+						if ($base_ligne=='ressources')
+							$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 					}
 					
 				}
@@ -1048,9 +1071,9 @@ if ($base_colonne=='jours')
 			$sClass = 'week';
 			$weekend = false;
 		} else {
+			$weekend = true;
 			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
-				$weekend = true;
 			} else {
 				$tmpDate->modify('+1 day');
 				continue;
@@ -1137,17 +1160,17 @@ if ($base_colonne=='heures')
 	while ($tmpDate <= $dateFin) {
 		$planning['colonnes'][]=$tmpDate->format('Y-m-d');
 		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED)) {
+			$weekend = true;
 			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
-				$weekend = true;
 			}else {
 				$tmpDate->modify('+1 day');
 				continue;
 			}
 		} elseif (array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
+			$weekend = true;
 			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
-				$weekend = true;
 			}else {
 				$tmpDate->modify('+1 day');
 				continue;
@@ -1183,18 +1206,18 @@ if ($base_colonne=='heures')
 	// On réinitialise la dateFin
 	$dateFin = clone $tmpDateFin;
 	while ($tmpDate <= $dateFin) {
+		$weekend = true;
 		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED)) {
 			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
-				$weekend = true;
 			}else {
 				$tmpDate->modify('+1 day');
 				continue;
 			}
 		} elseif (array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
+			$weekend = true;
 			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$sClass = 'weekend';
-				$weekend = true;
 			}else {
 				$tmpDate->modify('+1 day');
 				continue;
@@ -1356,6 +1379,7 @@ foreach ($planning['lignes'] as $ligne)
 			}
 		}
 	}
+
 	// si option de masquer les lignes vides est activée, on masque la ligne si elle est vide
 	if($masquerLigneVide == 1 && count($joursOccupes) == 0 && $base_ligne<>"heures") {
 		continue;
@@ -1399,6 +1423,7 @@ foreach ($planning['lignes'] as $ligne)
 					<button class="btn dropdown-toggle" data-toggle="dropdown" id="p'.$ligne['id'].'" style="height:15px;border:0px;padding-top:0px;padding-left:6px;padding-right:6px;padding-bottom:22px"></button>
 					<div class="dropdown-menu" aria-labelledby="p'.$ligne['id'].'">
 						<a class="dropdown-item" href="javascript:xajax_projet_decalage_form(\'' . $ligne['id'] . '\');undefined;"><i class="fa fa-fw fa-arrows-h" aria-hidden="true"></i> ' . $smarty->getConfigVars('decaler_taches') . '</a>			
+						<a class="dropdown-item" href="javascript:xajax_projet_copie_form(\'' . $ligne['id'] . '\');undefined;"><i class="fa fa-fw fa-copy" aria-hidden="true"></i> ' . $smarty->getConfigVars('projet_copie_infobulle') . '</a>			
 					</div>';
 			$html .= '</div>';
 		}
@@ -1439,16 +1464,15 @@ foreach ($planning['lignes'] as $ligne)
 				// Définition du style pour case semaine et WE
 				if ((!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) && $base_colonne<>"users") 
 				{
+					$weekend = true;
 					if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 						if (empty($joursFeries[$current_date]['couleur'])) {
 							$classTD = 'week feries';
 						} else {
 							$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-							$weekend = true;
 						}
 					}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 						$classTD = 'week weekend';
-						$weekend = true;
 					}else {
 						continue;
 					}
@@ -1465,6 +1489,8 @@ foreach ($planning['lignes'] as $ligne)
 						if (CONFIG_PLANNING_MASQUER_FERIES == 0) {
 							$tooltip = '<b>' . $ferieObj->libelle . '</b>';
 							$ferie = '<div class="cellHolidays tooltipster" title="'.$tooltip.'">' . $smarty->getConfigVars('planning_ferie') . '</div>' . CRLF;
+						} else{
+							$ferie = '&nbsp;';
 						}
 					}
 				}
@@ -1510,7 +1536,7 @@ foreach ($planning['lignes'] as $ligne)
 							$nbVides = (array_search($jour['periode_id'], $ordreJourPrec)-$niveauCourant);
 							for($i=1; $i<=$nbVides; $i++) 
 							{
-								$html .= '<div class="cellProject cellEmpty" ondrop="drop(event)" ondragleave="leaveDropZone(event);"></div>' . CRLF;
+								$html .= '<div class="cellEmpty" ondrop="drop(event)" ondragleave="leaveDropZone(event);"></div>' . CRLF;
 								$niveauCourant++;
 							}
 							$niveauCourant++;
@@ -1566,6 +1592,7 @@ foreach ($planning['lignes'] as $ligne)
 		}
 	}
 
+
 	// Planning Heures
 	if ($base_colonne=="heures")
 	{
@@ -1580,16 +1607,15 @@ foreach ($planning['lignes'] as $ligne)
 				$styleTD = '';
 				// Définition du style pour case semaine et WE
 				if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+					$weekend = true;
 					if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 						if (empty($joursFeries[$current_date]['couleur'])) {
 							$classTD = 'week feries';
 						}else {
 							$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-							$weekend = true;
 						}
 					}elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 						$classTD = 'week weekend';
-						$weekend = true;
 					}else {
 						continue;
 					}
@@ -1613,10 +1639,11 @@ foreach ($planning['lignes'] as $ligne)
 						}
 					}
 				}
-				
+
 				// Si la date contient une tâche (jour avec au moins une case remplie)
 				foreach ($planning['heures'] as $heure)
 				{
+
 					if (isset($joursOccupes[$current_date][$heure]))
 					{
 						$heure1=str_replace(":","_",$heure);
@@ -1772,16 +1799,15 @@ if($afficherLigneTotal == 1) {
 			// définit le style pour case semaine et WE
 			$styleTD='';
 			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+				$weekend = true;
 				if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 					if (empty($joursFeries[$current_date]['couleur'])) {
 						$classTD = 'feries';
 					} else {
 						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-						$weekend = true;
 					}
 				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 					$classTD = 'weekend';
-					$weekend = true;
 				} else {
 					continue;
 				}
@@ -1846,16 +1872,15 @@ if($afficherLigneTotal == 1) {
 			$styleTD='';
 			// définit le style pour case semaine et WE
 			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+				$weekend = true;
 				if (array_key_exists($current_date, $joursFeries)) {
 					if (empty($joursFeries[$current_date]['couleur'])) {
 						$classTD = 'feries';
 					}else {
 						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-						$weekend = true;
 					}
 				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)	{
 					$classTD = 'weekend';
-					$weekend = true;
 				} else {
 					continue;
 				}
@@ -1950,16 +1975,15 @@ if($afficherLigneTotalTaches == 1) {
 			// définit le style pour case semaine et WE
 			$styleTD='';
 			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+				$weekend = true;
 				if (array_key_exists($current_date, $joursFeries) && CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 					if (empty($joursFeries[$current_date]['couleur'])) {
 						$classTD = 'feries';
 					} else {
 						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-						$weekend = true;
 					}
 				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 					$classTD = 'weekend';
-					$weekend = true;
 				} else {
 					continue;
 				}
@@ -1999,16 +2023,15 @@ if($afficherLigneTotalTaches == 1) {
 			$styleTD='';
 			// définit le style pour case semaine et WE
 			if (!in_array($current_week, $DAYS_INCLUDED) || array_key_exists($current_date, $joursFeries)) {
+				$weekend = true;
 				if (array_key_exists($current_date, $joursFeries)) {
 					if (empty($joursFeries[$current_date]['couleur'])) {
 						$classTD = 'feries';
 					}else {
 						$styleTD = " style='background-color:#".$joursFeries[$current_date]['couleur']."' ";
-						$weekend = true;
 					}
 				} elseif (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1)	{
 					$classTD = 'weekend';
-					$weekend = true;
 				} else {
 					continue;
 				}
@@ -2045,13 +2068,22 @@ $html .= '</tbody></table>' . CRLF;
 // anchor for show/hide, move the page to be the entire project table
 $html .= '<a id="anchorProjectTable"></a>';
 
-////////////////////////////////////////////////////
+
 // AFFICHAGE DU TABLEAU RECAPITULATIF
-////////////////////////////////////////////////////
 $html_recap="";
 if ($_SESSION['afficherTableauRecap']=="1")
 {
 	include "planning_recap.php";
+}
+
+// gestion du tutoriel
+$dateTuto = $user->get_valeur_tutoriel('date_dernier_affichage');
+$masquerTuto = $user->get_valeur_tutoriel('masquer');
+$dateTutoCompare = new Datetime();
+$dateTutoCompare->modify('-14 days');
+if($dateTuto == '' || ($dateTuto != '' && $dateTuto < $dateTutoCompare->format('Y-m-d') && $masquerTuto == '')){
+	$user->set_valeur_tutoriel('date_dernier_affichage', date('Y-m-d'));
+	$smarty->assign('afficher_tuto', '1');
 }
 
 // Assignation du tableau
@@ -2065,4 +2097,5 @@ $smarty->assign('baseligne', $base_ligne);
 $smarty->assign('nbGroupes', ($idGroupeCourant+1));
 $smarty->assign('droitAjoutPeriode',$droitAjoutPeriode);
 $smarty->assign('xajax', $xajax->getJavascript("", "assets/js/xajax.js"));
+
 $smarty->display('www_planning.tpl');

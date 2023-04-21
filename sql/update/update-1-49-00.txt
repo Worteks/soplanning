@@ -1,0 +1,6 @@
+
+
+INSERT INTO `planning_config` VALUES('SEMAPHORE_ACTIVATED', '0', 'Activated in order to avoid periode_id crossing when creating a lot of tasks at the same time');
+
+UPDATE  `planning_config` SET  valeur ='1.49.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

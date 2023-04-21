@@ -16,9 +16,9 @@ class Groupe extends GObject
 		parent::__construct();
 	}
 
-	public function db_save($updateData = array(), $insertData = array())
+	public function db_save($updateData = array(), $insertData = array(), $import=false)
 	{
-		if (!$this->saved) {
+		if (!$this->saved && !$import) {
 			$result = db_query('SELECT MAX(' . $this->primaryKeys[0] . ') AS max FROM ' . $this->table);
 			$new = 1;
 			while ($var = db_fetch_array($result)) {
@@ -39,6 +39,30 @@ class Groupe extends GObject
 
 		$return = parent::db_delete();
 		return $return;
+	}
+
+	public function getAPIData(){
+		$data = array();
+		$groupe = new Groupe();
+		$data['id'] = valueAPI($this->groupe_id);
+		$data['name'] = valueAPI($this->nom);
+		return $data;
+	}
+
+	public function putAPI($group_id, $name){
+		if(strlen(trim($group_id)) > 0 && (!is_numeric(trim($group_id)) || !$this->db_load(array('groupe_id', '=', trim($group_id))))) {
+			throw new BadInputException('group_id unknown in database');
+		}
+		if(strlen(trim($name)) > 50 || strlen(trim($name)) <= 0){
+			throw new BadInputException('Name length not valid (max 50)');
+		}
+		$this->nom = trim($name);
+
+		if(!$this->db_save()){
+			throw new SaveErrorException('Unexpected error, please report maximum details to support@soplanning.org');
+		}
+		return true;
+
 	}
 
 }

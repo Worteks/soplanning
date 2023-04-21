@@ -440,3 +440,7 @@ input[type="date"]::-webkit-inner-spin-button {
 #taskListGroupeButton{display:block;}
 #taskListGroupeLabel{padding-left:0px;}
 #taskStatusCheckbox{display:block;}
+
+#footerbar {
+	display:none;
+}

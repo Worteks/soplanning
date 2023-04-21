@@ -1,5 +1,4 @@
 
-UPDATE  `planning_config` SET  valeur ='1.43' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
 
 ALTER TABLE `planning_user`  ADD `login_actif` ENUM('oui','non') CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL  AFTER `preferences`;
 
@@ -19,3 +18,5 @@ UPDATE `planning_status` set barre='1' where status_id='archive';
 ALTER TABLE `planning_projet` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';
 
 ALTER TABLE `planning_periode` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';
+
+UPDATE  `planning_config` SET  valeur ='1.43' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

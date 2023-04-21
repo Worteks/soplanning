@@ -1,7 +1,8 @@
 
-UPDATE  `planning_config` SET  valeur ='1.45.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
 
 INSERT INTO `planning_config` VALUES('PLANNING_DUREE_CRENEAU_HORAIRE', '30', 'Time duration');
 ALTER TABLE `planning_periode` ADD COLUMN `link_id` VARCHAR(25) NULL DEFAULT NULL COLLATE 'latin1_general_ci' AFTER `user_id`;
 
 update planning_status set `defaut` = 1;
+
+UPDATE  `planning_config` SET  valeur ='1.45.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

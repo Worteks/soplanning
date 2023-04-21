@@ -1,0 +1,7 @@
+
+ALTER TABLE `planning_user`  ADD COLUMN `tutoriel` varchar(255) NULL AFTER `date_modif`;
+
+UPDATE planning_user SET tutoriel = NULL;
+
+UPDATE  `planning_config` SET  valeur ='1.50.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

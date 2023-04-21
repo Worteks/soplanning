@@ -128,9 +128,9 @@
 						{foreach name=users item=userTmp from=$users}
 							<tr>
 								<td class="w140 nowrap">
-									<a href="javascript:xajax_modifUser('{$userTmp.user_id|urlencode}');undefined;"><i class="fa fa-pencil fa-lg fa-fw" aria-hidden="true"></i></a>
-									<a href="javascript:xajax_supprimerUser('{$userTmp.user_id|urlencode}');undefined;" onClick="javascript:return confirm('{#user_liste_confirmSuppr#|escape:"javascript"}')"><i class="fa fa-trash-o fa-lg fa-fw" aria-hidden="true"></i></a>
-									<a href="{$BASE}/process/planning.php?filtreSurUser={$userTmp.user_id}" title="{#planning_filtre_sur_user#|escape}"><i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i></a>
+									<a href="javascript:xajax_modifUser('{$userTmp.user_id|escape}');undefined;"><i class="fa fa-pencil fa-lg fa-fw" aria-hidden="true"></i></a>
+									<a href="javascript:xajax_supprimerUser('{$userTmp.user_id|escape}');undefined;" onClick="javascript:return confirm('{#user_liste_confirmSuppr#|escape:"javascript"}')"><i class="fa fa-trash-o fa-lg fa-fw" aria-hidden="true"></i></a>
+									<a class="tooltipster" href="{$BASE}/process/planning.php?filtreSurUser={$userTmp.user_id}" title="{#planning_filtre_sur_user#|escape}"><i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i></a>
 								</td>
 								<td class="userTabColId"><span class="pastille-user" style="background-color:#{$userTmp.couleur};color:{"#"|cat:$userTmp.couleur|buttonFontColor}">{$userTmp.user_id}</span></td>
 								<td>{$userTmp.nom|xss_protect}</td>
@@ -169,13 +169,13 @@
 									{assign var=dateModif value=$userTmp.date_modif|sqldatetime2userdatetime}
 									{assign var=cooltip value=$cooltip|cat:$dateModif}
 									
-									<span class="fa fa-info-circle fa-lg fa-fw cursor-help tooltipster" aria-hidden="true" title="{$cooltip}"></span>
+									<span class="tooltipster" title="{$cooltip}"><i class="fa fa-info-circle fa-lg fa-fw cursor-help " aria-hidden="true"></i></span>
 								</td>
 							</tr>
 						{/foreach}
 						{if $nbPages > 1}
 							<tr>
-								<td colspan="7" class="text-right">
+								<td colspan="7" class="text-right" style="white-space:normal">
 									{if $currentPage > 1}<a href="{$BASE}/user_list.php?page={$currentPage-1}">&lt;&lt; {#action_precedent#}</a>&nbsp;&nbsp;{/if}
 									{section name=pagination loop=$nbPages}
 										{if $smarty.section.pagination.iteration == $currentPage}<b>{else}<a href="{$BASE}/user_list.php?page={$smarty.section.pagination.iteration}">{/if}
@@ -190,6 +190,7 @@
 				</div>
 			</div>
 		</div>
+		<br>
 
 	{else}
 	
@@ -204,12 +205,4 @@
 	{/if}
 </div>
 
-{* CHARGEMENT SCROLL Y *}
-<script>
-	{literal}
-	var yscroll = getCookie('yposProjets');
-	window.onscroll = function() {document.cookie='yposProjets=' + window.pageYOffset;};
-	addEvent(window, 'load', chargerYScrollPos);
-	{/literal}
-</script>
 {include file="www_footer.tpl"}

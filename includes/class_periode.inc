@@ -13,7 +13,7 @@ class Periode extends GObject
 		$this->fields['projet_id'] = new GString('planning_periode', 'projet_id', 20, FALSE, '');
 		$this->fields['user_id'] = new GString('planning_periode', 'user_id', 20, FALSE, '');
 		$this->fields['link_id'] = new GString('planning_periode', 'link_id', 25, TRUE, NULL);
-		$this->fields['date_debut'] = new GDate('planning_periode', 'date_debut', 10, FALSE, '0000-00-00');
+		$this->fields['date_debut'] = new GDate('planning_periode', 'date_debut', 10, FALSE, date('Y-m-d'));
 		$this->fields['date_fin'] = new GDate('planning_periode', 'date_fin', 10, TRUE, NULL);
 		$this->fields['duree'] = new Gtime('planning_periode', 'duree', 12, TRUE, NULL);
 		$this->fields['duree_details'] = new GString('planning_periode', 'duree_details', 20, TRUE, NULL);
@@ -21,8 +21,8 @@ class Periode extends GObject
 		$this->fields['notes'] = new GString('planning_periode', 'notes', 65000, TRUE, NULL);
 		$this->fields['lien'] = new GString('planning_periode', 'lien', 65000, TRUE, NULL);
 		$this->fields['statut_tache'] = new GString('planning_periode', 'statut_tache', 10, TRUE, NULL);
-		$this->fields['lieu_id'] = new GString('planning_periode', 'lieu_id', 10, TRUE, NULL);
-		$this->fields['ressource_id'] = new GString('planning_periode', 'ressource_id', 10, TRUE, NULL);
+		$this->fields['lieu_id'] = new GString('planning_periode', 'lieu_id', 20, TRUE, NULL);
+		$this->fields['ressource_id'] = new GString('planning_periode', 'ressource_id', 20, TRUE, NULL);
 		$this->fields['livrable'] = new GEnum('planning_periode', 'livrable', array('oui','non'), FALSE, 'non');
 		$this->fields['fichiers'] = new GString('planning_periode', 'fichiers', 65000, TRUE, NULL);
 		$this->fields['createur_id'] = new GString('planning_periode', 'createur_id', 20, TRUE, NULL);
@@ -37,9 +37,16 @@ class Periode extends GObject
 	}
 
 	
-	public function db_save($updateData = array(), $insertData = array())
+	public function db_save($updateData = array(), $insertData = array(), $import=false)
 	{
-		if (!$this->saved) {
+		if (!$this->saved && !$import) {
+			$creation = true;
+			if(defined("CONFIG_SEMAPHORE_ACTIVATED") && CONFIG_SEMAPHORE_ACTIVATED == '1'){
+				$mutex = new Mutex();
+				$mutex->init(abs(crc32($cfgDatabase . $this->table)), BASE . '/../mutex_file.txt');
+				$mutex->acquire();
+			}
+
 			$result = db_query('SELECT MAX(' . $this->primaryKeys[0] . ') AS max FROM ' . $this->table);
 			$new = 1;
 			while ($var = db_fetch_array($result)) {
@@ -62,14 +69,20 @@ class Periode extends GObject
 		if(defined('CONFIG_DEFAULT_PERIOD_LINK') && $this->lien == CONFIG_DEFAULT_PERIOD_LINK) {
 			$this->lien = NULL;
 		}
-		return parent::db_save($updateData, $insertData);
+		$return = parent::db_save($updateData, $insertData);
+		
+		if (isset($creation) && defined("CONFIG_SEMAPHORE_ACTIVATED") && CONFIG_SEMAPHORE_ACTIVATED == '1') {
+			$mutex->release();
+		}
+
+		return $return;
 	}
 
 	public function getSmartyData()
 	{
 		$data = parent::getSmartyData();
-		$data['notes_xajax'] = str_replace(array("\r\n", "\n"), array("¤", "¤"), trim($data['notes']));
-		if(strlen($this->duree_details) == 17) {
+		$data['notes_xajax'] = str_replace(array("\r\n", "\n"), array("¤", "¤"), trim((string) $data['notes']));
+		if(strlen((string)$this->duree_details) == 17) {
 			$tmp = explode(';', $this->duree_details);
 			$data['duree_details_heure_debut'] = $tmp[0];
 			$data['duree_details_heure_fin'] = $tmp[1];
@@ -91,8 +104,7 @@ class Periode extends GObject
 		@set_time_limit(180);
 		$DAYS_INCLUDED1 = explode(',', CONFIG_DAYS_INCLUDED);
 		foreach($DAYS_INCLUDED1 as $a){$DAYS_INCLUDED[$a]=$a;}
-		$joursFeries1 = getjoursFeries();
-		foreach($joursFeries1 as $b){$joursFeries[$b]=$b;}
+		$joursFeries = getjoursFeries();
 		if(!in_array($repetition, $this->repetitionPossible)) {
 			return false;
 		}
@@ -172,14 +184,14 @@ class Periode extends GObject
 				   // Si c'est une répétition par semaine, on filtre aussi sur le jour de semaine
 				   if ($repetition == 'semaine') 
 				    {
-					 while (($tmpDate->format('w') != $jourSemaine) || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+					 while (($tmpDate->format('w') != $jourSemaine) || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					 $compteurJoursSautes++;
 				 	 $tmpDate->modify("+1 day");
 				     }
 					}else
 				    {
 				     // on decale pour eviter les jours non-inclus (Weekend) et jours fériés, mais on stocke le nombre de jours sautés pour repartir sur le bon calcul ensuite
-				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					  $compteurJoursSautes++;
 					  $tmpDate->modify("+1 day");
 				      }
@@ -190,19 +202,19 @@ class Periode extends GObject
 				   // Si c'est une répétition par semaine, on filtre aussi sur le jour de semaine
 				   if ($repetition == 'semaine') 
 				    {				
-					 while ($tmpDate->format('w') != $jourSemaine || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+					 while ($tmpDate->format('w') != $jourSemaine || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 				 	 $tmpDate->modify("+1 day");
 				     }
 					}elseif ($repetition == 'jour')
 				    {
 				     // on decale pour eviter les jours non-inclus (Weekend) et jours fériés, mais on stocke le nombre de jours sautés pour repartir sur le bon calcul ensuite
-				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
+				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					  $tmpDate->modify("+$nbRepetition day");
 				      }
 				    }else
 					{
 				     // on decale pour eviter les jours non-inclus (Weekend) et jours fériés, mais on stocke le nombre de jours sautés pour repartir sur le bon calcul ensuite
-				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					  $tmpDate->modify("+$nbRepetition month");
 				      }					
 					}
@@ -226,7 +238,9 @@ class Periode extends GObject
 				$debut=$tmpDate->format('Y-m-d');
 				if (!is_null($this->date_fin)) {
 					$fin = calculerDateFin($debut, $nbJours);
-				}				
+				} else{
+					$fin = NULL;
+				}	
 				if ($this->parent_id) {
 					$parent = $this->parent_id;
 				} else {
@@ -273,14 +287,14 @@ class Periode extends GObject
 				   // Si c'est une répétition par semaine, on filtre aussi sur le jour de semaine
 				   if ($repetition == 'semaine') 
 				    {				
-					 while ( ($tmpDate->format('w') != $jourSemaine) || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+					 while ( ($tmpDate->format('w') != $jourSemaine) || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					 $compteurJoursSautes++;
 				 	 $tmpDate->modify("-1 day");
 				     }
 					}else
 				    {
 				     // on decale pour eviter les jours non-inclus (Weekend) et jours fériés, mais on stocke le nombre de jours sautés pour repartir sur le bon calcul ensuite
-				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					  $compteurJoursSautes++;
 					  $tmpDate->modify("-1 day");
 				      }
@@ -291,19 +305,19 @@ class Periode extends GObject
 				   // Si c'est une répétition par semaine, on filtre aussi sur le jour de semaine
 				   if ($repetition == 'semaine') 
 				    {				
-					 while ( ($tmpDate->format('w') != $jourSemaine) || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+					 while ( ($tmpDate->format('w') != $jourSemaine) || !isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 				 	 $tmpDate->modify("-1 day");
 				     }
 					}elseif ($repetition == 'jour')
 				    {
 				     // on decale pour eviter les jours non-inclus (Weekend) et jours fériés, mais on stocke le nombre de jours sautés pour repartir sur le bon calcul ensuite
-				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					  $tmpDate->modify("-$nbRepetition day");
 				      }
 				    }else
 					{
 				     // on decale pour eviter les jours non-inclus (Weekend) et jours fériés, mais on stocke le nombre de jours sautés pour repartir sur le bon calcul ensuite
-				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || isset($joursFeries[$tmpDate->format('Y-m-d')])) {
+				      while (!isset($DAYS_INCLUDED[$tmpDate->format('w')]) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 					  $tmpDate->modify("-$nbRepetition month");
 				      }					
 					}
@@ -327,6 +341,8 @@ class Periode extends GObject
 				$debut=$tmpDate->format('Y-m-d');
 				if (!is_null($this->date_fin)) {
 					$fin = calculerDateFin($debut, $nbJours);
+				} else{
+					$fin = NULL;
 				}				
 				if ($this->parent_id) {
 					$parent = $this->parent_id;
@@ -394,6 +410,38 @@ class Periode extends GObject
 				$newPeriode->parent_id = $p['parent'];
 				$newPeriode->date_debut = $p['debut'];
 				$newPeriode->date_fin = $p['fin'];
+
+				// on cherche une tache pour le même jour avec le même parent pour récupérer le link_id en cas d'assignation multiple
+				$autreParent = new Periode();
+				$sql = "SELECT *
+						FROM planning_periode
+						WHERE parent_id <> " . val2sql($this->parent_id) . " AND
+						link_id = " . val2sql($this->link_id) . "
+						LIMIT 1
+				";
+
+				$autreParent->db_loadSQL($sql);
+
+				if($autreParent->isSaved()){
+					$recherche = new Periode();
+					$sql = "SELECT *
+							FROM planning_periode
+							WHERE parent_id = " . val2sql($autreParent->periode_id) . " AND
+							date_debut = " . val2sql($newPeriode->date_debut) . "
+							LIMIT 1
+					";
+					// @file_put_contents(BASE . '/../debug.txt', $sql . "\r\n", FILE_APPEND);
+					$recherche->db_loadSQL($sql);
+
+					if($recherche->isSaved()){
+						$newPeriode->link_id = $recherche->link_id;
+					} else{					
+						$newPeriode->link_id = uniqid(mt_rand());
+					}
+				} else{
+					$newPeriode->link_id = uniqid(mt_rand());
+				}
+
 				$newPeriode->db_save();
 		}
 		return true;
@@ -488,7 +536,6 @@ class Periode extends GObject
 	// applique les paramètres au parent et toutes les soeurs
 	public function updateOcurrences($nbJoursDecalDest = '',$copie='false') {
 		$periodes = new Gcollection('Periode');
-		@file_put_contents(BASE . '/../debug.txt', 'update occurences\r\n');
 		if(is_null($this->parent_id)) {
 			// si c'est le parent alors on sélectionne tout les enfants
 			$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE parent_id = ' . val2sql($this->periode_id)); // modif suppression:  . ' AND date_debut > ' . val2sql($this->date_debut);
@@ -542,7 +589,7 @@ class Periode extends GObject
 			}
 			$periode->projet_id = $this->projet_id;
 			$periode->titre = $this->titre;
-			$periode->link_id = $this->link_id;
+			//$periode->link_id = $this->link_id;
 			$periode->statut_tache = $this->statut_tache;
 			$periode->notes = $this->notes;
 			$periode->lien = $this->lien;
@@ -600,6 +647,14 @@ class Periode extends GObject
 		return $periode->date_debut;
 	}
 
+	public function derniereOccurence() {
+		$sql = 'SELECT * FROM planning_periode WHERE (parent_id = ' . val2sql($this->periode_id) . ' OR (parent_id IS NOT NULL AND parent_id = ' . val2sql($this->parent_id) . ' AND periode_id <> ' . val2sql($this->periode_id) . ')) AND date_debut > ' . val2sql($this->date_debut) . ' ORDER BY date_debut DESC LIMIT 1';
+		$periode = new Periode();
+		if(!$periode->db_loadSQL($sql)) {
+			return false;
+		}
+		return $periode->date_debut;
+	}
 	
 	// envoi un mail en cas de creation/modification de tache
 	public function envoiNotification($action = false, $repetition = false) {
@@ -622,6 +677,18 @@ class Periode extends GObject
 			
 			$smarty->assign('periode', $this->getData());
 			$smarty->assign('projet', $projet->getData());
+
+			$lieu = new Lieu();
+			if(!is_null($this->lieu_id)){
+				$lieu->db_load(array('lieu_id', '=', $this->lieu_id));
+				$smarty->assign('lieu', $lieu->getData());
+			}
+
+			$ressource = new Ressource();
+			if(!is_null($this->ressource_id)){
+				$ressource->db_load(array('ressource_id', '=', $this->ressource_id));
+				$smarty->assign('ressource', $ressource->getData());
+			}
 			
 			if(strlen($this->duree_details) == 17) {
 				$tmp = explode(';', $this->duree_details);
@@ -672,6 +739,19 @@ class Periode extends GObject
 					$oldProjet = new Projet();
 					$oldProjet->db_load(array('projet_id', '=', $oldPeriode->projet_id));
 					$smarty->assign('oldProjet', $oldProjet->getData());
+
+					$oldLieu = new Lieu();
+					if(!is_null($oldPeriode->lieu_id)){
+						$oldLieu->db_load(array('lieu_id', '=', $oldPeriode->lieu_id));
+						$smarty->assign('oldLieu', $oldLieu->getData());
+					}
+
+					$oldRessource = new Ressource();
+					if(!is_null($oldPeriode->ressource_id)){
+						$oldRessource->db_load(array('ressource_id', '=', $oldPeriode->ressource_id));
+						$smarty->assign('oldRessource', $oldRessource->getData());
+					}
+
 					$sujet = CONFIG_SOPLANNING_TITLE . ' - ' . $smarty->getConfigVars('mail_modifTache_sujet')  . ($this->titre != '' ? ' - ' . $this->titre : '');
 					$corps = $smarty->getHtml('mail_modif_tache.tpl');
 				}
@@ -684,6 +764,175 @@ class Periode extends GObject
 				print_r($e);
 			}
 			return $result;
+		}
+		return true;
+	}
+
+
+	public function getAPIData(){
+		$data = array();
+		$data['task_id'] = valueAPI($this->periode_id);
+		$data['project_id'] = valueAPI($this->projet_id);
+		$data['user_id'] = valueAPI($this->user_id);
+		$data['link_id'] = valueAPI($this->link_id);
+		$data['status_id'] = valueAPI($this->statut_tache);
+		$data['start_date'] = valueAPI($this->date_debut);
+		$data['end_date'] = valueAPI($this->date_fin);
+		$heures = $this->getHeureDebutFin();
+		$data['start_hour'] = valueAPI((!is_null($heures) ? $heures['duree_details_heure_debut'] : ''));
+		$data['end_hour'] = valueAPI((!is_null($heures) ? $heures['duree_details_heure_fin'] : ''));
+		$data['duration'] = valueAPI($this->duree);
+		$data['title'] = valueAPI($this->titre);
+		$data['comment'] = valueAPI($this->notes);
+		$data['link'] = valueAPI($this->lien);
+		$data['resource_id'] = valueAPI($this->ressource_id);
+		$data['place_id'] = valueAPI($this->lieu_id);
+		$data['milestone'] = valueAPI(($this->livrable == 'oui' ? 'yes' : 'non'));
+		$data['creator_id'] = valueAPI($this->createur_id);
+		$data['creation_date'] = valueAPI($this->date_creation);
+		$data['last_modifier_id'] = valueAPI($this->modifier_id);
+		$data['modification_date'] = valueAPI($this->date_modif);
+		$data['custom_field'] = valueAPI($this->custom);
+		return $data;
+	}
+
+	public function putAPI($task_id = '', $user_id = '', $project_id = '', $link_id = '', $start_date = '', $end_date = '', $start_time = '', $end_time = '', $duration = '', $status_id = '', $title = '', $comment = '', $link = '', $resource_id = '', $place_id = '', $milestone = '', $custom_field = '', $creator_id = ''){
+
+		if(strlen(trim($task_id)) > 0 && (!is_numeric(trim($task_id)) || !$this->db_load(array('periode_id', '=', trim($task_id))))) {
+			throw new BadInputException('task_id unknown in database');
+		}
+		$user = new User();
+		if(trim($user_id) == '' || !$user->db_load(array('user_id', '=', trim($user_id)))){
+			throw new BadInputException('user_id not existing in users list');
+		}
+		$this->user_id = trim($user_id);
+
+		$projet = new Projet();
+		if(trim($project_id) == '' || !$projet->db_load(array('projet_id', '=', trim($project_id)))){
+			throw new BadInputException('project_id not existing in projects list');
+		}
+		$this->projet_id = trim($project_id);
+
+		if(trim($link_id) == ''){
+			if(!$this->isSaved()){
+				$this->link_id = uniqid(mt_rand());
+			}
+		} else {
+			$this->link_id = trim($link_id);
+		}
+		if(strlen(trim($start_date)) == '0' || !controlDateSql($start_date)){
+			throw new BadInputException('Start date not valid : ' . $start_date . ' (yyyy-mm-dd required)');
+		}
+		$this->date_debut = trim($start_date);
+
+		if(strlen(trim($end_date)) != '0'){
+			if(!controlDateSql($end_date)){
+				throw new BadInputException('End date not valid : ' . $end_date . ' (yyyy-mm-dd required)');
+			}
+			if($start_date > $end_date){
+				throw new BadInputException('Start date cant be greater than end date');
+			}
+			$this->date_fin = trim($end_date);
+			$this->duree = NULL;
+			$this->duree_details = NULL;
+		} elseif (strlen(trim($start_time)) != '0') {
+			if(!controlTimeSql($start_time)){
+				throw new BadInputException('Start time not valid : ' . $start_time . ' (hh:mm)');
+			} elseif (strlen(trim($end_time)) == '0' || !controlTimeSql($end_time)) {
+				throw new BadInputException('End time required and not valid : ' . $end_time . ' (hh:mm)');
+			} elseif ($end_time < $start_time) {
+				throw new BadInputException('Start time cant be greater than end time');
+			}
+			$this->duree_details = trim($start_time) . ':00;' . trim($end_time) . ':00';
+			$this->duree = soustraireDuree($start_time, $end_time);
+			$this->date_fin = NULL;
+		} elseif (strlen(trim($duration)) != '0') {
+			if(trim($duration) == 'AM'){
+				$this->duree = CONFIG_DURATION_PM . ':00';
+				if (strlen(CONFIG_DURATION_PM) < 8) {
+					$this->duree = '0' . $this->duree;
+				}
+				$this->duree_details = 'AM';
+				$this->date_fin = NULL;
+			} elseif (trim($duration) == 'PM') {
+				$this->duree = CONFIG_DURATION_AM . ':00';
+				if (strlen(CONFIG_DURATION_AM) < 8) {
+					$this->duree = '0' . $this->duree;
+				}
+				$this->duree_details = 'PM';
+				$this->date_fin = NULL;
+			} elseif (controlTimeSql($duration)) {
+				$this->duree = $duration . ':00';
+				$this->duree_details = 'duree';
+				$this->date_fin = NULL;
+			} else{
+				throw new BadInputException('Duration not valid : "AM", "PM", or duration (hh:mm)');
+			}
+
+		} else{
+			throw new BadInputException('Please fill at least one of those values : end date, start and end time, duration');
+		}
+
+		$status = new Status();
+		if(trim($status_id) == '' || !$status->db_load(array('status_id', '=', trim($status_id)))){
+			throw new BadInputException('status_id not existing in statutes list');
+		}
+		$this->statut_tache = trim($status_id);
+
+		if(strlen(trim($title)) > 255){
+			throw new BadInputException('Title length not valid (max 255)');
+		}
+		$this->titre = (trim($title) != '' ? trim($title) : NULL);
+
+		if(strlen(trim($comment)) > 65000){
+			throw new BadInputException('Comment length not valid (max 65000)');
+		}
+		$this->notes = (trim($comment) != '' ? trim($comment) : NULL);
+
+		if(strlen(trim($link)) > 65000){
+			throw new BadInputException('Link length not valid (max 65000)');
+		}
+		$this->lien = (trim($link) != '' ? trim($link) : NULL);
+
+		$resource = new Ressource();
+		if(trim($resource_id) != '' && !$resource->db_load(array('ressource_id', '=', trim($resource_id)))){
+			throw new BadInputException('resource_id not existing');
+		}
+		$this->ressource_id = (trim($resource_id) != '' ? trim($resource_id) : NULL);
+
+		$place = new Lieu();
+		if(trim($place_id) != '' && !$place->db_load(array('lieu_id', '=', trim($place_id)))){
+			throw new BadInputException('place_id not existing');
+		}
+		$this->lieu_id = (trim($place_id) != '' ? trim($place_id) : NULL);
+
+		$this->livrable = ($milestone == 'yes' ? 'oui' : 'non');
+
+		if(strlen(trim($custom_field)) > 255){
+			throw new BadInputException('Custom field length not valid (max 255)');
+		}
+		$this->custom = (trim($custom_field) != '' ? trim($custom_field) : NULL);
+
+		if(!$this->isSaved()){
+			$creator = new User();
+			if(trim($creator_id) != '') {
+				if (!$creator->db_load(array('user_id', '=', trim($creator_id)))){
+					throw new BadInputException('creator_id not existing as a user');
+				}
+				$this->createur_id = $creator_id;
+			} else{
+				$creator = new User();
+				$creator->db_loadSQL("SELECT * FROM planning_user WHERE LOCATE('users_manage_all', droits) > 0 ORDER BY date_creation LIMIT 1 ");
+				$this->createur_id = $creator->user_id;
+			}
+			$this->date_creation = date('Y-m-d H:i:s');
+		}
+		$creator = new User();
+		$this->modifier_id = $this->createur_id;
+		$this->date_modif = date('Y-m-d H:i:s');
+
+		if(!$this->db_save()){
+			throw new SaveErrorException('Unexpected error, please report maximum details to support@soplanning.org');
 		}
 		return true;
 	}

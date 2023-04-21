@@ -610,45 +610,156 @@ function fileUpload() {
 	$('#divPatienter2').addClass('d-none');
 	$('#butSubmitPeriode').prop('disabled', false);
 	return true;
-	};
+};
 	
-	function fileRemove(fichier,div) {
-		var suppression_upload=$("#suppression_upload").val();
-		var json_files="";
-		var formData = new FormData();
-		var linkid = $('#link_id').val();
-		var periodeid = $('#periode_id').val();
-		
-		if(confirm(suppression_upload))
-		{
-			div.remove();
-			liste_fichiers=$("#liste_fichiers").val();
-			ret = liste_fichiers.replace('{"filename":"'+fichier+'"}','');
-			jQuery.each(jQuery('.fileupload'), function(i, file) {
-				if (json_files != '') { json_files = json_files + ';'; }
-				json_files = json_files + file.innerHTML;
-			});
-			$("#liste_fichiers").val(json_files);
+function fileRemove(fichier,div) {
+	var suppression_upload=$("#suppression_upload").val();
+	var json_files="";
+	var formData = new FormData();
+	var linkid = $('#link_id').val();
+	var periodeid = $('#periode_id').val();
+	
+	if(confirm(suppression_upload))
+	{
+		div.remove();
+		liste_fichiers=$("#liste_fichiers").val();
+		ret = liste_fichiers.replace('{"filename":"'+fichier+'"}','');
+		jQuery.each(jQuery('.fileupload'), function(i, file) {
+			if (json_files != '') { json_files = json_files + ';'; }
+			json_files = json_files + file.innerHTML;
+		});
+		$("#liste_fichiers").val(json_files);
 
-			formData.append('linkid', linkid);
-			formData.append('periodeid', periodeid);
-			formData.append('type', 'delete');
-			formData.append('fichier_to_delete',fichier);
-			formData.append('fichiers', json_files);
+		formData.append('linkid', linkid);
+		formData.append('periodeid', periodeid);
+		formData.append('type', 'delete');
+		formData.append('fichier_to_delete',fichier);
+		formData.append('fichiers', json_files);
+		$.ajax({
+			url			: 'process/upload.php',
+			cache       : false,
+			contentType : false,
+			processData : false,
+			data        : formData,                         
+			type        : 'post',     
+			success		: function(message){
+				if (message)
+					{
+						alert(message);
+						return false;
+					}
+			}
+		});
+	}
+}
+
+function fileUploadBackup() {
+	var formData = new FormData();
+	var fileData = $('#fichier').prop('files');
+	var filename=$('#fichier')[0].files[0]['name'];
+	filename = convertToAscii(filename);
+	var filenamesize=$('#fichier')[0].files[0]['size'];
+	var max_size_upload=$('#max_size_upload').val();
+	if(filename && filenamesize < max_size_upload)
+	{
+		if (fileData)
+		{	
+			jQuery.each(jQuery('#fichier').prop('files'), function(i, file) {
+				formData.append('fichier-'+i, file);
+			});
+			formData.append('type', 'upload');
+			formData.append('type_restauration', $("input[name='type_restauration']:checked").val());
+			formData.append('type_fichier_import', $("#type_fichier_import").val());
 			$.ajax({
-				url			: 'process/upload.php',
+				url			: 'process/upload_backup.php',
 				cache       : false,
 				contentType : false,
 				processData : false,
 				data        : formData,                         
 				type        : 'post',     
 				success		: function(message){
-					if (message)
-						{
-							alert(message);
-							return false;
-						}
-				}
+								$("#uploaddiv").hide();
+								$("#ecrasementdiv").hide();
+								$("#optionsdiv").hide();
+								$("#configoptions-div").hide();
+								$("#config-div").hide();
+								$("#projets-div").hide();
+								$("#user-div").hide();
+								$("#lieux-div").hide();
+								$("#ressources-div").hide();
+								$("#taches-div").hide();
+								if (message)
+								{
+									if (isJson(message))
+									{
+										var obj  = jQuery.parseJSON( message );
+										$.each(obj, function(key, value) {
+											if(value.file=='config.csv')
+											{
+												$("#config-div").show();
+												$("#configoptions-div").show();
+												$("#config-nb").text(value.nb);
+											}
+											if(value.file=='projet.csv' || value.file=='groupe.csv')
+											{
+												$("#projets-div").show();
+												$("#projets-nb").text(value.nb);
+											}
+											if(value.file=='user.csv' || value.file=='user_groupe.csv')
+											{
+												$("#user-div").show();
+												$("#user-nb").text(value.nb);
+											}
+											if(value.file=='lieu.csv')
+											{
+												$("#lieux-div").show();
+												$("#lieux-nb").text(value.nb);
+											}
+											if(value.file=='ressource.csv')
+											{
+												$("#ressources-div").show();
+												$("#ressources-nb").text(value.nb);
+											}
+											if(value.file=='periode.csv')
+											{
+												$("#taches-div").show();
+												$("#taches-nb").text(value.nb);
+											}
+										});
+										$("#uploaddiv").show();
+										$("#ecrasementdiv").show();
+										$("#optionsdiv").show();
+										$("#bouton-restore").prop('disabled', false);
+									}else
+									{
+										alert(message);
+										$("#uploaddiv").hide();
+										$("#ecrasementdiv").hide();
+										$("#optionsdiv").hide();
+										$("#configoptions-div").hide();
+										$("#bouton-restore").prop('disabled', true);
+										$('#fichier').val('');
+									}
+									return false;
+								}
+					}
 			});
 		}
 	}
+};
+
+function isJson(str) {
+	try {
+		JSON.parse(str);
+	} catch (e) {
+		return false;
+	}
+	return true;
+}
+
+function annulerSelectionTaches() {
+	tabCellsSelected.forEach(function(item){
+		$('#' + item).removeClass("bordureSelectionne");
+	});
+	tabCellsSelected = new Array();
+}

@@ -4,11 +4,8 @@
 @set_time_limit(1000);
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 $html = '';
 $js = '';
@@ -17,13 +14,12 @@ $joursFeries = getJoursFeries();
 
 if (!controlDate($_GET['date_debut_pdf']) || !controlDate($_GET['date_fin_pdf'])) {
 	echo $smarty->getConfigVars('feries_dateNonValide');
+	die;
 }
 
 // PARAM?TRES ////////////////////////////////
-$dateDebut = new DateTime();
-$dateFin = new DateTime();
-$dateDebut->setDate(substr($_GET['date_debut_pdf'],6,4), substr($_GET['date_debut_pdf'],3,2), substr($_GET['date_debut_pdf'],0,2));
-$dateFin->setDate(substr($_GET['date_fin_pdf'],6,4), substr($_GET['date_fin_pdf'],3,2), substr($_GET['date_fin_pdf'],0,2));
+$dateDebut = initDateTime($_GET['date_debut_pdf']);
+$dateFin = initDateTime($_GET['date_fin_pdf']);
 
 $nbLignes = $_SESSION['nb_lignes'];
 $pageLignes = $_SESSION['page_lignes'];
@@ -82,8 +78,8 @@ while ($tmpDate <= $dateFin) {
 		$sClass .= ' today';
 	}
 	*/
-	$headerNomJours .= '<th class="planning_head_day ' . $sClass . '">' . strtoupper(substr($smarty->getConfigVars('day_' . $tmpDate->format('w')), 0, 1)) . '</th>' . CRLF;
-	$headerNumeroJours .= '<th class="planning_head_dayname ' . $sClass . '">' . $tmpDate->format('j') . '</th>' . CRLF;
+	$headerNomJours .= '<th width="' . CONFIG_PLANNING_COL_WIDTH . '" class="planning_head_day ' . $sClass . '">' . strtoupper(substr($smarty->getConfigVars('day_' . $tmpDate->format('w')), 0, 1)) . '</th>' . CRLF;
+	$headerNumeroJours .= '<th width="' . CONFIG_PLANNING_COL_WIDTH . '" class="planning_head_dayname ' . $sClass . '">' . $tmpDate->format('j') . '</th>' . CRLF;
 
 	$nomMoisCourant = $smarty->getConfigVars('month_' . $tmpDate->format('n'));
 	if ($nomMoisCourant . ' ' . $tmpDate->format('Y') == $tmpMois) {
@@ -137,15 +133,11 @@ if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe
 	$sql .= " INNER JOIN planning_user AS pu ON pd.user_id = pu.user_id ";
 }
 $sql .= "WHERE (
-			(pd.date_debut <= '" . $dateDebut->format('Y-m-d') . "'
-			AND pd.date_fin >= '" . $dateDebut->format('Y-m-d') . "')
-			OR
-			(pd.date_debut <= '" . $dateFin->format('Y-m-d') . "'
-			AND pd.date_debut >= '" . $dateDebut->format('Y-m-d') . "')
+		0=0
 	)";
 if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe_id)) {
 	// on filtre sur les projets de l'?quipe de ce user
-	$sql .= " AND pu.user_groupe_id = " . val2sql($user->user_groupe_id);
+	$sql .= " AND (pu.user_groupe_id = " . val2sql($user->user_groupe_id) . " OR pd.createur_id = " . val2sql($user->user_id) . ")";
 }
 if($user->checkDroit('tasks_view_own_projects')) {
 	// on filtre sur les projets dont le user courant est proprietaire ou assigne
@@ -203,6 +195,7 @@ if($_SESSION['baseLigne'] == 'projets') {
 	}
 	$sql .= " ORDER BY " . $_SESSION['triPlanning'];
 }
+//echo $sql;die;
 $lines->db_loadSQL($sql);
 $nbLignesTotal = $lines->getCount();
 
@@ -325,7 +318,7 @@ while($ligneTmp = $lines->fetch()) {
 	}
 	if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe_id)) {
 		$sql .= " AND planning_periode.projet_id IN ('" . implode("','", $listeProjetsPossibles) . "')";
-		$sql .= " AND planning_user.user_groupe_id = " . val2sql($user->user_groupe_id);
+		//$sql .= " AND (planning_user.user_groupe_id = " . val2sql($user->user_groupe_id) . ' OR planning_projet.createur_id = ' . val2sql($user->user_id) . ')';
 	}
 	if ($user->checkDroit('tasks_view_only_own')) {
 		$sql .= " AND planning_periode.user_id = " . val2sql($user->user_id);
@@ -425,8 +418,8 @@ while($ligneTmp = $lines->fetch()) {
 
 		if (CONFIG_PLANNING_MASQUER_FERIES == 0 && array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 			// jours feries
-			$ferie = new Ferie();
-			if($ferie->db_load(array('date_ferie', '=', $tmpDate->format('Y-m-d'))) && trim($ferie->libelle) != "") {
+			$ferieObj = new Ferie();
+			if($ferieObj->db_load(array('date_ferie', '=', $tmpDate->format('Y-m-d'))) && trim($ferieObj->libelle) != "") {
 				$ferie = '<div class="cellHolidays">' . $smarty->getConfigVars('planning_ferie') . '</div>' . CRLF;
 			}
 		} else {
@@ -437,7 +430,7 @@ while($ligneTmp = $lines->fetch()) {
 			$html .= ' '.$styleTD.' class="' . $classTD . '">' . CRLF;
 
 			if(isset($ferie) && $ferie !== false) {
-				$html .= $ferie->libelle;
+				$html .= $ferie;
 			}
 			
 			
@@ -519,7 +512,7 @@ while($ligneTmp = $lines->fetch()) {
 			$html .= '<td ' . $styleLigne . ' id="td_' . $ligneId . '_' . $tmpDate->format('Ymd') . '"';
 			$html .= ' '.$styleTD.' class="' . $classTD . '">';
 			if(isset($ferie) && $ferie !== false) {
-				$html .= $ferie->libelle;
+				$html .= $ferie;
 			}
 			$html .= '</td>' . CRLF;
 		}
@@ -835,7 +828,7 @@ if(isset($_GET['cb_inclure_recap'])) {
 					$date2->setDate(substr($periode->date_fin,0,4), substr($periode->date_fin,5,2), substr($periode->date_fin,8,2));
 					while ($date1 <= $date2) {
 						// on ne compte pas le jour si c'est WE ou jour f?ri?
-						if (in_array($date1->format('w'), $DAYS_INCLUDED) && !in_array($date1->format('Y-m-d'), $joursFeries)) {
+						if (in_array($date1->format('w'), $DAYS_INCLUDED) && !array_key_exists($date1->format('Y-m-d'), $joursFeries)) {
 							$totalJours +=1;
 							if($date1 < $now) {
 								$totalJoursPassed +=1;
@@ -902,7 +895,8 @@ if(isset($_GET['debug'])) {
 // http://stackoverflow.com/questions/354476/html-to-excel-how-can-tell-excel-to-treat-columns-as-numbers
 // http://cosicimiento.blogspot.fr/2008/11/styling-excel-cells-with-mso-number.html
 
-require_once ('../html2pdf/html2pdf.class.php');
+use Spipu\Html2Pdf\Html2Pdf;
+
 try
 {
 //	$html2pdf = new HTML2PDF($orientation, $pdf_format, 'fr', true, 'iso-8859-1');

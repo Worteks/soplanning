@@ -1,11 +1,8 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('lieux_all')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';

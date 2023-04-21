@@ -9,7 +9,11 @@ function db_connect($cfgHostname, $cfgUsername, $cfgPassword, $cfgDatabase, $cfg
 	global $cfgConnection;
 	switch ($cfgSqlType) {
 		case 'mysql':
-			$cfgConnection = @mysqli_connect($cfgHostname, $cfgUsername, $cfgPassword, '', $cfgDBPort);
+			try { 
+				$cfgConnection = @mysqli_connect($cfgHostname, $cfgUsername, $cfgPassword, '', $cfgDBPort);
+			} catch (Exception $e) {
+				return false;
+			}
 			break;
 	}
 	if (!$cfgConnection) {
@@ -17,7 +21,9 @@ function db_connect($cfgHostname, $cfgUsername, $cfgPassword, $cfgDatabase, $cfg
 		return false;
 	}
 	mysqli_set_charset($cfgConnection, "latin1");
-	if(!mysqli_select_db($cfgConnection, $cfgDatabase)) {
+	try { 
+		mysqli_select_db($cfgConnection, $cfgDatabase);
+	} catch (Exception $e) {
 		return false;
 	}
 	return $cfgConnection;

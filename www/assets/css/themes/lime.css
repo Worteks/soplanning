@@ -91,9 +91,8 @@ a,a:focus,a:active,a:hover {
 {
 	background-color: #CDDC39;
 	color: #000;
-	font-size:16px;
+	font-size:15px;
 	padding:0px;
-	z-index: 100;
 	background-clip: padding-box
 }
 
@@ -101,10 +100,9 @@ a,a:focus,a:active,a:hover {
 {
 	background-color: #DCE775;
 	color: #000;
-	font-size:14px;
-	padding-top:6px;
-	padding-bottom:6px;
-	z-index: 100;
+	font-size:12px;
+	padding-top:3px;
+	padding-bottom:3px;
 	background-clip: padding-box
 }
 
@@ -115,7 +113,6 @@ a,a:focus,a:active,a:hover {
 	font-size:12px;
 	font-weight: normal;
 	padding:3px;
-	z-index: 100;
 	background-clip: padding-box
 }
 
@@ -124,8 +121,7 @@ a,a:focus,a:active,a:hover {
 	background-color: #DCE775;
 	color: #000;
 	font-size:12px;
-	padding:3px;
-	z-index: 100;
+	padding:2px;
 	background-clip: padding-box
 }
 
@@ -133,14 +129,15 @@ a,a:focus,a:active,a:hover {
 {
 	color:#FFFFFF;
 	text-decoration:none;
-	white-space: nowrap;	
+	padding: 2px;
+	white-space: nowrap;
 }
 
 .planning_head_week a
 {
 	color:#FFFFFF;
 	text-decoration:none;
-	padding:3px;
+	padding:2px;
 	white-space: nowrap;
 }
 
@@ -148,7 +145,7 @@ a,a:focus,a:active,a:hover {
 {
 	color:#FFFFFF;
 	text-decoration:none;
-	padding: 3px;
+	padding: 2px;
 	white-space: nowrap;
 }
 
@@ -156,7 +153,6 @@ a,a:focus,a:active,a:hover {
 {
 	color:#FFFFFF;
 	text-decoration:none;
-	white-space: nowrap;
 }
 
 .planning_head_month a:hover
@@ -353,6 +349,10 @@ a,a:focus,a:active,a:hover {
 	cursor: pointer;
 }
 
+.planningContent td, .planningContent th {
+	border: 1px solid #ebeff2;
+}
+
 .planningContent td.weekend {
 	background-color: #F9FBE7;
 	font-size: 9px;
@@ -378,8 +378,6 @@ a,a:focus,a:active,a:hover {
 {
 	background-color:#DCE775 !important;
 	color:#000000 !important;
-	border-top: 1px solid #ebeff2 !important;
-	border-bottom: 1px solid #ebeff2 !important;
 }
 
 th.planning_team_div, th.planning_team_div_hour
@@ -399,18 +397,16 @@ td.planning_team_div, td.planning_team_div_hour
 	vertical-align: middle;
 	text-align: center;
 	border:1px solid #ebeff2;
-	height: 30px;
+	height: 20px;
 	background-clip: padding-box;
 }
 
 .planningContent {
 	border-collapse: collapse;
+	border-spacing: 0;
 	table-layout: fixed;
 }
 
-.planningContent td, .planningContent th {
-	border: 1px solid #ebeff2;
-}
 
 /* project cell */
 .cellProject,.cellProjectBiseau1,.cellProjectBiseau2 {
@@ -448,14 +444,14 @@ td.planning_team_div, td.planning_team_div_hour
 
 /* holliday cell */
 .cellHolidays {
+	padding-top: 2px;
 	margin-bottom: 1px;
 	margin-top: 1px;
-	margin-left:2px;
-	margin-right:2px;
 	text-align: center;
-	font-size: 10px;
-	background: none repeat scroll 0 0 #AFB42B;
+	font-size: 9px;
+	background: none repeat scroll 0 0 #808080;
 	color: #ffffff;
+	line-height: 100%;
 	border-radius: 3px 3px 3px 3px;
 }
 
@@ -495,7 +491,6 @@ td.planning_team_div, td.planning_team_div_hour
 	padding-left:5px;
 	padding-right:5px;
 	min-width:120px;
-	z-index:400 !important;
 }
 
 .planningFirstColMin {
@@ -509,6 +504,7 @@ td.planning_team_div, td.planning_team_div_hour
 	padding-right:5px;
 	min-width:20px;
 	height:20px;
+	font-size:12px;
 }
 .planningFirstColHour {
 	background-color: #CDDC39;
@@ -564,4 +560,28 @@ td.planning_team_div, td.planning_team_div_hour
     vertical-align:middle;
 	margin: 5px;
 	border: 1px solid white;
+}
+
+.planning_team_div,.planning_team_div_hour {font-size:16px !important;padding-top:5px;padding-bottom:5px;font-weight:700;text-align:left !important;white-space:nowrap}
+
+td.planning_team_div,th.planning_team_div
+{
+ position: sticky;
+ position: -webkit-sticky;
+ top:261px !important;
+ left: 6px;
+ background-clip: padding-box;
+ z-index:2;
+ border-bottom:0px;
+}
+
+.planning_team_div_hour
+{
+ position: sticky;
+ position: -webkit-sticky;
+ top:222px !important;
+ left: 6px;
+ z-index:2;	
+ border-bottom:0px !important;
+ border-top:0px !important;
 }

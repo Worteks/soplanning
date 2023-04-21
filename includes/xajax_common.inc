@@ -63,4 +63,14 @@ $xajax->registerFunction('projet_decalage_submit');
 $xajax->registerFunction('periode_scinder_form');
 $xajax->registerFunction('periode_scinder_submit');
 
+$xajax->registerFunction('google_2fa_check_code');
+
+$xajax->registerFunction('projet_copie_form');
+$xajax->registerFunction('projet_copie_submit');
+
+$xajax->registerFunction('selection_multi_tache_form');
+$xajax->registerFunction('selection_multi_tache_suppr');
+
+$xajax->registerFunction('tutoriel_masquer');
+
 ?>

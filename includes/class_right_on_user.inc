@@ -16,9 +16,9 @@ class Right_on_user extends GObject
 		parent::__construct();
 	}
 
-	public function db_save($updateData = array(), $insertData = array())
+	public function db_save($updateData = array(), $insertData = array(), $import=false)
 	{
-		if (!$this->saved) {
+		if (!$this->saved && !$import) {
 			$result = db_query('SELECT MAX(' . $this->primaryKeys[0] . ') AS max FROM ' . $this->table);
 			$new = 1;
 			while ($var = db_fetch_array($result)) {

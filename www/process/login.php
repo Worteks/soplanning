@@ -96,33 +96,9 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout') {
 	}
 }
 
-function active_directory_login($username, $password){
-	global $ADServer, $ADDomain;
-	$ldap = ldap_connect($ADServer);
-	if($ldap === false) {
-		die('LDAP connexion failed');
-	}
-	ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
-	ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
-
-	$ldaprdn = $username . "@" . $ADDomain;
-	$bind = @ldap_bind($ldap, $ldaprdn, utf8_encode($password));
-	
-	if(!$bind) {
-		$ldaprdn = $ADDomain . "\\" . $username;
-		$bind = @ldap_bind($ldap, $ldaprdn, $password);
-	}
-
-	if ($bind) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 if(isset($_GET['direct_periode_id']) && $_GET['direct_periode_id'] > 0) {
 	// direct access from email to a specific task
-	if(!isset($_GET['date']) || $_GET['date'] < date('Y-m-d')) {
+	if(!isset($_GET['date'])) {
 		$_SESSION['message'] = 'Invalid URL';
 		header('Location: index.php');
 		exit;
@@ -139,7 +115,7 @@ if(isset($_GET['direct_periode_id']) && $_GET['direct_periode_id'] > 0) {
 }
 
 //login 
-if(!isset($_POST['login']) || !isset($_POST['password']) || $_POST['login'] == '' || $_POST['password'] == '') {
+if(!isset($_GET['google_code']) && (!isset($_POST['login']) || !isset($_POST['password']) || $_POST['login'] == '' || $_POST['password'] == '')) {
 	$_SESSION['message'] = 'erreur_bad_login';
 	header('Location: ../index.php');
 	exit;
@@ -173,12 +149,46 @@ if($ADLogin && ($_POST['login'] != 'admin')) {
         header('Location: ../index.php');
         exit;
     }
-} else {
-	$pwd = sha1("¤" . $_POST['password'] . "¤");
-	if(!$user->db_load(array('login', '=', $_POST['login'], 'password', '=', $pwd))) {
-        $_SESSION['message'] = 'erreur_bad_login';
+} elseif (CONFIG_GOOGLE_OAUTH_ACTIVE == 1 && isset($_GET['google_code'])) {
+	$google_client = new Google_oauth();
+	
+	try {
+		$email = $google_client->getAccess($_GET['google_code']);
+	}
+	catch(Exception $e) {
+        $_SESSION['message'] = $e->getMessage();
         header('Location: ../index.php');
-        exit;
+		exit;
+	}
+	$users = new GCollection('User');
+	$users->db_load(array('email', '=', $email));
+	if($users->getCount() == 0){
+        $_SESSION['message'] = 'google_sso_error_no_account_for_email';
+        header('Location: ../index.php');
+		exit;
+	}
+	if($users->getCount() > 1){
+        $_SESSION['message'] = 'google_sso_error_several_accounts_for_email';
+        header('Location: ../index.php');
+		exit;
+	}
+	$user = $users->fetch();
+
+} else {
+	// classic login
+	$pwd = $user->hashPassword($_POST['password']);
+	if(!$user->db_load(array('login', '=', $_POST['login'], 'password', '=', $pwd))) {
+		if(!$user->db_load(array('login', '=', $_POST['login']))){
+			$_SESSION['message'] = 'erreur_bad_login';
+			header('Location: ../index.php');
+			exit;
+		}
+		$pwd2 = $user->cle . "|" . $user->password;
+		if($_POST['password'] != $pwd2){
+			$_SESSION['message'] = 'erreur_bad_login';
+			header('Location: ../index.php');
+			exit;
+		}
     }
 }
 
@@ -190,16 +200,12 @@ if($user->login_actif == 'non'){
 
 if(isset($_POST['remember']) && $user->user_id != 'publicspl'){
 	$cle = $user->user_id . ';' . date('Y-m-d H:i:s') . ';' . sha1($user->user_id . date('Y-m-d H:i:s') . $user->cle);
-	setcookie('direct_auth', $cle, time()+60*60*24*45, '/');
+	setcookie('direct_auth', $cle, time()+60*60*24*30, '/');
 }
 
 $user->initPostLogin();
 
 // Préférence de vue planning
-if (isset($_SESSION['preferences']['vuePlanning']) && ($_SESSION['preferences']['vuePlanning']=="vueTaches") && (CONFIG_SOPLANNING_OPTION_TACHES == 1)) {
-	header('Location: ../taches.php');
-} else {
-	header('Location: ../planning.php');
-}
+header('Location: ../' . $user->vueDefaut());
 exit;
 ?>

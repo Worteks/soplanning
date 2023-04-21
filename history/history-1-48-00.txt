@@ -1,0 +1,11 @@
+v1.48.00
+
+- Google login / SSO : connect now through your Google/Gmail login page. Requires to make some setup from your organization in order to be activated
+- Google 2 factors authentication : if activated, all people connecting to your soplanning will have to install Google Authenticator on their smartphone for a securized 2 step authentication
+- API is ready ! If you have technical skills you can find API features in SOPlanning settings in order to synchronize SOPlanning with your own system on both ways. Contact us for more details
+- Many "invisible" improvements : library updates, PHP updates, bug fixes, security fixes and code optimization
+- Rights change : read only user can now open task form (read only). He can also download joined files
+- Added indonesian translation
+- Reduced planning header height to get more space
+
+

@@ -2,10 +2,7 @@
 
 require 'base.inc';
 require BASE . '/../config.inc';
-
 require BASE . '/../includes/header.inc';
-
-$smarty = new MySmarty();
 
 if(!$user->checkDroit('parameters_all')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
@@ -20,7 +17,7 @@ if(isset($_POST['SOPLANNING_TITLE'])) {
 	$config->valeur = ($_POST['SOPLANNING_TITLE'] != '' ? $_POST['SOPLANNING_TITLE'] : NULL);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 	$config = new Config();
@@ -28,7 +25,7 @@ if(isset($_POST['SOPLANNING_TITLE'])) {
 	$config->valeur = ($_POST['SOPLANNING_URL'] != '' ? $_POST['SOPLANNING_URL'] : NULL);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -41,13 +38,16 @@ if((isset($_FILES['SOPLANNING_LOGO']) && !empty($_FILES['SOPLANNING_LOGO']['name
 		$config->valeur = NULL;
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 		# Effacement de l'ancien logo
 		if (!empty($_POST['old_logo']))
 		{
-			if (!is_dir(BASE.'/upload/logo/'.$_POST['old_logo']) && file_exists(BASE.'/upload/logo/'.$_POST['old_logo'])) unlink(BASE.'/upload/logo/'.$_POST['old_logo']);
+			if (!is_dir(BASE.'/upload/logo/'.$_POST['old_logo']) && file_exists(BASE.'/upload/logo/'.$_POST['old_logo'])) {
+				unlink(BASE.'/upload/logo/'.$_POST['old_logo']);
+				@unlink(BASE.'/upload/logo/icon.png');
+			}
 		}
 	}else
 	{
@@ -55,7 +55,7 @@ if((isset($_FILES['SOPLANNING_LOGO']) && !empty($_FILES['SOPLANNING_LOGO']['name
 		if(!is__writable(BASE.'/upload/logo') && !is__writable(ini_get('upload_tmp_dir')))
 		{
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;			
 		}
 		$res=upload_image(BASE.'/upload/logo',$_FILES['SOPLANNING_LOGO']);
@@ -68,19 +68,23 @@ if((isset($_FILES['SOPLANNING_LOGO']) && !empty($_FILES['SOPLANNING_LOGO']['name
 			default : $_SESSION['message'] = 'changeNotOKImageErreur';break;
 			}
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 		$config->valeur = $_FILES['SOPLANNING_LOGO']['name'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
+		copy(BASE.'/upload/logo/' . $config->valeur, BASE.'/upload/logo/icon.png');
+		generer_icone_a2hs(BASE.'/upload/logo/icon.png');
+
 		# Effacement de l'ancien logo
-		if ($_POST['old_logo'] <> $_FILES['SOPLANNING_LOGO']['name'])
-		{
-		 if (file_exists(BASE.'/upload/logo/'.$_POST['old_logo'])) unlink(BASE.'/upload/logo/'.$_POST['old_logo']);
+		if ($_POST['old_logo'] <> $_FILES['SOPLANNING_LOGO']['name']) {
+			 if (file_exists(BASE.'/upload/logo/'.$_POST['old_logo'])) {
+				 unlink(BASE.'/upload/logo/'.$_POST['old_logo']);
+			}
 		}
 	}
 }
@@ -91,7 +95,7 @@ if(isset($_POST['SOPLANNING_THEME'])) {
 	$config->valeur=$_POST['SOPLANNING_THEME'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -102,7 +106,7 @@ if(isset($_POST['SOPLANNING_OPTION_ACCES'])) {
 	$config->valeur=$_POST['SOPLANNING_OPTION_ACCES'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -113,7 +117,7 @@ if(isset($_POST['CONFIG_SECURE_KEY'])) {
 	$config->valeur=$_POST['CONFIG_SECURE_KEY'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -128,7 +132,7 @@ if(isset($_POST['SOPLANNING_OPTION_LIEUX'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -143,7 +147,7 @@ if(isset($_POST['SOPLANNING_OPTION_RESSOURCES'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -158,7 +162,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -174,7 +178,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_TACHES'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -190,7 +194,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_PROJETS'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -206,7 +210,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_UTILISATEURS'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -222,7 +226,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_LIEUX'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -238,7 +242,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_RESSOURCES'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -253,7 +257,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_STATUTS'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -268,7 +272,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_EQUIPES'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -283,7 +287,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_GROUPES'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -294,7 +298,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_RETENTION'])) {
 	$config->valeur = $_POST['SOPLANNING_OPTION_AUDIT_RETENTION'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -310,7 +314,7 @@ if(isset($_POST['SOPLANNING_OPTION_AUDIT_CONNEXIONS'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -326,7 +330,7 @@ if(isset($_POST['SOPLANNING_OPTION_TACHES'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -351,7 +355,7 @@ if(isset($_POST['SOPLANNING_OPTION_VISITEUR_checkbox'])) {
 	
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }else
@@ -368,7 +372,7 @@ if(isset($_POST['SOPLANNING_OPTION_VISITEUR_checkbox'])) {
 	
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}	
 }
@@ -379,7 +383,7 @@ if(isset($_POST['DAYS_INCLUDED'])) {
 	$config->valeur = implode(',', $_POST['DAYS_INCLUDED']);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -390,7 +394,7 @@ if(isset($_POST['HOURS_DISPLAYED'])) {
 	$config->valeur = implode(',', $_POST['HOURS_DISPLAYED']);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -402,14 +406,14 @@ if(isset($_POST['PLANNING_DUREE_CRENEAU_HORAIRE'])) {
 		$config->valeur = $_POST['PLANNING_DUREE_CRENEAU_HORAIRE'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 		// on change aussi la valeur en session
 		$_SESSION['nb_mois'] = $config->valeur;
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -422,7 +426,7 @@ if(isset($_POST['DEFAULT_NB_MONTHS_DISPLAYED'])) {
 		$config->valeur = $_POST['DEFAULT_NB_MONTHS_DISPLAYED'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 		// on change aussi la valeur en session
@@ -430,7 +434,7 @@ if(isset($_POST['DEFAULT_NB_MONTHS_DISPLAYED'])) {
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_nbMoisDefaut_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -442,7 +446,7 @@ if(isset($_POST['DEFAULT_NB_DAYS_DISPLAYED'])) {
 		$config->valeur = $_POST['DEFAULT_NB_DAYS_DISPLAYED'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 		// on change aussi la valeur en session
@@ -450,7 +454,7 @@ if(isset($_POST['DEFAULT_NB_DAYS_DISPLAYED'])) {
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_nbjoursDefaut_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -462,7 +466,7 @@ if(isset($_POST['DEFAULT_NB_ROWS_DISPLAYED'])) {
 		$config->valeur = $_POST['DEFAULT_NB_ROWS_DISPLAYED'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 		// on change aussi la valeur en session
@@ -470,7 +474,7 @@ if(isset($_POST['DEFAULT_NB_ROWS_DISPLAYED'])) {
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_nbLignes_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -481,7 +485,7 @@ if(isset($_POST['PLANNING_COULEUR_TACHE'])) {
 	$config->valeur = $_POST['PLANNING_COULEUR_TACHE'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -492,7 +496,7 @@ if(isset($_POST['PLANNING_TEXTE_TACHES_PROJET'])) {
 	$config->valeur = $_POST['PLANNING_TEXTE_TACHES_PROJET'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -503,7 +507,7 @@ if(isset($_POST['PLANNING_TEXTE_TACHES_PERSONNE'])) {
 	$config->valeur = $_POST['PLANNING_TEXTE_TACHES_PERSONNE'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -514,7 +518,7 @@ if(isset($_POST['PLANNING_TEXTE_TACHES_LIEU'])) {
 	$config->valeur = $_POST['PLANNING_TEXTE_TACHES_LIEU'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -525,7 +529,7 @@ if(isset($_POST['PLANNING_TEXTE_TACHES_RESSOURCE'])) {
 	$config->valeur = $_POST['PLANNING_TEXTE_TACHES_RESSOURCE'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -536,7 +540,7 @@ if(isset($_POST['PLANNING_CELL_FONTSIZE'])) {
 	$config->valeur = $_POST['PLANNING_CELL_FONTSIZE'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -551,7 +555,7 @@ if(isset($_POST['PLANNING_DIFFERENCIE_WEEKEND'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -567,7 +571,7 @@ if(isset($_POST['PLANNING_DIFFERENCIE_TACHE_LIEN'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -583,7 +587,7 @@ if(isset($_POST['PLANNING_DIFFERENCIE_TACHE_COMMENTAIRE'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -598,7 +602,7 @@ if(isset($_POST['PLANNING_DIFFERENCIE_TACHE_PARTIELLE'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -613,7 +617,7 @@ if(isset($_POST['PLANNING_MASQUER_FERIES'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -628,7 +632,7 @@ if(isset($_POST['PLANNING_HIDE_WEEKEND_TASK'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -643,7 +647,7 @@ if(isset($_POST['PLANNING_LINE_HEIGHT'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -660,12 +664,12 @@ if(isset($_POST['PLANNING_COL_WIDTH'])) {
 	{
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_largeurColonne_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;		
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -682,12 +686,12 @@ if(isset($_POST['PLANNING_COL_WIDTH_LARGE'])) {
 	{
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_largeurColonneLarge_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;		
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -704,12 +708,12 @@ if(isset($_POST['PLANNING_CODE_WIDTH'])) {
 	{
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_largeurCode_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;		
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -726,12 +730,12 @@ if(isset($_POST['PLANNING_CODE_WIDTH_LARGE'])) {
 	{
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_largeurCodeLarge_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;		
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -745,7 +749,7 @@ if(isset($_POST['PLANNING_ONE_ASSIGNMENT_MAX_PER_DAY'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -756,7 +760,7 @@ if(isset($_POST['PLANNING_AFFICHAGE_STATUS'])) {
 	$config->valeur = $_POST['PLANNING_AFFICHAGE_STATUS'];
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -768,13 +772,13 @@ if(isset($_POST['REFRESH_TIMER'])) {
 		$config->valeur = $_POST['REFRESH_TIMER'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
 		$_SESSION['erreur'] = $smarty->getConfigVars('options_raffraichissement_erreur');
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -791,12 +795,12 @@ if(isset($_POST['PROJECT_COLORS_POSSIBLE'])) {
 		}
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -811,7 +815,7 @@ if(isset($_POST['DEFAULT_PERIOD_LINK'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -826,7 +830,7 @@ if(isset($_POST['LOGOUT_REDIRECT'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -841,12 +845,12 @@ if(isset($_POST['DURATION_DAY'])) {
 		$config->valeur = $_POST['DURATION_DAY'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -861,12 +865,12 @@ if(isset($_POST['DURATION_AM'])) {
 		$config->valeur = $_POST['DURATION_AM'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -881,12 +885,12 @@ if(isset($_POST['DURATION_PM'])) {
 		$config->valeur = $_POST['DURATION_PM'];
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 	} else {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -897,7 +901,7 @@ if(isset($_POST['SMTP_HOST'])) {
 	$config->valeur = ($_POST['SMTP_HOST'] != '' ? $_POST['SMTP_HOST'] : NULL);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 	$config = new Config();
@@ -906,7 +910,7 @@ if(isset($_POST['SMTP_HOST'])) {
 	if(!$config->db_save()) {
 		die;
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 	$config = new Config();
@@ -914,7 +918,7 @@ if(isset($_POST['SMTP_HOST'])) {
 	$config->valeur = ($_POST['SMTP_SECURE'] != '' ? $_POST['SMTP_SECURE'] : NULL);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 	$config = new Config();
@@ -922,7 +926,7 @@ if(isset($_POST['SMTP_HOST'])) {
 	$config->valeur = ($_POST['SMTP_FROM'] != '' ? $_POST['SMTP_FROM'] : NULL);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 	$config = new Config();
@@ -930,7 +934,7 @@ if(isset($_POST['SMTP_HOST'])) {
 	$config->valeur = ($_POST['SMTP_LOGIN'] != '' ? $_POST['SMTP_LOGIN'] : NULL);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 	if($_POST['SMTP_PASSWORD'] != 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') {
@@ -940,7 +944,7 @@ if(isset($_POST['SMTP_HOST'])) {
 		$config->valeur = ($_POST['SMTP_PASSWORD'] != '' ? $_POST['SMTP_PASSWORD'] : NULL);
 		if(!$config->db_save()) {
 			$_SESSION['erreur'] = 'changeNotOK';
-			header('Location: ../options.php');
+			header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 			exit;
 		}
 	}
@@ -956,7 +960,7 @@ if(isset($_POST['PLANNING_REPEAT_HEADER'])) {
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
 	}
 }
@@ -981,7 +985,7 @@ if(isset($_POST['mailTestDestinataire'])) {
 	}
 
 	$_SESSION['message'] = 'options_envoyerMailTest_envoye';
-	header('Location: ../options.php');
+	header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 	exit;
 }
 
@@ -991,14 +995,82 @@ if(isset($_POST['TIMEZONE'])) {
 	$config->valeur = ($_POST['TIMEZONE'] != '' ? $_POST['TIMEZONE'] : NULL);
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';
-		header('Location: ../options.php');
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 		exit;
+	}
+}
+
+if(isset($_POST['SOPLANNING_API_KEY_NAME'])) {
+	$config = new Config();
+	$config->db_load(array('cle', '=', 'SOPLANNING_API_KEY_NAME'));
+	$config->valeur = ($_POST['SOPLANNING_API_KEY_NAME'] != '' ? $_POST['SOPLANNING_API_KEY_NAME'] : NULL);
+	if(!$config->db_save()) {
+		$_SESSION['erreur'] = 'changeNotOK';
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
+		exit;
+	}
+}
+
+if(isset($_POST['SOPLANNING_API_KEY_VALUE'])) {
+	$config = new Config();
+	$config->db_load(array('cle', '=', 'SOPLANNING_API_KEY_VALUE'));
+	$config->valeur = ($_POST['SOPLANNING_API_KEY_VALUE'] != '' ? $_POST['SOPLANNING_API_KEY_VALUE'] : NULL);
+	if(!$config->db_save()) {
+		$_SESSION['erreur'] = 'changeNotOK';
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
+		exit;
+	}
+}
+
+if(isset($_POST['GOOGLE_OAUTH_CLIENT_ID'])) {
+	if(isset($_POST['GOOGLE_OAUTH_ACTIVE']) && $_POST['GOOGLE_OAUTH_ACTIVE'] == 1 && CONFIG_SOPLANNING_URL == ''){
+		$_SESSION['erreur'] = 'google_sso_return_url_need_setup';
+		header('Location: ../options.php?tab=google-login');
+		exit;
+	}
+	$config = new Config();
+	$config->db_load(array('cle', '=', 'GOOGLE_OAUTH_ACTIVE'));
+	$config->valeur= (isset($_POST['GOOGLE_OAUTH_ACTIVE']) ? '1' : '0');
+	if(!$config->db_save()) {
+		$_SESSION['erreur'] = 'changeNotOK';
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
+		exit;
+	}
+	$config = new Config();
+	$config->db_load(array('cle', '=', 'GOOGLE_OAUTH_CLIENT_ID'));
+	$config->valeur=$_POST['GOOGLE_OAUTH_CLIENT_ID'];
+	if(!$config->db_save()) {
+		$_SESSION['erreur'] = 'changeNotOK';
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
+		exit;
+	}
+	$config = new Config();
+	$config->db_load(array('cle', '=', 'GOOGLE_OAUTH_CLIENT_SECRET'));
+	$config->valeur=$_POST['GOOGLE_OAUTH_CLIENT_SECRET'];
+	if(!$config->db_save()) {
+		$_SESSION['erreur'] = 'changeNotOK';
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
+		exit;
+	}
+}
+
+if(isset($_POST['tab']) && $_POST['tab'] == 'google-2fa') {
+	$config = new Config();
+	$config->db_load(array('cle', '=', 'GOOGLE_2FA_ACTIVE'));
+	$config->valeur = (isset($_POST['GOOGLE_2FA_ACTIVE']) != '' ? '1' : '0');
+	if(!$config->db_save()) {
+		$_SESSION['erreur'] = 'changeNotOK';
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
+		exit;
+	}
+	if($config->valeur == '0'){
+		db_query("UPDATE planning_user SET google_2fa = 'setup'");
 	}
 }
 
 
 $_SESSION['message'] = 'changeOK';
-header('Location: ../options.php');
+header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
 exit;
 
 ?>

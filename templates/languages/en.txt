@@ -549,7 +549,7 @@ config_options_lieux = "Places management"
 config_aide_options_lieux = "Allow user to select a place while creating/modifying task"
 winPeriode_lieu = "Place"
 ajax_IDLieuNonValide = "Identifier not valid"
-winPeriode_lieu_identifiantCarMax = "(10 char. max)"
+winPeriode_lieu_identifiantCarMax = "(20 char. max)"
 
 menuRessources = "Resources"
 menuCreerRessource = "Add a resource"
@@ -566,7 +566,7 @@ config_options_ressources = "Resources management"
 config_aide_options_ressources = "Allow user to select a resource while creating/modifying task"
 winPeriode_ressource = "Resource"
 ajax_IDRessourceNonValide = "Identifier not valid"
-winPeriode_ressource_identifiantCarMax = "(10 char. max)"
+winPeriode_ressource_identifiantCarMax = "(20 char. max)"
 erreur_ressource_utilisee = "Selected resource is already is use for the date/time filled"
 ajax_deplacementImpossible_erreurRessource = "Move or copy canceled : selected resource already is use for this date/time"
 
@@ -642,9 +642,6 @@ config_aide_options_visiteur = "Allow guest (users not logged in) to add and mod
 loginTxt = "Login"
 soplanning_support = "Support"
 soplanning_donate = "Support us"
-scrolls_hv = "Horizontal and vertical scroll"
-scrolls_h = "Horizontal scroll"
-scrolls_none = "No scroll"
 
 option_masquer_projet_weekend = "Display tasks overlapping weekends and days off.<br><img src='assets/img/pictos/help_hide_task_weekend.png' alt='' />"
 options_aide_hide_weekend_task = "Task overlapping weekends or days off can be hidden."
@@ -786,14 +783,11 @@ planningRessource = "Ressources Planning"
 planningHorairePersonne = "People agenda"
 planningJours = "View per day"
 planningAfficherLignesVides = "Display empty lines"
-planningAfficherTotalJour = "Display line with total"
 planningAfficherTableauRecap = "Display summary below"
 planningHeures = "View per hour"
 options_planning = "Display planning"
 
-scrolls_v = "Scroll on top of planning"
 scrolls_fleches = "Navigation arrows"
-entetes_flottantes = "Floating header"
 
 menu_aide = "Online Help"
 menu_modifier_profil = "Modify my profile"
@@ -1044,6 +1038,195 @@ upload_fichier_delete_ok = "File 'filename' was deleted !"
 upload_fichier_delete_ko = "Error while deleting file 'filename' !"
 upload_fichier_suppression = "Are you sure you want to delete this file ?"
 upload_fichier_joindre = "Join a file"
+upload_fichier_non_autorise = "File 'filename' not authorized !"
+upload_aucun_fichier_valide = "No file to upload. Please check your file"
+upload_fichier_erreur_nom_fichier = "Loading error ! in order to be imported, file must be named correctly"
+upload_fichier_mauvais_format_fichier = "Bad file format for 'filename'. Import stopped !"
+upload_fichier_erreur_version = "Error while importing file 'filename". You can only restore from the same SOPlanning version !"
+upload_erreur_champs = "Error on following fields : "
 
 action_aide_deplacer_toutestaches = "Choose this type of move if you want to move all the repeated or linked tasks. If no repeated or linked task exists, only the selected task will be moved. <br> Repeated task: task created by using repeat option. <br> Related task: task created for several people "
 action_aide_deplacer_seule = "Move to the new start date desired for this task. <br> Please note: if you move the last day of the task, it will be stretched and not moved"
+
+menuImportExport = "Backup & Import"
+menuExport = "Backup"
+menuImport = "Import / restore"
+export_titre = "Data backup"
+export_choix_donnees = "Selection of data to be saved"
+export_choix_tout = "All planning data"
+export_choix_configuration = "Configuration data (configuration, task status, holidays)"
+export_choix_projets = "Project Data (projects & project groups)"
+export_choix_taches = "Task Data"
+export_choix_lieux = "Location data"
+export_choix_ressources = "Resource Data"
+export_choix_users = "User data (users, user groups & rights)"
+export_choix_fichiers = "Files"
+export_nom_sauvegarde = "Name of the backup file"
+sauvegarder = "Save data"
+
+import_titre = "Import / Restore data"
+import_choix_donnees = "Selection of data to import"
+import_type_fichier = "Restore choice"
+import_type_fichier_csv = "Import file type"
+import_type_fichier_config = "Setup file"
+import_type_fichier_projet = "Project file"
+import_type_fichier_projet_groupe = "Project group file"
+import_type_fichier_user = "Users file"
+import_type_fichier_user_groupe = "Team files"
+import_type_fichier_lieu = "Place file"
+import_type_fichier_ressource = Resource file"
+import_type_fichier_tache = "Task file"
+import_type_fichier_feries = "Days off file"
+import_type_fichier_status = "Statutes file"
+import_type_fichier_sauvegarde = "Restore backup"
+import_type_fichier_seul = "Import from file"
+import_fichier = "File name"
+import_fichier_aide = "Select a backup file name or a .csv file"
+import_options = "Import options"
+import_options_ecrasement = "Replace values if the record already exists"
+import_options_parametrage = "When importing configuration data, do not overwrite the 'General configuration' parameters"
+restaurer = "Restore data"
+analyser_sauvegarde = "Analyze the backup"
+
+export_choix_tout = "All planning data"
+export_choix_configuration = "Configuration data (configuration, task statuses, holidays)"
+export_choix_projets = "Project Data (projects & project groups)"
+export_choix_taches = "Task Data"
+export_choix_lieux = "Location data"
+export_choix_ressources = "Resource Data"
+export_choix_users = "User data (users, user groups & rights)"
+
+import_resultat_titre = "Result of data restoration"
+import_element = "element (s)"
+import_ecrasement = "Existing record?"
+import_ecrasement_choix1 = "No replacement"
+import_ecrasement_choix2 = "Replace values"
+import_type_add = "Adding"
+import_type_update = "Update"
+import_type_ignore = "Ignored"
+import_type_enregistration = "Record type"
+
+erreur_extraction_sauvegarde = "Backup extraction error! Wrong format?"
+
+options_api = "API access"
+options_api_url = "REST access point"
+options_api_doc = "API documentation"
+options_api_key = "Key name (header)"
+options_api_value = "Key value"
+ou = "OR"
+
+options_google_login = "Connect login Google"
+options_google_login_help = "If you want to configure the connection to SOPlanning via the login page of your google / Gmail (Oauth) accounts, connect to <a target='_blank' href='https://console.cloud.google.com/apis/credentials/'> Google Cloud interface</a> to create a new project and associated authentication. You can retrieve the necessary information below. <br> You will find on the web different <a target='_blank' href='https://www.webslesson.info/2019/09/how-to-make-login-with-google-account-using-php.html'>tutorials</a> about doing this, otherwise contact us on <a href='mailto:support@soplanning.org'>support@soplanning.org</a> <br> Note: the classic password connection will remain available "
+google_oauth_bouton = "Connect via Google / Gmail"
+google_sso_error_connection = "An error occurred while connecting, contact your administrator"
+google_sso_error_empty_email = "Your google account has no associated email"
+google_sso_error_no_account_for_email = "No SOPlanning account is linked to this email"
+google_sso_error_several_accounts_for_email = "Several SOPlanning accounts are linked to this email, please fix this problem and try again"
+google_sso_active = "Activate connection via Google"
+google_sso_return_url = "Return url to indicate in Google cloud"
+google_sso_return_url_need_setup = "<b> Please configure the SOPlanning connection address (General configuration tab) </b>"
+google_sso_client_id = "Customer ID (to be retrieved from Google cloud)"
+google_sso_secret = "Secret key (to be retrieved from Google cloud)"
+
+options_2fa = "2-step authentication"
+options_2fa_help = "The 2-step authentication uses Google Authenticator. If you activate this option, SOPlanning will ask for a one-time code just after the connection step. <br> The user will then have to retrieve the code from his smartphone, after installing the Google Authenticator application, available on Android and Iphone. "
+google_2fa_active = "Enable 2-step verification"
+google_2fa_scan_qrcode = "Please download the Google Authenticator application on your smartphone, then scan the following QRcode on Google Authenticator, then you can retrieve the code below"
+google_2fa_scan_code = "Temporary code"
+google_2fa_code_failed = "Wrong code"
+google_2fa_code_help = "Please enter the temporary code from your Google Authenticator application. <br> If you no longer have access to the application, please contact the administrator of SOPlanning in order to reinitialize your account."
+google_2fa_reset = "Reset 2-step verification (Google Authenticator to configure again)" 
+options_2fa_not_compatible = "This feature requires PHP 7 or more"
+
+projet_copie_infobulle = "Copy this project and tasks"
+projet_copie_nom = "Name of new project"
+projet_copie_projet_id = "New project identifier"
+projet_copie_a_partir_de = "Copy from"
+projet_copie_radio_copie_a_partir_debut = "first task of this project"
+projet_copie_radio_copie_a_partir_date = "following date"
+projet_copie_jusqua = "until"
+projet_copie_radio_copie_jusqua_fin = "last task"
+projet_copie_radio_copie_jusqua_date = "following date"
+projet_copie_demarrer = "Copy on new project on"
+projet_copie_demarrer_erreur = "Please fill valid start date for the new project"
+projet_copie_nom_copie_erreur = "Please fill name of the new project"
+projet_copie_radio_copie_a_partir_date_erreur = "Please fill a valid date for start of your selection"
+projet_copie_radio_jusqua_date_erreur = "Please fill a valid date for end of your selection"
+projet_copie_projet_id_copie_erreur = "Please fill a valid project identifier (letters and digits only)"
+
+titre_action_multiple_taches = "Group action"
+action_multi_concernees = "Concerned tasks"
+action_multi_supprimer = "Delete those tasks"
+action_multi_annuler_selection = "Cancel my selection"
+action_multi_annuler_fermer = "Add some other tasks"
+winPeriode_recurrente_fin = "Last occurence"
+
+tutoriel_titre = "Getting Started Tutorial"
+tutoriel_demarrer = "Start tutorial"
+tutoriel_precedent = "Previous"
+tutoriel_suivant = "Next"
+tutoriel_ne_plus_afficher = "Don't display anymore this tutorial"
+tutoriel_ne_plus_afficher_confirm = "If you confirm, this tutorial will not be shown anymore until next SOPlanning version"
+tutoriel_contenu_1 = """
+Welcome to SOPlanning!
+<br><br>
+Follow this tutorial in a few steps to discover specific features of SOPlanning.
+<br>
+SOPlanning being quite intuitive you should understand the basic operation in a few minutes.
+<br><br>
+After learning about these features, you can test them for yourself once this tutorial is closed.
+<br><br>
+For any other questions, look at the help (button in the bar at the top), or contact us at support.
+"""
+tutoriel_contenu_2 = """
+<b>Task creation</b>
+<br><br>
+To create a task you can click on the corresponding button above the schedule, or click directly on a box.
+<br><br>
+In this case the date will be pre-filled, as well as the line on which you clicked (the person or the project depending on the current display).
+"""
+tutoriel_contenu_3 = """
+<b>Drag / drop</b>
+<br><br>
+You can drag a task from one box to another. SOPlanning will then offer you to copy or move this task to the new location.
+<br><br>
+This feature will allow you to move the task in time, or change project / assigned person.
+"""
+tutoriel_contenu_4 = """
+<b>Multiple selection</b>
+<br><br>
+If you hold the CTRL key while you click on a task, then you can select multiple tasks from it as long as you hold CTRL.
+<br><br>
+As soon as you release CTRL, a window will allow you to perform actions on the selected tasks.
+"""
+tutoriel_contenu_5 = """
+<b>Double arrow and the different views of the schedule</b>
+<br><br>
+You can see a double arrow as the first "box" of the schedule. This allows you to easily switch from the person view to the project view.
+<br><br>
+You can do the same thing with the "Display" menu located above the schedule, and display the other possible views.
+"""
+tutoriel_contenu_6 = """
+<b>Project offset</b>
+<br><br>
+When viewing the schedule "by project", you will see a small arrow behind each project name in the left column.
+<br><br>This will allow you to access the bulk task shift functionality, setting the start date of the shift, and the date to shift all matching tasks to.
+"""
+tutoriel_contenu_7 = """
+<b>Summary of the schedule</b>
+<br><br>
+Below the schedule you will find a summary of all the tasks visible on the schedule, for the selected time period.
+<br>
+This allows you to see a more detailed version of scheduled tasks, with a list view.
+<br><br>
+You can hide this summary in the "Display" menu.
+"""
+tutoriel_contenu_8 = """
+<b>It's up to you!</b>
+<br><br>
+Take control of the tool for yourself and do not hesitate to contact us if you have any questions!
+"""
+
+user_masquerLigneVide = "Hide empty lines on planning"
+user_afficherTableauRecap = "Display summary below planning"
+audit_inactif = "Warning : Audit option is not activated, please enable it first on General settings"

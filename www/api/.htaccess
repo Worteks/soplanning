@@ -1,0 +1,6 @@
+RewriteEngine On
+
+Options -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^endpoint/(.*)$ endpoint.php/$1 [L,QSA]

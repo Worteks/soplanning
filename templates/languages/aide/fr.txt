@@ -159,7 +159,7 @@ users_contenu = """
 	<h3>Définition des droits</h3>
 	<b>Gestion des utilisateurs</b> : donne droit à l'ensemble des actions possibles sur les comptes utilisateurs. Il n'existe pas de droit intermédiaire permettant de modifier partiellement les comptes. Voir le module de <a href="../user_list.php">gestion des projets</a>.
 	<br><br>
-	<b>Gestion des projets</b> : donne droit à l'ensemble des actions possibles sur la fiche d'un projet. ça ne donne en revancha aucun droit sur les tâches associées à ces projets. Il n'existe pas de droit intermédiaire permettant de modifier partiellement les projets. Voir le module de <a href="../projets.php">gestion des projets</a>.
+	<b>Gestion des projets</b> : donne droit à l'ensemble des actions possibles sur la fiche d'un projet. ça ne donne en revanche aucun droit sur les tâches associées à ces projets. Il n'existe pas de droit intermédiaire permettant de modifier partiellement les projets. Voir le module de <a href="../projets.php">gestion des projets</a>.
 	<br><br>
 	<b>Gestion des groupes de projets</b> : permet de gérer les groupes de projets, auxquels peuvent être rattachés les projets.  Voir le module de <a href="../groupe_list.php">gestion des groupes de projets</a>.
 	<br><br>

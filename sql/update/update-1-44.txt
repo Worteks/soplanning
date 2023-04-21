@@ -1,6 +1,4 @@
 
-UPDATE  `planning_config` SET  valeur ='1.44' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
-
 INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT', '1', 'Audit module');
 INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_TACHES', '1', 'Audit tasks');
 INSERT INTO `planning_config` VALUES('SOPLANNING_OPTION_AUDIT_PROJETS', '1', 'Audit project');
@@ -54,3 +52,5 @@ update planning_user set droits = replace(droits, ']', ', "audit_restore"]') whe
 
 ALTER TABLE `planning_projet` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';
 ALTER TABLE `planning_periode` CHANGE `projet_id` `projet_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '';
+
+UPDATE  `planning_config` SET  valeur ='1.44' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

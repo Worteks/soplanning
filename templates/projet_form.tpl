@@ -42,7 +42,7 @@
 	<div class="form-group row col-md-12">
 		<label class="col-md-4 col-form-label">{#winProjet_charge#} :</label>
 		<div class="col-md-3">
-			<input type="number" step="0.01" class="form-control" name="charge" id="charge" maxlength="5" value="{$projet.charge}" />
+			<input type="number" step="0.01" class="form-control" name="charge" id="charge" maxlength="7" value="{$projet.charge}" />
 		</div>
 		<div class="col-md-3 left-0">
 		{#winProjet_chargeJours#}

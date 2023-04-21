@@ -1,0 +1,27 @@
+v1.49.00
+
+New ability : select multiple tasks and delete them with CTRL (new other features for multiple selection coming soon)
+Added new feature : can duplicate project and his tasks
+End occurence date now displayed for repeated tasks
+New ability : can now edit user identifier
+API : new ability to sort tasks (GET) by specific field/order
+Ability to create task with starting/ending hours covering 2 days
+Datepicker improved
+Browser autocomplete deactivated on some field
+Enlarged project charge length
+API error messages improvement
+External libraries update for security and compatibility
+Bugfix in order to avoid warnings
+Bugfix on planning header height
+Bugfix on column width on PDF export
+Bugfix on statutes order when creating a project
+Bugfix on datepicker when horizontal scroll
+Bugfix on filter, for project statutes
+Bugfix on date formatlibrary update
+Bugfix on date sart and end for the planning
+Bugfix on summary, for total days assigned
+Bugfix on project statutes when creating task
+Bugfix on email notification for places and resources
+Bugfix on task modification notification
+Some translations update
+Various minor fixes

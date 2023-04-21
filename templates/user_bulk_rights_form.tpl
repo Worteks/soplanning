@@ -77,7 +77,11 @@
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="planning_modif" id="tasks_modify_all" value="tasks_modify_all">
 							<label class="form-check-label" for="tasks_modify_all">{#droits_planningTousProjets#}</label>
-						</div><br />					
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="planning_modif" id="tasks_modify_team" value="tasks_modify_team">
+							<label class="form-check-label" for="tasks_modify_team">{#droits_planningEquipe#}</label>
+						</div><br />
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="planning_modif" id="tasks_modify_own_project" value="tasks_modify_own_project">
 							<label class="form-check-label" for="tasks_modify_own_project">{#droits_planningProjetsProprio#}</label>
@@ -130,7 +134,7 @@
 										{if $userCourant.user_groupe_id neq $groupeTemp}
 											</optgroup><optgroup id="g{$userCourant.user_groupe_id}" value="1" label="{$userCourant.groupe_nom}">
 										{/if}
-									<option value="{$userCourant.user_id}" {if in_array($userCourant.user_id, $listUsersRights)}selected="selected"{/if}>{$userCourant.nom|xss_protect} ({$userCourant.user_id|xss_protect})</option> 								
+									<option value="{$userCourant.user_id}">{$userCourant.nom|xss_protect} ({$userCourant.user_id|xss_protect})</option>		
 									{assign var=groupeTemp value=$userCourant.user_groupe_id}
 									{/foreach}
 								{/if}

@@ -20,6 +20,7 @@ $ldapBindPassword = '';
 // custom variables
 define('COMPIL_DIR', BASE . '/../smarty/templates_c/'); // templates compil directory, must have read/write access
 define('UPLOAD_DIR', BASE . '/../www/upload/files/'); // upload file directory, must have read/write access
+define('SAVE_DIR', BASE . '/../www/upload/backup/'); // backup directory, must have read/write access
 
 // number of results per page
 define('NB_RESULT_PER_PAGE', 30);
@@ -36,6 +37,9 @@ define('MAX_CODE_SIZE', '40');
 define('MAX_SIZE_UPLOAD', '20971520');
 define('DEBUG', false);  // put TRUE for debug
 define('DEV_MAIL', 'yourmail@domain.com');
+
+// Redirection
+define('HOME_REDIRECTION','Location: ' . BASE);
 
 // ----------------------------------------------------------------------------
 // DO NOT MODIFY ANYTHING AFTER THIS LINE
@@ -72,13 +76,19 @@ function autoloadSOPlanning($nomClasse) {
 spl_autoload_register("autoloadSOPlanning");
 require_once BASE . '/../vendor/autoload.php';
 
+// redirection possible vers installer / upgrade
+$version = new Version();
+if($version->checkPhpVersion() !== TRUE) {
+	if(strpos($_SERVER['REQUEST_URI'], '/install/') === FALSE) {
+		echo "<script>top.location='" . BASE . "/install/'</script>";
+		exit;
+	}
+}
+
 // Librairies
 require BASE . '/../includes/lib.inc';
 require BASE . '/../includes/xajax_common.inc';
 require BASE . '/../includes/db_wrapper.inc';
-
-// redirection possible vers installer / upgrade
-$version = new Version();
 
 if($version->checkDBAccess() !== TRUE || $version->checkDatabaseVersion() !== TRUE) {
 	if(strpos($_SERVER['REQUEST_URI'], '/install/') === FALSE) {
@@ -101,10 +111,12 @@ if(defined("CONFIG_TIMEZONE")){
 	date_default_timezone_set('Europe/Paris');	
 }
 header('Content-Type: text/html; charset=iso-8859-1');
+header("X-Frame-Options: SAMEORIGIN");
 session_start();
 
 // Préférence format date
-if (isset($_SESSION['preferences']['dateformat']))
+// on garde le format dd/mm/yyyy partout
+if (isset($_SESSION['preferences']['dateformat']) && 1 == 0)
 {
 	switch($_SESSION['preferences']['dateformat'])	{
 		case 'fr':
@@ -112,7 +124,7 @@ if (isset($_SESSION['preferences']['dateformat']))
 			define ('CONFIG_DATE_SHORT','d/m/y');	
 			define ('CONFIG_DATE_SHORT2','d/m');
 			define ('CONFIG_DATE_FIRST_DAY_MONTH','01/m/Y');		
-			define ('CONFIG_DATE_DATEPICKER','dd/mm/yy');
+			define ('CONFIG_DATE_DATEPICKER','dd/mm/yyyy');
 			define ('CONFIG_DATE_FORMAT','fr');
 			break;
 		case 'us':
@@ -120,7 +132,7 @@ if (isset($_SESSION['preferences']['dateformat']))
 			define ('CONFIG_DATE_SHORT','m-d-y');		
 			define ('CONFIG_DATE_SHORT2','m-d');
 			define ('CONFIG_DATE_FIRST_DAY_MONTH','m-01-Y');		
-			define ('CONFIG_DATE_DATEPICKER','mm-dd-yy');
+			define ('CONFIG_DATE_DATEPICKER','mm-dd-yyyy');
 			define ('CONFIG_DATE_FORMAT','us');
 			break;
 		case 'jp':
@@ -128,7 +140,7 @@ if (isset($_SESSION['preferences']['dateformat']))
 			define ('CONFIG_DATE_SHORT','y-m-d');		
 			define ('CONFIG_DATE_SHORT2','m-d');
 			define ('CONFIG_DATE_FIRST_DAY_MONTH','Y-m-01');		
-			define ('CONFIG_DATE_DATEPICKER','yy-mm-dd');
+			define ('CONFIG_DATE_DATEPICKER','yyyy-mm-dd');
 			define ('CONFIG_DATE_FORMAT','jp');
 			break;
 		default	 :
@@ -137,18 +149,17 @@ if (isset($_SESSION['preferences']['dateformat']))
 			define ('CONFIG_DATE_SHORT','d/m/y');
 			define ('CONFIG_DATE_SHORT2','d/m');
 			define ('CONFIG_DATE_FIRST_DAY_MONTH','01/m/Y');	
-			define ('CONFIG_DATE_DATEPICKER','dd/mm/yy');
+			define ('CONFIG_DATE_DATEPICKER','dd/mm/yyyy');
 			define ('CONFIG_DATE_FORMAT','fr');
 			break;
 	}
-}else
-	{
+}else {
 		$_SESSION['preferences']['dateformat']='fr';
 		define ('CONFIG_DATE_LONG','d/m/Y');
 		define ('CONFIG_DATE_SHORT','d/m/y');
 		define ('CONFIG_DATE_SHORT2','d/m');
 		define ('CONFIG_DATE_FIRST_DAY_MONTH','01/m/Y');	
-		define ('CONFIG_DATE_DATEPICKER','dd/mm/yy');
+		define ('CONFIG_DATE_DATEPICKER','dd/mm/yyyy');
 		define ('CONFIG_DATE_FORMAT','fr');	
 	}
 	define ('CONFIG_DATE_MYSQL','Y-m-d');
@@ -172,15 +183,16 @@ $cfgAvailableLanguages = array(
 	'hu'	=> array('hu([-_][[:alpha:]]{2})?|hungarian', 'hu'),
 	'pt'	=> array('pt([-_][[:alpha:]]{2})?|portuguese', 'pt'),
 	'pl'	=> array('pl([-_][[:alpha:]]{2})?|polish', 'pl'),
-	'br'	=> array('pt-br?|brazilian', 'br')
+	'br'	=> array('pt-br?|brazilian', 'br'),
+	'id'	=> array('id([-_][[:alpha:]]{2})?|indonesian', 'id')
 );
 
 $langueDefaut = 'en';
 $lang = $langueDefaut;
-if(isset($_GET) && !empty($_GET['language']) && in_array($_GET['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl', 'br'))){
+if(isset($_GET) && !empty($_GET['language']) && in_array($_GET['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl', 'br','id'))){
 	$_SESSION['language'] = $_GET['language'];
 	$lang = $_GET['language'];
-} elseif (isset($_SESSION['language']) && in_array($_SESSION['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl', 'br'))) {
+} elseif (isset($_SESSION['language']) && in_array($_SESSION['language'], array('fr', 'en', 'it', 'nl', 'de', 'pt', 'da', 'hu', 'es', 'pl', 'br','id'))) {
 	$lang = $_SESSION['language'];
 } else {
 	$_SESSION['language'] = detectLanguage($langueDefaut);

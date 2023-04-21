@@ -1,17 +1,17 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('parameters_all')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
 	header('Location: ../index.php');
 	exit;
 }
+
+$smarty->assign('phpversion', phpversion());
+
 
 $themes=array();
 $dirname = './assets/css/themes/';
@@ -24,11 +24,11 @@ while($file = readdir($dir)) {
 	}
 }
 closedir($dir);
+$smarty->assign('themes', $themes);
 
 $urlSuggeree = getUrlInfo();
 $smarty->assign('urlSuggeree', $urlSuggeree['root'] . $urlSuggeree['currentDir']);
 $smarty->assign('xajax', $xajax->getJavascript("", "assets/js/xajax.js"));
-$smarty->assign('themes', $themes);
 
 $timezones = array(
 "Pacific/Midway" => "(GMT-11:00) Midway Island, Samoa",

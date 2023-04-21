@@ -103,7 +103,7 @@ abstract class GField
 	public function getSqlValue($val)
 	{
 		global $cfgConnection;
-		$val = trim($val);
+		$val = trim((string) $val);
 		if (($val == '') || is_null($val)) {
 			$val = NULL;
 		}
