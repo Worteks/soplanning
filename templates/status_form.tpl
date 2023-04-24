@@ -92,7 +92,7 @@
 		<div class="col-md-5">
 			<div class="input-group">
 			<button type="button" id="button_bold" class="btn {if $status.gras eq 1}btn-info{else}btn-default{/if}" aria-label="Bold" onclick="boutonStyleStatut(this.id);">
-				<i class="fa fa-bold" aria-hidden="true";"></i>
+				<i class="fa fa-bold" aria-hidden="true"></i>
 			</button>
 			<button type="button" id="button_italic" class="btn {if $status.italique eq 1}btn-info{else}btn-default{/if}" aria-label="Italic" onclick="boutonStyleStatut(this.id);">
 				<i class="fa fa-italic" aria-hidden="true"></i>

@@ -1,15 +1,8 @@
 <?php
 
 require('./base.inc');
-require BASE . '/../config.inc';
-
-// Déclaration de smarty
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
-
-$_POST = sanitize($_POST);
-$_GET = sanitize($_GET);
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('users_manage_all') && !$user->checkDroit('users_manage_team')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
@@ -26,7 +19,6 @@ if (isset($_GET['order']) && in_array($_GET['order'], array('nom', 'email', 'use
 }
 
 if (isset($_GET['filtreEquipe'])) {
-	//$filtreEquipe = $_GET['filtreEquipe'];
 } elseif (isset($_SESSION['user_filtreEquipe'])) {
 	$filtreEquipe = $_SESSION['user_filtreEquipe'];
 } else {
@@ -63,6 +55,9 @@ $filtreUser="";
 if(isset($_POST['rechercheUser']))
 {
 	 $filtreUser=$_POST['rechercheUser'];
+	 $_SESSION['rechercheUser'] = $_POST['rechercheUser'];
+} elseif(isset($_SESSION['rechercheUser'])){
+	 $filtreUser=$_SESSION['rechercheUser'];
 }
 
 $users = new GCollection('User');
@@ -72,7 +67,7 @@ $sql = 'SELECT distinct pu.nom, pu.email, pu.user_id, pu.login, pu.visible_plann
 		LEFT JOIN planning_periode pp ON pu.user_id = pp.user_id
 		LEFT JOIN planning_user_groupe pug ON pug.user_groupe_id = pu.user_groupe_id
 		WHERE pu.user_id <> "publicspl" ';
-if(count($filtreEquipe) > 0) {
+if(!empty($filtreEquipe)) {
 	$sql .= "		AND (pu.user_groupe_id IN ('" . implode("','", $filtreEquipe) . "')";
 	if(in_array('gu0', $filtreEquipe)) {
 		$sql .= '	OR pug.user_groupe_id IS NULL ';

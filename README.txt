@@ -18,6 +18,69 @@ SO Planning - Readme
 
 ---------------------------
 
+=======
+v1.50.00 (02/11/2022)
+- Audit module control in settings
+- "Hide empty lines" and "Display summary under the planning" option are now stored in user profile and can be applied for all devices used
+- Added control to avoid memory limit error when displaying a long period in the planning
+- Bugfix on filter height, for advanced filters on the planning, when having many statutes visible
+- Improved datepicker look, and behavior when scrolling
+- Added ability to display empty lines in the planning for resources view and places view
+- Bugfix on Google 2FA for Firefox
+- Bulk user rights change is updated
+- Bugfix on API for AM/PM tasks
+- Various fixes for PHP 8.1.5
+- Bugfix on planning view per hour, when the task is less than 1 hour
+- Tutorial implementation, in order to show main key features
+- Bugfix on repeated tasks modification
+- XSS fix
+- Various css/display fix on header
+- Fix on some translations
+- Library updates (for php 8.1)
+- Fix on statutes in projects page
+- Bugfix on days off management (how they are excluded from calculation) in some cases
+- Bugfix on Calendar PDF
+- Manifest for A2HS
+
+
+v1.49.00 (25/02/2022)
+
+- New ability : select multiple tasks and delete them with CTRL (new other features for multiple selection coming soon)
+- Added new feature : can duplicate project and his tasks
+- End occurence date now displayed for repeated tasks
+- New ability : can now edit user identifier
+- API : new ability to sort tasks (GET) by specific field/order
+- Ability to create task with starting/ending hours covering 2 days
+- Datepicker improved
+- Browser autocomplete deactivated on some field
+- Enlarged project charge length
+- API error messages improvement
+- External libraries update for security and compatibility
+- Bugfix in order to avoid warnings
+- Bugfix on planning header height
+- Bugfix on column width on PDF export
+- Bugfix on statutes order when creating a project
+- Bugfix on datepicker when horizontal scroll
+- Bugfix on filter, for project statutes
+- Bugfix on date formatlibrary update
+- Bugfix on date sart and end for the planning
+- Bugfix on summary, for total days assigned
+- Bugfix on project statutes when creating task
+- Bugfix on email notification for places and resources
+- Bugfix on task modification notification
+- Some translations update
+- Various minor fixes
+
+v1.48.00 (17/05/2021)
+
+- Google login / SSO : connect now through your Google/Gmail login page. Requires to make some setup from your organization in order to be activated
+- Google 2 factors authentication : if activated, all people connecting to your soplanning will have to install Google Authenticator on their smartphone for a securized 2 step authentication
+- API is ready ! If you have technical skills you can find API features in SOPlanning settings in order to synchronize SOPlanning with your own system on both ways. Contact us for more details
+- Many "invisible" improvements : library updates, PHP updates, bug fixes, security fixes and code optimization
+- Rights change : read only user can now open task form (read only). He can also download joined files
+- Added indonesian translation
+- Reduced planning header height to get more space
+
 v1.47.01 (05/11/20)
 
 - Bugfix on datepicker and timepicker, in some cases the position of the picker is not good

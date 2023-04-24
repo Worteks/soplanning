@@ -33,11 +33,11 @@
 	<br/>
 {/if} 
 {if $periode.lieu_id neq ""}
-	<b>{#winPeriode_lieu#}</b> : {$periode.lieu_id}
+	<b>{#winPeriode_lieu#}</b> : {$lieu.nom} ({$periode.lieu_id})
 	<br/>
 {/if} 
 {if $periode.ressource_id neq ""}
-	<b>{#winPeriode_ressource#}</b> : {$periode.ressource_id}
+	<b>{#winPeriode_ressource#}</b> : {$ressource.nom} ({$periode.ressource_id})
 	<br/>
 {/if} 
 {if $periode.notes neq ""}

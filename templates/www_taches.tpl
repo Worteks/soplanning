@@ -292,7 +292,7 @@
 						<tr>
 							<td style="background-color:#{$projet.couleur};color:{"#"|cat:$projet.couleur|buttonFontColor}">{$projet.projet_id}</td>
 							<td class="w140">
-								{if in_array("tasks_modify_all", $user.tabDroits) || (in_array("tasks_modify_own_project", $user.tabDroits) && $projet.createur_id eq $user.user_id) || (in_array("tasks_modify_own_task", $user.tabDroits) && ($projet.user_id eq $user.user_id) || $projet.createur_id eq $user.user_id)}									<a href="javascript:xajax_modifPeriode('{$projet.periode_id}');undefined;"><i class="fa fa-pencil fa-lg fa-fw" aria-hidden="true"></i></a>
+								{if in_array("tasks_modify_all", $user.tabDroits) || (in_array("tasks_modify_own_project", $user.tabDroits) && $projet.createur_id eq $user.user_id) || (in_array("tasks_modify_own_task", $user.tabDroits) && ($projet.user_id eq $user.user_id) || $projet.createur_id eq $user.user_id) || ( in_array("tasks_modify_team", $user.tabDroits) && $user.user_groupe_id eq $projet.user_groupe_id)}									<a href="javascript:xajax_modifPeriode('{$projet.periode_id}');undefined;"><i class="fa fa-pencil fa-lg fa-fw" aria-hidden="true"></i></a>
 									<a href="javascript:xajax_supprimerPeriode('{$projet.periode_id}');undefined;" 
 									onclick="javascript: return confirm('{#taches_tache_confirmSuppr#|escape:"javascript"}')"><i class="fa fa-trash-o fa-lg fa-fw" aria-hidden="true"></i></a>
 								{/if}

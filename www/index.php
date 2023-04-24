@@ -34,6 +34,16 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_id'] != '') {
 
 $smarty = new MySmarty();
 
+
+if(CONFIG_GOOGLE_OAUTH_ACTIVE == 1){
+	if(isset($_GET["code"])) {
+		header('Location: process/login.php?google_code=' . urlencode($_GET["code"]));
+		exit;
+	}
+	$google_client = new Google_oauth();
+	$smarty->assign('google_auth_url', $google_client->getLink());
+}
+
 // header connecté non inclus sur la page de login, check de version ici
 $version = new Version();
 $smarty->assign('infoVersion', $version->getVersion());
@@ -49,6 +59,7 @@ if(is_file(BASE . '/../blocked.txt')) {
 }
 
 $smarty->assign('xajax', $xajax->getJavascript("", "assets/js/xajax.js"));
+
 
 $smarty->display('www_index.tpl');
 

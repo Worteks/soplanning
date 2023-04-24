@@ -1,1 +1,4 @@
 
+show tables from `soplanning15002` like 'planning_config'
+show tables from `soplanning15002` like 'planning_config'
+show tables from `soplanning15002` like 'planning_config'

@@ -7,7 +7,7 @@
 			{if $lieu.lieu_id neq ''}
 			<input name="lieu_id" id="lieu_id" type="text" readonly class="form-control-plaintext" value="{$lieu.lieu_id}">
 			{else}
-		<input name="lieu_id" id="lieu_id" type="text" maxlength="10" class="form-control" value="{$lieu.lieu_id}"  onChange="xajax_checkLieuId(this.value, '{$lieu.lieu_id}');" /> 
+		<input name="lieu_id" id="lieu_id" type="text" maxlength="20" class="form-control" value="{$lieu.lieu_id}"  onChange="xajax_checkLieuId(this.value, '{$lieu.lieu_id}');" /> 
 		</div>	
 		<div class="col-md-4">
 		<span class="col-form-label" id="divStatutCheckLieuId"></span>

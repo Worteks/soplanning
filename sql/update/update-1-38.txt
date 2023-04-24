@@ -1,5 +1,4 @@
 
-UPDATE  `planning_config` SET  valeur ='1.38' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
 
 INSERT INTO `planning_config` VALUES('SOPLANNING_LOGO', '', 'Logo');
 INSERT INTO `planning_config` VALUES('SOPLANNING_THEME', 'soplanning.css', 'Default theme');
@@ -9,3 +8,5 @@ ALTER TABLE `planning_user` ADD  `telephone` varchar(20) collate latin1_general_
 ALTER TABLE `planning_user` ADD  `mobile` varchar(20) collate latin1_general_ci default NULL AFTER  `telephone`;
 ALTER TABLE `planning_user` ADD  `metier` varchar(50) collate latin1_general_ci default NULL AFTER  `mobile`;
 ALTER TABLE `planning_user` ADD  `commentaire` varchar(255) collate latin1_general_ci default NULL AFTER  `metier`;
+
+UPDATE  `planning_config` SET  valeur ='1.38' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

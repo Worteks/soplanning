@@ -4,9 +4,6 @@ require 'base.inc';
 require BASE . '/../config.inc';
 require BASE . '/../includes/header.inc';
 
-$_POST = sanitize($_POST);
-$_GET = sanitize($_GET);
-
 // Conversion des dates en mode mobile au format french
 if(isset($_GET['date_fin_affiche'])){
 	$_GET['date_fin_affiche'] = forceUserDateFormat($_GET['date_fin_affiche']);
@@ -136,10 +133,23 @@ if(isset($_GET['raccourci_date'])) {
 		$_GET['date_debut_affiche'] = $dateDebut->format(CONFIG_DATE_LONG);
 		$_GET['date_fin_affiche'] = $dateFin->format(CONFIG_DATE_LONG);
 	}else{
-		$dateDebut->modify($_GET['raccourci_date'] . 'days');
-		$dateFin->modify($_GET['raccourci_date'] . 'days');
+		if(substr($_GET['raccourci_date'], 0, 1) == '-'){
+			$dateFin = clone $dateDebut;
+			$dateFin->modify('-1 days');
+			$dateDebut = clone $dateFin;
+			$dateDebut->modify(($_GET['raccourci_date']+1) . 'days');
+		} else{
+			//echo $dateDebut->format('Y-m-d') . ' - ' . $dateFin->format('Y-m-d') . "<br>";
+			$dateDebut = clone $dateFin;
+			$dateDebut->modify('+1 days');
+			$dateFin = clone $dateDebut;
+			$dateFin->modify(($_GET['raccourci_date']-1) . 'days');
+			//echo $dateDebut->format('Y-m-d') . ' - ' . $dateFin->format('Y-m-d') . "<br>";
+		}
 		$_GET['date_debut_affiche'] = $dateDebut->format(CONFIG_DATE_LONG);
 		$_GET['date_fin_affiche'] = $dateFin->format(CONFIG_DATE_LONG);
+		//echo $_GET['date_debut_affiche'] . ' - ' . $_GET['date_fin_affiche'];
+		//die;
 	}
 }
 
@@ -173,6 +183,9 @@ if(isset($_GET['date_debut_affiche']) && isset($_GET['date_fin_affiche'])) {
 if (isset($_GET['nb_mois']) && is_numeric($_GET['nb_mois']) && round($_GET['nb_mois']) > 0) {
 	$nbMois = $_GET['nb_mois'];
 	$_SESSION['nb_mois'] = $_GET['nb_mois'];
+	if($_SESSION['nb_mois'] > 24){
+		$_SESSION['nb_mois'] = 24;
+	}
 	setcookie('nb_mois', $_SESSION['nb_mois'], time()+60*60*24*500, '/');
 }
 
@@ -269,6 +282,14 @@ if(isset($_GET['filtreSurProjet'])) {
 		if($row['le_max2'] != '' && $row['le_max2'] > $row['le_max1']) {
 			$_SESSION['date_fin_affiche'] = sqldate2userdate($row['le_max2']);
 		}
+		$dateDebut = Datetime::createFromFormat('d/m/Y', $_SESSION['date_debut_affiche']);
+		$dateFin = Datetime::createFromFormat('d/m/Y', $_SESSION['date_fin_affiche']);
+		$diff = $dateDebut->diff($dateFin);
+		if($diff->format('%a days') > 730){
+			$dateDebut->modify('+750 days');
+			$_SESSION['date_fin_affiche'] = $dateDebut->format('d/m/Y');
+		}
+
 		setcookie('date_debut_affiche', $_SESSION['date_debut_affiche'], time()+60*60*24*500, '/');
 		setcookie('date_fin_affiche', $_SESSION['date_fin_affiche'], time()+60*60*24*500, '/');
 		header('Location: ../planning.php');
@@ -448,6 +469,26 @@ if(isset($_GET["dimensionCase"])){
 	$_SESSION['dimensionCase'] = $_GET["dimensionCase"];
 }
 setcookie('dimensionCase', $_SESSION['dimensionCase'], time()+60*60*24*500, '/');
+
+
+// we limit the number of days displayed in order to avoid memory limit crash on the server
+$dateDebut = initDateTime($_SESSION['date_debut_affiche']);
+$dateFin = initDateTime($_SESSION['date_fin_affiche']);
+$diff = $dateDebut->diff($dateFin);
+if($_SESSION['baseColonne'] == 'heures'){
+	if($diff->format('%a') > 60){
+		$dateDebut->modify('+60 days');
+		$_SESSION['date_fin_affiche'] = $dateDebut->format('d/m/Y');
+		setcookie('date_fin_affiche', $_SESSION['date_fin_affiche'], time()+60*60*24*500, '/');
+	}
+} else{
+	if($diff->format('%a') > 730){
+		$dateDebut->modify('+730 days');
+		$_SESSION['date_fin_affiche'] = $dateDebut->format('d/m/Y');
+		setcookie('date_fin_affiche', $_SESSION['date_fin_affiche'], time()+60*60*24*500, '/');
+	}
+}
+
 header('Location: ../planning.php');
 exit;
 

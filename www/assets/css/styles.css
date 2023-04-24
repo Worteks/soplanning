@@ -7,6 +7,32 @@ td{
 	vertical-align:top;
 	white-space:nowrap;
 }
+
+.datepicker .datepicker-days table {
+	border-collapse: separate;
+}
+
+.datepicker .datepicker-days .datepicker-switch {
+	background-color:#F6F6F6;
+	border: 1px solid #C5C5C5 !important;
+}
+.datepicker .datepicker-days .prev {
+	background-color:#F6F6F6;
+	border: 1px solid #C5C5C5 !important;
+}
+.datepicker .datepicker-days .next {
+	background-color:#F6F6F6;
+	border: 1px solid #C5C5C5 !important;
+}
+
+.datepicker .datepicker-days td.day {
+	vertical-align:middle;
+	padding:4px;
+	background-color:#F6F6F6;
+	border: 1px solid #C5C5C5 !important;
+}
+
+
 hr{
 	width: 100%; 
 	color: #e5e5e5; 
@@ -40,6 +66,14 @@ hr{
   display: block;
 }
 
+.navbar-brand-logo
+{
+	padding-top:0px;
+	padding-bottom:0px;
+}
+.logo {
+	max-height:35px;
+}
 .dropdown-menu {
 	min-width: 200px;
 }
@@ -94,12 +128,18 @@ div.btn-group
 
 }
 
+.modal-tutoriel{
+	max-width:690px;
+}
+
 .modal-backdrop,.modal-backdrop.fade.in {
 	opacity: .5;
 }
 
 .modal-header {
 	cursor: move;
+	border-bottom-color: #EEEEEE;
+	background-color: #FAFAFA;
 }
 
 .modal-header h5 {
@@ -217,17 +257,17 @@ position: absolute;right:-5px;top:12px;color:#000;font-size:9px;
 	box-shadow: 1px 1px 5px silver;
 }
 .cellEmpty {
-height:8px;
-padding:0;
-margin:0;
-margin-top:1px;
-font-size:0;
-box-shadow: none;
+	height:14px;
+	padding:0;
+	margin:0;
+	margin-top:1px;
+	font-size:0;
+	box-shadow: none;
 }
 .sumCell
 {
-text-align:center;
-vertical-align: middle;
+	text-align:center;
+	vertical-align: middle;
 }
 .sumLargeCell
 {
@@ -271,10 +311,6 @@ font-weight:700
 	min-width: 25px;
 	min-height: 20px;
 	line-height: 20px;
-}
-
-.planningContent th.today {
-	font-size: 15px;
 }
 
 .planningTabName {
@@ -378,17 +414,11 @@ td.planningDropdownFilter div.form-horizontal
 }
 
 /* Form */
-.datepicker
+.form-control.datepicker
 {
-	 width:103px !important;
+	 width:103px;
 }
-.ui-datepicker-week-col
-{
-	text-align:center;
-}
-.ui-datepicker{ 
-	z-index: 9999;
-}
+
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
 {
 	text-align:center;
@@ -436,7 +466,6 @@ font-size:30px;font-weight:700;
 #taskFromDate{display:table-cell;}
 #taskFromDate label{margin-right:5px;margin-left:5px;}
 #taskToDate{display:table-cell;}
-.planning_team_div,.planning_team_div_hour {font-size:16px !important;padding-top:5px;padding-bottom:5px;font-weight:700;text-align:left !important;white-space:nowrap}
 
 .tooltip-html{display:none;}
 
@@ -724,7 +753,7 @@ box-shadow: 1px 1px 5px silver;
 {
  position: sticky;
  position: -webkit-sticky;
- top:195px;
+ top:188px;
  z-index: 12;
 }
 
@@ -732,7 +761,7 @@ box-shadow: 1px 1px 5px silver;
 {
  position: sticky;
  position: -webkit-sticky;
- top:195px;
+ top:190px;
  z-index: 12;
 }
 
@@ -740,7 +769,7 @@ box-shadow: 1px 1px 5px silver;
 {
  position: sticky;
  position: -webkit-sticky;
- top:226px;
+ top:213px;
  z-index: 12;
 }
 
@@ -748,7 +777,7 @@ box-shadow: 1px 1px 5px silver;
 {
  position: sticky;
  position: -webkit-sticky;
- top:257px;
+ top:236px;
  z-index: 12;
  border-bottom:1px solid white;
 }
@@ -773,28 +802,6 @@ box-shadow: 1px 1px 5px silver;
  border-top:0px;
  background-color:#f9f9f9;
  border-bottom: 2px solid #dee2e6;
-}
-
-td.planning_team_div,th.planning_team_div
-{
- position: sticky;
- position: -webkit-sticky;
- top:286px !important;
- left: 6px;
- background-clip: padding-box;
- z-index:2;
- border-bottom:0px;
-}
-
-.planning_team_div_hour
-{
- position: sticky;
- position: -webkit-sticky;
- top:230px !important;
- left: 6px;
- z-index:2;	
- border-bottom:0px !important;
- border-top:0px !important;
 }
 
 .planningContent th {
@@ -862,11 +869,87 @@ th[scope=row]
     cursor: pointer;
 }
 
-.container{margin-top:60px;}
+.container{margin-top:60px;margin-bottom: 40px;}
 #divChoixDragNDrop a{
     display:block;
     margin-bottom:10px;
 }
-#ui-datepicker-div, #ui-timepicker-div {
+
+#ui-timepicker-div {
   position: absolute !important;
+}
+
+#table_restore_result table, #table_restore_result th, #table_restore_result td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px;
+}
+.restore-OK{ background-color:green;color:white;padding:3px;border-radius:2px;}
+.restore-KO{ background-color:red;color:white;padding:3px;border-radius:2px;}
+
+.bordureSelectionne {
+	border:2px #ff0000 dotted;
+}
+
+/* for modal on right or left side */
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+	position: fixed;
+	margin: auto;
+	width: 400px;
+	height: 100%;
+	-webkit-transform: translate3d(0%, 0, 0);
+		-ms-transform: translate3d(0%, 0, 0);
+		 -o-transform: translate3d(0%, 0, 0);
+			transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-dialog {
+	left:0px;
+}
+
+.modal.right .modal-dialog {
+	right:0px;
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+	height: 100%;
+	overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+	padding: 15px 15px 80px;
+}
+
+.modal.left.fade .modal-dialog{
+	left: 0px;
+	-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+	   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+		 -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+			transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog{
+	left: 0;
+}
+	
+.modal.right.fade .modal-dialog {
+	right: 0px;
+	-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+	   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+		 -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+			transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+	right: 0;
+}
+
+/* end for modal */
+
+.dropdown-menu.filtrePlanning {
+	max-height: 700px;
+	overflow-y: scroll;
 }

@@ -3,10 +3,10 @@
 	<div class="form-group row">
 		<label class="col-md-3 col-form-label">{#icalExport_users#} :</label>
 		<div class="col-md-8 radio-inline">
-			<input type="radio" name="ical_users" id="ical_users_moi" value="ical_users_moi" checked="checked" onClick="xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());">
+			<input type="radio" name="ical_users" id="ical_users_moi" value="ical_users_moi" checked="checked" onClick="xajax_icalGenererLien($('#anciennete').val(), getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'));">
 			<label for="ical_users_moi">{#icalExport_users_moi#}</label>
 			<br />
-			<input type="radio" name="ical_users" id="ical_users_tous" value="ical_users_tous" onClick="xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());">
+			<input type="radio" name="ical_users" id="ical_users_tous" value="ical_users_tous" onClick="xajax_icalGenererLien($('#anciennete').val(), getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'));">
 			<label for="ical_users_tous">{#icalExport_users_tous#}</label>
 			<br />
 		</div>
@@ -14,10 +14,10 @@
 	<div class="form-group row">
 		<label class="col-md-3 col-form-label">{#icalExport_projets#} :</label>
 		<div class="col-md-8 radio-inline">
-			<input type="radio" name="ical_projets" id="ical_projets_tous" value="ical_projets_tous" checked="checked" onClick="$('#divIcalProjets').addClass('hidden');" onClick="xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());">
+			<input type="radio" name="ical_projets" id="ical_projets_tous" value="ical_projets_tous" checked="checked" onClick="$('#divIcalProjets').addClass('hidden');" onClick="xajax_icalGenererLien($('#anciennete').val(), getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'));">
 			<label for="ical_projets_tous">{#icalExport_projets_tous#}</label>
 			<br />
-			<input type="radio" name="ical_projets" id="ical_projets_liste" value="ical_projets_liste" onClick="$('#divIcalProjets').removeClass('hidden');xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());">
+			<input type="radio" name="ical_projets" id="ical_projets_liste" value="ical_projets_liste" onClick="$('#divIcalProjets').removeClass('hidden');xajax_icalGenererLien($('#anciennete').val(), getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'));">
 			<label for="ical_projets_liste">{#icalExport_projets_liste#}</label>
 			<div id="divIcalProjets" class="hidden">
 					<select multiple="multiple" name="icalProjetsChoix" id="icalProjetsChoix" class="form-control {if !$smarty.session.isMobileOrTablet}select2{/if}" onfocus="blur();" tabindex="1" style="width:100%" onchange="xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());">
@@ -43,7 +43,7 @@
 	<div class="form-group row">
 		<label class="col-md-3 col-form-label">{#icalExport_delai#} :</label>
 		<div class="col-md-6 form-inline">
-			<select id="anciennete" name="anciennete" onchange="xajax_icalGenererLien(getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'), $('#anciennete').val());" class="form-control">
+			<select id="anciennete" name="anciennete" onchange="xajax_icalGenererLien($('#anciennete').val(), getRadioValue('ical_users'), getRadioValue('ical_projets'), getSelectValue('icalProjetsChoix'));" class="form-control">
 				<option value="0">0 {#winPeriode_mois#} {#seulement_taches_a_venir#}</option>
 				<option value="1">1 {#winPeriode_mois#}</option>
 				<option value="3" selected="selected">3 {#winPeriode_mois#}</option>

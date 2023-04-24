@@ -7,7 +7,7 @@
 			{if $ressource.ressource_id neq ''}
 			<input name="ressource_id" id="ressource_id" type="text" readonly class="form-control-plaintext" value="{$ressource.ressource_id}"> 			
 			{else}
-			<input name="ressource_id" id="ressource_id" type="text" class="form-control" maxlength="10" value="{$ressource.ressource_id}" onChange="xajax_checkRessourceId(this.value, '{$ressource.ressource_id}');" />
+			<input name="ressource_id" id="ressource_id" type="text" class="form-control" maxlength="20" value="{$ressource.ressource_id}" onChange="xajax_checkRessourceId(this.value, '{$ressource.ressource_id}');" />
 			</div>
 			<span id="divStatutCheckRessourceId"></span>
 			<div class="col-md-3">{#winPeriode_ressource_identifiantCarMax#}

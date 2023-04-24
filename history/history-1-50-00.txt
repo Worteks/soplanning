@@ -1,0 +1,24 @@
+v1.50.00
+
+- Audit module control in settings
+- "Hide empty lines" and "Display summary under the planning" option are now stored in user profile and can be applied for all devices used
+- Added control to avoid memory limit error when displaying a long period in the planning
+- Bugfix on filter height, for advanced filters on the planning, when having many statutes visible
+- Improved datepicker look, and behavior when scrolling
+- Added ability to display empty lines in the planning for resources view and places view
+- Bugfix on Google 2FA for Firefox
+- Bulk user rights change is updated
+- Bugfix on API for AM/PM tasks
+- Various fixes for PHP 8.1.5
+- Bugfix on planning view per hour, when the task is less than 1 hour
+- Tutorial implementation, in order to show main key features
+- Bugfix on repeated tasks modification
+- XSS fix
+- Various css/display fix on header
+- Fix on some translations
+- Library updates (for php 8.1)
+- Fix on statutes in projects page
+- Bugfix on days off management (how they are excluded from calculation) in some cases
+- Bugfix on Calendar PDF
+- Manifest for A2HS
+

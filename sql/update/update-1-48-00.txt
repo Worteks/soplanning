@@ -1,0 +1,23 @@
+
+INSERT INTO `planning_config` VALUES('SOPLANNING_API_KEY_NAME', 'SOPLANNING-API', '');
+INSERT INTO `planning_config` VALUES('SOPLANNING_API_KEY_VALUE', UUID(),'');
+
+ALTER TABLE `planning_periode` MODIFY COLUMN `date_debut` date NOT NULL DEFAULT '2000-01-01' AFTER `link_id`;
+
+ALTER TABLE `planning_ressource` MODIFY COLUMN `ressource_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '' FIRST;
+ALTER TABLE `planning_lieu` MODIFY COLUMN `lieu_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT '' FIRST;
+
+ALTER TABLE `planning_periode` MODIFY COLUMN `ressource_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL;
+ALTER TABLE `planning_periode` MODIFY COLUMN `lieu_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL;
+
+INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_CLIENT_ID', '', '');
+INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_CLIENT_SECRET', '', '');
+INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_ACTIVE', '0', '');
+
+INSERT INTO `planning_config` VALUES('GOOGLE_2FA_ACTIVE', '0', '');
+
+ALTER TABLE `planning_user` ADD COLUMN `google_2fa` enum('setup','ok') NOT NULL DEFAULT 'setup' AFTER `login_actif`;
+
+
+UPDATE  `planning_config` SET  valeur ='1.48.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

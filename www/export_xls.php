@@ -4,11 +4,8 @@
 @set_time_limit(1000);
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 $html = '';
 $js = '';
@@ -16,10 +13,8 @@ $js = '';
 $joursFeries = getJoursFeries();
 
 // PARAM�TRES ////////////////////////////////
-$dateDebut = new DateTime();
-$dateFin = new DateTime();
-$dateDebut->setDate(substr($_SESSION['date_debut_affiche'],6,4), substr($_SESSION['date_debut_affiche'],3,2), substr($_SESSION['date_debut_affiche'],0,2));
-$dateFin->setDate(substr($_SESSION['date_fin_affiche'],6,4), substr($_SESSION['date_fin_affiche'],3,2), substr($_SESSION['date_fin_affiche'],0,2));
+$dateDebut = initDateTime($_SESSION['date_debut_affiche']);
+$dateFin = initDateTime($_SESSION['date_fin_affiche']);
 
 $nbLignes = $_SESSION['nb_lignes'];
 $pageLignes = $_SESSION['page_lignes'];
@@ -63,7 +58,7 @@ $tmpMois = $smarty->getConfigVars('month_' . $tmpDate->format('n')) . ' ' . $tmp
 
 // GESTION DES ENTETES DU TABLEAU (MOIS, SEMAINE ET JOUR)
 while ($tmpDate <= $dateFin) {
-	if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
+	if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 		$sClass = 'week';
 	} else {
 		if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
@@ -375,7 +370,7 @@ while($ligneTmp = $lines->fetch()) {
 	// on boucle sur la dur�e de l'affichage
 	while ($tmpDate <= $dateFin) {
 		// d�finit le style pour case semaine et WE
-		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
+		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 			if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 1) {
 				$classTD = 'weekend';
 				$opacity = 'filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25';
@@ -393,7 +388,7 @@ while($ligneTmp = $lines->fetch()) {
 			$styleLigne = '';
 		}
 
-		if (in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
+		if (array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 			// jours f�ri�s
 			$ferie = new Ferie();
 			if($ferie->db_load(array('date_ferie', '=', $tmpDate->format('Y-m-d'))) && trim($ferie->libelle) != "") {
@@ -467,7 +462,7 @@ while($ligneTmp = $lines->fetch()) {
 				$couleurTexte = buttonFontColor('#' . $couleurFond);
 
 				// la case avec le code du projet
-				$html .= '<div id="c_' . $jour['periode_id'] . '_' . $tmpDate->format('Ymd') . '" class="caseProjets" style="' . $opacity . ';';
+				$html .= '<div id="c_' . $jour['periode_id'] . '_' . $tmpDate->format('Ymd') . '" class="caseProjets" style="' . $opacity . ';color:' . $couleurTexte . ';background-color:' . $couleurFond . '"';
 
 				if($jour['statut_tache'] == 'fait' || $jour['statut_tache'] == 'abandon') {
 					$html .= 'text-decoration:line-through;';

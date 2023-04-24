@@ -17,21 +17,25 @@
 	<div class="form-group row col-md-12 mt-2" id="optionsRow">
 		<div class="col-3">
 			<div  class="nav flex-column nav-pills soplanning-box" role="tablist" aria-orientation="vertical" id="myTab">
-				<a class="nav-link {if !isset($smarty.get.tab) || $smarty.get.tab eq ""}active{/if}" id="param-global-tab" data-toggle="pill" href="#param-global" role="tab" aria-controls="param-global" aria-selected="true">{#options_configGenerale#}</a>
-				<a class="nav-link" id="param-modules-tab" data-toggle="pill" href="#param-modules" role="tab" aria-controls="param-modules" aria-selected="false">{#options_modules#}</a>
-				<a class="nav-link" id="param-planning-tab" data-toggle="pill" href="#param-planning" role="tab" aria-controls="param-planning" aria-selected="false">{#options_planning#}</a>
-				<a class="nav-link" id="param-taches-tab" data-toggle="pill" href="#param-taches" role="tab" aria-controls="param-taches" aria-selected="false">{#options_taches#}</a>
-				<a class="nav-link" id="param-divers-tab" data-toggle="pill" href="#param-divers" role="tab" aria-controls="param-divers" aria-selected="false">{#options_divers#}</a>
-				<a class="nav-link" id="param-smtp-tab" data-toggle="pill" href="#param-smtp" role="tab" aria-controls="param-smtp" aria-selected="false">{#options_smtp#}</a>
-				<a class="nav-link" id="param-testmail-tab" data-toggle="pill" href="#param-testmail" role="tab" aria-controls="param-testmail" aria-selected="false">{#options_envoyerMailTest#}</a>
+				<a class="nav-link {if !isset($smarty.get.tab) || $smarty.get.tab eq "params-global" || $smarty.get.tab eq ""}active{/if}" id="param-global-tab" data-toggle="pill" href="#param-global" role="tab" aria-controls="param-global" aria-selected="true">{#options_configGenerale#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-modules"}active{/if}" id="param-modules-tab" data-toggle="pill" href="#param-modules" role="tab" aria-controls="param-modules" aria-selected="false">{#options_modules#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-planning"}active{/if}" id="param-planning-tab" data-toggle="pill" href="#param-planning" role="tab" aria-controls="param-planning" aria-selected="false">{#options_planning#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-taches"}active{/if}" id="param-taches-tab" data-toggle="pill" href="#param-taches" role="tab" aria-controls="param-taches" aria-selected="false">{#options_taches#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-divers"}active{/if}" id="param-divers-tab" data-toggle="pill" href="#param-divers" role="tab" aria-controls="param-divers" aria-selected="false">{#options_divers#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-smtp"}active{/if}" id="param-smtp-tab" data-toggle="pill" href="#param-smtp" role="tab" aria-controls="param-smtp" aria-selected="false">{#options_smtp#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-testmail"}active{/if}" id="param-testmail-tab" data-toggle="pill" href="#param-testmail" role="tab" aria-controls="param-testmail" aria-selected="false">{#options_envoyerMailTest#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-api"}active{/if}" id="param-api-tab" data-toggle="pill" href="#param-api" role="tab" aria-controls="param-api" aria-selected="false">{#options_api#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "google-login"}active{/if}" id="google-login-tab" data-toggle="pill" href="#google-login" role="tab" aria-controls="google-login" aria-selected="false">{#options_google_login#}</a>
+				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "google-2fa"}active{/if}" id="google-2fa-tab" data-toggle="pill" href="#google-2fa" role="tab" aria-controls="google-2fa" aria-selected="false">{#options_2fa#}</a>
 				<a class="nav-link {if isset($smarty.get.tab) && $smarty.get.tab eq "param-audit"}active{/if}" id="param-audit-tab" data-toggle="pill" href="#param-audit" role="tab" aria-controls="param-audit" aria-selected="false">{#options_audit#}</a>
 			</div >
 		</div>
 		<div class="col-9">
 			<div class="soplanning-box">
 				<div class="tab-content">
-					<div class="tab-pane fade show {if !isset($smarty.get.tab) || $smarty.get.tab eq ""}active{/if}" id="param-global" role="tabpanel" aria-labelledby="param-global-tab">
+					<div class="tab-pane fade show {if !isset($smarty.get.tab) || $smarty.get.tab == 'param-global' || $smarty.get.tab eq ""}active{/if}" id="param-global" role="tabpanel" aria-labelledby="param-global-tab">
 						<form action="process/options.php" method="POST" class="form-horizontal" enctype="multipart/form-data" id="setupForm">
+							<input type="hidden" name="tab" value="param-global">
 							<fieldset>
 								<legend>
 									{#options_configGenerale#}
@@ -163,8 +167,9 @@
 							</fieldset>
 						</form>
 					</div>
-					<div class="tab-pane" id="param-modules">
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-modules"}active{/if}"" id="param-modules">
 						<form action="process/options.php" method="POST">
+							<input type="hidden" name="tab" value="param-modules">
 							<fieldset>
 								<legend>
 									{#modules#}
@@ -210,8 +215,9 @@
 							</fieldset>
 						</form>
 					</div>
-					<div class="tab-pane" id="param-planning">
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-planning"}active{/if}"" id="param-planning">
 						<form action="process/options.php" method="POST">
+							<input type="hidden" name="tab" value="param-planning">
 							<fieldset>
 								<legend>
 									{#options_planning#}
@@ -449,8 +455,9 @@
 							</fieldset>
 						</form>
 					</div>
-					<div class="tab-pane" id="param-taches">
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-taches"}active{/if}"" id="param-taches">
 						<form action="process/options.php" method="POST" class="form-horizontal">
+							<input type="hidden" name="tab" value="param-taches">
 							<fieldset>
 								<legend>
 									{#options_taches#}
@@ -639,8 +646,11 @@
 								</div>
 							</fieldset>
 						</form>
-					</div>					<div class="tab-pane" id="param-divers">
+					</div>
+					
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-divers"}active{/if}"" id="param-divers">
 						<form action="process/options.php" method="POST" class="form-horizontal">
+							<input type="hidden" name="tab" value="param-divers">
 							<fieldset>
 								<legend>
 									{#options_divers#}
@@ -697,8 +707,10 @@
 							</fieldset>
 						</form>
 					</div>
-					<div class="tab-pane" id="param-smtp">
+
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-smtp"}active{/if}"" id="param-smtp">
 						<form action="process/options.php" method="POST">
+							<input type="hidden" name="tab" value="param-smtp">
 							<fieldset>
 								<legend>
 									{#options_smtp_titre#}
@@ -754,8 +766,10 @@
 							</fieldset>
 						</form>
 					</div>
-					<div class="tab-pane" id="param-testmail">
+
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-testmail"}active{/if}"" id="param-testmail">
 						<form action="process/options.php" method="POST" class="form-horizontal">
+							<input type="hidden" name="tab" value="param-testmail">
 							<fieldset>
 								<legend>
 									{#options_envoyerMailTest#}
@@ -782,12 +796,140 @@
 							</fieldset>
 						</form>
 					</div>
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-api"}active{/if}"" id="param-api">
+						<form action="process/options.php" method="POST" class="form-horizontal">
+							<input type="hidden" name="tab" value="param-api">
+							<fieldset>
+								<legend>
+									{#options_api#}
+								</legend>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-4 col-form-label">{#options_api_url#} :</label>
+									<div class="col-6">
+										{if $smarty.const.CONFIG_SOPLANNING_URL neq ""}{$smarty.const.CONFIG_SOPLANNING_URL}{else}SOPLANNING_URL{/if}/api/endpoint
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-4 col-form-label">{#options_api_key#} :</label>
+									<div class="col-6">
+										<input name="SOPLANNING_API_KEY_NAME" type="text" class="form-control" value="{$smarty.const.CONFIG_SOPLANNING_API_KEY_NAME|xss_protect}" />
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-4 col-form-label">{#options_api_value#} :</label>
+									<div class="col-6">
+										<input name="SOPLANNING_API_KEY_VALUE" type="text" class="form-control" value="{$smarty.const.CONFIG_SOPLANNING_API_KEY_VALUE|xss_protect}" />
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-4 col-form-label">{#options_api_doc#} :</label>
+									<div class="col-6">
+										<a target="_blank" href="https://documenter.getpostman.com/view/13456412/Tz5s4wwD"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<div class="col-md-4"></div>
+									<div class="col-6">
+										<br />
+										<input type="submit" class="btn btn-primary" value="{#enregistrer#}">
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "google-login"}active{/if}" id="google-login">
+						<form action="process/options.php" method="POST" class="form-horizontal">
+							<input type="hidden" name="tab" value="google-login">
+							<fieldset>
+								<legend>
+									{#options_google_login#}
+								</legend>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-12 col-form-label" style="font-size:13px">{#options_google_login_help#}</label>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-6 col-form-label">{#google_sso_active#} :</label>
+									<div class="col-6">
+										<input type="checkbox" name="GOOGLE_OAUTH_ACTIVE" id="GOOGLE_OAUTH_ACTIVE" {if $smarty.const.CONFIG_GOOGLE_OAUTH_ACTIVE ==1}checked="checked"{/if} value="1">
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-6 col-form-label">{#google_sso_return_url#} :</label>
+									<div class="col-6">
+										{if $smarty.const.CONFIG_SOPLANNING_URL eq ""}
+											{#google_sso_return_url_need_setup#}
+										{else}
+											{$smarty.const.CONFIG_SOPLANNING_URL}
+										{/if}
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-6 col-form-label">{#google_sso_client_id#} :</label>
+									<div class="col-6">
+										<input name="GOOGLE_OAUTH_CLIENT_ID" type="text" class="form-control" value="{$smarty.const.CONFIG_GOOGLE_OAUTH_CLIENT_ID|xss_protect}" />
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-6 col-form-label">{#google_sso_secret#} :</label>
+									<div class="col-6">
+										<input name="GOOGLE_OAUTH_CLIENT_SECRET" type="text" class="form-control" value="{$smarty.const.CONFIG_GOOGLE_OAUTH_CLIENT_SECRET|xss_protect}" />
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<div class="col-md-6"></div>
+									<div class="col-6">
+										<br />
+										<input type="submit" class="btn btn-primary" value="{#enregistrer#}">
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+
+					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "google-2fa"}active{/if}" id="google-2fa">
+						<form action="process/options.php" method="POST" class="form-horizontal">
+							<input type="hidden" name="tab" value="google-2fa">
+							<fieldset>
+								<legend>
+									{#options_2fa#}
+								</legend>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-12 col-form-label" style="font-size:13px">{#options_2fa_help#}</label>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-6 col-form-label">{#google_2fa_active#} :</label>
+									<div class="col-6">
+										{if $phpversion >= "7"}
+											<input type="checkbox" name="GOOGLE_2FA_ACTIVE" id="GOOGLE_2FA_ACTIVE" {if $smarty.const.CONFIG_GOOGLE_2FA_ACTIVE ==1}checked="checked"{/if} value="1">
+										{else}
+											{#options_2fa_not_compatible#}
+										{/if}
+									</div>
+								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<div class="col-md-6"></div>
+									<div class="col-6">
+										<br />
+										<input type="submit" class="btn btn-primary" value="{#enregistrer#}">
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+
 					<div class="tab-pane {if isset($smarty.get.tab) && $smarty.get.tab eq "param-audit"}active{/if}" id="param-audit">
 						<form action="process/options.php" method="POST" class="form-horizontal">
+							<input type="hidden" name="tab" value="param-audit">
 							<fieldset>
 								<legend>
 									{#options_audit#}
 								</legend>
+								{if $smarty.const.CONFIG_SOPLANNING_OPTION_AUDIT eq 0}
+									<br>
+									<span style="color:#ff0000;font-weight:bold">{#audit_inactif#}</span>
+									<br><br>
+								{/if}
 								<div class="form-group row col-md-12 align-items-center">
 									<label class="col-md-4 col-form-label">{#config_options_audit_taches#}  :</label>
 									<div class="col-2">

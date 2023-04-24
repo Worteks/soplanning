@@ -9,7 +9,7 @@ $joursFeries = getJoursFeries();
 $DAYS_INCLUDED = explode(',', CONFIG_DAYS_INCLUDED);
 
 // Base ligne
-if(isset($_COOKIE['baseLigne'])) {
+if(isset($_COOKIE['baseLigne']) && !isset($_SESSION['baseLigne'])) {
 	$_SESSION['baseLigne'] = $_COOKIE['baseLigne'];
 }
 if (!isset($_SESSION['baseLigne'])) 
@@ -380,7 +380,7 @@ if ($user->checkDroit('tasks_view_team_projects') && !is_null($user->user_groupe
 	// on filtre sur les projets de l'équipe de ce user
 	$sql .= " LEFT JOIN planning_user AS pu ON pd.user_id = pu.user_id ";
 }
-$sql .= "WHERE (0 = 0";
+$sql .= "WHERE ((0 = 0";
 if($user->checkDroit('tasks_view_own_projects')) {
 	// on filtre sur les projets dont le user courant est propriétaire ou assigné
 	$sql .= " AND (pp.createur_id = " . val2sql($user->user_id) . " OR pd.user_id = " . val2sql($user->user_id) . ")";
@@ -393,7 +393,7 @@ if ($user->checkDroit('tasks_view_only_own')) {
 	$sql .= " AND pd.user_id = " . val2sql($user->user_id);
 }
 $sql .= ')';
-$sql .= " OR pp.createur_id = " . val2sql($user->user_id);
+$sql .= " OR pp.createur_id = " . val2sql($user->user_id) . ')';
 // Si filtre sur statut de projet
 if(count($_SESSION['filtreStatutProjet']) > 0) {
 	$sql.= " AND pp.statut IN ('" . implode("','", $_SESSION['filtreStatutProjet']) . "')";
@@ -401,7 +401,7 @@ if(count($_SESSION['filtreStatutProjet']) > 0) {
 $sql.= " GROUP BY pp.nom, pp.projet_id
 		ORDER BY pg.nom, pp.nom";
 $projetsFiltre->db_loadSQL($sql);
-//echo $sql;
+//echo $sql;die;
 $smarty->assign('listeProjets', $projetsFiltre->getSmartyData());
 
 // Liste des projets possibles

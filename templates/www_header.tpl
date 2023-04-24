@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	{if !isset($infoVersion)}
+		{assign var=infoVersion value="temp"}
+	{/if}
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no" />
 	<meta name="reply-to" content="support@soplanning.org" />
 	<meta name="email" content="support@soplanning.org" />
 	<meta name="Identifier-URL" content="http://www.soplanning.org" />
 	<meta name="robots" content="noindex,follow" />
-	<title>{$smarty.const.CONFIG_SOPLANNING_TITLE|xss_protect}</title>
+	<title>
+		{if isset($smarty.const.CONFIG_SOPLANNING_TITLE) && $smarty.const.CONFIG_SOPLANNING_TITLE neq "SOPlanning"}
+			{$smarty.const.CONFIG_SOPLANNING_TITLE|xss_protect}
+		{else}
+			SOPlanning - Simple Online Planning
+		{/if}
+	</title>
 	<link rel="apple-touch-icon" sizes="180x180" href="{$BASE}/apple-touch-icon.png" />
 	<link rel="icon" type="image/png" sizes="32x32" href="{$BASE}/favicon-32x32.png" />
 	<link rel="icon" type="image/png" sizes="16x16" href="{$BASE}/favicon-16x16.png" />
-	<link rel="manifest" href="{$BASE}/site.webmanifest" />
+	<link rel="manifest" href="{$BASE}/manifest.php" />
 	<link rel="mask-icon" href="{$BASE}/safari-pinned-tab.svg" color="#5bbad5" />
 	<meta name="msapplication-TileColor" content="#da532c" />
 	<meta name="theme-color" content="#ffffff" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-4.5.2/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-4.6/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/css/themes/{$smarty.const.CONFIG_SOPLANNING_THEME}?{$infoVersion}" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-multiselect-2.4.1/jquery.multiselect.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/css/styles.css?{$infoVersion}" type="text/css" />
 	<link rel="stylesheet" href="{$BASE}/assets/css/mobile.css?{$infoVersion}" media="screen and (max-width: 1165px)" type="text/css" />
 	<link rel="stylesheet" href="{$BASE}/assets/css/print.css?{$infoVersion}" media="print">
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/select2-4.0.13/dist/css/select2.min.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/css/select2-bootstrap.min.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/spectrum-1.8.1/spectrum.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/timepicker/jquery.ui.timepicker.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-timepicker-1.11.15/jquery.timepicker.min.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/font-awesome-6/css/all.min.css" />
 	<script src="{$BASE}/assets/js/fonctions.js?{$infoVersion}"></script>
-	<script src="{$BASE}/assets/js/jquery-3.5.1.min.js"></script>
-	<script src="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="{$BASE}/assets/js/jquery-3.6.0.min.js"></script>
+	<script src="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 	<script src="{$BASE}/assets/plugins/jquery-multiselect-2.4.1/jquery.multiselect.js"></script>
 	<script src="{$BASE}/assets/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
 	<script src="{$BASE}/assets/plugins/select2-4.0.13/dist/js/i18n/fr.js" charset="UTF-8"></script>
 	<script src="{$BASE}/assets/plugins/spectrum-1.8.1/spectrum.js"></script>
 	<script src="{$BASE}/assets/plugins/jquery-timepicker-1.11.15/jquery.timepicker.min.js"></script>
 	<script src="{$BASE}/assets/plugins/textarea-autosize/autosize.js"></script>
-	<script src="{$BASE}/assets/plugins/timepicker/jquery.ui.timepicker.js"></script>
-	
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-timepicker-1.11.15/jquery.timepicker.min.css" />
+	<script src="{$BASE}/assets/plugins/timepicker/jquery.ui.timepicker.js"></script>	
+	<script defer src="{$BASE}/assets/plugins/font-awesome-6/js/all.min.js"></script>
+	<script defer src="{$BASE}/assets/plugins/font-awesome-6/js/v4-shims.min.js"></script>
 	<style>
 	{if $smarty.const.CONFIG_SOPLANNING_LOGO != ''}
 		{literal}
@@ -50,7 +61,7 @@
 		{if $smarty.const.CONFIG_PLANNING_LINE_HEIGHT > 0}
 			height:{$smarty.const.CONFIG_PLANNING_LINE_HEIGHT}px;
 		{/if}
-		{if $smarty.session.dimensionCase == "reduit"}
+		{if isset($smarty.session.dimensionCase) && $smarty.session.dimensionCase == "reduit"}
 			{if $smarty.const.CONFIG_PLANNING_COL_WIDTH > 0}
 				min-width:{$smarty.const.CONFIG_PLANNING_COL_WIDTH}px;
 			{/if}
@@ -72,7 +83,7 @@
 {if isset($user)}
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top flex-lg-nowrap bg-dark">
 		{if $smarty.const.CONFIG_SOPLANNING_LOGO != ''}
-			<a class="navbar-brand navbar-brand-logo mr-auto d-inline-block align-items-center" href="{$BASE}/"><img src="{$BASE}/upload/logo/{$smarty.const.CONFIG_SOPLANNING_LOGO}" alt='logo' class="mr-3" />
+			<a class="navbar-brand navbar-brand-logo mr-auto d-inline-block align-items-center" href="{$BASE}/"><img src="{$BASE}/upload/logo/{$smarty.const.CONFIG_SOPLANNING_LOGO}" alt='logo' class="mr-3 logo" />
 		{else}
 			<a class="navbar-brand mr-auto" href="{$BASE}/">
 		{/if}
@@ -177,15 +188,9 @@
 								<i class="fa fa-user-secret fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuAudit#}
 							</a>
 						{/if}
-						{if $smarty.const.CONFIG_SOPLANNING_OPTION_AUDIT == 1 && in_array("audit_restore_own", $user.tabDroits) }
-							<div class="dropdown-divider"></div>
-							<a href="{$BASE}/audit.php" class="dropdown-item">
-								<i class="fa fa-user-secret fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuAuditCorbeille#}
-							</a>
-						{/if}	
 					</div>
 				</li>	
-			{/if}	
+			{/if}
 			{if in_array("parameters_all", $user.tabDroits) || in_array("lieux_all", $user.tabDroits) || in_array("ressources_all", $user.tabDroits)}
 				<li class="divider-vertical"></li>
 				<li class="nav-item dropdown">
@@ -213,11 +218,16 @@
 								<i class="fa fa-plug fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuRessources#}
 							</a>				
 						{/if}
+						<div class="dropdown-divider"></div>
+						<a href="{$BASE}/backup.php" class="dropdown-item">
+							<i class="fa fa-exchange fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuImportExport#}
+						</a>
+
 					</div>
 				 </li>	
 			{/if}
 			<li class="nav-item">
-				<a class="nav-link" href="{$lienAide}" data-target="#"><i title="{#menu_aide#}" class="fa fa-question-circle fa-lg fa-fw tooltipster" aria-hidden="true"></i></a>
+				<a class="nav-link tooltipster" title="{#menu_aide#}" href="{$lienAide}" data-target="#"><i class="fa fa-question-circle fa-lg fa-fw" aria-hidden="true"></i></a>
 			</li>
 		</ul> 
 		<ul class="navbar-nav ml-auto">
@@ -251,7 +261,7 @@
 		{assign var=messageErreur value=$smartyData.erreur|formatMessage}
 	{/if}
 	<div class="container-fluid" style="margin-bottom:60px;">
-		<div id="divMessage" class="alert {if $smartyData.message eq 'changeNotOK' or isset($messageErreur)}alert-danger{else}alert-success{/if}">
+		<div id="divMessage" class="alert {if (isset($smartyData.message) && $smartyData.message eq 'changeNotOK') or isset($messageErreur)}alert-danger{else}alert-success{/if}">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>

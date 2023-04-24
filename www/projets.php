@@ -1,15 +1,9 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
-
-$_POST = sanitize($_POST);
-$_GET = sanitize($_GET);
-$_REQUEST = sanitize($_REQUEST);
 $_SESSION['lastURL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 if(!$user->checkDroit('projects_manage_all') && !$user->checkDroit('projects_manage_own')) {
@@ -41,7 +35,6 @@ if (isset($_REQUEST['date_debut_affiche_projet'])) {
 	$dateDebut = initDateTime($_REQUEST['date_debut_affiche_projet']);
 	$_SESSION['date_debut_affiche_projet'] = $_REQUEST['date_debut_affiche_projet'];
 } else {
-	//$dateDebut->modify('-' . CONFIG_DEFAULT_NB_PAST_DAYS . ' days');
 	$_SESSION['date_debut_affiche_projet'] = $dateDebut->format(CONFIG_DATE_LONG);
 }
 if(!$dateDebut ) {
@@ -101,7 +94,7 @@ $projets = new GCollection('Projet');
 
 if(isset($_REQUEST['desactiverfiltreGroupe'])) {
 	$filtreGroupeProjet = array();
-	$_SESSION['groupe_filtreEquipeProjet'] = $filtreGroupeProjet;
+	$_SESSION['projets_filtreGroupeProjet'] = $filtreGroupeProjet;
 }
 
 if (isset($_REQUEST['filtreGroupeProjet'])) {
@@ -155,7 +148,7 @@ if($search != ''){
 			WHERE (" . $isLike . ") 
 			AND planning_projet.statut in ('" . implode("','", $listeStatuts) . "')";
 	
-	if(count($filtreGroupeProjet) > 0) {
+	if(!empty($filtreGroupeProjet)) {
 	$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", $filtreGroupeProjet) . "')";
 	if(in_array('gp0', $filtreGroupeProjet)) {
 		$sql .= '	OR planning_projet.groupe_id IS NULL ';
@@ -179,7 +172,7 @@ if($search != ''){
 	}
 	$sql .= " WHERE planning_projet.statut in ('" . implode("','", $listeStatuts) . "')";
 	
-	if(count($filtreGroupeProjet) > 0) {
+	if(!empty($filtreGroupeProjet)) {
 	$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", $filtreGroupeProjet) . "')";
 	if(in_array('gp0', $filtreGroupeProjet)) {
 		$sql .= '	OR planning_projet.groupe_id IS NULL ';
@@ -195,8 +188,7 @@ $projets->db_loadSQL($sql);
 
 // liste des status
 $status = new GCollection('Status');
-$sql = "SELECT status_id,nom from planning_status where affichage in ('p','tp') order by priorite asc";
-$status->db_load(array('affichage', 'IN', array('p','tp'), array('priorite' => 'ASC')));
+$status->db_load(array('affichage', 'IN', array('p','tp')), array('priorite' => 'ASC'));
 $smarty->assign('listeStatus', $status->getSmartyData());
 
 $groupeProjets = new GCollection('Groupe');

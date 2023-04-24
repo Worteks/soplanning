@@ -3,23 +3,24 @@
 {include file="www_planning_filtre.tpl"}
 	{* le planning *}
 		<div class="position-relative" id="thirdLayer">
-				{if $fleches eq 1}
-					<div id="left-scroll">					
-						<span class="fa-stack">
-							<i class="fa fa-chevron-left fa-2x" id="left-button" aria-hidden="true"></i>				
-						</span>
-					</div>
-				{/if}
-				<div id="divConteneurPlanning" style="width:99vw;">
-					{$htmlTableau}
+			{if $fleches eq 1}
+				<div id="left-scroll">					
+					<span class="fa-stack">
+						<i class="fa fa-chevron-left fa-2x" id="left-button" aria-hidden="true"></i>				
+					</span>
 				</div>
-				{if $fleches eq 1}
-					<div id="right-scroll">						
-						<span class="fa-stack">
-							<i class="fa fa-chevron-right fa-2x" id="right-button" aria-hidden="true"></i>				
-						</span>
-					</div>
-				{/if}
+			{/if}
+			<div id="divConteneurPlanning" style="width:99vw;">
+				{$htmlTableau}
+			</div>
+			{if $fleches eq 1}
+				<div id="right-scroll">						
+					<span class="fa-stack">
+						<i class="fa fa-chevron-right fa-2x" id="right-button" aria-hidden="true"></i>				
+					</span>
+				</div>
+			{/if}
+			<br><br><br>
 		 </div> 
 	{if isset($htmlRecap) and $htmlRecap neq ""}
 	<div class="vw-100 noprint" id="divRecap">
@@ -133,29 +134,44 @@ var dateFin = {$dateFin|@json_encode};
 	}
 		{/literal}
 		{if $baseligne == "heures"}
-		{literal}
-			$('#divConteneurPlanning').attr('style','overflow:visible');
-		{/literal}
+			{literal}
+				$('#divConteneurPlanning').attr('style','overflow:visible');
+			{/literal}
 		{/if}		
-		{if isset($droitAjoutPeriode) and $droitAjoutPeriode== true}
 	{literal}
+	
+	var tabCellsSelected = new Array();
+
 	// Affichage du formulaire période si clic sur case vide
 	$('#tabContenuPlanning td.week,#tabContenuPlanning td.weekend,#tabContenuPlanning .cellProject,#tabContenuPlanning .cellProjectBiseau1, #tabContenuPlanning .cellProjectBiseau2').click(function(ev){
 		ev.preventDefault();
-		if (!$(this).hasClass("read-only")){
+		if (ev.ctrlKey) {
 			if ($(this).hasClass("cellProject") || $(this).hasClass("cellProjectBiseau1")  || $(this).hasClass("cellProjectBiseau2")) {
-				cellClic(this.id,0);
-			} else {
-				cellClic(this.id,1);
+				checkPos = tabCellsSelected.indexOf(this.id);
+				if (checkPos >= 0) {
+					tabCellsSelected.splice(checkPos, 1);
+					$(this).removeClass("bordureSelectionne");
+				} else {
+					tabCellsSelected.push(this.id);
+					$(this).addClass("bordureSelectionne");
+				}
 			}
-			return false;
-		};	
+		} else {
+			if (!$(this).hasClass("read-only")){
+				if ($(this).hasClass("cellProject") || $(this).hasClass("cellProjectBiseau1")  || $(this).hasClass("cellProjectBiseau2")) {
+					cellClic(this.id,0);
+				} else {
+					{/literal}{if isset($droitAjoutPeriode) and $droitAjoutPeriode== true}{literal}
+					cellClic(this.id,1);
+					{/literal}{/if}{literal}
+
+				}
+				return false;
+			}
+		}
 	});
 	
 		
-	{/literal}
-{/if}
-	{literal}
 	function resizeDivConteneur()
 	{
 
@@ -225,25 +241,37 @@ var dateFin = {$dateFin|@json_encode};
 	window.scroll(xscrollWin,yscrollWin);
 	window.onscroll = function() {writeCookie(displayMode)};
 	{/literal}
-			{literal}
+	{literal}
+		resizeDivConteneur();
+	{/literal}
 
-			resizeDivConteneur();
-		{/literal}
+
 	// Onload
 	jQuery(function() {
 		{if $smarty.session.isMobileOrTablet==0}
-		{literal}
-		// hack pour empecher fermeture du layer au click sur les boutons du calendrier1
-		$("#ui-datepicker-div").click( function(event) {
-			event.stopPropagation();
-		});
-		jQuery('#dropdownDateSelector .dropdown-menu').on({
-		"click":function(e){
-				e.stopPropagation();
-			}
-		});
-		{/literal}
+			{literal}
+			// hack pour empecher fermeture du layer au click sur les boutons du calendrier1
+			$("#ui-datepicker-div").click( function(event) {
+				event.stopPropagation();
+			});
+			jQuery('#dropdownDateSelector .dropdown-menu').on({
+			"click":function(e){
+					e.stopPropagation();
+				}
+			});
+
+			$(document).on('keyup', function(e) {
+				if (e.which == 17 && tabCellsSelected.length > 0){
+					xajax_selection_multi_tache_form(tabCellsSelected);
+				}
+			});
+
+			{/literal}
 		{/if}
 	});
+
 </script>
+
+{include file="tutoriel.tpl"}
+
 {include file="www_footer.tpl"}

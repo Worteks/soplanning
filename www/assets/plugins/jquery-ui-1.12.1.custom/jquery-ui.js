@@ -3889,8 +3889,11 @@ $.extend( Datepicker.prototype, {
 				!$target.closest( "." + $.datepicker._triggerClass ).length &&
 				$.datepicker._datepickerShowing && !( $.datepicker._inDialog && $.blockUI ) ) ) ||
 			( $target.hasClass( $.datepicker.markerClassName ) && $.datepicker._curInst !== inst ) ) {
-				$.datepicker._hideDatepicker();
-		}
+				//$.datepicker._hideDatepicker();
+				if (!$target.is('html')) {
+					$.datepicker._hideDatepicker();
+				}
+	   }
 	},
 
 	/* Adjust one of the date sub-fields. */

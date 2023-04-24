@@ -26,6 +26,12 @@ abstract class GObject
      */
 	protected $fields		= array();
 
+	/**
+     * The data (the type fields of the table in the db) of the object.
+     * @var	array
+     */
+	public $fields_on_error		= array();
+
     /**
      * The primary keys of the table.
      * @var	array
@@ -232,6 +238,7 @@ abstract class GObject
 			foreach($this->data as $key => $val) {
 				if (isset($this->fields[$key]) && $this->fields[$key]->table == $this->table) {
 					if ($this->fields[$key]->getSqlSet($val) === FALSE) {
+						$this->fields_on_error[]=$key;
 						return FALSE;
 					}
 					$set[$key] = $this->fields[$key]->getSqlSet($val);
@@ -261,6 +268,7 @@ abstract class GObject
 			foreach($this->data as $key => $val) {
 				if ($this->fields[$key]->table == $this->table) {
 					if ($this->fields[$key]->getSqlValue($val) === FALSE) {
+						$this->fields_on_error[]=$key;
 						return FALSE;
 					}
 					$set[$this->fields[$key]->getSqlName()] = $this->fields[$key]->getSqlValue($val);
@@ -453,6 +461,14 @@ abstract class GObject
 		return $class;
 	}
 
+	public function getFieldSize($field) {
+		if(!array_key_exists($field, $this->fields)) {
+			return false;
+		}
+		return $this->fields[$field]->size;
+	}
+
 }
+
 
 ?>

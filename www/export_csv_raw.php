@@ -1,11 +1,8 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 $html = '';
 $js = '';
@@ -13,10 +10,8 @@ $js = '';
 $joursFeries = getJoursFeries();
 
 // PARAMÈTRES ////////////////////////////////
-$dateDebut = new DateTime();
-$dateFin = new DateTime();
-$dateDebut->setDate(substr($_SESSION['date_debut_affiche'],6,4), substr($_SESSION['date_debut_affiche'],3,2), substr($_SESSION['date_debut_affiche'],0,2));
-$dateFin->setDate(substr($_SESSION['date_fin_affiche'],6,4), substr($_SESSION['date_fin_affiche'],3,2), substr($_SESSION['date_fin_affiche'],0,2));
+$dateDebut = initDateTime($_SESSION['date_debut_affiche']);
+$dateFin = initDateTime($_SESSION['date_fin_affiche']);
 
 $nbLignes = $_SESSION['nb_lignes'];
 $pageLignes = $_SESSION['page_lignes'];
@@ -86,7 +81,7 @@ while ($periode = $periodes->fetch()) {
 
 		
 		while ($tmpDate <= $dateFin_projet) {
-			if (in_array($tmpDate->format('w'), explode(',', CONFIG_DAYS_INCLUDED)) && !in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
+			if (in_array($tmpDate->format('w'), explode(',', CONFIG_DAYS_INCLUDED)) && !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 				$duree = CONFIG_DURATION_DAY;
 				$texte .= '"' . $tmpDate->format('Y-m-d') . '";"';
 				$texte .= usertime2sqltime($duree) . '";"';

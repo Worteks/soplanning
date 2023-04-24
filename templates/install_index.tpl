@@ -1,70 +1,18 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="reply-to" content="support@soplanning.org" />
-	<meta name="email" content="support@soplanning.org" />
-	<meta name="Identifier-URL" content="http://www.soplanning.org" />
-	<meta name="robots" content="noindex,follow" />
-	<title>SoPlanning Installation</title>
+{include file="www_header.tpl"}
 
-	<link rel="apple-touch-icon" sizes="180x180" href="{$BASE}/apple-touch-icon.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="{$BASE}/favicon-32x32.png" />
-	<link rel="icon" type="image/png" sizes="16x16" href="{$BASE}/favicon-16x16.png" />
-	<link rel="manifest" href="{$BASE}/site.webmanifest" />
-	<link rel="mask-icon" href="{$BASE}/safari-pinned-tab.svg" color="#5bbad5" />
-	<meta name="msapplication-TileColor" content="#da532c" />
-	<meta name="theme-color" content="#ffffff" />
+<link rel="stylesheet" href="{$BASE}/assets/css/simplePage.css" />	
 
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-4.5.2/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/css/themes/{$smarty.const.CONFIG_SOPLANNING_THEME}" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-multiselect-2.4.1/jquery.multiselect.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/css/styles.css" type="text/css" />
-	<link rel="stylesheet" href="{$BASE}/assets/css/mobile.css" media="screen and (max-width: 1165px)" type="text/css" />
-	<link rel="stylesheet" href="{$BASE}/assets/css/print.css" media="print">
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/select2-4.0.13/dist/css/select2.min.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/css/select2-bootstrap.min.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/spectrum-1.8.1/spectrum.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/timepicker/jquery.ui.timepicker.css" />
-	<script src="{$BASE}/assets/js/fonctions.js"></script>
-	<script src="{$BASE}/assets/js/jquery-3.5.1.min.js"></script>
-	<script src="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="{$BASE}/assets/plugins/jquery-multiselect-2.4.1/jquery.multiselect.js"></script>
-	<script src="{$BASE}/assets/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
-	<script src="{$BASE}/assets/plugins/select2-4.0.13/dist/js/i18n/fr.js"></script>
-	<script src="{$BASE}/assets/plugins/spectrum-1.8.1/spectrum.js"></script>
-	<script src="{$BASE}/assets/plugins/jquery-timepicker-1.11.15/jquery.timepicker.min.js"></script>
-	<script src="{$BASE}/assets/plugins/textarea-autosize/autosize.js"></script>
-	<script src="{$BASE}/assets/plugins/timepicker/jquery.ui.timepicker.js"></script>
-
-	<link rel="stylesheet" href="{$BASE}/assets/css/simplePage.css" />	
-		{$xajax}
-	</head>
-	<body>
 		<div class="container">
 			<h3 class="text-center">
 				<span class="soplanning_install_title">Simple Online Planning</span>
 			</h3>
 			<div class="small-container">
-				{if isset($smartyData.message)}
-					{assign var=messageFinal value=$smartyData.message|formatMessage}
-					<div class="alert alert-danger" id="divMessage" >
-						<div class="row noprint">
-							<div class="col-md-10">
-								{$messageFinal}
-							</div>
-						</div>
-					</div>
-				{/if}
 				{if isset($checkInstall.checkPhpVersion)}
 					<div class="alert alert-danger">
 						<h4>{#install_wrongPhpVersion#}</h4>
 						{#install_currentPhpVersion#} :{$phpversion}
 						<br />
-						{#install_requiredPhpVersion#} : 5.2
+						{#install_requiredPhpVersion#} : 5.6
 					</div>
 				{/if}
 				{if isset($checkInstall.checkWritableDatabaseInc)}

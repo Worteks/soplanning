@@ -38,10 +38,10 @@
 									<a href="{$BASE}/process/planning.php?filtreSurLieu={$lieu.lieu_id}" title="{#planning_filtre_sur_lieu#|escape}"><i class="fa fa-globe fa-lg fa-fw" aria-hidden="true"></i></a>
 								</td>
 								<td class="wrap">
-									{$lieu.nom}&nbsp;
+									{$lieu.nom|xss_protect}&nbsp;
 								</td>
 								<td class="wrap d-none d-md-table-cell d-lg-table-cell">
-									{$lieu.commentaire}
+									{$lieu.commentaire|xss_protect}
 								</td>
 								<td class="text-center d-none d-sm-table-cell d-md-table-cell d-lg-table-cell">
 									{if $lieu.exclusif eq 1}{#oui#}{else}{#non#}{/if}

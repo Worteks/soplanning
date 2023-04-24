@@ -6,7 +6,7 @@ CREATE TABLE `planning_config` (
   PRIMARY KEY (`cle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.47.01', 'Internal key for auto upgrade control');
+INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.50.02', 'Internal key for auto upgrade control');
 INSERT INTO `planning_config` VALUES('PLANNING_PAGES', '1,5,10,20,50,100', 'rows per page in the planning');
 INSERT INTO `planning_config` VALUES('PROJECT_COLORS_POSSIBLE', '', 'color choice limitation for planner (empty for no limit). Exemple :#ff0000,#aa8811,#446622');
 INSERT INTO `planning_config` VALUES('DEFAULT_NB_MONTHS_DISPLAYED', '2', 'Default number of months displayed in the planning');
@@ -71,6 +71,13 @@ INSERT INTO `planning_config` VALUES('PLANNING_TEXTE_TACHES_LIEU', 'code_projet'
 INSERT INTO `planning_config` VALUES('PLANNING_TEXTE_TACHES_RESSOURCE', 'code_projet', 'Cell text resource');
 INSERT INTO `planning_config` VALUES('PLANNING_MASQUER_FERIES', '0', 'Hide holidays');
 INSERT INTO `planning_config` VALUES('PLANNING_DUREE_CRENEAU_HORAIRE', '30', 'Time duration');
+INSERT INTO `planning_config` VALUES('SOPLANNING_API_KEY_NAME', 'SOPLANNING-API', '');
+INSERT INTO `planning_config` VALUES('SOPLANNING_API_KEY_VALUE', UUID(),'');
+INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_CLIENT_ID', '', '');
+INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_CLIENT_SECRET', '', '');
+INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_ACTIVE', '0', '');
+INSERT INTO `planning_config` VALUES('GOOGLE_2FA_ACTIVE', '0', '');
+INSERT INTO `planning_config` VALUES('SEMAPHORE_ACTIVATED', '0', 'Activated in order to avoid periode_id crossing when creating a lot of tasks at the same time');
 
 CREATE TABLE `planning_ferie` (
   `date_ferie` date NOT NULL,
@@ -128,8 +135,10 @@ CREATE TABLE `planning_user` (
   `date_dernier_login` DATETIME NULL,
   `preferences` text default NULL,
   `login_actif` ENUM('oui','non') CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT 'oui',
+  `google_2fa` enum('setup','ok') NOT NULL DEFAULT 'setup',
   `date_creation` datetime DEFAULT NULL,
   `date_modif` datetime DEFAULT NULL,
+  `tutoriel` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY  (`user_id`),
   KEY `user_groupe_id` (`user_groupe_id`),
   CONSTRAINT `planning_user_ibfk_1` FOREIGN KEY (`user_groupe_id`) REFERENCES `planning_user_groupe` (`user_groupe_id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -139,9 +148,9 @@ CREATE TABLE `planning_periode` (
   `periode_id` int(11) NOT NULL auto_increment,
   `parent_id` int(11) NULL,
   `projet_id` varchar(20) collate latin1_general_ci NOT NULL default '',
-  `user_id` varchar(20) collate latin1_general_ci NOT NULL default '0',
+  `user_id` varchar(20) collate latin1_general_ci NOT NULL default '',
   `link_id` VARCHAR(25) NULL DEFAULT NULL,  
-  `date_debut` date NOT NULL default '2016-04-07',
+  `date_debut` date NOT NULL default '2000-01-01',
   `date_fin` date default NULL,
   `duree` time default NULL,
   `duree_details` varchar(20) collate latin1_general_ci default NULL,
@@ -150,8 +159,8 @@ CREATE TABLE `planning_periode` (
   `lien` text default NULL,
   `statut_tache` varchar(10) NOT NULL collate latin1_general_ci NOT NULL default 'a_faire',
   `livrable` enum('oui','non') collate latin1_general_ci NOT NULL default 'non',
-  `lieu_id` VARCHAR(10) NULL COLLATE 'latin1_general_ci' default NULL,
-  `ressource_id` VARCHAR(10) NULL COLLATE 'latin1_general_ci' default NULL,
+  `lieu_id` VARCHAR(20) NULL COLLATE 'latin1_general_ci' default NULL,
+  `ressource_id` VARCHAR(20) NULL COLLATE 'latin1_general_ci' default NULL,
   `fichiers` TEXT default NULL,
   `createur_id` varchar(20) collate latin1_general_ci NOT NULL,
   `date_creation` DATETIME NULL,
@@ -168,7 +177,7 @@ CREATE TABLE `planning_periode` (
 
 
 CREATE TABLE `planning_lieu` (
-  `lieu_id` varchar(10) collate latin1_general_ci NOT NULL default '',
+  `lieu_id` varchar(20) collate latin1_general_ci NOT NULL default '',
   `nom` varchar(50) collate latin1_general_ci NOT NULL default '',
   `commentaire` TEXT collate latin1_general_ci default NULL,
   `exclusif` TINYINT NULL DEFAULT '0' COLLATE 'latin1_general_ci',
@@ -176,7 +185,7 @@ CREATE TABLE `planning_lieu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 CREATE TABLE `planning_ressource` (
-  `ressource_id` varchar(10) collate latin1_general_ci NOT NULL default '',
+  `ressource_id` varchar(20) collate latin1_general_ci NOT NULL default '',
   `nom` varchar(30) collate latin1_general_ci NOT NULL default '',
   `commentaire` TEXT collate latin1_general_ci default NULL,
   `exclusif` TINYINT NULL DEFAULT '0' COLLATE 'latin1_general_ci',

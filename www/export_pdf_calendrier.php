@@ -4,22 +4,18 @@
 @set_time_limit(1000);
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 $html = '';
 $js = '';
 
+
 $joursFeries = getJoursFeries();
 
 // PARAMETRES ////////////////////////////////
-$dateDebut = new DateTime();
-$dateFin = new DateTime();
-$dateDebut->setDate(substr($_SESSION['date_debut_affiche'],6,4), substr($_SESSION['date_debut_affiche'],3,2), substr($_SESSION['date_debut_affiche'],0,2));
-$dateFin->setDate(substr($_SESSION['date_fin_affiche'],6,4), substr($_SESSION['date_fin_affiche'],3,2), substr($_SESSION['date_fin_affiche'],0,2));
+$dateDebut = initDateTime($_SESSION['date_debut_affiche']);
+$dateFin = initDateTime($_SESSION['date_fin_affiche']);
 
 $nbLignes = $_SESSION['nb_lignes'];
 $pageLignes = $_SESSION['page_lignes'];
@@ -43,6 +39,23 @@ $masquerLigneVide = $_SESSION['masquerLigneVide'];
 $DAYS_INCLUDED = explode(',', CONFIG_DAYS_INCLUDED);
 
 // FIN PARAMETRES ////////////////////////////////
+
+$enteteCustom = true;
+if($enteteCustom){
+	if(CONFIG_SOPLANNING_LOGO != ''){
+		$html .= '<a class="navbar-brand navbar-brand-logo mr-auto d-inline-block align-items-center"><img src="upload/logo/' . CONFIG_SOPLANNING_LOGO . '" class="mr-3 logo" /></a>';
+	}
+	$html .= '&nbsp;&nbsp;&nbsp;<span style="font-size:15px;">';
+	if(count($_SESSION['filtreUser']) == 1){
+		$userTmp = new User();
+		if($userTmp->db_load(array('user_id', '=', $_SESSION['filtreUser'][0]))){
+			$html .= xss_protect($userTmp->nom);
+		}
+	} else{
+		$html .= xss_protect(CONFIG_SOPLANNING_TITLE);
+	}
+	$html .= '</span>';
+}
 
 // on se cale sur les mois entiers
 $dateDebut->modify('-' . ($dateDebut->format('d') - 1) . ' day');
@@ -253,23 +266,28 @@ while ($tmpDate <= $dateFin) {
 	while (true) {
 		$html .= '<tr>' . CRLF;
 		$html .= '<td class="calCell"';
-		if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
+		if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 			$html .= ' class="calOpenDay"';
 		} else {
 			$html .= ' class="calCloseDay"';
 		}
 		$html .= '>' . strtoupper(substr($smarty->getConfigVars('day_' . $tmpDate->format('w')), 0, 1)) . '</td>' . CRLF;
 		$html .= '<td class="calCell"';
-		if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !in_array($tmpDate->format('Y-m-d'), $joursFeries)) {
+		if (in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 			$html .= ' class="calOpenDay"';
 		} else {
 			$html .= ' class="calCloseDay"';
 		}
 		$html .= '>' . $tmpDate->format('j') . '</td>' . CRLF;
-		$html .= '<td class="w40">' . CRLF;
+		$html .= '<td class="w40" ';
+		if (!in_array($tmpDate->format('w'), $DAYS_INCLUDED) || array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
+			$html .= ' style="background-color:#e4e8eb" ';
+		}
+
+		$html .= '>' . CRLF;
 		// on boucle pour afficher les cases de ce jour
 
-		if (isset($joursOccupes[$tmpDate->format('Y-m-d')])) {
+		if (isset($joursOccupes[$tmpDate->format('Y-m-d')]) && in_array($tmpDate->format('w'), $DAYS_INCLUDED) && !array_key_exists($tmpDate->format('Y-m-d'), $joursFeries)) {
 			foreach ($joursOccupes[$tmpDate->format('Y-m-d')] as $jour) {
 				if( $_SESSION['baseLigne']=='projets') {
 					$jour['nom_cellule']=$jour['user_id'];
@@ -369,14 +387,13 @@ if($pdf_orientation == 'paysage') {
 }
 $html = '<page orientation="' . $orientation . '"><style>' . file_get_contents('assets/css/export_pdf_calendrier.css') .  file_get_contents('assets/css/themes/'.CONFIG_SOPLANNING_THEME) .'</style>' . $html . '</page>';
 
-/*
 if(isset($_GET['debug'])) {
 	echo $html;
 	die;
 }
-*/
 
-require_once ('../html2pdf/html2pdf.class.php');
+use Spipu\Html2Pdf\Html2Pdf;
+
 try
 {
 	$html = utf8_encode($html);

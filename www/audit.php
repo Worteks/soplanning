@@ -1,15 +1,8 @@
 <?php
 
 require('./base.inc');
-require(BASE . '/../config.inc');
-
-$smarty = new MySmarty();
-
-$_REQUEST = sanitize($_REQUEST);
-$_GET = sanitize($_GET);
-$_POST = sanitize($_POST);
-
-require BASE . '/../includes/header.inc';
+require(BASE .'/../config.inc');
+require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('audit_restore_own') && !$user->checkDroit('audit_restore') ) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';

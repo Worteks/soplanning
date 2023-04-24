@@ -42,10 +42,10 @@
 									</a>
 								</td>
 								<td class="wrap">
-									{$ressource.nom}&nbsp;
+									{$ressource.nom|xss_protect}&nbsp;
 								</td>
 								<td class="wrap d-none d-md-table-cell d-lg-table-cell">
-									{$ressource.commentaire}
+									{$ressource.commentaire|xss_protect}
 								</td>
 								<td class="text-center d-none d-sm-table-cell d-md-table-cell d-lg-table-cell">
 									{if $ressource.exclusif eq 1}{#oui#}{else}{#non#}{/if}

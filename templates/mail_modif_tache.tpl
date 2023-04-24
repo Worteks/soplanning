@@ -26,12 +26,12 @@
 	<b>{#mail_heure_fin#}</b> : {$heure_fin|sqltime2usertime}
 	<br/>
 {/if}
-{if $periode.statut_tache neq ""}
-	<b>{#winPeriode_statut#}</b> : {$status}
-	<br/>
-{/if}
 {if $periode.lieu_id neq ""}
-	<b>{#winPeriode_lieu#}</b> : {$periode.nom}
+	<b>{#winPeriode_lieu#}</b> : {$lieu.nom} ({$periode.lieu_id})
+	<br/>
+{/if} 
+{if $periode.ressource_id neq ""}
+	<b>{#winPeriode_ressource#}</b> : {$ressource.nom} ({$periode.ressource_id})
 	<br/>
 {/if} 
 {if $periode.ressource_id neq ""}
@@ -88,11 +88,11 @@
 	<br/>
 {/if} 
 {if $oldPeriode.lieu_id neq ""}
-	<b>{#winPeriode_lieu#}</b> : {$oldPeriode.lieu_id}
+	<b>{#winPeriode_lieu#}</b> : {$oldLieu.nom} ({$oldPeriode.lieu_id})
 	<br/>
 {/if} 
 {if $oldPeriode.ressource_id neq ""}
-	<b>{#winPeriode_ressource#}</b> : {$oldPeriode.ressource_id}
+	<b>{#winPeriode_ressource#}</b> : {$oldRessource.nom} ({$oldPeriode.ressource_id})
 	<br/>
 {/if} 
 {if $oldPeriode.notes neq ""}

@@ -73,12 +73,13 @@ class Version
 		global $cfgHostname, $cfgUsername, $cfgPassword, $cfgDatabase, $cfgSqlType, $cfgConnection, $cfgPrefix, $smarty, $cfgDBPort;
 
 		$tempConnect = db_connect($cfgHostname, $cfgUsername, $cfgPassword, $cfgDatabase, $cfgSqlType, $cfgDBPort);
+
 		if($tempConnect === FALSE) {
 
 			try {
-				$cfgConnectionTest = @mysqli_connect($cfgHostname, $cfgUsername, $cfgPassword);
+				$cfgConnectionTest = mysqli_connect($cfgHostname, $cfgUsername, $cfgPassword);
 				mysqli_set_charset($cfgConnectionTest, "latin1");
-			} catch (PDOException $e) {
+			} catch (Exception $e) {
 				return 'database_creation_failed';
 			}
 			if(!mysqli_query($cfgConnection, 'CREATE DATABASE `' . $cfgDatabase . '` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;')) {
@@ -252,7 +253,7 @@ class Version
 
 	public function checkPhpVersion() {
 		$version = phpversion();
-		if($version < '5.2') {
+		if($version < '5.6') {
 			return 'php_too_old';
 		}
 		return true;

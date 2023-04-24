@@ -1,4 +1,3 @@
-UPDATE  `planning_config` SET  valeur ='1.39' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
 
 INSERT INTO `planning_config` VALUES('PLANNING_COL_WIDTH', '25', 'Planning col width');
 INSERT INTO `planning_config` VALUES('PLANNING_COL_WIDTH_LARGE', '130', 'Planning col width large mode');
@@ -13,3 +12,5 @@ ALTER TABLE `planning_periode` CHANGE COLUMN `modifier_id` `modifier_id` VARCHAR
 ALTER TABLE `planning_projet` CHANGE COLUMN `createur_id` `createur_id` VARCHAR(20);
 UPDATE  `planning_config` SET  valeur=lpad(valeur,2,0) where cle like 'DURATION_%';
 UPDATE  `planning_config` SET  valeur=concat(valeur, ':00') where cle like 'DURATION_%';
+
+UPDATE  `planning_config` SET  valeur ='1.39' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';

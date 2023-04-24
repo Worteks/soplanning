@@ -1,4 +1,11 @@
 {* Smarty *}
+
+{if !isset($projet) || in_array("projects_manage_all", $user.tabDroits) || (in_array("tasks_modify_own_project", $user.tabDroits) && isset($projet) && $user.user_id eq $projet.createur_id) || in_array("tasks_modify_all", $user.tabDroits) || (in_array("tasks_modify_own_task", $user.tabDroits) && $periode.user_id eq $user.user_id) || ( in_array("tasks_modify_team", $user.tabDroits) && isset($userAssigne) && $user.user_groupe_id eq $userAssigne.user_groupe_id)}
+	{assign var=buttonSubmitTache value=1}
+{else}
+	{assign var=buttonSubmitTache value=0}
+{/if}
+
 <form class="form-horizontal" method="POST" target="_blank" id="periodForm2">
 	<input type="hidden" id="periode_id" name="periode_id" value="{$periode.periode_id}" />
 	<input type="hidden" id="link_id" name="link_id" value="{$link_id}" />	
@@ -40,7 +47,7 @@
 							<optgroup label="{$userCourant.groupe_nom}">
 						{/if}
 						<option value="{$userCourant.user_id}" {if $userCourant.user_id eq $periode.user_id}selected="selected"{/if} 
-						{if $userCourant.user_id|in_array:$listeUsersSelect}selected="selected"{/if}
+						{if isset($listeUsersSelect) && $userCourant.user_id|in_array:$listeUsersSelect}selected="selected"{/if}
 						>{$userCourant.nom} - {$userCourant.user_id}</option>
 						{if $userCourant.user_groupe_id neq $groupeTemp}
 							</optgroup>
@@ -62,11 +69,11 @@
 		<div class='col-md-12'><hr /></div>
 		<div class="form-group row col-md-12">
 			<label class="col-md-2 col-form-label">{#winPeriode_debut#} :</label>
-			<div class="col-md-4">
+			<div class="col-md-4" style="position:relative">
 				{if $smarty.session.isMobileOrTablet==1}
-					<input type="date" class="form-control" name="date_debut" id="date_debut" maxlength="10" value="{$periode.date_debut|forceISODateFormat}" tabindex="4" />
+					<input type="date" class="form-control" name="date_debut" id="date_debut" maxlength="10" value="{$periode.date_debut|forceISODateFormat}" tabindex="4" autocomplete="off" />
 				{else}
-					<input type="text" class="form-control datepicker" name="date_debut" id="date_debut" maxlength="10" value="{$periode.date_debut|sqldate2userdate}" tabindex="4" />
+					<input type="text" class="form-control datepicker" name="date_debut" id="date_debut" maxlength="10" value="{$periode.date_debut|sqldate2userdate}" tabindex="4" autocomplete="off" />
 				{/if}
 			</div>
 		</div>
@@ -82,14 +89,14 @@
 				<label class="form-check-label" for="radioChoixFinDuree">{#winPeriode_finChoixDuree#}</label>
 			</div>
 			</div>
-			<div class="offset-md-2 col-md-10 form-inline" id="divFinChoixDate">
+			<div class="offset-md-2 col-md-10 form-inline {if $periode.duree_details neq ''}d-none{/if}" id="divFinChoixDate" style="position:relative">
 				{if $smarty.session.isMobileOrTablet==1}
-					<input type="date" class="form-control datepicker" name="date_fin" id="date_fin" maxlength="10" value="{$periode.date_fin|forceISODateFormat}" onFocus="remplirDateFinPeriode();videChampsFinTache(this.id);" onChange="videChampsFinTache(this.id);" tabindex="7" />
+					<input type="date" class="form-control datepicker" name="date_fin" id="date_fin" maxlength="10" value="{$periode.date_fin|forceISODateFormat}" onFocus="remplirDateFinPeriode();videChampsFinTache(this.id);" onChange="videChampsFinTache(this.id);" tabindex="7" autocomplete="off" />
 				{else}
-					<input type="text" class="form-control datepicker" name="date_fin" id="date_fin" maxlength="10" value="{$periode.date_fin|sqldate2userdate}" onFocus="remplirDateFinPeriode();videChampsFinTache(this.id);" onChange="videChampsFinTache(this.id);" tabindex="7" />
+					<input type="text" class="form-control datepicker" name="date_fin" id="date_fin" maxlength="10" value="{$periode.date_fin|sqldate2userdate}" onFocus="remplirDateFinPeriode();videChampsFinTache(this.id);" onChange="videChampsFinTache(this.id);" tabindex="7" autocomplete="off" />
 				{/if}
 				&nbsp;{#winPeriode_ouNBJours#} :&nbsp;
-				<input type="number" class="form-control col-md-1" name="nb_jours" id="nb_jours" size="2"  onChange="videChampsFinTache(this.id);" tabindex="10" />
+				<input type="number" class="form-control col-md-1" name="nb_jours" id="nb_jours" size="2"  onChange="videChampsFinTache(this.id);" tabindex="10" autocomplete="off" />
 			{if $periode.periode_id neq 0 && $periode.date_fin neq ""}
 				<label class="checkbox-inline" ><input type="checkbox" id="conserver_duree" name="conserver_duree" value="1" onClick="videChampsFinTache('');" tabindex="11" />{#winPeriode_conserverDuree#|sprintf:$nbJours}</label>
 			{else}
@@ -347,7 +354,7 @@
 			{else}
 					<label class="col-md-2 col-form-label">{#winPeriode_repeter#} :</label>
 					<div class="col-md-10 col-form-label">
-						<b>{#winPeriode_recurrente#}{$prochaineOccurence|sqldate2userdate}</b>
+						<b>{#winPeriode_recurrente#}{$prochaineOccurence|sqldate2userdate}. {#winPeriode_recurrente_fin#} : {$derniereOccurence|sqldate2userdate}</b>
 					</div>
 					<input type="hidden" name="repetition" id="repetition" value="" />
 					<input type="hidden" name="dateFinRepetitionJour" id="dateFinRepetitionJour" value="" />
@@ -419,15 +426,18 @@
 			</div>
 			<label class="col-md-2 col-form-label">{#winPeriode_fichier#} :</label>
 			<div class="col-md-4 form-inline">
-				<form enctype="multipart/form-data" id="fichier_form">
+				{if $buttonSubmitTache eq 1}<form enctype="multipart/form-data" id="fichier_form">
 					<span id="file-select-button" class="col-form-label"><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;
 						{#upload_fichier_joindre#}<img id="divPatienter2" src="assets/img/pictos/loading16.gif" class="d-none ml-2" alt="" />
-					</span>					
+					</span>	
 					<input name="fichier" id="fichier" type="file" style="float:left;width:220px;display:none;" />
+				{/if}
 					{foreach from=$fichiers item=fichier}
 						<div>
 							<a href="upload/files/{$link_id}/{$fichier}" target="_blank" class="ellipsis fileupload" id="fichier_periode" style="float:left;">{$fichier}</a>
-							&nbsp;<i class="fa fa-trash fa-fw" aria-hidden="true" onclick="fileRemove('{$fichier}',this.closest('div'));" id="fileremovebutton" style="margin-top:4px;margin-left:4px;float:left;cursor:pointer;"></i>
+							{if $buttonSubmitTache eq 1}
+								&nbsp;<i class="fa fa-trash fa-fw" aria-hidden="true" onclick="fileRemove('{$fichier}',this.closest('div'));" id="fileremovebutton" style="margin-top:4px;margin-left:4px;float:left;cursor:pointer;"></i>
+							{/if}
 						</div>
 					{/foreach}
 					<a id="lastfile"></a>
@@ -451,11 +461,6 @@
 				<div title='{#winPeriode_custom_aide#|xss_protect}' class="glyphicon glyphicon-question-sign cursor-help small tooltipster ml-2"></div>
 			</div>
 		</div>
-		{if !isset($projet) || in_array("projects_manage_all", $user.tabDroits) || (in_array("tasks_modify_own_project", $user.tabDroits) && isset($projet) && $user.user_id eq $projet.createur_id) || in_array("tasks_modify_all", $user.tabDroits) || (in_array("tasks_modify_own_task", $user.tabDroits) && $periode.user_id eq $user.user_id)}
-			{assign var=buttonSubmitTache value=1}
-		{else}
-			{assign var=buttonSubmitTache value=0}
-		{/if}
 
 		<div id="divSubmitPeriode" class="form-group row col-md-12 justify-content-end {if $buttonSubmitTache eq 0}d-none{/if}">
 			{if $smarty.const.CONFIG_SMTP_HOST neq ''}
@@ -468,7 +473,7 @@
 			{/if}
 
 			<div class="btn-group" role="group">
-				<button type="button" id="butSubmitPeriode" class="btn btn-primary" tabindex="24" onClick="$('#divPatienter').removeClass('d-none');this.disabled=true;users_ids=getSelectValue('user_id2');xajax_submitFormPeriode('{$periode.periode_id}', $('#projet_id').val(), users_ids, $('#date_debut').val(), $('#conserver_duree').is(':checked'), $('#date_fin').val(), $('#nb_jours').val(), $('#duree').val(), $('#heure_debut').val(), $('#heure_fin').val(), $('#matin').is(':checked'), $('#apresmidi').is(':checked'), $('#repetition option:selected').val(), $('#dateFinRepetitionJour').val(),$('#dateFinRepetitionSemaine').val(),$('#dateFinRepetitionMois').val(), $('#nbRepetitionJour option:selected').val(),$('#nbRepetitionSemaine option:selected').val(),$('#nbRepetitionMois option:selected').val(),getRadioValue('jourSemaine'),getRadioValue('exceptionRepetition'),$('#appliquerATous').is(':checked'), $('#statut_tache').val(),$('#lieu option:selected').val(), $('#ressource option:selected').val(), $('#livrable').val(), $('#titre').val(), $('#notes').val(), $('#lien').val(), $('#custom').val(), $('#liste_fichiers').val(), $('#link_id').val(), $('#notif_email').is(':checked'), $('#updateoccurrences').val());">{#winPeriode_valider#|xss_protect}</button>
+				<button type="button" id="butSubmitPeriode" class="btn btn-primary" tabindex="24" onClick="$('#divPatienter').removeClass('d-none');this.disabled=true;users_ids=getSelectValue('user_id2');xajax_submitFormPeriode('{$periode.periode_id}', $('#projet_id').val(), users_ids, $('#date_debut').val(), $('#conserver_duree').is(':checked'), $('#date_fin').val(), $('#nb_jours').val(), $('#duree').val(), $('#heure_debut').val(), $('#heure_fin').val(), $('#matin').is(':checked'), $('#apresmidi').is(':checked'), $('#repetition option:selected').val(), $('#dateFinRepetitionJour').val(),$('#dateFinRepetitionSemaine').val(),$('#dateFinRepetitionMois').val(), $('#nbRepetitionJour option:selected').val(),$('#nbRepetitionSemaine option:selected').val(),$('#nbRepetitionMois option:selected').val(),getRadioValue('jourSemaine'),getRadioValue('exceptionRepetition'),$('#appliquerATous').is(':checked'), $('#statut_tache').val(),$('#lieu').val(), $('#ressource').val(), $('#livrable').val(), $('#titre').val(), $('#notes').val(), $('#lien').val(), $('#custom').val(), $('#liste_fichiers').val(), $('#link_id').val(), $('#notif_email').is(':checked'), $('#updateoccurrences').val());">{#winPeriode_valider#|xss_protect}</button>
 				{if $periode.periode_id neq 0}
 					<button type="button" class="btn btn-warning" onClick="if(confirm('{#winPeriode_confirmSuppr#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, false, $('#notif_email').is(':checked'));undefined;">{#winPeriode_supprimer#}</button>
 				{/if}
@@ -495,7 +500,7 @@
 </form>
 <script>
 	{literal}
-	
+
 	$('.tooltipster').tooltip({
 		html: true,
 		placement: 'auto',
@@ -514,7 +519,7 @@
 	$('input[type=file]').change(function() { 
 		fileUpload(); 
 	});
-	
+
 	$("#myBigModal").on("hidden.bs.modal", function () {
 	 var periode_id=$('#periode_id').val();
 	 var fichiers=$('#fichiers').val();
@@ -536,6 +541,5 @@
 			});
 	 }
 	});
-
 	{/literal}
 </script>

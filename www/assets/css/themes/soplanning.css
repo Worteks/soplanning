@@ -86,8 +86,8 @@ body {
 	background-color: #3DA9C9;
 	color: #FFFFFF;
 	font-size:12px;
-	padding-top:6px;
-	padding-bottom:6px;
+	padding-top:3px;
+	padding-bottom:3px;
 	background-clip: padding-box
 }
 
@@ -341,7 +341,7 @@ td.planning_team_div, td.planning_team_div_hour
 	vertical-align: middle;
 	text-align: center;
 	border:1px solid #ebeff2;
-	height: 30px;
+	height: 20px;
 	background-clip: padding-box;
 }
 
@@ -506,3 +506,27 @@ td.planning_team_div, td.planning_team_div_hour
 	border: 1px solid white;
 }
 
+
+.planning_team_div,.planning_team_div_hour {font-size:16px !important;padding-top:5px;padding-bottom:5px;font-weight:700;text-align:left !important;white-space:nowrap}
+
+td.planning_team_div,th.planning_team_div
+{
+ position: sticky;
+ position: -webkit-sticky;
+ top:261px !important;
+ left: 6px;
+ background-clip: padding-box;
+ z-index:2;
+ border-bottom:0px;
+}
+
+.planning_team_div_hour
+{
+ position: sticky;
+ position: -webkit-sticky;
+ top:222px !important;
+ left: 6px;
+ z-index:2;	
+ border-bottom:0px !important;
+ border-top:0px !important;
+}

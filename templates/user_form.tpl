@@ -7,12 +7,7 @@
 	<div class="form-group row col-md-12">
 			<label class="col-form-label col-md-2">{#user_identifiant#} :</label>
 			<div class="col-md-4">
-				{if $user_form.saved eq 1}
-					<p class="col-form-label">{$user_form.user_id|xss_protect}</p>
-					<input id="user_id" type="hidden" value="{$user_form.user_id|xss_protect}" />
-				{else}
-					<input class="form-control" id="user_id" type="text" value="{$user_form.user_id|xss_protect}" maxlength="20" />
-				{/if}
+				<input class="form-control" id="user_id" type="text" value="{$user_form.user_id|xss_protect}" maxlength="20" />
 			</div>
 			<label class="col-form-label col-md-2">{#user_groupe#} :</label>
 			<div class="col-md-4">
@@ -37,11 +32,11 @@
 	<div class="form-group row col-md-12">
 				<label class="col-form-label col-md-2">{#user_login#} :</label>
 				<div class="col-md-4">
-					<input id="tmp_lo" class="form-control" type="text" value="{$user_form.login|xss_protect}" maxlength="30" autocomplete="off" />
+					<input id="tmp_lo" class="form-control" type="text" value="{$user_form.login|xss_protect}" maxlength="30" autocomplete="new-password" />
 				</div>
 				<label class="col-form-label col-md-2">{#user_password#} :</label>
 				<div class="col-md-4">
-					<input id="tmp_pa" class="form-control" type="password" value="" maxlength="50" autocomplete="off" />
+					<input id="tmp_pa" class="form-control" type="password" value="" maxlength="50" autocomplete="new-password" />
 				</div>
 	</div>
 	<div class="form-group row col-md-12">
@@ -62,21 +57,23 @@
 	<div class="form-group">
 	<div class="tab-content">	
 		<div class="tab-pane container active" id="droits">
-			<div class="row">
-				<label class="col-form-label col-md-3">{#droits_utilisateurs#} :</label>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="users_manage" id="droit1" value="" {if !in_array("users_manage_all", $user_form.tabDroits)}checked="checked"{/if}>
-					<label class="form-check-label" for="droit1">{#droits_aucundroitUser#}</label>
+			{if in_array("users_manage_all", $user.tabDroits)}
+				<div class="row">
+					<label class="col-form-label col-md-3">{#droits_utilisateurs#} :</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="users_manage" id="droit1" value="" {if !in_array("users_manage_all", $user_form.tabDroits)}checked="checked"{/if}>
+						<label class="form-check-label" for="droit1">{#droits_aucundroitUser#}</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="users_manage" id="users_manage_team" value="users_manage_team" {if in_array("users_manage_team", $user_form.tabDroits)}checked="checked"{/if}>
+						<label class="form-check-label" for="users_manage_team">{#droits_gererUsersTeam#}</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="users_manage" id="users_manage_all" value="users_manage_all" {if in_array("users_manage_all", $user_form.tabDroits)}checked="checked"{/if} {if in_array("users_manage_team", $user.tabDroits)}disabled{/if}>
+						<label class="form-check-label" for="users_manage_all">{#droits_gererTousUsers#}</label>
+					</div>
 				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="users_manage" id="users_manage_team" value="users_manage_team" {if in_array("users_manage_team", $user_form.tabDroits)}checked="checked"{/if}>
-					<label class="form-check-label" for="users_manage_team">{#droits_gererUsersTeam#}</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="users_manage" id="users_manage_all" value="users_manage_all" {if in_array("users_manage_all", $user_form.tabDroits)}checked="checked"{/if} {if in_array("users_manage_team", $user_form.tabDroits)}disabled{/if}>
-					<label class="form-check-label" for="users_manage_all">{#droits_gererTousUsers#}</label>
-				</div>
-			</div>
+			{/if}
 			<div class="row">
 				<label class="col-form-label col-md-3">{#droits_projets#} :</label>
 				<div class="form-check form-check-inline">
@@ -298,7 +295,7 @@
 					<input class="form-check-input" type="radio" name="notifications" id="notificationsNon" value="non" {if $user_form.notifications eq "non"}checked="checked"{/if}>
 					<label class="form-check-label" for="notificationsNon">{#non#}</label>
 				</div>
-				<label class="col-form-label offset-md-2 col-md-4">{#user_couleur#} :</label>
+				<label class="col-form-label offset-md-2 col-md-3">{#user_couleur#} :</label>
 				<div>
 					{if $smarty.session.couleurExUser neq ""}
 						{assign var=couleurExUser value=$smarty.session.couleurExUser}
@@ -328,12 +325,23 @@
 			</div>
 
 			<div class="form-group">
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<label class="checkbox-inline">
 						<input type="checkbox" id="envoiMailPwd" name="envoiMailPwd" value="true" />{#user_mailPwd#}
 					</label>
 				</div>
 			</div>
+			{if $smarty.const.CONFIG_GOOGLE_2FA_ACTIVE eq "1" && $user_form.google_2fa eq "ok"}
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="checkbox-inline">
+							<input type="checkbox" id="google_2fa_reset" name="google_2fa_reset" value="true" />{#google_2fa_reset#}
+						</label>
+					</div>
+				</div>
+			{else}
+				<input type="hidden" id="google_2fa_reset" value="0" />
+			{/if}
 		</div>	
         <div class="tab-pane container fade" id="infos">
 			<div class="form-group row">
@@ -370,7 +378,7 @@
 	</div>
 	</div>
 	<div class="form-group col-md-12 text-center">
-				<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="specific_users_ids=getSelectValue('specific_user_id');xajax_submitFormUser($('#user_id').val(), $('#user_id_origine').val(), $('#user_groupe_id').val(), $('#nom').val(), $('#email_user').val(), $('#tmp_lo').val(), $('#tmp_pa').val(), $('#visible_planningOui').is(':checked'), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur_user').val(){/if}, $('#notificationsOui').is(':checked'), $('#envoiMailPwd').is(':checked'), new Array(getRadioValue('users_manage'), getRadioValue('projects_manage'), getRadioValue('projectgroups_manage'), getRadioValue('planning_modif'), getRadioValue('planning_view'), getRadioValue('planning_view_users'), getRadioValue('lieux'), getRadioValue('ressources'), getRadioValue('audit'), getRadioValue('parameters'), ($('#stats_users').is(':checked') ? $('#stats_users').val() : ''), ($('#stats_projects').is(':checked') ? $('#stats_projects').val() : '')), $('#user_adress').val(), $('#user_phone').val(),$('#user_mobile').val(), $('#user_metier').val(), $('#user_comment').val(), $('#login_actifOui').is(':checked'), specific_users_ids);" />
+				<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="specific_users_ids=getSelectValue('specific_user_id');xajax_submitFormUser($('#user_id').val(), $('#user_id_origine').val(), $('#user_groupe_id').val(), $('#nom').val(), $('#email_user').val(), $('#tmp_lo').val(), $('#tmp_pa').val(), $('#visible_planningOui').is(':checked'), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur_user').val(){/if}, $('#notificationsOui').is(':checked'), $('#envoiMailPwd').is(':checked'), new Array(getRadioValue('users_manage'), getRadioValue('projects_manage'), getRadioValue('projectgroups_manage'), getRadioValue('planning_modif'), getRadioValue('planning_view'), getRadioValue('planning_view_users'), getRadioValue('lieux'), getRadioValue('ressources'), getRadioValue('audit'), getRadioValue('parameters'), ($('#stats_users').is(':checked') ? $('#stats_users').val() : ''), ($('#stats_projects').is(':checked') ? $('#stats_projects').val() : '')), $('#user_adress').val(), $('#user_phone').val(),$('#user_mobile').val(), $('#user_metier').val(), $('#user_comment').val(), $('#login_actifOui').is(':checked'), specific_users_ids, $('#google_2fa_reset').is(':checked'));" />
 		</div>
 	</div>
 </div>

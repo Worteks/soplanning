@@ -20,11 +20,7 @@ function afficherErreur($objResponse, $message) {
 function getNbJours($date_debut, $date_fin, $skipDaysoff = true) {
 	global $lang;
 	$DAYS_INCLUDED = explode(',', CONFIG_DAYS_INCLUDED);
-	$joursFeriesTmp = getjoursFeries();
-	$joursFeries = array();
-	foreach($joursFeriesTmp as $b){
-		$joursFeries[$b]=$b;
-	}
+	$joursFeries = getJoursFeries();
 	$nbJours = 1;
 	$dateDebut = new DateTime();
 	$dateDebut->setDate(substr($date_debut,0,4), substr($date_debut,5,2), substr($date_debut,8,2));
@@ -59,7 +55,7 @@ function calculerDateFin($date_debut, $nbJours) {
 	$i = 1;
 	while($i < $nbJours) {
 		$dateFin->modify('+1 days');
-		if (in_array($dateFin->format('w'), $DAYS_INCLUDED) && !in_array($dateFin->format('Y-m-d'), $joursFeries)) {
+		if (in_array($dateFin->format('w'), $DAYS_INCLUDED) && !isset($joursFeries[$dateFin->format('Y-m-d')])) {
 			$i++;
 		}
 	}
@@ -77,7 +73,7 @@ function calculerDateDebut($date_fin, $nbJours) {
 	$i = 1;
 	while($i < $nbJours) {
 		$dateDebut->modify('-1 days');
-		if (in_array($dateDebut->format('w'), $DAYS_INCLUDED) && !in_array($dateDebut->format('Y-m-d'), $joursFeries)) {
+		if (in_array($dateDebut->format('w'), $DAYS_INCLUDED) && !isset($joursFeries[$dateDebut->format('Y-m-d')])) {
 			$i++;
 		}
 	}
@@ -102,10 +98,20 @@ function ajouterDuree($total, $ajout) {
 
 // calculer diff entre 2 heures (la 1ere est la plus tot). format hh:mm
 function soustraireDuree($heure1, $heure2) {
-	$h1 = strtotime($heure1);
-	$h2 = strtotime($heure2);
-	$final = gmdate('H:i:s',$h2-$h1);
-	return $final;
+	$heure1 = substr($heure1, 0,5);
+	$heure2 = substr($heure2, 0,5);
+
+	if($heure2 < $heure1){
+		$total = soustraireDuree($heure1, '24:00');
+		$total = ajouterDuree($total, soustraireDuree('00:00', $heure2));
+		return $total . ':00';
+	}
+
+	$a = new DateTime($heure1);
+	$b = new DateTime($heure2);
+	$interval = $a->diff($b);
+	$res = $interval->format("%H:%I:00");
+	return $res;
 }
 
 function getJoursFeries() {
@@ -408,7 +414,7 @@ function getUrlInfo()
 function is__writable($path) {
 //will work in despite of Windows ACLs bug
 //NOTE: use a trailing slash for folders!!!
-    if ($path{strlen($path)-1}=='/') // recursively return a temporary file path
+    if (substr($path, strlen($path)-1, 1) == '/') // recursively return a temporary file path
         return is__writable($path.uniqid(mt_rand()).'.tmp');
     else if (is_dir($path))
         return is__writable($path.'/'.uniqid(mt_rand()).'.tmp');
@@ -423,9 +429,8 @@ function is__writable($path) {
     return true;
 }
 
-
 function VerifierAdresseMail($adresse) {
-	$Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,15}$#';
+	$Syntaxe='#^[+\w.-]+@[\w.-]+\.[a-zA-Z]{2,15}$#';
 	if(preg_match($Syntaxe,$adresse))
 		return true;
 	else
@@ -515,43 +520,11 @@ function couvreTranche($dureeDetails, $trancheHoraire) {
 	}
 }
 
-
-function cleanInput($input) {
-
-  $search = array(
-    '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
-    '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
-    '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
-    '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
-  );
-
-    $output = preg_replace($search, '', $input);
-    return $output;
-}
-
-function sanitize($input) {
-	global $cfgConnection;
-    if (is_array($input)) {
-        foreach($input as $var=>$val) {
-            $output[$var] = sanitize($val);
-        }
-		if(!isset($output)) {
-			$output = array();
-		}
-    }
-    else {
-        $input  = cleanInput($input);
-        $output = mysqli_real_escape_string($cfgConnection, $input);
-    }
-    return $output;
-}
-
-
 function checkConflitRessource($ressource,$date_debut,$date_fin,$duree_details,$user_id,$periode_id,$link_id) {
 		// V?rification de l'exclusivité de la ressource
+		$nressource = new Ressource();
 		if($ressource != '')
 		{
-	      $nressource = new Ressource();
 		  $nressource->db_load(array('ressource_id', '=', $ressource));
 		}else $nressource->exclusif=0;
 		if ($nressource->exclusif==1)
@@ -607,9 +580,9 @@ function checkConflitRessource($ressource,$date_debut,$date_fin,$duree_details,$
 
 function checkConflitLieu($lieu,$date_debut,$date_fin,$duree_details,$user_id,$periode_id,$link_id) {
 	// V?rification de l'exclusivité du lieu
+	$nlieu = new Lieu();
 	if($lieu != '')
 	{
-	  $nlieu = new Lieu();
 	  $nlieu->db_load(array('lieu_id', '=', $lieu));
 	}else $nlieu->exclusif=0;
 	if ($nlieu->exclusif==1)
@@ -851,6 +824,76 @@ function upload_image($target,$fichier)
 	return $message;
 }
 
+function generer_icone_a2hs($fichier)
+{
+	$maxWidth = 48;
+
+	// Tableaux de donnees
+	$tabExt = array('jpg','gif','png','jpeg');    // Extensions autorisees
+
+	if (!extension_loaded('gd'))
+	{
+		// Sinon erreur sur le type de l'image
+		$_SESSION['erreur'] = $smarty->getConfigVars('erreur_extension_gd');
+		return 'KO';
+	}
+	if( !is_file($fichier) ) {
+		$_SESSION['erreur'] = $smarty->getConfigVars('erreur_creation_repertoire_logo');
+		return 'KO';
+	}
+
+	// Recuperation de l'extension du fichier
+    $extension  = pathinfo($fichier, PATHINFO_EXTENSION);
+
+	// On recupere les dimensions du fichier
+	$infosImg = getimagesize($fichier);
+
+	$NouvelleImage = imagecreatetruecolor($maxWidth , $maxWidth) or die ("Erreur");
+	imagealphablending( $NouvelleImage, false);
+	imagesavealpha($NouvelleImage, true);
+
+	$gdinfo=gd_info();
+	// Sinon erreur sur les dimensions et taille de l'image
+	if (preg_match('/jpg|jpeg/i',$extension))
+	{
+		if ($gdinfo["JPEG Support"]==true)
+		{
+			$ImageChoisie=imagecreatefromjpeg($fichier);
+		}else
+		{
+			// Sinon erreur sur le type de l'image
+			$_SESSION['erreur'] = $smarty->getConfigVars('erreur_support_jpeg');
+			return 'KO';
+		}
+	}else if (preg_match('/png/i',$extension)) {
+		if ($gdinfo["PNG Support"]==true)
+		{
+			$ImageChoisie=imagecreatefrompng($fichier);
+		}else
+		{
+			// Sinon erreur sur le type de l'image
+			$_SESSION['erreur'] = $smarty->getConfigVars('erreur_support_png');
+			return 'KO';
+		}
+	}else if (preg_match('/gif/i',$extension)) {
+		if ($gdinfo["GIF Read Support"]==true)
+		{
+			$ImageChoisie=imagecreatefromgif($fichier);
+		}else
+		{
+			// Sinon erreur sur le type de l'image
+			$_SESSION['erreur'] = $smarty->getConfigVars('erreur_support_png');
+			return 'KO';
+		}
+	}
+	imagecopyresampled($NouvelleImage, $ImageChoisie, 0,0, 0,0, $maxWidth, $maxWidth, $maxWidth,$maxWidth);
+	//imagedestroy($ImageChoisie);
+	imagepng($NouvelleImage , $fichier, 0);
+	echo 'ok';die;
+
+	return true;
+}
+
 // Force the User Date Format
 function forceUserDateFormat($date,$force=0)
 {
@@ -884,10 +927,10 @@ function forceISODateFormat($date)
 }
 
 function convertHourToDecimal($heure) {
-	$data = explode(':', $heure);
+	$data = explode(':', (string)$heure);
 	if(count($data) == 1) {
 		// we cast if necessary
-		return (round($data[0]) + 0);
+		return (round((int)$data[0]) + 0);
 	}
 	return $data[0] + ($data[1]*5/3/100);
 }
@@ -1090,10 +1133,10 @@ function createCellProject($infos)
 
 	// Définition des classes de la cellule
 	// Masque les tâches du week-end si l'option est activée (uniquement pour le planning jour)
-	if ($base_colonne=="heures" || $base_colonne=="users"){
+	if ($base_colonne=="users"){
 		$classHidden = "";
 	} else {
-		if (CONFIG_PLANNING_DIFFERENCIE_WEEKEND == 0 && ($weekend==true || $ferie!=false)) {
+		if (CONFIG_PLANNING_HIDE_WEEKEND_TASK == 1 && ($weekend==true || $ferie!=false)) {
 			$classHidden = " hidden";
 		} else {
 			$classHidden = "";
@@ -1350,7 +1393,6 @@ function array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
     foreach ($arr as $key=> $row) {
         $sort_col[$key] = $row[$col];
     }
-
     array_multisort($sort_col, $dir, $arr);
 }
 
@@ -1359,6 +1401,7 @@ function array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
 function array_sort_by_columns() {
     $args = func_get_args();
     $data = array_shift($args);
+	
     foreach ($args as $n => $field) {
         if (is_string($field)) {
             $tmp = array();
@@ -1505,16 +1548,19 @@ function chargerSessionStatutsDefaut(){
 }
 
  // Suppression d'un repertoire
- function rrmdir($dir) {
+ function rrmdir($dir,$removedir=true) {
    if (is_dir($dir)) {
      $objects = scandir($dir);
      foreach ($objects as $object) {
        if ($object != "." && $object != "..") {
-         if (filetype($dir."/".$object) == "dir") rmdir($dir."/".$object); else unlink($dir."/".$object);
+         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
        }
      }
      reset($objects);
-     rmdir($dir);
+	 if ($removedir)
+	 {
+		rmdir($dir);
+	 }
    }
  }
 
@@ -1540,4 +1586,79 @@ function replaceAccents($str) {
   $search = explode(",","ç,æ,œ,á,é,í,ó,ú,à,è,ì,ò,ù,ä,ë,ï,ö,ü,ÿ,â,ê,î,ô,û,å,ø,Ø,Å,Á,À,Â,Ä,È,É,Ê,Ë,Í,Î,Ï,Ì,Ò,Ó,Ô,Ö,Ú,Ù,Û,Ü,Ÿ,Ç,Æ,Œ");
   $replace = explode(",","c,ae,oe,a,e,i,o,u,a,e,i,o,u,a,e,i,o,u,y,a,e,i,o,u,a,o,O,A,A,A,A,A,E,E,E,E,I,I,I,I,O,O,O,O,U,U,U,U,Y,C,AE,OE");
   return str_replace($search, $replace, $str);
+}
+
+
+function valueAPI($string){
+	if(is_null($string)){
+		return '';
+	} else{
+		return utf8_encode($string);
+	}
+}
+
+
+function controlDateSql($date){
+	if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date)) {
+		return false;
+	} else{
+		return true;
+	}
+	
+}
+
+
+function controlTimeSql($date){
+	if (!preg_match("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/", $date)) {
+		return false;
+	} else{
+		return true;
+	}
+	
+}
+
+
+function active_directory_login($username, $password){
+	global $ADServer, $ADDomain;
+	$ldap = ldap_connect($ADServer);
+	if($ldap === false) {
+		die('LDAP connexion failed');
+	}
+	ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+	ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+
+	$ldaprdn = $username . "@" . $ADDomain;
+	$bind = @ldap_bind($ldap, $ldaprdn, utf8_encode($password));
+	
+	if(!$bind) {
+		$ldaprdn = $ADDomain . "\\" . $username;
+		$bind = @ldap_bind($ldap, $ldaprdn, $password);
+	}
+
+	if ($bind) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function cleanStr($str) {
+	$return = '';
+	for ($i=0; $i <= strlen($str)-1; $i++) {
+		if (preg_match('/[a-z]|[A-Z]|[0-9]/',$str[$i]))		$return .= strtolower($str[$i]);
+		elseif (preg_match('/[_-]/', $str[$i]))				$return .= '_';
+		elseif (preg_match('/[àâäãáåÀÁÂÃÄÅ]/', $str[$i]))	$return .= 'a';
+		elseif (preg_match('/[æÆ]/', $str[$i]))				$return .= 'a';
+		elseif (preg_match('/[çÇ]/', $str[$i]))				$return .= 'c';
+		elseif (preg_match('/[éèêëÉÈÊËE]/', $str[$i]))		$return .= 'e';
+		elseif (preg_match('/[îïìíÌÍÎÏ]/', $str[$i]))		$return .= 'i';
+		elseif (preg_match('/[ôöðòóÒÓÔÕÖ]/', $str[$i]))		$return .= 'o';
+		elseif (preg_match('/[ùúûüÙÚÛÜ]/', $str[$i]))		$return .= 'u';
+		elseif (preg_match('/[ýÿÝŸ]/', $str[$i]))			$return .= 'y';
+		elseif (preg_match('/[ ]/', $str[$i]))				$return .= '_';
+		elseif (preg_match('/[.]/', $str[$i]))				$return .= '_';
+		elseif (preg_match('/[\\/]/', $str[$i]))			$return .= '_';
+		else												$return .= '_';
+	}
+	return $return;
 }

@@ -6,7 +6,16 @@
 	$html_recap .= '	<tbody>' . CRLF;
 	$html_recap .= '	<tr>' . CRLF;
 	$html_recap .= '		<th class="w50"></th>' . CRLF;
-	$html_recap .= '		<th class="planningTabName">' . $smarty->getConfigVars('tab_projet2') . '</th>' . CRLF;
+	if($base_ligne == 'projets'){
+		$cleTableau = 'tab_projet2';
+	} elseif($base_ligne == 'users'){
+		$cleTableau = 'tab_personne';
+	} elseif($base_ligne == 'lieux'){
+		$cleTableau = 'winPeriode_lieu';
+	} elseif($base_ligne == 'ressources'){
+		$cleTableau = 'winPeriode_ressource';
+	}
+	$html_recap .= '		<th class="planningTabName">' . $smarty->getConfigVars($cleTableau) . '</th>' . CRLF;
 	$html_recap .= '		<th class="planningTabTask">' . $smarty->getConfigVars('tab_periode2') . '</th>' . CRLF;
 	$html_recap .= '		<th class="w220 planningTabCharge">' . $smarty->getConfigVars('tab_charge') . '</th>' . CRLF;
 	$html_recap .= '	</tr>' . CRLF;
@@ -133,7 +142,7 @@
 						while ($date1 <= $date2) 
 						{
 							// on ne compte pas le jour si c'est WE ou jour férié
-							if (in_array($date1->format('w'), $DAYS_INCLUDED) && !in_array($date1->format('Y-m-d'), $joursFeries)) 
+							if (in_array($date1->format('w'), $DAYS_INCLUDED) && !array_key_exists($date1->format('Y-m-d'), $joursFeries)) 
 							{
 								$totalJours +=1;
 								if($date1 < $now) {
