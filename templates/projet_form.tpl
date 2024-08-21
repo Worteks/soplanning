@@ -40,15 +40,6 @@
 		</div>
 	</div>
 	<div class="form-group row col-md-12">
-		<label class="col-md-4 col-form-label">{#winProjet_charge#} :</label>
-		<div class="col-md-3">
-			<input type="number" step="0.01" class="form-control" name="charge" id="charge" maxlength="7" value="{$projet.charge}" />
-		</div>
-		<div class="col-md-3 left-0">
-		{#winProjet_chargeJours#}
-		</div>
-	</div>
-	<div class="form-group row col-md-12">
 		<label class="col-md-4 col-form-label">{#winProjet_livraison#} :</label>
 		<div class="col-md-8">
 			{if $smarty.session.isMobileOrTablet==1}
@@ -123,7 +114,7 @@
 	<div class="col-md-4 col-form-label"></div>
 		<div class="col-md-8">
 			<br />
-			<input type="button" value="{#enregistrer#|escape:"html"}" class="btn btn-primary" onClick="xajax_submitFormProjet('{$projet.projet_id}', $('#origine').val(), $('#projet_id').val(), $('#nom').val(), $('#groupe_id').val(), $('#statut').val(), $('#charge').val(), $('#livraison').val(), $('#lien').val(), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur').val(){/if}, $('#createur_id').val(), $('#iteration').val())" />
+			<input type="button" value="{#enregistrer#|escape:"html"}" class="btn btn-primary" onClick="xajax_submitFormProjet('{$projet.projet_id}', $('#origine').val(), $('#projet_id').val(), $('#nom').val(), $('#groupe_id').val(), $('#statut').val(), $('#livraison').val(), $('#lien').val(), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur').val(){/if}, $('#createur_id').val(), $('#iteration').val())" />
 		</div>
 	</div>
 </form>

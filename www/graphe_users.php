@@ -28,7 +28,8 @@ $sql = "SELECT *
 		WHERE 0 = 0
 		AND visible_planning = 'oui' ";
 if(count($_SESSION['stats_users']['users']) > 0) {
-	$sql .= " AND user_id IN ('" . implode("','", $_SESSION['stats_users']['users']) . "')";
+	$chaineFiltre = addslashes(implode("','", $_SESSION['stats_users']['users']));
+	$sql .= " AND user_id IN ('" . $chaineFiltre . "')";
 }
 $sql .= " ORDER BY nom";
 $users->db_loadSQL($sql);
@@ -66,10 +67,10 @@ $sql = "SELECT ppe.*
 		)
 		";
 if(count($_SESSION['stats_users']['users']) > 0) {
-	$sql .= " AND ppe.user_id IN ('" . implode("','", $_SESSION['stats_users']['users']) . "')";
+	$sql .= " AND ppe.user_id IN ('" . implode("','", array_map('addslashes', $_SESSION['stats_users']['users'])) . "')";
 }
 if(count($_SESSION['stats_users']['projets']) > 0) {
-	$sql .= " AND ppe.projet_id IN ('" . implode("','", $_SESSION['stats_users']['projets']) . "')";
+	$sql .= " AND ppe.projet_id IN ('" . implode("','", array_map('addslashes', $_SESSION['stats_users']['projets'])) . "')";
 }
 $sql .= " ORDER BY date_debut";
 $periodes->db_loadSQL($sql);
@@ -133,7 +134,7 @@ foreach ($donnees as $cle => $valeurs) {
 			if($_SESSION['stats_users']['abscisse_echelle_valeur'] == 'heures') {
 				$donneesOrdonnee[$user_id][] = convertHourToDecimal($valeurs[$user_id]);
 			} else {
-				$donneesOrdonnee[$user_id][] = convertHourToDecimal($valeurs[$user_id]) / CONFIG_DURATION_DAY;
+				$donneesOrdonnee[$user_id][] = convertHourToDecimal($valeurs[$user_id]) / convertHourToDecimal(CONFIG_DURATION_DAY);
 			}
 		} else {
 			$donneesOrdonnee[$user_id][] = "0";

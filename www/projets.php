@@ -8,7 +8,7 @@ $_SESSION['lastURL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 if(!$user->checkDroit('projects_manage_all') && !$user->checkDroit('projects_manage_own')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
-	header('Location: ../index.php');
+	header('Location: index.php');
 	exit;
 }
 
@@ -61,7 +61,7 @@ if (isset($_REQUEST['filtrageProjet'])) {
 }
 $_SESSION['filtrageProjet'] = $filtrageProjet;
 
-if (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('projet_id', 'nom_createur', 'nom', 'charge', 'livraison'))) {
+if (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('projet_id', 'nom_createur', 'nom', 'budget_montant', 'livraison'))) {
 	$order = $_REQUEST['order'];
 } elseif (isset($_SESSION['projet_order'])) {
 	$order = $_SESSION['projet_order'];
@@ -100,7 +100,13 @@ if(isset($_REQUEST['desactiverfiltreGroupe'])) {
 if (isset($_REQUEST['filtreGroupeProjet'])) {
 	$filtreGroupeProjet = array();
 	if(isset($_REQUEST['gp'])) {
-		$filtreGroupeProjet = $_REQUEST['gp'];
+		foreach ($_REQUEST['gp'] as $valPost) {
+			$check = new Groupe();
+			if(!$check->db_load(array('groupe_id', '=', $valPost))){
+				continue;
+			}
+			$filtreGroupeProjet[] = $valPost;
+		}
 	}
 	if(isset($_REQUEST['gp0'])) {
 		$filtreGroupeProjet[] = 'gp0';
@@ -146,14 +152,14 @@ if($search != ''){
 			LEFT JOIN planning_groupe ON planning_groupe.groupe_id = planning_projet.groupe_id
 			LEFT JOIN planning_user ON planning_user.user_id = planning_projet.createur_id
 			WHERE (" . $isLike . ") 
-			AND planning_projet.statut in ('" . implode("','", $listeStatuts) . "')";
+			AND planning_projet.statut in ('" . implode("','", array_map('addslashes', $listeStatuts)) . "')";
 	
 	if(!empty($filtreGroupeProjet)) {
-	$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", $filtreGroupeProjet) . "')";
-	if(in_array('gp0', $filtreGroupeProjet)) {
-		$sql .= '	OR planning_projet.groupe_id IS NULL ';
-	}
-	$sql .= ' ) ';
+		$sql .= "AND (planning_projet.groupe_id IN ('" . implode("','", array_map('addslashes', $filtreGroupeProjet)) . "')";
+		if(in_array('gp0', $filtreGroupeProjet)) {
+			$sql .= '	OR planning_projet.groupe_id IS NULL ';
+		}
+		$sql .= ' ) ';
 	}			
 			
 	$sql .= ' GROUP BY planning_projet.projet_id ';
@@ -170,19 +176,20 @@ if($search != ''){
 	if($filtrageProjet != 'tous') {
 		$sql .= "INNER JOIN planning_periode ON planning_periode.projet_id = planning_projet.projet_id AND ((planning_periode.date_debut <= '" . $dateDebut->format('Y-m-d') . "' AND planning_periode.date_fin >= '" . $dateDebut->format('Y-m-d') . "') OR (planning_periode.date_debut <= '" . $dateFin->format('Y-m-d') . "' AND planning_periode.date_debut >= '" . $dateDebut->format('Y-m-d') . "')) ";
 	}
-	$sql .= " WHERE planning_projet.statut in ('" . implode("','", $listeStatuts) . "')";
+	$sql .= " WHERE planning_projet.statut in ('" . implode("','", array_map('addslashes', $listeStatuts)) . "')";
 	
 	if(!empty($filtreGroupeProjet)) {
-	$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", $filtreGroupeProjet) . "')";
-	if(in_array('gp0', $filtreGroupeProjet)) {
-		$sql .= '	OR planning_projet.groupe_id IS NULL ';
-	}
-	$sql .= ' )';
+		$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", array_map('addslashes', $filtreGroupeProjet)) . "')";
+		if(in_array('gp0', $filtreGroupeProjet)) {
+			$sql .= '	OR planning_projet.groupe_id IS NULL ';
+		}
+		$sql .= ' )';
 	}	
 	$sql .= ' GROUP BY planning_projet.projet_id ';
 	$sql .=" ORDER BY nom_groupe ASC," . $order . ' ' . $by;
 	$smarty->assign('rechercheProjet', '');
  }
+ //echo $sql;die;
 
 $projets->db_loadSQL($sql);
 

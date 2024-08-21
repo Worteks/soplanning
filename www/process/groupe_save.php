@@ -44,14 +44,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete'){
 		exit();
 	}
 } else {
-	
 	$groupe = new groupe();
 	if($_POST['groupe_id'] != '' && $_POST['groupe_id'] != 0) {
 		$groupe->db_load(array('groupe_id', '=', $_POST['groupe_id']));
 		$groupeSave = clone $groupe;
 	}
 
-	$groupe->loadArray($_POST);
+	$groupe->loadArray($_REQUEST);
 
 	if (is_array($groupe->check())) {
 		$_SESSION['message'] = 'error_someWrongData';

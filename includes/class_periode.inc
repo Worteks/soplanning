@@ -30,6 +30,8 @@ class Periode extends GObject
 		$this->fields['modifier_id'] = new GString('planning_periode', 'modifier_id', 20, TRUE, NULL);
 		$this->fields['date_modif'] = new GDatetime('planning_periode', 'date_modif', 19, TRUE, NULL);
 		$this->fields['custom'] = new GString('planning_periode', 'custom', 255, TRUE, NULL);
+		$this->fields['pause'] = new Gtime('planning_periode', 'pause', 12, TRUE, NULL);
+		$this->fields['duree_reelle'] = new GFloat('planning_periode', 'duree_reelle', 15, TRUE, NULL);
 
 		$this->primaryKeys = array('periode_id');
 
@@ -74,6 +76,7 @@ class Periode extends GObject
 		if (isset($creation) && defined("CONFIG_SEMAPHORE_ACTIVATED") && CONFIG_SEMAPHORE_ACTIVATED == '1') {
 			$mutex->release();
 		}
+		$this->updateBudgetsProjet();
 
 		return $return;
 	}
@@ -111,14 +114,14 @@ class Periode extends GObject
 
 		// Creation des objets date (plus facile à manipuler)
 		$tmpDate = new DateTime();
-		$tmpDate->setDate(substr($this->date_debut,0,4), substr($this->date_debut,5,2), substr($this->date_debut,8,2));
+		$tmpDate->setDate((int)substr($this->date_debut,0,4), (int)substr($this->date_debut,5,2), (int)substr($this->date_debut,8,2));
 		$dateFin = new DateTime();
-		$dateFin->setDate(substr($dateFinRepetition,0,4), substr($dateFinRepetition,5,2), substr($dateFinRepetition,8,2));
+		$dateFin->setDate((int)substr($dateFinRepetition,0,4), (int)substr($dateFinRepetition,5,2), (int)substr($dateFinRepetition,8,2));
 		// S'il existe une date de fin de période
 		if ($this->date_fin<>"")
 		{
 			$dateFinPeriode = new DateTime();
-			$dateFinPeriode->setDate(substr($this->date_fin,0,4), substr($this->date_fin,5,2), substr($this->date_fin,8,2));
+			$dateFinPeriode->setDate((int)substr($this->date_fin,0,4), (int)substr($this->date_fin,5,2), (int)substr($this->date_fin,8,2));
 		}
 		
 		// Calcul du nombre de jours
@@ -355,48 +358,40 @@ class Periode extends GObject
 
 		// Post-traitement, vérification et enregistrement de toutes les périodes trouvées
 		// Vérification de l'utilisation de la ressource
-		if (CONFIG_SOPLANNING_OPTION_RESSOURCES == 1 && (!is_null($data['ressource_id'])))
-		{
+		if (CONFIG_SOPLANNING_OPTION_RESSOURCES == 1 && (!is_null($data['ressource_id']))) {
 			$dates_erreurs=array();
-			foreach ($periode_tosave as $p)
-			{	if(!checkConflitRessource($data['ressource_id'],$p['debut'],$p['fin'],$dureeDetails,$idUser,$idPeriode,$data['link_id']))
-			{
-				$dates_erreurs[]=sqldate2userdate($p['debut']);
+			foreach ($periode_tosave as $p) {
+				if(!checkConflitRessource($data['ressource_id'],$p['debut'],$p['fin'],$dureeDetails,$idUser,$idPeriode,$data['link_id'])) {
+					$dates_erreurs[]=sqldate2userdate($p['debut']);
+				}
 			}
+			if (!empty($dates_erreurs)) {
+				$retour="";
+				$sep="";
+				foreach($dates_erreurs as $d) {
+					if (!empty($retour)) $sep=", ";
+					$retour.=$sep.$d;
+				}
+				return $retour;
 			}
-			if (!empty($dates_erreurs))
-			{
-			  $retour="";
-			  $sep="";
-			  foreach($dates_erreurs as $d)
-			  {
-			   if (!empty($retour)) $sep=", ";
-			   $retour.=$sep.$d;
-			  }
-			 return $retour;
-			}
-		}	
+		}
 		// Post-traitement, vérification et enregistrement de toutes les périodes trouvées
 		// Vérification de l'utilisation du lieu
-		if (CONFIG_SOPLANNING_OPTION_LIEUX == 1 && (!is_null($data['lieu_id'])))
-		{
+		if (CONFIG_SOPLANNING_OPTION_LIEUX == 1 && (!is_null($data['lieu_id']))) {
 			$dates_erreurs=array();
-			foreach ($periode_tosave as $p)
-			{	if(!checkConflitLieu($data['lieu_id'],$p['debut'],$p['fin'],$dureeDetails,$idUser,$idPeriode,$data['link_id']))
-			{
-				$dates_erreurs[]=sqldate2userdate($p['debut']);
-			}			
+			foreach ($periode_tosave as $p) {		
+				if(!checkConflitLieu($data['lieu_id'],$p['debut'],$p['fin'],$dureeDetails,$idUser,$idPeriode,$data['link_id'])) {
+					$dates_erreurs[]=sqldate2userdate($p['debut']);
+				}			
 			}
-			if (!empty($dates_erreurs))
-			{
-			  $retour="";
-			  $sep="";
-			  foreach($dates_erreurs as $d)
-			  {
-			   if (!empty($retour)) $sep=", ";
-			   $retour.=$sep.$d;
-			  }
-			 return $retour;
+			if (!empty($dates_erreurs)) {
+				$retour="";
+				$sep="";
+				foreach($dates_erreurs as $d) {
+					if (!empty($retour)) $sep=", ";
+					$retour.=$sep.$d;
+				}
+				return $retour;
 			}
 		}	
 		// Dédoublonnage de la liste des périodes
@@ -538,17 +533,9 @@ class Periode extends GObject
 		$periodes = new Gcollection('Periode');
 		if(is_null($this->parent_id)) {
 			// si c'est le parent alors on sélectionne tout les enfants
-			$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE parent_id = ' . val2sql($this->periode_id)); // modif suppression:  . ' AND date_debut > ' . val2sql($this->date_debut);
+			$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE parent_id = ' . val2sql($this->periode_id) . ' OR link_id = ' . val2sql($this->link_id)); // modif suppression:  . ' AND date_debut > ' . val2sql($this->date_debut);
 		}else{
-			// si non, alors c'est déjà une récurrence, on sélectionne le parent et tous les enfants sauf la periode sélectionnée qui a déjà été mise à jour
-			if (is_null($this->link_id))
-			{
-				$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE ((parent_id = ' . val2sql($this->parent_id) . ' AND periode_id <> ' . val2sql($this->periode_id) . ') OR periode_id = ' . val2sql($this->parent_id) . ')');
-			// si c'est une tâche liée, on sélectionne toutes les occurences
-			}else
-			{
-				$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE ( link_id = '. val2sql($this->link_id).' AND periode_id <> ' . val2sql($this->periode_id) . ')');
-			}
+			$periodes->db_loadSQL('SELECT * FROM planning_periode WHERE ( link_id = '. val2sql($this->link_id).' OR (parent_id IS NOT NULL AND parent_id = ' . val2sql($this->parent_id) . ' OR periode_id = ' . val2sql($this->parent_id) . ' OR parent_id = ' . val2sql($this->periode_id) . ') )  AND periode_id <> ' . val2sql($this->periode_id));
 		}
 		//si la periode appellante vient d'être supprimée, on verifie qu'il existe plusieurs période récurrentes, si non, on met à jour le parent_id à NULL de la période restante
 		if($periodes->getCount() == 1 && !$this->saved ) {
@@ -559,7 +546,7 @@ class Periode extends GObject
 			return;
 		}
 		//on gere le cas des deleteAfter et deleteAvant sur periode recurrente restante
-		if($periodes->getCount() == 0) {
+		if($periodes->getCount() == 0 && $this->isSaved()) {
 			$this->parent_id = NULL;
 			$this->db_save();
 			return;
@@ -704,7 +691,7 @@ class Periode extends GObject
 			}
 
 			if(CONFIG_SOPLANNING_URL != "") {
-				$smarty->assign('lienTache', CONFIG_SOPLANNING_URL . '/process/login.php?direct_periode_id=' . $this->periode_id . '&date=' . date('Y-m-d') . '&hash=' . md5($this->periode_id . '!¤' . date('Y-m-d') . '¤' . CONFIG_SECURE_KEY));
+				$smarty->assign('lienTache', $this->getTaskLink());
 				$smarty->assign('base', CONFIG_SOPLANNING_URL);
 			}
 			
@@ -793,10 +780,12 @@ class Periode extends GObject
 		$data['last_modifier_id'] = valueAPI($this->modifier_id);
 		$data['modification_date'] = valueAPI($this->date_modif);
 		$data['custom_field'] = valueAPI($this->custom);
+		$data['pause'] = valueAPI($this->pause);
+		$data['real_duration'] = valueAPI($this->duree_reelle);
 		return $data;
 	}
 
-	public function putAPI($task_id = '', $user_id = '', $project_id = '', $link_id = '', $start_date = '', $end_date = '', $start_time = '', $end_time = '', $duration = '', $status_id = '', $title = '', $comment = '', $link = '', $resource_id = '', $place_id = '', $milestone = '', $custom_field = '', $creator_id = ''){
+	public function putAPI($task_id = '', $user_id = '', $project_id = '', $link_id = '', $start_date = '', $end_date = '', $start_time = '', $end_time = '', $duration = '', $status_id = '', $title = '', $comment = '', $link = '', $resource_id = '', $place_id = '', $milestone = '', $custom_field = '', $creator_id = '', $pause = '', $real_duration = ''){
 
 		if(strlen(trim($task_id)) > 0 && (!is_numeric(trim($task_id)) || !$this->db_load(array('periode_id', '=', trim($task_id))))) {
 			throw new BadInputException('task_id unknown in database');
@@ -873,6 +862,13 @@ class Periode extends GObject
 			throw new BadInputException('Please fill at least one of those values : end date, start and end time, duration');
 		}
 
+		if($pause != '' && !controlTimeSql($pause)) {
+			throw new BadInputException('Pauqe duration not valid (hh:mm)');
+		}
+		$this->pause = (trim($pause) != '' ? trim($pause) . ':00' : NULL);
+
+		$this->duree_reelle = (trim($real_duration) != '' ? trim($real_duration) : NULL);
+
 		$status = new Status();
 		if(trim($status_id) == '' || !$status->db_load(array('status_id', '=', trim($status_id)))){
 			throw new BadInputException('status_id not existing in statutes list');
@@ -882,12 +878,14 @@ class Periode extends GObject
 		if(strlen(trim($title)) > 255){
 			throw new BadInputException('Title length not valid (max 255)');
 		}
-		$this->titre = (trim($title) != '' ? trim($title) : NULL);
+		$encoding = mb_detect_encoding($title);
+		$this->titre = (trim($title) != '' ? trim(($encoding == 'UTF-8' ? utf8_decode($title) : $title)) : NULL);
 
 		if(strlen(trim($comment)) > 65000){
 			throw new BadInputException('Comment length not valid (max 65000)');
 		}
-		$this->notes = (trim($comment) != '' ? trim($comment) : NULL);
+		$encoding = mb_detect_encoding($comment);
+		$this->notes = (trim($comment) != '' ? trim(($encoding == 'UTF-8' ? utf8_decode($comment) : $comment)) : NULL);
 
 		if(strlen(trim($link)) > 65000){
 			throw new BadInputException('Link length not valid (max 65000)');
@@ -911,7 +909,8 @@ class Periode extends GObject
 		if(strlen(trim($custom_field)) > 255){
 			throw new BadInputException('Custom field length not valid (max 255)');
 		}
-		$this->custom = (trim($custom_field) != '' ? trim($custom_field) : NULL);
+		$encoding = mb_detect_encoding($custom_field);
+		$this->custom = (trim($custom_field) != '' ? trim(($encoding == 'UTF-8' ? utf8_decode($custom_field) : $custom_field)) : NULL);
 
 		if(!$this->isSaved()){
 			$creator = new User();
@@ -935,6 +934,27 @@ class Periode extends GObject
 			throw new SaveErrorException('Unexpected error, please report maximum details to support@soplanning.org');
 		}
 		return true;
+	}
+
+	public function getTaskLink(){
+		if(CONFIG_SOPLANNING_URL != "") {
+			return CONFIG_SOPLANNING_URL . '/process/login.php?direct_periode_id=' . $this->periode_id . '&date=' . date('Y-m-d') . '&hash=' . md5($this->periode_id . '!¤' . date('Y-m-d') . '¤' . CONFIG_SECURE_KEY);
+		} else{
+			return false;
+		}
+	}
+
+	public function db_delete() {	
+		$return = parent::db_delete();
+		$this->updateBudgetsProjet();
+		return $return;
+	}
+
+	public function updateBudgetsProjet(){
+		$projet = new Projet();
+		$projet->db_load(array('projet_id', '=', $this->projet_id));
+		$projet->updateBudgets();
+		return true;		
 	}
 }
 ?>

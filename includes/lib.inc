@@ -23,7 +23,7 @@ function getNbJours($date_debut, $date_fin, $skipDaysoff = true) {
 	$joursFeries = getJoursFeries();
 	$nbJours = 1;
 	$dateDebut = new DateTime();
-	$dateDebut->setDate(substr($date_debut,0,4), substr($date_debut,5,2), substr($date_debut,8,2));
+	$dateDebut->setDate((int)substr($date_debut,0,4), (int)substr($date_debut,5,2), (int)substr($date_debut,8,2));
 	while($dateDebut->format('Y-m-d') < $date_fin) {
 		$dateDebut->modify('+1 days');
 		if (!$skipDaysoff || (in_array($dateDebut->format('w'), $DAYS_INCLUDED) && !isset($joursFeries[$dateDebut->format('Y-m-d')]))) {
@@ -37,7 +37,7 @@ function getNbJours($date_debut, $date_fin, $skipDaysoff = true) {
 function getNbJoursFull($date_debut, $date_fin) {
 	$nbJours = 1;
 	$dateDebut = new DateTime();
-	$dateDebut->setDate(substr($date_debut,0,4), substr($date_debut,5,2), substr($date_debut,8,2));
+	$dateDebut->setDate((int)substr($date_debut,0,4), (int)substr($date_debut,5,2), (int)substr($date_debut,8,2));
 	while($dateDebut->format('Y-m-d') < $date_fin) {
 		$dateDebut->modify('+1 days');
 		$nbJours++;
@@ -51,7 +51,7 @@ function calculerDateFin($date_debut, $nbJours) {
 	$joursFeries = getjoursFeries();
 
 	$dateFin = new DateTime();
-	$dateFin->setDate(substr($date_debut,0,4), substr($date_debut,5,2), substr($date_debut,8,2));
+	$dateFin->setDate((int)substr($date_debut,0,4), (int)substr($date_debut,5,2), (int)substr($date_debut,8,2));
 	$i = 1;
 	while($i < $nbJours) {
 		$dateFin->modify('+1 days');
@@ -69,7 +69,7 @@ function calculerDateDebut($date_fin, $nbJours) {
 	$joursFeries = getjoursFeries();
 
 	$dateDebut = new DateTime();
-	$dateDebut->setDate(substr($date_fin,0,4), substr($date_fin,5,2), substr($date_fin,8,2));
+	$dateDebut->setDate((int)substr($date_fin,0,4), (int)substr($date_fin,5,2), (int)substr($date_fin,8,2));
 	$i = 1;
 	while($i < $nbJours) {
 		$dateDebut->modify('-1 days');
@@ -112,6 +112,17 @@ function soustraireDuree($heure1, $heure2) {
 	$interval = $a->diff($b);
 	$res = $interval->format("%H:%I:00");
 	return $res;
+}
+
+function retirerDureePause($duree, $pause) {
+	if($pause == ''){
+		return $duree;
+	}
+	$final = DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d') . ' ' . $duree);
+	$tab = explode(':', $pause);
+	$final->modify('-' . $tab[0] . 'hours');
+	$final->modify('-' . $tab[1] . 'minutes');
+	return $final->format('H:i:s');
 }
 
 function getJoursFeries() {
@@ -521,119 +532,148 @@ function couvreTranche($dureeDetails, $trancheHoraire) {
 }
 
 function checkConflitRessource($ressource,$date_debut,$date_fin,$duree_details,$user_id,$periode_id,$link_id) {
-		// V?rification de l'exclusivité de la ressource
-		$nressource = new Ressource();
-		if($ressource != '')
-		{
-		  $nressource->db_load(array('ressource_id', '=', $ressource));
-		}else $nressource->exclusif=0;
-		if ($nressource->exclusif==1)
-		{
-		  $texte = '';
-		  $smarty = new MySmarty();
-		  $str_user="(";
-		  if (is_array($user_id))
-		  {
+	// V?rification de l'exclusivité de la ressource
+	$nressource = new Ressource();
+	if($ressource != '') {
+		$nressource->db_load(array('ressource_id', '=', $ressource));
+	} else {
+		$nressource->exclusif=0;
+	}
+	if ($nressource->exclusif==1) {
+		$texte = '';
+		$smarty = new MySmarty();
+		$str_user="(";
+		if (is_array($user_id)) {
 			foreach($user_id as $current_user_id) {
-			if ($str_user!="(") {$str_user.=",";}
-			$str_user.="'".$current_user_id."'";
-		  }
-		  }else $str_user.="'".$user_id."'";
-		  $str_user.=")";
-		  // si pas de date de fin, c'est sur un jour seulement
+				if ($str_user!="(") {
+					$str_user.=",";
+				}
+				$str_user.="'".$current_user_id."'";
+			}
+		} else {
+			$str_user.="'".$user_id."'";
+		}
+		$str_user.=")";
+		// si pas de date de fin, c'est sur un jour seulement
 		if (is_null($date_fin)) $date_fin=$date_debut;
-		 if (is_null($date_fin) or empty($date_fin)) $date_fin=$date_debut;
-		  if ($date_debut == $date_fin)
-	 	  {
-            $sql = "SELECT *, planning_user.nom AS nom_user";
-            $sql .= " FROM planning_periode ";
-            $sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
-            $sql .= " WHERE ((date_fin IS NOT NULL AND date_debut <= " . val2sql($date_debut) . " AND date_fin >= " . val2sql($date_fin) . ")";
-            $sql .= " OR (date_fin IS NULL AND date_debut = " . val2sql($date_debut) . "))";
-            $sql .= " AND planning_periode.ressource_id = ".val2sql($ressource);
-		  }else
-		  {
-            $sql = "SELECT *, planning_user.nom AS nom_user";
-            $sql .= " FROM planning_periode ";
-            $sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
-            $sql .= " WHERE ((date_fin IS NOT NULL AND date_debut <= " . val2sql($date_debut) . " AND date_fin >= " . val2sql($date_debut) . ")";
-            $sql .= " OR (date_fin IS NOT NULL AND date_debut <= " . val2sql($date_fin) . " AND date_debut >= " . val2sql($date_debut) . ")";
+		if (is_null($date_fin) or empty($date_fin)) $date_fin=$date_debut;
+		if ($date_debut == $date_fin) {
+			$sql = "SELECT *, planning_user.nom AS nom_user";
+			$sql .= " FROM planning_periode ";
+			$sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
+			$sql .= " WHERE ((date_fin IS NOT NULL AND date_debut <= " . val2sql($date_debut) . " AND date_fin >= " . val2sql($date_fin) . ")";
+			$sql .= " OR (date_fin IS NULL AND date_debut = " . val2sql($date_debut) . "))";
+			$sql .= " AND planning_periode.ressource_id = ".val2sql($ressource);
+		} else {
+			$sql = "SELECT *, planning_user.nom AS nom_user";
+			$sql .= " FROM planning_periode ";
+			$sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
+			$sql .= " WHERE ((date_fin IS NOT NULL AND date_debut <= " . val2sql($date_debut) . " AND date_fin >= " . val2sql($date_debut) . ")";
+			$sql .= " OR (date_fin IS NOT NULL AND date_debut <= " . val2sql($date_fin) . " AND date_debut >= " . val2sql($date_debut) . ")";
 			$sql .= " OR (date_fin IS NULL AND date_debut >= " . val2sql($date_debut) . " AND date_debut <= " . val2sql($date_fin) . "))";
-            $sql .= " AND planning_periode.ressource_id = ".val2sql($ressource);
-		  }
-		  if (!empty($link_id)) $sql .= " AND link_id<>'$link_id'";
-	      if (!is_null($periode_id)) $sql.= " AND planning_periode.periode_id<> $periode_id ";
-	      $result = db_query($sql);
-	      if (db_num_rows($result)>0)
-	      {
-	       	// Au premier conflit horaire, on quitte
+			$sql .= " AND planning_periode.ressource_id = ".val2sql($ressource);
+		}
+		if (!empty($link_id)) $sql .= " AND link_id<>'$link_id'";
+		if (!is_null($periode_id)) $sql.= " AND planning_periode.periode_id<> $periode_id ";
+		$result = db_query($sql);
+		if (db_num_rows($result)> 0) {
+			// Au premier conflit horaire, on quitte
 			while ($var = db_fetch_array($result)) {
-				if (!checkConflitHoraire($var['duree_details'],$duree_details))
-				{
-					return false;
+				// cas particulier : on ne bloque pas si la période trouvée est une autre personne assignée dans la même tâche pour la même ressource
+				$check = new GCollection('Periode');
+				$sql = "SELECT p1.*
+						FROM planning_periode as p1
+						INNER JOIN planning_periode AS p2 ON p1.parent_id = p2.periode_id
+						WHERE p1.periode_id = " . val2sql($var['periode_id']) . "
+						AND p2.link_id = " . val2sql($link_id);
+				$check->db_loadSQL($sql);
+				if($check->getCount() > 0){
+					// la période trouvée est bien la soeur (même date ressource et personne assignée 
+					continue;
+				} else{
+					if (!checkConflitHoraire($var['duree_details'],$duree_details)) {
+						//file_put_contents(BASE . '/../debug.txt', $sql . "\r\n", FILE_APPEND);
+						return false;
+					}
 				}
 			}
-	      	return true;
-		  }else return true;
-		}else return true;
+			return true;
+		} else {
+		  return true;
+		}
+	} else {
+		return true;
 	}
+}
 
 function checkConflitLieu($lieu,$date_debut,$date_fin,$duree_details,$user_id,$periode_id,$link_id) {
 	// V?rification de l'exclusivité du lieu
 	$nlieu = new Lieu();
-	if($lieu != '')
-	{
+	if($lieu != '') {
 	  $nlieu->db_load(array('lieu_id', '=', $lieu));
-	}else $nlieu->exclusif=0;
-	if ($nlieu->exclusif==1)
-	{
-	 $texte = '';
-	 $smarty = new MySmarty();
-	 $str_user="(";
-	 if (is_array($user_id))
-	 {
-		foreach($user_id as $current_user_id)
-		{
-		 if ($str_user!="(") {$str_user.=",";}
-		 $str_user.="'".$current_user_id."'";
-		}
-	 }else $str_user.="'".$user_id."'";
-	 $str_user.=")";
-	 // si pas de date de fin, c'est sur un jour seulement
-	 if (is_null($date_fin) or empty($date_fin)) $date_fin=$date_debut;
-	 if ($date_debut == $date_fin)
-	 {
-		$sql = "SELECT *, planning_user.nom AS nom_user";
-		$sql .= " FROM planning_periode ";
-		$sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
-		$sql .= " WHERE	((date_fin IS NOT NULL AND date_debut <= " . val2sql($date_debut) . " AND date_fin >= " . val2sql($date_fin) . ")";
-		$sql .= " OR (date_fin IS NULL AND date_debut = " . val2sql($date_debut) . "))";
-		$sql .= " AND planning_periode.lieu_id = ".val2sql($lieu);
-	 }else
-	 {
-		$sql = "SELECT *, planning_user.nom AS nom_user";
-		$sql .= " FROM planning_periode ";
-		$sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
-		$sql .= " WHERE	((date_fin IS NOT NULL AND date_debut >= " . val2sql($date_debut) . " AND date_fin <= " . val2sql($date_fin) . ")";
-		$sql .= " OR (date_fin IS NOT NULL AND date_debut <= " . val2sql($date_fin) . " AND date_debut >= " . val2sql($date_debut) . ")";
-		$sql .= " OR (date_fin IS NULL AND date_debut >= " . val2sql($date_debut) . " AND date_debut <= " . val2sql($date_fin) . "))";
-		$sql .= " AND planning_periode.lieu_id = ".val2sql($lieu);
-	 }
-	 if (!empty($link_id)) $sql .= " AND link_id<>'$link_id'";
-	 if (!is_null($periode_id)) $sql.= " AND planning_periode.periode_id<> $periode_id ";
-	 $result = db_query($sql);
-	 if (db_num_rows($result)>0)
-	 {
-		// Au premier conflit horaire, on quitte
-		while ($var = db_fetch_array($result)) {
-			if (!checkConflitHoraire($var['duree_details'],$duree_details))
-			{
-				return false;
+	} else {
+		$nlieu->exclusif=0;
+	}
+	if ($nlieu->exclusif==1) {
+		$texte = '';
+		$smarty = new MySmarty();
+		$str_user="(";
+		if (is_array($user_id)) {
+			foreach($user_id as $current_user_id) {
+				if ($str_user!="(") {$str_user.=",";}
+				$str_user.="'".$current_user_id."'";
 			}
-		}	
-		return true;
+		} else {
+			$str_user.="'".$user_id."'";
+		}
+		$str_user.=")";
+		
+		// si pas de date de fin, c'est sur un jour seulement
+		if (is_null($date_fin)) $date_fin=$date_debut;
+		if (is_null($date_fin) or empty($date_fin)) $date_fin=$date_debut;
+		if ($date_debut == $date_fin) {
+			$sql = "SELECT *, planning_user.nom AS nom_user";
+			$sql .= " FROM planning_periode ";
+			$sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
+			$sql .= " WHERE	((date_fin IS NOT NULL AND date_debut <= " . val2sql($date_debut) . " AND date_fin >= " . val2sql($date_fin) . ")";
+			$sql .= " OR (date_fin IS NULL AND date_debut = " . val2sql($date_debut) . "))";
+			$sql .= " AND planning_periode.lieu_id = ".val2sql($lieu);
+		}else {
+			$sql = "SELECT *, planning_user.nom AS nom_user";
+			$sql .= " FROM planning_periode ";
+			$sql .= " INNER JOIN planning_user ON planning_periode.user_id = planning_user.user_id ";
+			$sql .= " WHERE	((date_fin IS NOT NULL AND date_debut >= " . val2sql($date_debut) . " AND date_fin <= " . val2sql($date_fin) . ")";
+			$sql .= " OR (date_fin IS NOT NULL AND date_debut <= " . val2sql($date_fin) . " AND date_debut >= " . val2sql($date_debut) . ")";
+			$sql .= " OR (date_fin IS NULL AND date_debut >= " . val2sql($date_debut) . " AND date_debut <= " . val2sql($date_fin) . "))";
+			$sql .= " AND planning_periode.lieu_id = ".val2sql($lieu);
+		}
+		if (!empty($link_id)) $sql .= " AND link_id<>'$link_id'";
+		if (!is_null($periode_id)) $sql.= " AND planning_periode.periode_id<> $periode_id ";
+		$result = db_query($sql);
+		if (db_num_rows($result)>0) {
+			// Au premier conflit horaire, on quitte
+			while ($var = db_fetch_array($result)) {
+				// cas particulier : on ne bloque pas si la période trouvée est une autre personne assignée dans la même tâche pour la même ressource
+				$check = new GCollection('Periode');
+				$sql = "SELECT p1.*
+						FROM planning_periode as p1
+						INNER JOIN planning_periode AS p2 ON p1.parent_id = p2.periode_id
+						WHERE p1.periode_id = " . val2sql($var['periode_id']) . "
+						AND p2.link_id = " . val2sql($link_id);
+				$check->db_loadSQL($sql);
+				if($check->getCount() > 0){
+					// la période trouvée est bien la soeur (même date ressource et personne assignée 
+					continue;
+				} else{
+					if (!checkConflitHoraire($var['duree_details'],$duree_details))
+					{
+						return false;
+					}
+				}
+			}	
+			return true;
+		}else return true;
 	}else return true;
-  }else return true;
 }
 
 function checkConflitHoraire($horaire1,$horaire2) {
@@ -941,20 +981,20 @@ function initDateTime($date)
 	$object = new Datetime();
 	switch(CONFIG_DATE_FORMAT)	{
 		case 'fr':
-			if (!($object->setDate(substr($date,6,4), substr($date,3,2), substr($date,0,2))))
+			if (!($object->setDate((int)substr($date,6,4), (int)substr($date,3,2), (int)substr($date,0,2))))
 			{
 				$object=false;
 			}
 			break;
 		case 'us':
-			$ret=$object->setDate(substr($date,6,4), substr($date,0,2), substr($date,3,2));
+			$ret=$object->setDate((int)substr($date,6,4), (int)substr($date,0,2), (int)substr($date,3,2));
 			if (!$ret)
 			{
 				$object=false;
 			}
 			break;
 		case 'jp':
-			if (!($object->setDate(substr($date,0,4), substr($date,5,2), substr($date,8,2))))
+			if (!($object->setDate((int)substr($date,0,4), (int)substr($date,5,2), (int)substr($date,8,2))))
 			{
 				$object=false;
 			}
@@ -1017,6 +1057,10 @@ function create_tooltip($tableau)
 		{
 			$cooltip .= ' (' . $smarty->getConfigVars('tab_apresmidi') . ')';
 		}
+	}
+	if($tableau['pause'] != '') 
+	{
+		$cooltip .= '<br/><strong>' . $smarty->getConfigVars('winPeriode_pause') . '</strong> : ' . sqltime2usertime($tableau['pause']);
 	}
 	
 	// Lieux
@@ -1109,7 +1153,7 @@ function createCellProject($infos)
 	}
 
 	// Cellule en lecture seule si equipe différente et droit de modification de son équipe seulement
-	if($user->checkDroit('tasks_modify_team') && ( $infos['team_id'] != $_SESSION['user_groupe_id'])) {
+	if($user->checkDroit('tasks_readonly') || ($user->checkDroit('tasks_modify_team') && ( $infos['team_id'] != $_SESSION['user_groupe_id']))) {
 	 $classCell.=" read-only";
 	 $dragndropzone = '';
 	}else $dragndropzone = 'draggable="true" ondrop="drop(event)" ondragleave="leaveDropZone(event);"';
@@ -1388,15 +1432,6 @@ return $cellule;
 }
 
 // multisort array
-function array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
-    $sort_col = array();
-    foreach ($arr as $key=> $row) {
-        $sort_col[$key] = $row[$col];
-    }
-    array_multisort($sort_col, $dir, $arr);
-}
-
-// multisort array
 // Utilisation : array_sort_by_columns($données, 'champ1', SORT_DESC, 'champ2', SORT_ASC);
 function array_sort_by_columns() {
     $args = func_get_args();
@@ -1479,6 +1514,7 @@ function logAction($typeaction,$infos=null) {
 		{
 			$diff_value = array_diff_assoc($infos['old_data'],$infos['new_data']);
 			unset($diff_value['date_modif']);
+			$new_values = array();
 			foreach($diff_value as $cle => $valeur)
 			{
 				$old_values[$cle] = utf8_encode($infos['old_data'][$cle]);
@@ -1486,6 +1522,9 @@ function logAction($typeaction,$infos=null) {
 			}
 			$trace->anciennes_valeurs = json_encode($old_values, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 			$trace->nouvelles_valeurs = json_encode($new_values, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+			if(count($new_values) == 0){
+				return true;
+			}
 			$trace->nbmodifs = count($new_values);
 		}elseif (($typeaction=='DT' or $typeaction=='DP' or $typeaction=='DU' or $typeaction=='DL' or $typeaction=='DR' or $typeaction=='DS' or $typeaction=='DG' or $typeaction=='DE') && isset($infos['old_data']))
 		{
@@ -1661,4 +1700,31 @@ function cleanStr($str) {
 		else												$return .= '_';
 	}
 	return $return;
+}
+
+function delete_session_value($key){
+	// delete message from SESSION when displayed in the tool (avoid deletion before redirection)
+	unset($_SESSION[$key]);
+	//echo '<br><br><br><br><br><br><br><br>ok';
+	//return '';
+}
+
+function encrypt($key, $payload) {
+  $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+  $encrypted = openssl_encrypt($payload, 'aes-256-cbc', $key, 0, $iv);
+  return base64_encode($encrypted . '::' . $iv);
+}
+
+function decrypt($key, $garble) {
+    list($encrypted_data, $iv) = explode('::', base64_decode($garble), 2);
+    return openssl_decrypt($encrypted_data, 'aes-256-cbc', $key, 0, $iv);
+}
+
+function formaterNombreDecimal($chaine){
+	return sprintf("%01.2f", round((float)$chaine, 2));	
+}
+
+function heures2Jours($heures){
+	$dureeJour = decimalHours(CONFIG_DURATION_DAY);
+	return formaterNombreDecimal($heures/$dureeJour);
 }

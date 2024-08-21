@@ -3,6 +3,12 @@ require 'base.inc';
 require BASE . '/../config.inc';
 require BASE . '/../includes/header.inc';
 
+if(!$user->checkDroit('parameters_all')) {
+	$_SESSION['erreur'] = 'droitsInsuffisants';
+	header('Location: index.php');
+	exit;
+}
+
 $filename=$_POST['export_nom_sauvegarde'];
 $type="save";
 $save_dir = SAVE_DIR."$filename".".tmp";
@@ -65,8 +71,8 @@ function export_projets()
     global $save_dir;
     $file=$save_dir.'/projet.csv';
     $projets = new GCollection('Projet');
-    $fields=array('projet_id','nom','iteration','couleur','charge','livraison','lien','statut','groupe_id','createur_id');
-    $sql="select projet_id,nom,iteration,couleur,charge,livraison,lien,statut,groupe_id,createur_id from planning_projet";
+    $fields=array('projet_id','nom','iteration','couleur', 'budget_temps', 'budget_montant','livraison','lien','statut','groupe_id','createur_id');
+    $sql="select projet_id,nom,iteration,couleur,budget_temps, budget_montant,livraison,lien,statut,groupe_id,createur_id from planning_projet";
     $projets->db_loadSQL($sql);
     $data=$projets->getData();
     write_csv($file, $fields, $data);
@@ -91,8 +97,8 @@ function export_taches()
     global $save_dir;
     $file=$save_dir.'/periode.csv';
     $periode = new GCollection('Periode');
-    $fields=array('periode_id','parent_id','projet_id','user_id','link_id','date_debut','date_fin','duree','duree_details','titre','notes','lien','statut_tache','lieu_id','ressource_id','livrable','fichiers','createur_id','date_creation','modifier_id','date_modif','custom');
-    $sql="select periode_id,parent_id,projet_id,user_id,link_id,date_debut,date_fin,duree,duree_details,titre,notes,lien,statut_tache,lieu_id,ressource_id,livrable,fichiers,createur_id,date_creation,modifier_id,date_modif,custom from planning_periode";
+    $fields=array('periode_id','parent_id','projet_id','user_id','link_id','date_debut','date_fin','duree','duree_details','titre','notes','lien','statut_tache','lieu_id','ressource_id','livrable','fichiers','createur_id','date_creation','modifier_id','date_modif','custom', 'pause');
+    $sql="select periode_id,parent_id,projet_id,user_id,link_id,date_debut,date_fin,duree,duree_details,titre,notes,lien,statut_tache,lieu_id,ressource_id,livrable,fichiers,createur_id,date_creation,modifier_id,date_modif,custom,pause from planning_periode";
     $periode->db_loadSQL($sql);
     $data=$periode->getData();
 
@@ -194,13 +200,15 @@ function export_feries()
 // Ecriture du fichier .csv
 function write_csv($file, $fields, $data)
 {
-    $fp = fopen($file, 'w');
+	$fp = fopen($file, 'w');
     fputcsv($fp, $fields, ";");
-    foreach ($data as $fields) {
-        @array_pop($fields);
-        @array_pop($fields);
-        @fputcsv($fp, $fields, ";");
-    }
+    foreach ($data as $record) {
+		$tabTmp = array();
+		foreach ($fields as $field) {
+			$tabTmp[] = $record[$field];
+		}
+		@fputcsv($fp, $tabTmp, ";");
+	}
     fclose($fp);
 }
 

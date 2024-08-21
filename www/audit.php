@@ -6,7 +6,7 @@ require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('audit_restore_own') && !$user->checkDroit('audit_restore') ) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
-	header('Location: ../index.php');
+	header('Location: index.php');
 	exit;
 }
 if(isset($_GET['desactiverFiltreUserAudit']) || (!isset($_SESSION['filtreUserAudit']))) {
@@ -86,10 +86,10 @@ $sql = "SELECT pa.*, pu.nom as modif_nom, pu2.nom as user_nom, pp.nom as projet_
 		LEFT JOIN planning_groupe as pg ON pg.groupe_id = pa.groupe_id
 		WHERE 1=1";
 	if(count($_SESSION['filtreUserAudit']) > 0)	{
-		$sql.= " AND pa.user_modif IN ('" . implode("','", $_SESSION['filtreUserAudit']) . "')";
+		$sql.= " AND pa.user_modif IN ('" . implode("','", array_map('addslashes', $_SESSION['filtreUserAudit'])) . "')";
 	}
 	if(count($_SESSION['filtreGroupeProjetAudit']) > 0)	{
-		$sql.= " AND pa.projet_id IN ('" . implode("','", $_SESSION['filtreGroupeProjetAudit']) . "')";
+		$sql.= " AND pa.projet_id IN ('" . implode("','", array_map('addslashes', $_SESSION['filtreGroupeProjetAudit'])) . "')";
 	}	
 	// 
 	if ($user->checkDroit('audit_restore_own'))

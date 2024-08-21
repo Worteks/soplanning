@@ -53,7 +53,15 @@ if(DEBUG) {
 
 define('CRLF', "\n");
 
-require_once BASE . '/../smarty/libs/Smarty.class.php';
+// redirection possible vers installer / upgrade
+require BASE . '/../includes/class_version.inc';
+$version = new Version();
+if($version->checkPhpVersion() !== TRUE) {
+	echo "<span style=''>PHP Version too old. Now SOPlanning requires PHP 7.2 at least. Contact our support if you need us to host it for you : contact@soplanning.org<br><br>Votre version de PHP est trop ancienne. Maintenant SOPlanning requiert la version 7.2 &agrave; minima. Contactez notre support si vous avez besoin d'aide pour l'h&eacute;bergement : contact@soplanning.org</span>";
+	die;
+}
+
+require_once BASE . '/../vendor/smarty/smarty/libs/Smarty.class.php';
 function autoloadSOPlanning($nomClasse) {
 	if($nomClasse == 'PHPMailer') {
 		require BASE . '/../phpmailer/class.phpmailer.php';
@@ -76,14 +84,6 @@ function autoloadSOPlanning($nomClasse) {
 spl_autoload_register("autoloadSOPlanning");
 require_once BASE . '/../vendor/autoload.php';
 
-// redirection possible vers installer / upgrade
-$version = new Version();
-if($version->checkPhpVersion() !== TRUE) {
-	if(strpos($_SERVER['REQUEST_URI'], '/install/') === FALSE) {
-		echo "<script>top.location='" . BASE . "/install/'</script>";
-		exit;
-	}
-}
 
 // Librairies
 require BASE . '/../includes/lib.inc';
@@ -113,6 +113,10 @@ if(defined("CONFIG_TIMEZONE")){
 header('Content-Type: text/html; charset=iso-8859-1');
 header("X-Frame-Options: SAMEORIGIN");
 session_start();
+
+if(!isset($_SESSION['CRSF'])){
+	$_SESSION['CRSF'] = md5(uniqid(mt_rand(), true));
+}
 
 // Préférence format date
 // on garde le format dd/mm/yyyy partout
@@ -154,15 +158,14 @@ if (isset($_SESSION['preferences']['dateformat']) && 1 == 0)
 			break;
 	}
 }else {
-		$_SESSION['preferences']['dateformat']='fr';
-		define ('CONFIG_DATE_LONG','d/m/Y');
-		define ('CONFIG_DATE_SHORT','d/m/y');
-		define ('CONFIG_DATE_SHORT2','d/m');
-		define ('CONFIG_DATE_FIRST_DAY_MONTH','01/m/Y');	
-		define ('CONFIG_DATE_DATEPICKER','dd/mm/yyyy');
-		define ('CONFIG_DATE_FORMAT','fr');	
-	}
-	define ('CONFIG_DATE_MYSQL','Y-m-d');
+	$_SESSION['preferences']['dateformat']='fr';
+	define ('CONFIG_DATE_LONG','d/m/Y');
+	define ('CONFIG_DATE_SHORT','d/m/y');
+	define ('CONFIG_DATE_SHORT2','d/m');
+	define ('CONFIG_DATE_FIRST_DAY_MONTH','01/m/Y');	
+	define ('CONFIG_DATE_DATEPICKER','dd/mm/yyyy');
+	define ('CONFIG_DATE_FORMAT','fr');	
+}
 	
 // Mobile Detection
 $detect = new Mobile_Detect;

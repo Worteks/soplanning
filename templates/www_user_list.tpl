@@ -7,7 +7,7 @@
 		<div class="col-md-12">
 			<div class="soplanning-box form-inline">
 				<div class="btn-group">
-					<a href="javascript:xajax_modifUser();undefined;" class="btn btn-default" ><i class="fa fa-user-plus fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuCreerUser#}</a>
+					<a href="javascript:xajax_modifUser('');undefined;" class="btn btn-default" ><i class="fa fa-user-plus fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuCreerUser#}</a>
 					<a href="{$BASE}/user_groupes.php" class="btn btn-default"><i class="fa fa-users fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuGroupesUsers#}</a>
 				</div>
 
@@ -134,9 +134,9 @@
 								</td>
 								<td class="userTabColId"><span class="pastille-user" style="background-color:#{$userTmp.couleur};color:{"#"|cat:$userTmp.couleur|buttonFontColor}">{$userTmp.user_id}</span></td>
 								<td>{$userTmp.nom|xss_protect}</td>
-								<td class="userTabColEmail">
+								<td class="wrap userTabColEmail">
 									{if $userTmp.email neq ""}
-										<a href="mailto:{$userTmp.email|xss_protect}">{$userTmp.email|xss_protect}</a>
+										<a href="mailto:{$userTmp.email|xss_protect}">{$userTmp.email|truncate:20:"..."|xss_protect}</a>
 									{/if}
 								</td>
 								<td class="wrap d-none d-sm-table-cell d-lg-table-cell">{$userTmp.nom_groupe|xss_protect}</td>

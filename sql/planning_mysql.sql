@@ -6,7 +6,7 @@ CREATE TABLE `planning_config` (
   PRIMARY KEY (`cle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
-INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.50.02', 'Internal key for auto upgrade control');
+INSERT INTO `planning_config` VALUES('CURRENT_VERSION', '1.52.02', 'Internal key for auto upgrade control');
 INSERT INTO `planning_config` VALUES('PLANNING_PAGES', '1,5,10,20,50,100', 'rows per page in the planning');
 INSERT INTO `planning_config` VALUES('PROJECT_COLORS_POSSIBLE', '', 'color choice limitation for planner (empty for no limit). Exemple :#ff0000,#aa8811,#446622');
 INSERT INTO `planning_config` VALUES('DEFAULT_NB_MONTHS_DISPLAYED', '2', 'Default number of months displayed in the planning');
@@ -78,6 +78,7 @@ INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_CLIENT_SECRET', '', '');
 INSERT INTO `planning_config` VALUES('GOOGLE_OAUTH_ACTIVE', '0', '');
 INSERT INTO `planning_config` VALUES('GOOGLE_2FA_ACTIVE', '0', '');
 INSERT INTO `planning_config` VALUES('SEMAPHORE_ACTIVATED', '0', 'Activated in order to avoid periode_id crossing when creating a lot of tasks at the same time');
+INSERT INTO `planning_config`(`cle`, `valeur`, `commentaire`) VALUES ('NOTIFICATION_EMAIL_COCHE', '1', 'Default state for notification checkbox in task form');
 
 CREATE TABLE `planning_ferie` (
   `date_ferie` date NOT NULL,
@@ -98,12 +99,18 @@ CREATE TABLE `planning_projet` (
   `nom` varchar(50) collate latin1_general_ci NOT NULL default '',
   `iteration` varchar(255) collate latin1_general_ci default NULL,
   `couleur` varchar(6) collate latin1_general_ci NOT NULL default '',
-  `charge` float default NULL,
   `livraison` DATE NULL DEFAULT NULL,
   `lien` text collate latin1_general_ci default NULL,
   `statut` varchar(10) NOT NULL collate latin1_general_ci NOT NULL default 'a_faire',
   `groupe_id` int(11) default NULL,
   `createur_id` varchar(20) collate latin1_general_ci NOT NULL,
+  `budget_montant` float default NULL,
+  `budget_temps` float default NULL,
+  `montant_consomme` float default NULL,
+  `temps_consomme` float default NULL,
+  `montant_restant` float default NULL,
+  `temps_restant` float default NULL,
+
   PRIMARY KEY  (`projet_id`),
   KEY `groupe_id` (`groupe_id`),
   CONSTRAINT `planning_projet_ibfk_1` FOREIGN KEY (`groupe_id`) REFERENCES `planning_groupe` (`groupe_id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -119,7 +126,7 @@ CREATE TABLE `planning_user` (
   `user_id` varchar(20) collate latin1_general_ci NOT NULL default '',
   `user_groupe_id` int(11) NULL,
   `nom` varchar(50) collate latin1_general_ci NOT NULL default '',
-  `login` varchar(30) collate latin1_general_ci default NULL,
+  `login` varchar(100) collate latin1_general_ci default NULL,
   `password` varchar(50) collate latin1_general_ci default NULL,
   `email` varchar(255) collate latin1_general_ci default NULL,
   `visible_planning` enum('oui','non') collate latin1_general_ci NOT NULL default 'oui',
@@ -139,6 +146,7 @@ CREATE TABLE `planning_user` (
   `date_creation` datetime DEFAULT NULL,
   `date_modif` datetime DEFAULT NULL,
   `tutoriel` VARCHAR(255) DEFAULT NULL,
+  `tarif_horaire_defaut` float DEFAULT NULL,
   PRIMARY KEY  (`user_id`),
   KEY `user_groupe_id` (`user_groupe_id`),
   CONSTRAINT `planning_user_ibfk_1` FOREIGN KEY (`user_groupe_id`) REFERENCES `planning_user_groupe` (`user_groupe_id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -167,6 +175,8 @@ CREATE TABLE `planning_periode` (
   `modifier_id` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_general_ci NULL,
   `date_modif` DATETIME NULL,
   `custom` varchar(255) collate latin1_general_ci DEFAULT NULL,
+  `pause` TIME NULL,
+  `duree_reelle` FLOAT NULL,
   PRIMARY KEY  (`periode_id`),
   KEY `projet_id` (`projet_id`),
   KEY `user_id` (`user_id`),
@@ -201,13 +211,9 @@ CREATE TABLE `planning_right_on_user` (
 
 ALTER TABLE `planning_right_on_user` ADD PRIMARY KEY(`right_id`);
 
-ALTER TABLE `planning_right_on_user`
-  ADD KEY `owner_id` (`owner_id`),
-  ADD KEY `allowed_id` (`allowed_id`);
+ALTER TABLE `planning_right_on_user`  ADD KEY `owner_id` (`owner_id`), ADD KEY `allowed_id` (`allowed_id`);
 
-ALTER TABLE `planning_right_on_user`
-  ADD CONSTRAINT `fk_rou_allowed_id` FOREIGN KEY (`allowed_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_rou_owner_id` FOREIGN KEY (`owner_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `planning_right_on_user`   ADD CONSTRAINT `planning_fk_rou_allowed_id` FOREIGN KEY (`allowed_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,   ADD CONSTRAINT `planning_fk_rou_owner_id` FOREIGN KEY (`owner_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
   CREATE TABLE `planning_status` (
     `status_id` varchar(10) collate latin1_general_ci NOT NULL default '',
@@ -249,4 +255,16 @@ CREATE TABLE `planning_audit` (
 	INDEX `projet_id` (`projet_id`)
 )COLLATE='latin1_general_ci' ENGINE=InnoDB;
 
+CREATE TABLE `planning_projet_user_tarif`  (
+  `projet_user_tarif_id` int(255) NOT NULL,
+  `user_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `projet_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `tarif_horaire` float NULL DEFAULT NULL,
+  PRIMARY KEY (`projet_user_tarif_id`) USING BTREE,
+  INDEX `put_projet_id`(`projet_id`) USING BTREE,
+  INDEX `put_user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_general_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `planning_projet_user_tarif` ADD CONSTRAINT `put_projet_id` FOREIGN KEY (`projet_id`) REFERENCES `planning_projet` (`projet_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `planning_projet_user_tarif` ADD CONSTRAINT `put_user_id` FOREIGN KEY (`user_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

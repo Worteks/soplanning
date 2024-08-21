@@ -3,6 +3,12 @@
 require 'base.inc';
 require BASE . '/../config.inc';
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 1000");
+header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
+header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
+
 class FailedAuthException extends Exception{}
 class BadInputException extends Exception{}
 class RessourceNotFoundException extends Exception{}
@@ -91,7 +97,7 @@ $server = Server::create('/')
 		return $data;
 	})
 
-	->addPutRoute('projects/([a-za-zA-Z0-9]+)', function($project_id, $name, $owner_id, $status_id = '', $charge = '', $delivery = '', $color = '', $link = '', $comment = '', $group_id = ''){
+	->addPutRoute('projects/([a-za-zA-Z0-9]+)', function($project_id, $name, $owner_id, $status_id = '', $delivery = '', $color = '', $link = '', $comment = '', $group_id = '', $budget_amount = '', $budget_time = ''){
 		checkAuth();
 		$projet = new Projet();
 		try {
@@ -118,11 +124,11 @@ $server = Server::create('/')
 		$args = func_get_args();
 		$projet_id = $args[0];
 		$projet = new Projet();
-		if(trim($user_id) == '' || !$user->db_load(array('user_id', '=', trim($user_id)))){
-			throw new BadInputException('userID not found');
+		if(trim($projet_id) == '' || !$projet->db_load(array('projet_id', '=', trim($projet_id)))){
+			throw new BadInputException('projectID not found');
 		}
-		$user->db_delete();
-		return $user->getAPIData();
+		$projet->db_delete();
+		return $projet->getAPIData();
 	})
 
 	///////////////// TASKS /////////////////////////////
@@ -201,7 +207,7 @@ $server = Server::create('/')
 		return $data;
 	})
 
-	->addPostRoute('tasks', function($task_id = '', $user_id, $project_id, $link_id = '', $start_date, $end_date = '', $start_time = '', $end_time = '', $duration = '', $status_id, $title = '', $comment = '', $link = '', $resource_id = '', $place_id = '', $milestone = '', $custom_field = '', $creator_id = '') {
+	->addPostRoute('tasks', function($task_id, $user_id, $project_id, $link_id, $start_date, $end_date = '', $start_time = '', $end_time = '', $duration = '', $status_id = '', $title = '', $comment = '', $link = '', $resource_id = '', $place_id = '', $milestone = '', $custom_field = '', $creator_id = '') {
 		checkAuth();
 		$periode = new Periode();
 		try {
@@ -401,7 +407,7 @@ $server = Server::create('/')
 
 	->addPostRoute('groups', function($group_id, $name){
 		checkAuth();
-		$user_groupe = new User_groupe();
+		$user_groupe = new Groupe();
 		try {
 			call_user_func_array([$user_groupe, 'putAPI'], func_get_args());
 		}
@@ -441,25 +447,25 @@ $server->setExceptionHandler(function(\Exception $e) use ($server) {
     if ($e instanceof BadInputException) {
         $server->getClient()->sendResponse('400', array(
             'error' => get_class($e),
-            'message' => $e->getMessage()
+            'message' => utf8_encode($e->getMessage())
         ));
     }
     if ($e instanceof FailedAuthException) {
         $server->getClient()->sendResponse('401', array(
             'error' => get_class($e),
-            'message' => $e->getMessage()
+            'message' => utf8_encode($e->getMessage())
         ));
     }
     if ($e instanceof RessourceNotFoundException) {
         $server->getClient()->sendResponse('404', array(
             'error' => get_class($e),
-            'message' => $e->getMessage()
+            'message' => utf8_encode($e->getMessage())
         ));
     }
     if ($e instanceof SaveErrorException) {
         $server->getClient()->sendResponse('500', array(
             'error' => get_class($e),
-            'message' => $e->getMessage()
+            'message' => utf8_encode($e->getMessage())
         ));
     }
 });

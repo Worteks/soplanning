@@ -353,7 +353,7 @@ while($ligneTmp = $lines->fetch()) {
 		}
 
 		$dateDebut_projet = new DateTime();
-		$dateDebut_projet->setDate(substr($periode->date_debut,0,4), substr($periode->date_debut,5,2), substr($periode->date_debut,8,2));
+		$dateDebut_projet->setDate((int)substr($periode->date_debut,0,4), (int)substr($periode->date_debut,5,2), (int)substr($periode->date_debut,8,2));
 
 		$dateFin_projet = new DateTime();
 
@@ -362,7 +362,7 @@ while($ligneTmp = $lines->fetch()) {
 			$dateFin_projet = clone $dateDebut_projet;
 		}
 		else {
-			$dateFin_projet->setDate(substr($periode->date_fin,0,4), substr($periode->date_fin,5,2), substr($periode->date_fin,8,2));
+			$dateFin_projet->setDate((int)substr($periode->date_fin,0,4), (int)substr($periode->date_fin,5,2), (int)substr($periode->date_fin,8,2));
 		}
 
 		while ($tmpDate <= $dateFin_projet) {
@@ -645,12 +645,12 @@ if(isset($_GET['cb_inclure_recap'])) {
 				$html .= '</div>';
 
 				$date1 = new DateTime();
-				$date1->setDate(substr($periode->date_debut,0,4), substr($periode->date_debut,5,2), substr($periode->date_debut,8,2));
+				$date1->setDate((int)substr($periode->date_debut,0,4), (int)substr($periode->date_debut,5,2), (int)substr($periode->date_debut,8,2));
 
 				// on additionne les jours de travail
 				if(!is_null($periode->date_fin)) {
 					$date2 = new DateTime();
-					$date2->setDate(substr($periode->date_fin,0,4), substr($periode->date_fin,5,2), substr($periode->date_fin,8,2));
+					$date2->setDate((int)substr($periode->date_fin,0,4), (int)substr($periode->date_fin,5,2), (int)substr($periode->date_fin,8,2));
 					while ($date1 <= $date2) {
 						// on ne compte pas le jour si c'est WE ou jour f?ri?
 						if (in_array($date1->format('w'), $DAYS_INCLUDED) && !array_key_exists($date1->format('Y-m-d'), $joursFeries)) {
@@ -672,8 +672,8 @@ if(isset($_GET['cb_inclure_recap'])) {
 
 			$html .= '</td>' . CRLF;
 			$html .= '<td>' . CRLF;
-			if(!is_null($projet->charge)) {
-				$html .= $smarty->getConfigVars('tab_chargeProjet') . ' : ' . $projet->charge . $smarty->getConfigVars('tab_j') . '<br />' . CRLF;
+			if(!is_null($projet->budget_montant)) {
+				$html .= $smarty->getConfigVars('tab_chargeProjet') . ' : ' . $projet->budget_montant . $smarty->getConfigVars('tab_j') . '<br />' . CRLF;
 			}
 			$nbJourTot=0;
 			$config = new Config();
@@ -820,12 +820,12 @@ if(isset($_GET['cb_inclure_recap'])) {
 				$html .= '</div>';
 
 				$date1 = new DateTime();
-				$date1->setDate(substr($periode->date_debut,0,4), substr($periode->date_debut,5,2), substr($periode->date_debut,8,2));
+				$date1->setDate((int)substr($periode->date_debut,0,4), (int)substr($periode->date_debut,5,2), (int)substr($periode->date_debut,8,2));
 
 				// on additionne les jours de travail
 				if(!is_null($periode->date_fin)) {
 					$date2 = new DateTime();
-					$date2->setDate(substr($periode->date_fin,0,4), substr($periode->date_fin,5,2), substr($periode->date_fin,8,2));
+					$date2->setDate((int)substr($periode->date_fin,0,4), (int)substr($periode->date_fin,5,2), (int)substr($periode->date_fin,8,2));
 					while ($date1 <= $date2) {
 						// on ne compte pas le jour si c'est WE ou jour f?ri?
 						if (in_array($date1->format('w'), $DAYS_INCLUDED) && !array_key_exists($date1->format('Y-m-d'), $joursFeries)) {

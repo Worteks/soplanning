@@ -178,6 +178,15 @@
       ),
       'reference' => '120b605dfeb996808c31b6477290a714d356e822',
     ),
+    'smarty/smarty' => 
+    array (
+      'pretty_version' => 'v4.3.4',
+      'version' => '4.3.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3931d8f54b8f7a4ffab538582d34d4397ba8daa5',
+    ),
     'spipu/html2pdf' => 
     array (
       'pretty_version' => 'v5.2.2',

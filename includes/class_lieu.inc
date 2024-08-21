@@ -49,6 +49,18 @@ class Lieu extends GObject
 
 	}
 
+
+	public function db_delete() {
+		$periodes = new GCollection('Periode');
+		$periodes->db_load(array('lieu_id', '=', $this->lieu_id));
+		while($periode = $periodes->fetch()){
+			$periode->lieu_id = NULL;
+			$periode->db_save();
+		}
+		$return = parent::db_delete();
+		return $return;
+	}
+
 }
 
 ?>

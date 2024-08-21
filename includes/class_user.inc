@@ -13,7 +13,7 @@ class User extends GObject
 		$this->fields['user_id'] = new GString('planning_user', 'user_id', 20, FALSE, '');
 		$this->fields['user_groupe_id'] = new GInteger('planning_user', 'user_groupe_id', 11, TRUE, NULL);
 		$this->fields['nom'] = new GString('planning_user', 'nom', 50, FALSE, '');
-		$this->fields['login'] = new GString('planning_user', 'login', 30, TRUE, NULL);
+		$this->fields['login'] = new GString('planning_user', 'login', 100, TRUE, NULL);
 		$this->fields['password'] = new GString('planning_user', 'password', 50, TRUE, NULL);
 		$this->fields['email'] = new GString('planning_user', 'email', 255, TRUE, NULL);
 		$this->fields['visible_planning'] = new GEnum('planning_user', 'visible_planning', array('oui','non'), FALSE, 'oui');
@@ -33,6 +33,8 @@ class User extends GObject
 		$this->fields['date_creation'] = new GDatetime('planning_user', 'date_creation', '19', false, date('Y-m-d H:i:s'));
 		$this->fields['date_modif'] = new GDatetime('planning_user', 'date_modif', '19', TRUE, NULL);
 		$this->fields['tutoriel'] = new GString('planning_user', 'tutoriel', 255, TRUE, NULL);
+		$this->fields['tarif_horaire_defaut'] = new GFloat('planning_user', 'tarif_horaire_defaut', 20, TRUE, NULL);
+		
 		$this->primaryKeys = array('user_id');
 		parent::__construct();
 	}
@@ -293,10 +295,12 @@ class User extends GObject
 		$data['last_login'] = valueAPI($this->date_dernier_login);
 		$data['creation_date'] = valueAPI($this->date_creation);
 		$data['modification_date'] = valueAPI($this->date_modif);
+		$data['default_hourly_rate'] = valueAPI($this->tarif_horaire_defaut);
+		
 		return $data;
 	}
 
-	public function putAPI($user_id, $name, $login = '', $email = '', $password = '', $visible = '', $color = '', $notification = '', $address = '', $phone = '', $mobile = '', $job = '', $comment = '', $active = '', $rights = '', $team_id = ''){
+	public function putAPI($user_id, $name, $login = '', $email = '', $password = '', $visible = '', $color = '', $notification = '', $address = '', $phone = '', $mobile = '', $job = '', $comment = '', $active = '', $rights = '', $team_id = '', $default_hourly_rate = ''){
 		if(strlen($user_id) > 20 || strlen($user_id) < 1){
 			throw new BadInputException('userID length not valid (max 20)');
 		}
@@ -348,7 +352,10 @@ class User extends GObject
 			$this->date_modif = date('Y-m-d H:i:s');
 		}
 		$this->user_id = trim($user_id);
-		$this->nom = trim($name);
+
+		$encoding = mb_detect_encoding($name);
+		$this->nom = (trim($name) != '' ? trim(($encoding == 'UTF-8' ? utf8_decode($name) : $name)) : NULL);
+
 		$this->login = (trim($login) != '' ? trim($login) : NULL);
 		$check = new GCollection('User');
 		$check->db_load(array('login', '=', $this->login, 'user_id', '<>', $this->user_id));
@@ -370,6 +377,7 @@ class User extends GObject
 		$this->commentaire = (trim($comment) != '' ? trim($comment) : NULL);
 		$this->login_actif = (trim($active) == 0 ? 'non' : 'oui');
 		$this->user_groupe_id = (trim($team_id) > 0 ? trim($team_id) : NULL);
+		$this->tarif_horaire_defaut = (trim($default_hourly_rate) != '' ? trim($default_hourly_rate) : NULL);
 		if(!$this->isSaved()){
 			// read only
 			$this->droits = '["tasks_readonly","tasks_view_all_projects","tasks_view_all_users"]';
@@ -412,12 +420,13 @@ class User extends GObject
 	}
 
 	public function get_valeur_tutoriel($cle) {
-		$data = json_decode($this->tutoriel, true);
-		if(is_null($data)){
+		if(is_null($this->tutoriel)){
 			return NULL;
 		}
+		$data = json_decode($this->tutoriel, true);
 		return (array_key_exists($cle,$data) ? $data[$cle] : NULL);
 	}
+
 
 	public function set_valeur_tutoriel($cle, $valeur) {
 		$data = json_decode($this->tutoriel, true);

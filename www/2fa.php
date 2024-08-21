@@ -19,10 +19,6 @@ if($user->google_2fa != 'ok'){
 	$user->db_save();
 }
 
-$finalSecret = $user->cle;
-$qrcode = $g->getURL($user->user_id, cleanStr(CONFIG_SOPLANNING_TITLE), $finalSecret);
-$smarty->assign('qrcode', $qrcode);
-
 $smarty->assign('xajax', $xajax->getJavascript("", "assets/js/xajax.js"));
 
 

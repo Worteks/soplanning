@@ -58,7 +58,7 @@ if(isset($_GET['rechercheProjet']) && $_GET['rechercheProjet'] != ''){
 			LEFT JOIN planning_projet pp ON pg.groupe_id = pp.groupe_id
 			WHERE " . $isLike;
 	if(count($listeStatuts) > 0){
-		$groupesSQL .= " AND (pp.statut in ('" . implode("','", $listeStatuts) . "') OR pp.statut IS NULL)";
+		$groupesSQL .= " AND (pp.statut in ('" . implode("','", array_map('addslashes', $listeStatuts)) . "') OR pp.statut IS NULL)";
 	}
 	$groupesSQL .= " GROUP BY pg.groupe_id, pg.nom, pg.ordre
 					ORDER BY ". $order . ' ' . $by;
@@ -69,7 +69,7 @@ if(isset($_GET['rechercheProjet']) && $_GET['rechercheProjet'] != ''){
 			LEFT JOIN planning_projet pp ON pg.groupe_id = pp.groupe_id";
 	$groupesSQL .= " WHERE 0 = 0";
 	if(count($listeStatuts) > 0){
-		$groupesSQL .= " AND (pp.statut in ('" . implode("','", $listeStatuts) . "') OR pp.statut IS NULL)";
+		$groupesSQL .= " AND (pp.statut in ('" . implode("','", array_map('addslashes', $listeStatuts)) . "') OR pp.statut IS NULL)";
 	}
 	$groupesSQL .= "GROUP BY pg.groupe_id, pg.nom, pg.ordre
 					ORDER BY ". $order . ' ' . $by;

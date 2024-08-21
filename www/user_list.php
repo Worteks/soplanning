@@ -66,9 +66,10 @@ $sql = 'SELECT distinct pu.nom, pu.email, pu.user_id, pu.login, pu.visible_plann
 		FROM planning_user pu
 		LEFT JOIN planning_periode pp ON pu.user_id = pp.user_id
 		LEFT JOIN planning_user_groupe pug ON pug.user_groupe_id = pu.user_groupe_id
-		WHERE pu.user_id <> "publicspl" ';
+		WHERE pu.user_id <> "publicspl"
+		AND 0 = 0 ';
 if(!empty($filtreEquipe)) {
-	$sql .= "		AND (pu.user_groupe_id IN ('" . implode("','", $filtreEquipe) . "')";
+	$sql .= "		AND (pu.user_groupe_id IN ('" . implode("','", array_map('addslashes', $filtreEquipe)) . "')";
 	if(in_array('gu0', $filtreEquipe)) {
 		$sql .= '	OR pug.user_groupe_id IS NULL ';
 	}

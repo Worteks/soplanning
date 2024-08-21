@@ -165,17 +165,6 @@
 							{/if}
 						</th>
 						<th class="d-none d-md-table-cell">
-							{if $order eq "charge"}
-								{if $by eq "asc"}
-									<a href="?order=charge&by=desc">{#projet_liste_charge#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
-								{else}
-									<a href="?order=charge&by=asc">{#projet_liste_charge#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/desc_order.png" alt="" />
-								{/if}
-							{else}
-								<a href="?order=charge&by={$by}">{#projet_liste_charge#}</a>
-							{/if}
-						</th>
-						<th class="d-none d-md-table-cell">
 							{if $order eq "livraison"}
 								{if $by eq "asc"}
 									<a href="?order=livraison&by=desc">{#projet_liste_livraison#}</a>&nbsp;<img src="{$BASE}/assets/img/pictos/asc_order.png" alt="" />
@@ -211,6 +200,7 @@
 								<a class="tooltipster" href="{$BASE}/process/planning.php?filtreSurProjet={$projet.projet_id}" title="{#planning_filtre_sur_projet#|xss_protect}"><i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i></a>
 								{if in_array("projects_manage_all", $user.tabDroits) || (in_array("projects_manage_own", $user.tabDroits) && $projet.createur_id eq $user.user_id)}
 									<a class="tooltipster" href="javascript:xajax_projet_copie_form('{$projet.projet_id}');undefined;" title="{#projet_copie_infobulle#|xss_protect}"><i class="fa fa-copy fa-lg fa-fw" aria-hidden="true"></i></a>
+									<a class="tooltipster" href="javascript:xajax_projet_couts_form('{$projet.projet_id}');undefined;" title="{#projet_couts#|xss_protect}"><i class="fa fa-coins fa-lg fa-fw" aria-hidden="true"></i></a>
 								{/if}
 								{if $projet.lien <> ''}
 									<a href="{if $projet.lien|strpos:"http" !== 0 && $projet.lien|strpos:"\\" !== 0}http://{/if}{$projet.lien}" title="{#winProjet_gotoLien#|xss_protect}" target="_blank"><i class="fa fa-globe fa-lg fa-fw" aria-hidden="true"></i></a>
@@ -233,18 +223,18 @@
 							<td class="projectTabColCreator">
 								{$projet.nom_createur|xss_protect}
 							</td>
-							<td class="d-none d-md-table-cell">{$projet.charge}</td>
 							<td class="d-none d-md-table-cell">
 								{if $projet.livraison neq '' && $projet.livraison neq '0000-00-00'}
 									<a href="planning.php?livraison={$projet.livraison|sqldate2userdate}">{$projet.livraison|sqldate2userdate}</a>
 								{/if}
 							</td>
 							<td class="wrap projectTabColComment">
-								{assign var=cooltip value=$smarty.config.user_liste_NBPeriodes|cat:" : "|cat:$projet.totalPeriodes}
-								
+								{assign var=cooltip value=$smarty.config.user_liste_NBPeriodes|cat:" : "|cat:$projet.totalPeriodes}	
+								{if $projet.iteration neq ""}
+									{assign var=commentaire value=$projet.iteration|xss_protect|nl2br}
+									{assign var=cooltip value=$cooltip|cat:"<br>"|cat:$smarty.config.winProjet_commentaires|cat:" : "|cat:$commentaire}	
+								{/if}
 								<span class="tooltipster" title="{$cooltip}"><i class="fa fa-info-circle fa-lg fa-fw cursor-help " aria-hidden="true"></i></span>
-								&nbsp;&nbsp;&nbsp;
-								{$projet.iteration|xss_protect}
 							</td>
 						</tr>
 						{assign var=groupeCourant value=$projet.groupe_id}

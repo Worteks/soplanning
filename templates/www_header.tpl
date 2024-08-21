@@ -24,8 +24,8 @@
 	<link rel="mask-icon" href="{$BASE}/safari-pinned-tab.svg" color="#5bbad5" />
 	<meta name="msapplication-TileColor" content="#da532c" />
 	<meta name="theme-color" content="#ffffff" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-4.6/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-4.6.2/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-ui-1.13.2.custom/jquery-ui.min.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/css/themes/{$smarty.const.CONFIG_SOPLANNING_THEME}?{$infoVersion}" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-multiselect-2.4.1/jquery.multiselect.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/css/styles.css?{$infoVersion}" type="text/css" />
@@ -35,21 +35,21 @@
 	<link rel="stylesheet" href="{$BASE}/assets/css/select2-bootstrap.min.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/spectrum-1.8.1/spectrum.css" />
 	<link rel="stylesheet" href="{$BASE}/assets/plugins/timepicker/jquery.ui.timepicker.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-timepicker-1.11.15/jquery.timepicker.min.css" />
-	<link rel="stylesheet" href="{$BASE}/assets/plugins/font-awesome-6/css/all.min.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/bootstrap-datepicker-1.10.0/css/bootstrap-datepicker3.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/jquery-timepicker-1.14.0/jquery.timepicker.min.css" />
+	<link rel="stylesheet" href="{$BASE}/assets/plugins/fontawesome-6.4.0/css/all.min.css" />
 	<script src="{$BASE}/assets/js/fonctions.js?{$infoVersion}"></script>
-	<script src="{$BASE}/assets/js/jquery-3.6.0.min.js"></script>
-	<script src="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	<script src="{$BASE}/assets/js/jquery-3.7.0.min.js"></script>
+	<script src="{$BASE}/assets/plugins/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
 	<script src="{$BASE}/assets/plugins/jquery-multiselect-2.4.1/jquery.multiselect.js"></script>
 	<script src="{$BASE}/assets/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
 	<script src="{$BASE}/assets/plugins/select2-4.0.13/dist/js/i18n/fr.js" charset="UTF-8"></script>
 	<script src="{$BASE}/assets/plugins/spectrum-1.8.1/spectrum.js"></script>
-	<script src="{$BASE}/assets/plugins/jquery-timepicker-1.11.15/jquery.timepicker.min.js"></script>
+	<script src="{$BASE}/assets/plugins/jquery-timepicker-1.14.0/jquery.timepicker.min.js"></script>
 	<script src="{$BASE}/assets/plugins/textarea-autosize/autosize.js"></script>
 	<script src="{$BASE}/assets/plugins/timepicker/jquery.ui.timepicker.js"></script>	
-	<script defer src="{$BASE}/assets/plugins/font-awesome-6/js/all.min.js"></script>
-	<script defer src="{$BASE}/assets/plugins/font-awesome-6/js/v4-shims.min.js"></script>
+	<script defer src="{$BASE}/assets/plugins/fontawesome-6.4.0/js/all.min.js"></script>
+	<script defer src="{$BASE}/assets/plugins/fontawesome-6.4.0/js/v4-shims.min.js"></script>
 	<style>
 	{if $smarty.const.CONFIG_SOPLANNING_LOGO != ''}
 		{literal}
@@ -83,7 +83,7 @@
 {if isset($user)}
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top flex-lg-nowrap bg-dark">
 		{if $smarty.const.CONFIG_SOPLANNING_LOGO != ''}
-			<a class="navbar-brand navbar-brand-logo mr-auto d-inline-block align-items-center" href="{$BASE}/"><img src="{$BASE}/upload/logo/{$smarty.const.CONFIG_SOPLANNING_LOGO}" alt='logo' class="mr-3 logo" />
+			<a class="navbar-brand navbar-brand-logo mr-auto d-inline-block align-items-center" href="{$BASE}/"><img src="{$BASE}/upload/logo/{$smarty.const.CONFIG_SOPLANNING_LOGO}" alt='logo' class="mr-3 logo" style="max-height:23px" />
 		{else}
 			<a class="navbar-brand mr-auto" href="{$BASE}/">
 		{/if}
@@ -165,7 +165,7 @@
 					</div>
 				</li>
 			{/if}
-			{if in_array("stats_users", $user.tabDroits) || in_array("stats_projects", $user.tabDroits) || in_array("audit_restore_own", $user.tabDroits) || in_array("audit_restore", $user.tabDroits)}	
+			{if in_array("stats_users", $user.tabDroits) || in_array("stats_projects", $user.tabDroits) || in_array("audit_restore_own", $user.tabDroits) || in_array("stats_roi_projects", $user.tabDroits) || in_array("audit_restore", $user.tabDroits)}	
 				<li class="divider-vertical"></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="{$BASE}/stats_users.php" id="menuStats" role="button" {if $smarty.session.isMobileOrTablet==1}data-toggle="dropdown"{/if} aria-haspopup="true" data-target="#menuStatsToggle" aria-expanded="true">
@@ -182,6 +182,11 @@
 								<i class="fa fa-bar-chart fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#droits_stats_projects#}
 							</a>
 						{/if}
+						{if in_array("stats_roi_projects", $user.tabDroits)}
+							<a href="{$BASE}/stats_roi_projects.php" class="dropdown-item">
+								<i class="fa fa-coins fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#droits_stats_roi_projects#}
+							</a>
+						{/if}
 						{if $smarty.const.CONFIG_SOPLANNING_OPTION_AUDIT == 1 && in_array("audit_restore", $user.tabDroits) }
 							<div class="dropdown-divider"></div>
 							<a href="{$BASE}/audit.php"  class="dropdown-item">
@@ -194,20 +199,22 @@
 			{if in_array("parameters_all", $user.tabDroits) || in_array("lieux_all", $user.tabDroits) || in_array("ressources_all", $user.tabDroits)}
 				<li class="divider-vertical"></li>
 				<li class="nav-item dropdown">
-					<a class="nav-link" href="{$BASE}/options.php" data-target="#menuOptionsToggle" id="menuOptions" {if $smarty.session.isMobileOrTablet==1}data-toggle="dropdown"{/if} role="button">
+					<a class="nav-link" href="{if in_array("parameters_all", $user.tabDroits)}{$BASE}/options.php{else}#{/if}" data-target="#menuOptionsToggle" id="menuOptions" {if $smarty.session.isMobileOrTablet==1}data-toggle="dropdown"{/if} role="button">
 						<i class="fa fa-cogs fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{#menuOptions#}
 					</a>
 					<div class="dropdown-menu mt-0" id="menuOptionsToggle" aria-labelledby="menuOptions">
-						<a href="{$BASE}/options.php" class="dropdown-item">
-							<i class="fa fa-cogs fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuOptions#}
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="{$BASE}/feries.php" class="dropdown-item">
-							<i class="fa fa-plane fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuFeries#}
-						</a>
-						<a href="{$BASE}/status.php" class="dropdown-item">
-							<i class="fa fa-tags fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuStatus#}
-						</a>
+						{if in_array("parameters_all", $user.tabDroits)}
+							<a href="{$BASE}/options.php" class="dropdown-item">
+								<i class="fa fa-cogs fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuOptions#}
+							</a>
+							<div class="dropdown-divider"></div>
+							<a href="{$BASE}/feries.php" class="dropdown-item">
+								<i class="fa fa-plane fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuFeries#}
+							</a>
+							<a href="{$BASE}/status.php" class="dropdown-item">
+								<i class="fa fa-tags fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuStatus#}
+							</a>
+						{/if}
 						{if $smarty.const.CONFIG_SOPLANNING_OPTION_LIEUX == 1 && in_array("lieux_all", $user.tabDroits) }
 							<a href="{$BASE}/lieux.php" class="dropdown-item">
 								<i class="fa fa-map-marker fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuLieux#}
@@ -218,11 +225,12 @@
 								<i class="fa fa-plug fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuRessources#}
 							</a>				
 						{/if}
-						<div class="dropdown-divider"></div>
-						<a href="{$BASE}/backup.php" class="dropdown-item">
-							<i class="fa fa-exchange fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuImportExport#}
-						</a>
-
+						{if in_array("parameters_all", $user.tabDroits)}
+							<div class="dropdown-divider"></div>
+							<a href="{$BASE}/backup.php" class="dropdown-item">
+								<i class="fa fa-exchange fa-lg fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;{#menuImportExport#}
+							</a>
+						{/if}
 					</div>
 				 </li>	
 			{/if}
@@ -231,6 +239,20 @@
 			</li>
 		</ul> 
 		<ul class="navbar-nav ml-auto">
+			{if isset($dateAbo) && $smarty.session.isMobileOrTablet==0}
+				<li class="nav-item" style="margin-right:50px;">
+					<a class="nav-link navbar-right tooltipster" target="_blank" href="{#texte_abo_lien#}" title="{"%1%"|str_replace:$dateAbo:$smarty.config.texte_abo2}">
+						<i class="fa fa-warning fa-lg fa-fw" aria-hidden="true" style="color:orange"></i>&nbsp;{"%1%"|str_replace:$dateAbo:$smarty.config.texte_abo}
+					</a>
+				</li>
+			{/if}
+			{if $smarty.const.CONFIG_SOPLANNING_URL neq ""}
+				<li class="nav-item" style="margin-right:10px;">
+					<a class="nav-link navbar-right tooltipster" href="javascript:xajax_qrcode();undefined;" title="{#acces_mobile#}">
+						<i class="fa fa-qrcode fa-lg fa-fw" aria-hidden="true"></i>
+					</a>
+				</li>
+			{/if}
 			{if $user.user_id == 'publicspl' }
 				<li class="nav-item">
 					<a class="nav-link" href="#" data-target="#" style="color:white">
@@ -253,23 +275,30 @@
 		</div>
 	</nav>
 {/if}
-{if isset($smartyData.message) or isset($smartyData.erreur)}
-	{if isset($smartyData.message)}
-		{assign var=messageFinal value=$smartyData.message|formatMessage}
-	{/if}
-	{if isset($smartyData.erreur)}
-		{assign var=messageErreur value=$smartyData.erreur|formatMessage}
-	{/if}
-	<div class="container-fluid" style="margin-bottom:60px;">
-		<div id="divMessage" class="alert {if (isset($smartyData.message) && $smartyData.message eq 'changeNotOK') or isset($messageErreur)}alert-danger{else}alert-success{/if}">
+{if isset($smarty.session.message)}
+	{assign var=messageFinal value=$smarty.session.message|formatMessage}
+	{"message"|delete_session_value}
+
+	<div class="container-fluid" style="{if isset($htmlTableau)}{* displayed fixed if planning page otherwise not visible *}cursor:pointer;position:fixed;top:10px;z-index:1000{else}margin-bottom:60px;{/if}" onClick="this.style.display='none'">
+		<div id="divMessage" class="alert alert-success">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-			{if isset($messageErreur)}
-				<i class="fa fa-lg fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;{$messageErreur}
-			{else}
-				<i class="fa fa-lg fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{$messageFinal}
-			{/if}
+		<i class="fa fa-lg fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;{$messageFinal}
 		</div>
 	</div>
 {/if}
+{if isset($smarty.session.erreur)}
+	{assign var=messageFinal value=$smarty.session.erreur|formatMessage}
+	{"erreur"|delete_session_value}
+
+	<div class="container-fluid" style="{if isset($htmlTableau)}{* displayed fixed if planning page otherwise not visible *}cursor:pointer;position:fixed;top:10px;z-index:1000{else}margin-bottom:60px;{/if}" onClick="this.style.display='none'">
+		<div id="divMessage" class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<i class="fa fa-lg fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;&nbsp;{$messageFinal}
+		</div>
+	</div>
+{/if}
+

@@ -3,6 +3,12 @@ require 'base.inc';
 require BASE . '/../config.inc';
 require BASE . '/../includes/header.inc';
 
+if(!$user->checkDroit('parameters_all')) {
+	$_SESSION['erreur'] = 'droitsInsuffisants';
+	header('Location: index.php');
+	exit;
+}
+
 $type=$_POST['type'];
 $type_restauration=$_POST['type_restauration'];
 $type_fichier_import_seul=$_POST['type_fichier_import'];

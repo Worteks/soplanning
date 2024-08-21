@@ -1,5 +1,6 @@
 {* Smarty *}
 <form method="post" action="" target="_blank" name="formUser"  onSubmit="return false;">
+	<input type="hidden" id="crsf" value="{$smarty.session.CRSF}">
 	<div class="row">
 		<label class="col-md-4 col-form-label">{#user_identifiant#} :</label>
 		<div class="col-md-5 col-form-label">
@@ -159,7 +160,7 @@
 	<div class="form-group row">
 		<div class="col-md-4">&nbsp;</div>
 		<div class="col-md-4">
-			<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="xajax_submitFormProfil('{$user_form.user_id|xss_protect}', $('#email_user').val(), $('#password_tmp').val(), $('#dateformat').val(), $('#notificationsOui').is(':checked'),$('#positionToday').is(':checked'),$('#vueDefautPlanning').is(':checked'),$('#vueDefautPersonne').is(':checked'),$('#vueDefautMois').is(':checked'),$('#vueDefautLarge').is(':checked'), $('#masquerLigneVide').val(), $('#afficherTableauRecap').val());"/>
+			<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="xajax_submitFormProfil('{$user_form.user_id|xss_protect}', $('#email_user').val(), $('#password_tmp').val(), $('#dateformat').val(), $('#notificationsOui').is(':checked'),$('#positionToday').is(':checked'),$('#vueDefautPlanning').is(':checked'),$('#vueDefautPersonne').is(':checked'),$('#vueDefautMois').is(':checked'),$('#vueDefautLarge').is(':checked'), $('#masquerLigneVide').val(), $('#afficherTableauRecap').val(), $('#crsf').val());"/>
 		</div>
 	</div>
 </form>

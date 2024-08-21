@@ -696,6 +696,16 @@
 									</div>
 									<div title="{#options_aide_dureeCreneauHoraire#}" class="cursor-help tooltipster"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
 								</div>
+								<div class="form-group row col-md-12 align-items-center">
+									<label class="col-md-4 col-form-label">{#options_notification_email_coche#} :</label>
+									<div class="col-3">
+										<select name="NOTIFICATION_EMAIL_COCHE" class="form-control">
+											<option value="1" {if $smarty.const.CONFIG_NOTIFICATION_EMAIL_COCHE eq "1"}selected="selected"{/if}> {#oui#}</option>
+											<option value="0" {if $smarty.const.CONFIG_NOTIFICATION_EMAIL_COCHE eq "0"}selected="selected"{/if}> {#non#}</option>
+										</select>
+									</div>
+									<div title="{#options_aide_notification_email_coche#}" class="cursor-help tooltipster"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
+								</div>
 
 								<div class="form-group row col-md-12 align-items-center">
 									<div class="col-md-4"></div>

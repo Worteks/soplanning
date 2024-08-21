@@ -44,10 +44,10 @@
 		</div>
 
 		<script src="{$BASE}/assets/plugins/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
-		<script src="{$BASE}/assets/plugins/jquery-ui-1.12.1.custom/i18n/datepicker-{$lang}.js"></script>
-		<script src="{$BASE}/assets/plugins/bootstrap-4.6/js/bootstrap.bundle.min.js"></script>
-		<script src="{$BASE}/assets/plugins/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
-		<script src="{$BASE}/assets/plugins/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.{if $lang eq "en"}en-GB{else}{$lang}{/if}.min.js" charset="UTF-8"></script>
+		<script src="{$BASE}/assets/plugins/jquery-ui-1.13.2.custom/i18n/datepicker-{$lang}.js"></script>
+		<script src="{$BASE}/assets/plugins/bootstrap-4.6.2/js/bootstrap.bundle.min.js"></script>
+		<script src="{$BASE}/assets/plugins/bootstrap-datepicker-1.10.0/js/bootstrap-datepicker.min.js"></script>
+		<script src="{$BASE}/assets/plugins/bootstrap-datepicker-1.10.0/locales/bootstrap-datepicker.{if $lang eq "en"}en-GB{else}{$lang}{/if}.min.js" charset="UTF-8"></script>
 
 		{$xajax}
 		<script>
@@ -72,7 +72,6 @@
 			placement: 'auto',
 			boundary: 'window'
 		});
-			
 
 		{/literal}
 		

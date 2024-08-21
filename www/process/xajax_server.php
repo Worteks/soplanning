@@ -143,12 +143,15 @@ function modifProjet($projet_id = null, $origine = null)
     if (!$_SESSION['isMobileOrTablet']) {
 		$objResponse->addScript('jQuery(".datepicker").datepicker({ calendarWeeks: true, language: "'.$lang.'",format: "' . CONFIG_DATE_DATEPICKER . '", autoclose: true,todayHighlight: true });');
     }
+
+    $objResponse->addAssign('iteration', 'value', $projet->iteration);
+
     $objResponse->addScript('document.getElementById("groupe_id").focus();');
     $objResponse->addScript('document.getElementById("createur_id").focus();');
     return $objResponse->getXML();
 }
 
-function submitFormProjet($projet_id, $origine, $new_projet_id, $nom, $groupe_id, $statut, $charge, $livraison, $lien, $couleur, $createur_id, $iteration)
+function submitFormProjet($projet_id, $origine, $new_projet_id, $nom, $groupe_id, $statut, $livraison, $lien, $couleur, $createur_id, $iteration)
 {
     $objResponse = new xajaxResponse();
     $smarty = new MySmarty();
@@ -172,12 +175,8 @@ function submitFormProjet($projet_id, $origine, $new_projet_id, $nom, $groupe_id
         $objResponse->addAlert(addslashes($smarty->getConfigVars('js_saisirCouleur')));
         return $objResponse;
     }
-    if (trim($charge) != '' && ($charge <= 0 || $charge > 99999)) {
-        $objResponse->addAlert(addslashes($smarty->getConfigVars('js_saisirCharge')));
-        return $objResponse;
-    }
 
-    // French date forcing
+	// French date forcing
     if (trim($livraison) != '') {
         $livraison = forceUserDateFormat($livraison);
     }
@@ -208,7 +207,6 @@ function submitFormProjet($projet_id, $origine, $new_projet_id, $nom, $groupe_id
     $projet->nom = trim($nom);
     $projet->groupe_id = ($groupe_id != '' ? $groupe_id : null);
     $projet->statut = $statut;
-    $projet->charge = ($charge != '' ? $charge : null);
     $projet->livraison = ($livraison != '' ? $livraison : null);
     $projet->lien = ($lien != '' ? $lien : null);
     $projet->couleur = ($couleur != '' ? $couleur : null);
@@ -551,6 +549,7 @@ function ajoutPeriode($dateDebut = '', $ligne_id = '', $periode_id = '', $heureD
     $objResponse->addScript('jQuery("#heure_debut").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
     $objResponse->addScript('jQuery("#heure_fin").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
     $objResponse->addScript('jQuery("#duree").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
+    $objResponse->addScript('jQuery("#pause").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
     return $objResponse->getXML();
 }
 
@@ -638,24 +637,22 @@ function modifPeriode($periode_id)
 
     // liste de tous les utilisateurs
     $listeUsers = new GCollection('User');
-    if ($user->checkDroit('tasks_modify_all') || $user->checkDroit('tasks_modify_own_project') || $user->checkDroit('tasks_modify_own_task') || $user->checkDroit('tasks_modify_team')) {
-        $sql = "SELECT pu.*, pug.nom AS groupe_nom
-        FROM planning_user pu ";
-        if ($user->checkDroit('tasks_view_specific_users')) {
-            $sql .= " INNER JOIN planning_right_on_user AS rou ON rou.allowed_id = pu.user_id AND rou.owner_id = " . val2sql($user->user_id);
-        }
-        $sql .= "   LEFT JOIN planning_user_groupe pug ON pu.user_groupe_id = pug.user_groupe_id
-                    WHERE visible_planning = 'oui' ";
-        if ($user->checkDroit('tasks_view_only_own')) {
-            $sql .= " AND pu.user_id = " . val2sql($user->user_id);
-        }
-        if ($user->checkDroit('tasks_modify_team')) {
-            $sql .= " AND pu.user_groupe_id = " . val2sql($user->user_groupe_id);
-        }
-        $sql .= " ORDER BY groupe_nom, pu.nom";
-        $listeUsers->db_loadSQL($sql);
-        //$listeUsers->db_load(array('visible_planning', '=', 'oui'), array('nom' => 'ASC'));
-    }
+	$sql = "SELECT pu.*, pug.nom AS groupe_nom
+	FROM planning_user pu ";
+	if ($user->checkDroit('tasks_view_specific_users')) {
+		$sql .= " INNER JOIN planning_right_on_user AS rou ON rou.allowed_id = pu.user_id AND rou.owner_id = " . val2sql($user->user_id);
+	}
+	$sql .= "   LEFT JOIN planning_user_groupe pug ON pu.user_groupe_id = pug.user_groupe_id
+				WHERE visible_planning = 'oui' ";
+	if ($user->checkDroit('tasks_view_only_own')) {
+		$sql .= " AND pu.user_id = " . val2sql($user->user_id);
+	}
+	if ($user->checkDroit('tasks_modify_team') || $user->checkDroit('tasks_view_team_users')) {
+		$sql .= " AND pu.user_groupe_id = " . val2sql($user->user_groupe_id);
+	}
+	$sql .= " ORDER BY groupe_nom, pu.nom";
+	$listeUsers->db_loadSQL($sql);
+
     $smarty->assign('listeUsers', $listeUsers->getSmartyData());
     $smarty->assign('link_id', $periode->link_id);
 
@@ -744,7 +741,8 @@ function modifPeriode($periode_id)
     $objResponse->addScript('jQuery("#heure_debut").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
     $objResponse->addScript('jQuery("#heure_fin").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
     $objResponse->addScript('jQuery("#duree").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
-    return $objResponse->getXML();
+     $objResponse->addScript('jQuery("#pause").timepicker({hourText: "' . $smarty->getConfigVars('heure') . '", minuteText: "' . $smarty->getConfigVars('minutes') . '", amPmText: ["", ""]});');
+   return $objResponse->getXML();
 }
 
 // check si l'identifiant de projet est disponible
@@ -1151,7 +1149,7 @@ function moveCasePeriode($casePeriode, $jourCible, $copie_periode = false, $scop
 				$periode->ressource_id = $ressourceCible->ressource_id;
 			}
 
-			if(count($chaines2) < 4 && $scope == 'seule' && !is_null($periode->date_fin) && $jourOrigine == $periode->date_fin && $jourDestination > $periode->date_debut){
+			if(count($chaines2) < 4 && $scope == 'seule' && !is_null($periode->date_fin) && $periode->date_fin != $periode->date_debut && $jourOrigine == $periode->date_fin && $jourDestination > $periode->date_debut){
 				$periode->date_fin = $jourDestination;
 			} else{
 				// modif calcul du nombre de jour de decalage entre le debut de la periode et la case cliqu?e
@@ -1386,7 +1384,7 @@ function choixIcal()
     }
     $smarty->assign('user', $user->getSmartyData());
 
-    $lienIcal = $user->lienIcal(array($user->user_id), array(), '3');
+    $lienIcal = $user->lienIcal('3', array($user->user_id), array());
     $smarty->assign('lienIcal', $lienIcal);
 
     // liste de tous les projets
@@ -1491,7 +1489,7 @@ function modifUser($user_id = null)
     return $objResponse->getXML();
 }
 
-function submitFormUser($user_id, $user_id_origine, $user_groupe_id, $nom, $email, $login, $password, $visible_planningOui, $couleur, $notificationsOui, $envoiMailPwd, $droits, $adresse, $telephone, $mobile, $metier, $commentaire, $login_actifOui, $specific_users_ids, $google_2fa_reset)
+function submitFormUser($user_id, $user_id_origine, $user_groupe_id, $nom, $email, $login, $password, $visible_planningOui, $couleur, $notificationsOui, $envoiMailPwd, $droits, $adresse, $telephone, $mobile, $metier, $commentaire, $login_actifOui, $specific_users_ids, $google_2fa_reset, $tarif_horaire_defaut)
 {
     $objResponse = new xajaxResponse();
     $smarty = new MySmarty();
@@ -1502,8 +1500,8 @@ function submitFormUser($user_id, $user_id_origine, $user_groupe_id, $nom, $emai
         return $objResponse;
     }
 
-	if (trim($user_id) == '') {
-        $objResponse->addAlert($smarty->getConfigVars('user_user_idManquant'));
+    if (trim($user_id) == '' || !preg_match('<^[A-Za-z0-9]*$>', $user_id)) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('user_user_idManquant')));
         return $objResponse;
     }
 
@@ -1580,6 +1578,7 @@ function submitFormUser($user_id, $user_id_origine, $user_groupe_id, $nom, $emai
     $user_form->mobile = ($mobile != '' ? $mobile : null);
     $user_form->metier = ($metier != '' ? $metier : null);
     $user_form->commentaire = ($commentaire != '' ? $commentaire : null);
+	$user_form->tarif_horaire_defaut = ($tarif_horaire_defaut != '' ? $tarif_horaire_defaut : null);
 
     $user_form->user_groupe_id = ($user_groupe_id != '' ? $user_groupe_id : null);
     $user_form->login = (trim($login) != '' ? trim($login) : null);
@@ -1667,7 +1666,7 @@ function supprimerUser($user_id)
     $objResponse = new xajaxResponse();
     $smarty = new MySmarty();
 
-    $user = new User();
+	$user = new User();
     if ($user->chargerUserFromSession() !== true || (!$user->checkDroit('users_manage_all') && !$user->checkDroit('users_manage_team'))) {
         $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
         $objResponse->addScript('location.reload();');
@@ -1682,7 +1681,7 @@ function supprimerUser($user_id)
         $userSave = clone $user_form;
     }
 
-    // on reassigne les projets au user courant
+	// on reassigne les projets au user courant
     $sql = "UPDATE planning_projet
             SET createur_id = " . val2sql($user->user_id) . "
             WHERE createur_id = " . val2sql($user_form->user_id);
@@ -1729,13 +1728,13 @@ function modifProfil()
     return $objResponse->getXML();
 }
 
-function submitFormProfil($user_id, $email, $password, $dateformat, $notificationsOui, $positionPlanning, $vueDefautPlanning, $vueDefautPersonne, $vueDefautMois, $vueDefautLarge, $masquerLigneVide, $afficherTableauRecap)
+function submitFormProfil($user_id, $email, $password, $dateformat, $notificationsOui, $positionPlanning, $vueDefautPlanning, $vueDefautPersonne, $vueDefautMois, $vueDefautLarge, $masquerLigneVide, $afficherTableauRecap, $crsf)
 {
     $objResponse = new xajaxResponse();
     $smarty = new MySmarty();
 
     $user = new User();
-    if ($user->chargerUserFromSession() !== true || $user->user_id != $user_id) {
+    if ($user->chargerUserFromSession() !== true || $user->user_id != $user_id || $crsf != $_SESSION['CRSF']) {
         $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
         $objResponse->addScript('location.reload();');
         return $objResponse;
@@ -1886,7 +1885,7 @@ function nouveauPwd($password)
     return $objResponse;
 }
 
-function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $conserver_duree, $date_fin, $nb_jours, $duree, $heure_debut, $heure_fin, $matin, $apresmidi, $repetition, $dateFinRepetitionJour, $dateFinRepetitionSemaine, $dateFinRepetitionMois, $nbRepetitionJour, $nbRepetitionSemaine, $nbRepetitionMois, $jourSemaine, $exceptionRepetition, $appliquerATous, $statut_tache, $lieu, $ressource, $livrable, $titre, $notes, $lien, $custom, $fichiers, $link_id, $notif_email, $updateoccurrences = 'true')
+function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $conserver_duree, $date_fin, $nb_jours, $duree, $heure_debut, $heure_fin, $matin, $apresmidi, $repetition, $dateFinRepetitionJour, $dateFinRepetitionSemaine, $dateFinRepetitionMois, $nbRepetitionJour, $nbRepetitionSemaine, $nbRepetitionMois, $jourSemaine, $exceptionRepetition, $appliquerATous, $statut_tache, $lieu, $ressource, $livrable, $titre, $notes, $lien, $custom, $fichiers, $link_id, $notif_email, $pause, $updateoccurrences = 'true')
 {
 
     $objResponse = new xajaxResponse();
@@ -1941,6 +1940,7 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
     $periode->livrable = ($livrable != '' ? $livrable : null);
     $periode->lieu_id = ($lieu != '' ? $lieu : null);
     $periode->ressource_id = ($ressource != '' ? $ressource : null);
+    $periode->pause = ($pause != '' ? $pause . ':00' : null);
     $periode->notes = ($notes != '' ? $notes : null);
     $periode->lien = ($lien != '' ? $lien : null);
     $periode->custom = ($custom != '' ? $custom : null);
@@ -2000,6 +2000,14 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
         return $objResponse;
     }
 
+    $pause = usertime2sqltime($pause);
+    if ($duree != '00:00:00' && !is_valid_time($pause)) {
+        $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
+        $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('erreur_pauseNonValide')));
+        return $objResponse;
+    }
+
     $heure_debut = usertime2sqltime($heure_debut);
     if ($heure_debut != '00:00:00' && !is_valid_time($heure_debut)) {
         $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
@@ -2009,7 +2017,7 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
     }
 
     $heure_fin = usertime2sqltime($heure_fin);
-    if (($heure_debut != '00:00:00' && $heure_fin == '00:00:00') || ($heure_fin != '00:00:00' && !is_valid_time($heure_fin))) {
+    if (($heure_debut != '00:00:00' && $heure_fin == '00:00:00') || ($heure_fin != '00:00:00' && !is_valid_time($heure_fin)) || ($heure_debut != '00:00:00' && $heure_debut == $heure_fin)) {
         $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
         $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
         $objResponse->addAlert(addslashes($smarty->getConfigVars('erreur_heureFinNonValide')));
@@ -2040,7 +2048,7 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
         // on calcule la date finale en rajoutant le nb de jours, sans les WE.
         // affich? seulement en cr?ation
         $dateFin = new DateTime();
-        $dateFin->setDate(substr($periode->date_debut, 0, 4), substr($periode->date_debut, 5, 2), substr($periode->date_debut, 8, 2));
+        $dateFin->setDate((int)substr($periode->date_debut, 0, 4), (int)substr($periode->date_debut, 5, 2), (int)substr($periode->date_debut, 8, 2));
         $nbJours = (int) $nb_jours - 1;
         $i = 1;
         while ($i <= $nbJours) {
@@ -2060,7 +2068,7 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
         // si aucune info renseign?e, on met la journ?e enti?re pour la tache
         if ($duree == '00:00:00' && $heure_debut == '00:00:00' && $heure_fin == '00:00:00' && $matin == 'false' && $apresmidi == 'false') {
             $periode->duree = CONFIG_DURATION_DAY . ':00';
-            if (strlen(CONFIG_DURATION_DAY) < 8) {
+            if (strlen($periode->duree) < 8) {
                 $periode->duree = '0' . $periode->duree;
             }
             $periode->duree_details = 'duree';
@@ -2090,6 +2098,12 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
         if (!is_null($periode->duree)) {
             $periode->date_fin = null;
         }
+		if($periode->pause >= $periode->duree){
+            $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
+            $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+            $objResponse->addAlert(addslashes($smarty->getConfigVars('erreur_duree_pause_tache')));
+            return $objResponse;
+		}
     }
 
     // V?rification que la ressource est disponible
@@ -2112,7 +2126,7 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
         }
     }
 
-	// on construit un tableau indiquant quoi faire pour chaque user assign?
+	// on construit un tableau indiquant quoi faire pour chaque user assigné
 	$col = new GCollection('Periode');
 	if(!isset($creationPeriode)){
 		$col->db_load(array('link_id', '=', $periodeSave->link_id, 'date_debut', '=', $periodeSave->date_debut));
@@ -2120,6 +2134,9 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
 	$usersExistants = $col->get('user_id');
 	$usersTraitement = array();
     foreach ($user_id as $current_user_id) {
+        if ($user->checkDroit('tasks_modify_own_task') && $projet->createur_id != $user->user_id && $current_user_id != $user->user_id) {
+			continue;
+		}
 		if(in_array($current_user_id, $usersExistants)){
 			$usersTraitement[$current_user_id] = 'update';
 		} else{
@@ -2127,6 +2144,10 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
 		}
 	}
 	foreach ($usersExistants as $current_user_id){
+        if ($user->checkDroit('tasks_modify_own_task') && $projet->createur_id != $user->user_id && $current_user_id != $user->user_id) {
+			continue;
+		}
+
 		if(!array_key_exists($current_user_id, $usersTraitement)){
 			$usersTraitement[$current_user_id] = 'delete';
 		}
@@ -2273,7 +2294,7 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
             $sqldate_FinRepetition = userdate2sqldate($dateFinRepetition);
             $dt_Debut = userdate2sqldate($date_debut);
             $date_FinRepetition = new DateTime();
-            $date_FinRepetition->setDate(substr($sqldate_FinRepetition, 0, 4), substr($sqldate_FinRepetition, 5, 2), substr($sqldate_FinRepetition, 8, 2));
+            $date_FinRepetition->setDate((int)substr($sqldate_FinRepetition, 0, 4), (int)substr($sqldate_FinRepetition, 5, 2), (int)substr($sqldate_FinRepetition, 8, 2));
             $dt_FinRepetition = $date_FinRepetition->format('Y-m-d');
             $nbjours = getNbJours($dt_Debut, $dt_FinRepetition);
             // Controle que la date de fin de r?p?tition est sup?rieure ? la date de d?but
@@ -2297,15 +2318,6 @@ function submitFormPeriode($periode_id, $projet_id, $user_id, $date_debut, $cons
 
             if ($repetition == "mois" && $nbjours < 30) {
                 $objResponse->addAlert(addslashes($smarty->getConfigVars('js_dateFinInferieure_30jours')));
-                $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
-                $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
-                return $objResponse;
-            }
-
-            // Controle que l'on ne choisit pas de poser un jour qui n'est pas dans la liste des jours choisis
-            $DAYS_INCLUDED = explode(',', CONFIG_DAYS_INCLUDED);
-            if ($repetition == "semaine" && !in_array($jourSemaine, $DAYS_INCLUDED)) {
-                $objResponse->addAlert(addslashes($smarty->getConfigVars('erreur_jourNonValide')));
                 $objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
                 $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
                 return $objResponse;
@@ -2438,7 +2450,7 @@ function supprimerPeriode($periode_id, $fullscope = 'true', $notif_email = 'fals
         }
     }
 
-    // Suppression des fichiers joints s'ils ne sont plus utilis?s
+    // Suppression des fichiers joints s'ils ne sont plus utilisés
     $periodes_liees = new Gcollection('Periode');
     $periodes_liees->db_loadSQL('SELECT periode_id FROM planning_periode WHERE link_id = ' . val2sql($periode->link_id));
     $nb_periodes_liees = count($periodes_liees->getSmartyData());
@@ -3686,7 +3698,7 @@ function projet_decalage_submit($projet_id, $date_decalage, $date_nouvelle)
     $taches->db_loadSql($sql);
 
     $datetime_nouvelle = new DateTime();
-    $datetime_nouvelle->setDate(substr($date_nouvelle, 0, 4), substr($date_nouvelle, 5, 2), substr($date_nouvelle, 8, 2));
+    $datetime_nouvelle->setDate((int)substr($date_nouvelle, 0, 4), (int)substr($date_nouvelle, 5, 2), (int)substr($date_nouvelle, 8, 2));
     if ($date_decalage > $date_nouvelle) {
         $nb_jours_decalage = -getNbJours($date_nouvelle, $date_decalage, false) - 1;
     } else {
@@ -3829,11 +3841,11 @@ function periode_scinder_submit($periode_id, $date_scinder)
         $data = $tache->getData();
         $data['periode_id'] = 0;
         unset($data['saved']);
-        unset($data['link_id']);
         $suite = new Periode();
         $suite->setData($data);
         $suite->date_debut = userdate2sqldate($dateTmp);
         $suite->date_fin = $dateFin;
+		$suite->link_id = uniqid(mt_rand());
         $suite->db_save();
     }
 
@@ -4097,6 +4109,7 @@ function selection_multi_tache_form($tabDivTaches)
     }
     $smarty->assign('user', $user->getSmartyData());
 
+	$tabTaches = array();
 	foreach ($tabDivTaches as $div){
 		$data2 = explode('_', $div);
 		$tache = new Periode();
@@ -4135,6 +4148,35 @@ function selection_multi_tache_suppr($taches_ids)
 	foreach ($taches as $tache_id){
 		$tache = new Periode();
 		if($tache->db_load(array('periode_id', '=', $tache_id))){
+			$projet = new Projet();
+			$projet->db_load(array('projet_id', '=', $tache->projet_id));
+			if ($user->checkDroit('tasks_modify_own_project') && $projet->createur_id != $user->user_id) {
+				$objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+				$objResponse->addScript('location.reload();');
+				return $objResponse;
+			}
+
+			if ($user->checkDroit('tasks_modify_own_task') && $projet->createur_id != $user->user_id && $tache->user_id != $user->user_id) {
+				$objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
+				$objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+				$objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+				return $objResponse;
+			}
+
+			if ($user->checkDroit('tasks_view_only_own') && $tache->user_id != $user->user_id) {
+				$objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
+				$objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+				$objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+				return $objResponse;
+			}
+			
+			if ($user->checkDroit('tasks_readonly')) {
+				$objResponse->addScript("document.getElementById('butSubmitPeriode').disabled=false;");
+				$objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+				$objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+				return $objResponse;
+			}
+
 			if($user->peutGererTache($tache)){
 				$tache->db_delete();
 			}
@@ -4167,6 +4209,358 @@ function tutoriel_masquer()
     $objResponse->addRedirect('planning.php');
     return $objResponse->getXML();
 }
+
+
+function qrcode()
+{
+    global $lang;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+    $smarty = new MySmarty();
+
+	$user = new User();
+    if ($user->chargerUserFromSession() !== true) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse->getXML();
+    }
+    $smarty->assign('user', $user->getSmartyData());
+
+    $objResponse->addScript('jQuery("#myModal").modal("hide")');
+    $objResponse->addScript('jQuery("#myModal .modal-header h5").html("' . addslashes($smarty->getConfigVars('qrcode_acces_mobile')) . '")');
+    $objResponse->addScript('jQuery("#myModal .modal-body").html("' . xajaxFormat($smarty->getHtml('qrcode.tpl')) . '")');
+    $objResponse->addScript('jQuery("#myModal").modal()');
+
+    return $objResponse->getXML();
+}
+
+function projet_dupliquer_tache_form($projet_id)
+{
+    global $lang;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+    $smarty = new MySmarty();
+
+    $user = new User();
+    if ($user->chargerUserFromSession() !== true || !$user->checkDroit('ressources_all')) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+    $projet = new Projet();
+    if ($projet_id == '' || !$projet->db_load(array('projet_id', '=', $projet_id))) {
+        return $objResponse->getXML();
+    }
+    $smarty->assign('projet', $projet->getSmartyData());
+
+    $objResponse->addScript('jQuery("#myModal .modal-header h5").html("' . addslashes($smarty->getConfigVars('projet_dupliquer_tache_infobulle')) . '")');
+    $objResponse->addScript('jQuery("#myModal .modal-body").html("' . xajaxFormat($smarty->getHtml('projet_dupliquer_tache_form.tpl')) . '")');
+    $objResponse->addScript('jQuery("#myModal").modal()');
+
+    if (!$_SESSION['isMobileOrTablet']) {
+        $objResponse->addScript('jQuery(".datepicker").datepicker({ calendarWeeks: true, language: "'.$lang.'",format: "' . CONFIG_DATE_DATEPICKER . '", autoclose: true,todayHighlight: true });');
+    }
+
+    return $objResponse->getXML();
+}
+
+function projet_dupliquer_tache_submit($projet_id, $date_debut_copie, $date_fin_copie, $date_demarrage)
+{
+    $objResponse = new xajaxResponse();
+    $smarty = new MySmarty();
+    $user = new User();
+    if ($user->chargerUserFromSession() !== true) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+    $projet = new Projet();
+    if (!$projet->db_load(array('projet_id', '=', $projet_id))) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+    $date_debut_copie = forceUserDateFormat($date_debut_copie);
+    if ($date_debut_copie == '' || !controlDate($date_debut_copie)) {
+        $objResponse->addScript("document.getElementById('butSubmitCopie').disabled=false;");
+        $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('projet_copie_radio_copie_a_partir_date_erreur')));
+        return $objResponse;
+    }
+
+    $date_fin_copie = forceUserDateFormat($date_fin_copie);
+    if ($date_fin_copie == '' || !controlDate($date_fin_copie)) {
+        $objResponse->addScript("document.getElementById('butSubmitCopie').disabled=false;");
+        $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('projet_copie_radio_jusqua_date_erreur')));
+        return $objResponse;
+    }
+    $date_demarrage = forceUserDateFormat($date_demarrage);
+    if ($date_demarrage == '' || !controlDate($date_demarrage)) {
+        $objResponse->addScript("document.getElementById('butSubmitCopie').disabled=false;");
+        $objResponse->addScript("document.getElementById('divPatienter').style.display='none';");
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('projet_copie_demarrer_erreur')));
+        return $objResponse;
+    }
+
+    $date_demarrage = userdate2sqldate($date_demarrage);
+    $date_debut_copie = userdate2sqldate($date_debut_copie);
+    $date_fin_copie = userdate2sqldate($date_fin_copie);
+
+    $taches = new GCollection('Periode');
+    $sql = "    SELECT *
+                FROM planning_periode
+                WHERE projet_id = " . val2sql($projet->projet_id) ."
+                AND
+                    (
+                    (date_debut >= " . val2sql($date_debut_copie) . ")
+                    OR
+                    (date_debut <= " . val2sql($date_debut_copie) . " AND date_fin >= " . val2sql($date_debut_copie) . ")
+                    )
+                AND
+                    (
+                    (date_debut <= " . val2sql($date_fin_copie) . ")
+                    OR
+                    (date_debut > " . val2sql($date_fin_copie) . " AND date_fin <= " . val2sql($date_fin_copie) . ")
+                    )
+                ORDER BY date_debut";
+
+    $taches->db_loadSql($sql);
+
+    // on calcule le delta à partir de la premiere tache trouvée
+    $tmp = $taches->fetch();
+
+    // s'il n'y a pas de tache pendant cette période
+    if ($tmp != false) {
+
+        $date_repere_depart = $tmp->date_debut;
+        $taches->reset();
+
+        if ($date_repere_depart > $date_demarrage) {
+            $nb_jours_decalage_initial = -getNbJours($date_demarrage, $date_repere_depart);
+        } else {
+            $nb_jours_decalage_initial = getNbJours($date_repere_depart, $date_demarrage);
+        }
+
+        // sauvegardons l'id de lien actuel
+        $taches_links_id = array();
+
+        while ($tache = $taches->fetch()) {
+
+            $index_id = $tache->link_id;
+
+            // si l'id n'est pas sauvegardé, si l'identifiant n'est pas sauvegardé,
+            // en créer un nouveau et l'attribuer à celui qui vient d'être généré
+            if (!array_key_exists($index_id, $taches_links_id)) {
+                $taches_links_id[$index_id] = uniqid(mt_rand());
+            }
+
+            $new_date_debut = calculerDateFin($tache->date_debut, $nb_jours_decalage_initial);
+
+            $new_tache = new Periode();
+            $data = $tache->getData();
+
+            unset($data['periode_id']);
+            unset($data['saved']);
+            unset($data['fichiers']);
+            unset($data['date_modif']);
+            unset($data['modifier_id']);
+            unset($data['parent_id']);
+            $new_tache->setData($data);
+            $new_tache->createur_id = $user->user_id;
+            $new_tache->date_creation = date('Y-m-d');
+            // prend le nouveau links_id du tableau,
+            // en gardant le même links_id d'utilisateur dans la même tâche
+            $new_tache->link_id = $taches_links_id[$index_id];
+
+            $new_tache->projet_id = $projet->projet_id;
+
+            if (!is_null($tache->date_fin)) {
+                $duree_tache = getNbJours($tache->date_debut, $tache->date_fin);
+                $new_date_fin = calculerDateFin($new_date_debut, $duree_tache);
+                $new_tache->date_fin = $new_date_fin;
+            }
+            $new_tache->date_debut = $new_date_debut;
+            $new_tache->db_save();
+        }
+    }
+
+    $_SESSION['message'] = 'changeOK';
+    $objResponse->addRedirect('planning.php');
+    return $objResponse;
+}
+
+
+function projet_couts_form($projet_id)
+{
+    global $lang;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+    $smarty = new MySmarty();
+
+    $projet = new Projet();
+    if ($projet_id == '' || !$projet->db_load(array('projet_id', '=', $projet_id))) {
+        return $objResponse->getXML();
+    }
+    $smarty->assign('projet', $projet->getSmartyData());
+
+    $user = new User();
+    if ($user->chargerUserFromSession() !== true || (!$user->checkDroit('projects_manage_all') && !($user->checkDroit('projects_manage_own') && $projet->createur_id == $user->user_id))) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+	$listeUsers = new GCollection('User');
+	 $sql = "SELECT pu.*, pug.nom AS groupe_nom
+			FROM planning_user pu
+			LEFT JOIN planning_user_groupe pug ON pu.user_groupe_id = pug.user_groupe_id
+			";
+	if ($user->checkDroit('tasks_view_specific_users')) {
+		$sql .= " INNER JOIN planning_right_on_user AS rou ON rou.allowed_id = pu.user_id AND rou.owner_id = " . val2sql($user->user_id);
+	}
+	$sql .= "   WHERE visible_planning = 'oui' ";
+	if ($user->checkDroit('tasks_modify_team')) {
+		$sql .= " AND pu.user_groupe_id = " . val2sql($user->user_groupe_id);
+	}
+	$sql .= " AND pu.user_id NOT IN (
+					SELECT user_id
+					FROM planning_projet_user_tarif
+					WHERE projet_id = " . val2sql($projet->projet_id) . "
+			)";
+
+	$sql .= " ORDER BY groupe_nom, pu.nom";
+	$listeUsers->db_loadSQL($sql);
+	$smarty->assign('listeUsers', $listeUsers->getSmartyData());
+
+	$tarifs = new GCollection('Projet_user_tarif');
+	$sql = 'SELECT u.nom, u.user_id, put.projet_user_tarif_id, put.tarif_horaire
+			FROM planning_projet_user_tarif AS put
+			INNER JOIN planning_user AS u ON u.user_id = put.user_id
+			WHERE put.projet_id = ' . val2sql($projet_id) . "
+			ORDER BY u.nom
+			";
+	$tarifs->db_loadSQL($sql);
+	$smarty->assign('tarifs', $tarifs->getSmartyData());
+
+    $objResponse->addScript('jQuery("#myModal .modal-header h5").html("' . addslashes($smarty->getConfigVars('projet_couts')) . '")');
+    $objResponse->addScript('jQuery("#myModal .modal-body").html("' . xajaxFormat($smarty->getHtml('projet_couts_form.tpl')) . '")');
+    $objResponse->addScript('jQuery("#myModal").modal()');
+    $objResponse->addScript("initselect2('$lang','" . $smarty->getConfigVars('choix_option') . "')");
+
+    return $objResponse->getXML();
+}
+
+
+function projet_couts_submit($projet_id, $budget_montant, $budget_temps, $users, $tarifs)
+{
+    $objResponse = new xajaxResponse();
+    $smarty = new MySmarty();
+    $user = new User();
+    if ($user->chargerUserFromSession() !== true) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+    $projet = new Projet();
+    if (!$projet->db_load(array('projet_id', '=', $projet_id))) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+    $user = new User();
+    if ($user->chargerUserFromSession() !== true || (!$user->checkDroit('projects_manage_all') && !($user->checkDroit('projects_manage_own') && $projet->createur_id == $user->user_id))) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+	if (trim($budget_montant) != '' && ($budget_montant < 0 || $budget_montant > 999999999)) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('projet_saisir_budget_montant')));
+        return $objResponse;
+    }
+	if (trim($budget_temps) != '' && ($budget_temps < 0 || $budget_temps > 999999999)) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('projet_saisir_budget_temps')));
+        return $objResponse;
+    }
+
+	foreach ($tarifs as $tarif_id => $valeur){
+		$t = new Projet_user_tarif();
+		$t->db_load(array('projet_user_tarif_id', '=', $tarif_id));
+		$t->tarif_horaire = ($valeur != '' ? $valeur : NULL);
+		$t->db_save();
+	}
+
+	if(count($users) > 0){
+		$listeUsers = new GCollection('User');
+		$listeUsers->db_load(array('user_id', 'IN', $users));
+		while($userTmp = $listeUsers->fetch()){
+			$p = new Projet_user_tarif();
+			$p->user_id = $userTmp->user_id;
+			$p->projet_id = $projet_id;
+			$p->tarif_horaire = $userTmp->tarif_horaire_defaut;
+			$p->db_save();
+		}
+	}
+
+
+	$projet->budget_montant = ($budget_montant != '' ? $budget_montant : NULL);
+	$projet->budget_temps = ($budget_temps != '' ? $budget_temps : NULL);
+	$projet->db_save();
+
+	$projet->updateBudgets();
+
+	// si de nouveaux users ajoutés on recharge juste la fenetre, sinon on la ferme
+	if(count($users) > 0){
+		$objResponse->addScript('jQuery("#myModal").modal("hide")');
+		$objResponse->addScript("xajax_projet_couts_form('" . $projet_id . "');");
+	} else{
+		$_SESSION['message'] = 'changeOK';
+        $objResponse->addScript('location.reload();');
+		return $objResponse;
+	}
+
+    return $objResponse->getXML();
+}
+
+
+function projet_couts_supprimer_personne($projet_id, $tarif_id)
+{
+    $objResponse = new xajaxResponse();
+    $smarty = new MySmarty();
+    $user = new User();
+    if ($user->chargerUserFromSession() !== true) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+    $projet = new Projet();
+    if (!$projet->db_load(array('projet_id', '=', $projet_id))) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+    $user = new User();
+    if ($user->chargerUserFromSession() !== true || (!$user->checkDroit('projects_manage_all') && !($user->checkDroit('projects_manage_own') && $projet->createur_id == $user->user_id))) {
+        $objResponse->addAlert(addslashes($smarty->getConfigVars('ajax_droitsInsuffisants')));
+        $objResponse->addScript('location.reload();');
+        return $objResponse;
+    }
+
+	$put = new Projet_user_tarif();
+	$put->db_load(array('projet_user_tarif_id', '=', $tarif_id));
+	$put->db_delete();
+
+    $objResponse->addScript('jQuery("#myModal").modal("hide")');
+    $objResponse->addScript("xajax_projet_couts_form('" . $projet_id . "');");
+
+    return $objResponse->getXML();
+}
+
 
 $xajax->processRequests();
 ?>

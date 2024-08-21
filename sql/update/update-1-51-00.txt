@@ -1,0 +1,5 @@
+
+UPDATE planning_user set droits = replace(droits, 'droits_tasks_view_team_users', 'tasks_view_team_users'); 
+
+UPDATE  `planning_config` SET  valeur ='1.51.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

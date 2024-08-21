@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			<div class="soplanning-box" style="font-size:17px">
+			<div class="soplanning-box" style="font-size:17px;width:800px">
 				{#index_contenu#}
 			</div>
 		</div>
@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="span12">
 			<div class="soplanning-box mt-2">
-				<table width="100%">
+				<table style="width:800px">
 				<tr>
 					<td style="font-size:18px">
 						<a href="utilisateurs.php"><img src="{$BASE}/assets/img/pictos/users.png"> {#users_titre#}</a>
@@ -24,6 +24,7 @@
 						<br><br>
 						<a href="groupes.php"><img src="{$BASE}/assets/img/pictos/groupes.png"> {#groupes_titre#}</a>
 						<br><br>
+						<a href="faq.php"><img src="{$BASE}/assets/img/pictos/faq.png"> {#faq_titre#}</a>
 					</td>
 					<td style="font-size:18px">
 						<a href="planning.php"><img src="{$BASE}/assets/img/pictos/logo.png"> {#planning_titre#}</a>
@@ -32,7 +33,7 @@
 						<br><br>
 						<a href="lieux.php"><img src="{$BASE}/assets/img/pictos/location.png"> {#lieux_titre#}</a>
 						<br><br>
-						<a href="faq.php"><img src="{$BASE}/assets/img/pictos/faq.png"> {#faq_titre#}</a>
+						<a href="roi.php"><i class="fa fa-coins fa-lg fa-fw" aria-hidden="true"></i> {#faq_roi#}</a>
 					</td>
 				</tr>
 				</table>

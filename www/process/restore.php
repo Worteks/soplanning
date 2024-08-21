@@ -3,6 +3,12 @@ require 'base.inc';
 require BASE . '/../config.inc';
 require BASE . '/../includes/header.inc';
 
+if(!$user->checkDroit('parameters_all')) {
+	$_SESSION['erreur'] = 'droitsInsuffisants';
+	header('Location: index.php');
+	exit;
+}
+
 $filename=$_POST['fichier'];
 $fichier_import_seul=$_POST['$filename'];
 $type="save";
@@ -110,7 +116,7 @@ function restore_projets()
 		// Contrôle de l'entête du fichier
 		if ($entete) {
 			$entete=false;
-			if ($data[0]<>"projet_id" || $data[1]<>"nom" || $data[2]<>"iteration" || $data[3]<>"couleur" || $data[4]<>"charge" || $data[5]<>"livraison" || $data[6]<>"lien" || $data[7]<>"statut" || $data[8]<>"groupe_id" || $data[9]<>"createur_id")
+			if ($data[0]<>"projet_id" || $data[1]<>"nom" || $data[2]<>"iteration" || $data[3]<>"couleur" || $data[4]<>"budget_temps" || $data[5]<>"budget_montant" || $data[6]<>"livraison" || $data[7]<>"lien" || $data[8]<>"statut" || $data[9]<>"groupe_id" || $data[10]<>"createur_id")
 			{
 				$msg=preg_replace('/filename/',$file,$smarty->getConfigVars('upload_fichier_mauvais_format_fichier'));
 				echo $msg;
@@ -145,12 +151,13 @@ function restore_projets()
 		$projet->nom = ($data[1] != '' ? substr($data[1],0, $projet->getFieldSize('nom')) : null);
 		$projet->iteration = ($data[2] != '' ? substr($data[2],0, $projet->getFieldSize('iteration')) : null);
 		$projet->couleur = ($data[3] != '' ? $data[3] : null);
-		$projet->charge = ($data[4] != '' ? $data[4] : null);
-		$projet->livraison = ($data[5] != '' ? $data[5] : null);
-		$projet->lien = ($data[6] != '' ? $data[6] : null);
-		$projet->statut = ($data[7] != '' ? $data[7] : null);
-		$projet->groupe_id = ($data[8] != '' ? $data[8] : null);
-		$projet->createur_id = ($data[9] != '' ? $data[9] : null);
+		$projet->budget_temps = ($data[4] != '' ? $data[4] : null);
+		$projet->budget_montant = ($data[5] != '' ? $data[5] : null);
+		$projet->livraison = ($data[6] != '' ? $data[6] : null);
+		$projet->lien = ($data[7] != '' ? $data[7] : null);
+		$projet->statut = ($data[8] != '' ? $data[8] : null);
+		$projet->groupe_id = ($data[9] != '' ? $data[9] : null);
+		$projet->createur_id = ($data[10] != '' ? $data[10] : null);
 
 		if ($type<>"ignore")
 		{
@@ -161,10 +168,13 @@ function restore_projets()
 			{
 				$elements_restauration['projet'][]=array("id"=>$projet->projet_id,"type"=>$type,"status"=>"KO","error"=>$projet->fields_on_error);
 			}
-		} else $elements_restauration['projet'][]=array("id"=>$projet->projet_id,"type"=>$type,"status"=>"OK");
+		} else {
+			$elements_restauration['projet'][]=array("id"=>$projet->projet_id,"type"=>$type,"status"=>"OK");
+		}
 	}
 	ini_set('auto_detect_line_endings',FALSE);
 }
+
 
 // Restauration des groupes projets
 function restore_groupes_projets()

@@ -1012,7 +1012,7 @@ statut_supprimer_erreur_taches = "It is not possible to delete this status, it i
 
 decaler_taches = "Shift tasks"
 decaler_a_partir_du = "Shift from"
-decaler_tout_au = "Shit to "
+decaler_tout_au = "Shift to "
 decaler_tout_au_aide = "All tasks found from start date will be shifted based on new date selected (number of days between those 2 dates). Days off and not-included days in soplanning will be escaped, tasks will be shifted accordingly."
 
 periode_plus = "Plus ..."
@@ -1224,10 +1224,64 @@ You can hide this summary in the "Display" menu.
 tutoriel_contenu_8 = """
 <b>It's up to you!</b>
 <br><br>
-Take control of the tool for yourself and do not hesitate to contact us if you have any questions!
+Take control of the tool for yourself and do not hesitate to contact us if you have any questions :  : <a href="mailto:contact@soplanning.org">contact@soplanning.org</a> !
+"""
+
+tutoriel_contenu_9 = """
+<b>Project cost management / profitability</b>
+<br><br>
+The profitability calculation allows you to know the consumed/remaining amount on projects compared to the initial budget, whether on the total hours or the planned budget.
+<br><br>
+In order to make the best use of this profitability information, here is what to do:
+<br>
+<ul>
+	<li>Enter a default hourly rate in each employee form ("Configuration" tab)</li>
+	<li>Indicate in the project file the planned/initial budget for amount and hours</li>
+	<li>Modify (if necessary) the project form to indicate specific hourly rates for this project. Otherwise the employee's default rate will apply</li>
+	<li>Assign tasks to projects and collaborators</li>
+	<li>Give authorized people access to the Statistics / ROI module on projects (new right added)</li>
+	<li>Consult the figures in the project ROI module: the tool calculates the budget consumed (amount and hours), the remaining budget, and profitability</li>
+</ul>
 """
 
 user_masquerLigneVide = "Hide empty lines on planning"
 user_afficherTableauRecap = "Display summary below planning"
 audit_inactif = "Warning : Audit option is not activated, please enable it first on General settings"
 
+texte_abo = "End of demo on %1%"
+texte_abo_lien = "https://www.soplanning.org/en/hosting-pro-version/?from_soplanning"
+texte_abo2 = "
+Your demo space is available <b>until %1%</b>, it is totally unlimited during this period.<br><br>Beyond that, you will be invited to subscribe to a subscription.< br ><b>Find our different offers</b> by clicking on this tooltip.<br><br>In case of subscription, you will not lose any data, and you keep the address of your SOPlanning.<br><br>Do not hesitate to contact us for any questions about SOPlanning or the subscription at contact@soplanning.org"
+
+qrcode_acces_mobile = "Access SOPlanning on your mobile"
+
+projet_dupliquer_tache_infobulle = "Duplicate tasks on this project"
+projet_dupliquer_tache_a_partir_de = "Duplicate from"
+projet_dupliquer_tache_jusqua = "To"
+projet_dupliquer_tache_demarrer = "duplicate on"
+projet_dupliquer_tache_a_partir_date_erreur = "Please fill a valid date for start date"
+projet_dupliquer_tache_jusqua_date_erreur = "Please fill a valid date for end date"
+projet_dupliquer_tache_demarrer_erreur = "Please fill a valid date for the new range"
+
+options_notification_email_coche = "Email notification by default"
+options_aide_notification_email_coche = "If yes, email notification checkbox will be checked by default in task form"
+
+user_tarif_horaire_defaut = "Default hourly rate"
+projet_couts = "Cost management / Profitability"
+projet_budget_montant = "Budget amount"
+projet_budget_consomme = "Budget consumed"
+projet_budget_restant = "Remaining budget"
+projet_budget_temps = "Budget time"
+projet_temps_consomme = "Time consumed"
+projet_temps_restant = "Remaining time"
+projet_budget_pourcent = "Profitability"
+projet_temps_pourcent = "Profitability"
+projet_soit = "either"
+projet_couts_ajouter = "Customize the hourly rate for this project"
+projet_couts_existants = "Hourly costs of the project"
+projet_saisir_budget_montant = "Please enter a valid budget amount"
+projet_saisir_budget_temps = "Please enter a valid time budget"
+winPeriode_pause = "Pause duration"
+erreur_pauseNonValide = "Please enter a valid pause"
+erreur_duree_pause_tache = "The pause duration is greater than the task duration"
+droits_stats_roi_projects = "ROI projects"

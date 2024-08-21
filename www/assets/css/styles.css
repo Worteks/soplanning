@@ -753,7 +753,7 @@ box-shadow: 1px 1px 5px silver;
 {
  position: sticky;
  position: -webkit-sticky;
- top:188px;
+ top:189px;
  z-index: 12;
 }
 
@@ -769,7 +769,7 @@ box-shadow: 1px 1px 5px silver;
 {
  position: sticky;
  position: -webkit-sticky;
- top:213px;
+ top:214px;
  z-index: 12;
 }
 
@@ -777,7 +777,7 @@ box-shadow: 1px 1px 5px silver;
 {
  position: sticky;
  position: -webkit-sticky;
- top:236px;
+ top:237px;
  z-index: 12;
  border-bottom:1px solid white;
 }
@@ -953,3 +953,16 @@ th[scope=row]
 	max-height: 700px;
 	overflow-y: scroll;
 }
+
+.tooltip-inner {
+    max-width: 500px !important;
+}
+
+
+.colProj1 {
+	background-color:#ffffd9;
+}
+.colProj2 {
+	background-color:#d8fcf9;
+}
+

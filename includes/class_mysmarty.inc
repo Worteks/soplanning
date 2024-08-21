@@ -22,8 +22,6 @@ class MySmarty extends Smarty {
 		$this->compile_dir = COMPIL_DIR;
 		$this->cache_dir = BASE . '/../smarty/cache/';
 
-		require BASE . '/../includes/smarty_data.inc';
-
 		$this->assign('BASE', BASE);
 		$this->assign('lang', $lang);
 
@@ -39,6 +37,25 @@ class MySmarty extends Smarty {
 		} else {
 			$this->configLoad($cfgAvailableLanguages[$lang][1] . '.txt');
 		}
+
+		$this->registerPlugin("modifier","xss_protect", "xss_protect");
+		$this->registerPlugin("modifier","urlencode", "urlencode");
+		$this->registerPlugin("modifier","sqldate2userdate", "sqldate2userdate");
+		$this->registerPlugin("modifier","forceISODateFormat", "forceISODateFormat");
+		$this->registerPlugin("modifier","explode", "explode");
+		$this->registerPlugin("modifier","sqltime2usertime", "sqltime2usertime");
+		$this->registerPlugin("modifier","str_replace", "str_replace");
+		$this->registerPlugin("modifier","formatMessage", "formatMessage");
+		$this->registerPlugin("modifier","delete_session_value", "delete_session_value");
+		$this->registerPlugin("modifier","json_encode", "json_encode");
+		$this->registerPlugin("modifier","substr", "substr");
+		$this->registerPlugin("modifier","buttonFontColor", "buttonFontColor");
+		$this->registerPlugin("modifier","sqldatetime2userdatetime", "sqldatetime2userdatetime");
+		$this->registerPlugin("modifier","strpos", "strpos");
+		$this->registerPlugin("modifier","formaterNombreDecimal", "formaterNombreDecimal");
+		$this->registerPlugin("modifier","strtoupper", "strtoupper");
+		$this->registerPlugin("modifier","basename", "basename");
+		
 
 	}
 

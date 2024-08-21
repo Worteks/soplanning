@@ -145,7 +145,7 @@ var dateFin = {$dateFin|@json_encode};
 	// Affichage du formulaire période si clic sur case vide
 	$('#tabContenuPlanning td.week,#tabContenuPlanning td.weekend,#tabContenuPlanning .cellProject,#tabContenuPlanning .cellProjectBiseau1, #tabContenuPlanning .cellProjectBiseau2').click(function(ev){
 		ev.preventDefault();
-		if (ev.ctrlKey) {
+		if (ev.ctrlKey && !$(this).hasClass("read-only")) {
 			if ($(this).hasClass("cellProject") || $(this).hasClass("cellProjectBiseau1")  || $(this).hasClass("cellProjectBiseau2")) {
 				checkPos = tabCellsSelected.indexOf(this.id);
 				if (checkPos >= 0) {

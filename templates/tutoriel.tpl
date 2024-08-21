@@ -114,10 +114,21 @@
 						</div>
 
 						<div id="tutoriel-contenu-8" style="display:none">
-							{#tutoriel_contenu_8#}
+							{* numeros inverses  8 et 9, normal *}
+							{#tutoriel_contenu_9#}
 							<br><br>
 							<div align="center">
 								<a class="btn btn-default" href="javascript:$('#tutoriel-contenu-7').show();$('#tutoriel-contenu-8').hide();undefined;">{#tutoriel_precedent#}</a>
+								<a class="btn btn-default" href="javascript:$('#tutoriel-contenu-9').show();$('#tutoriel-contenu-8').hide();undefined;">{#tutoriel_suivant#}</a>
+							</div>
+							<br>
+						</div>
+
+						<div id="tutoriel-contenu-9" style="display:none">
+							{#tutoriel_contenu_8#}
+							<br><br>
+							<div align="center">
+								<a class="btn btn-default" href="javascript:$('#tutoriel-contenu-8').show();$('#tutoriel-contenu-9').hide();undefined;">{#tutoriel_precedent#}</a>
 							</div>
 							<br>
 						</div>

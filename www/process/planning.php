@@ -222,9 +222,17 @@ if(isset($_POST['filtreGroupeProjet'])) {
 	setcookie('filtreGroupeProjet', json_encode($projetsFiltre), time()+60*60*24*500, '/');	
 }
 
-if(isset($_POST['filtreGroupeLieu'])) {
+if(isset($_POST['filtreGroupeLieu']) && isset($_POST['lieu'])) {
 	// si filtre sur les lieux, on boucle pour recuperer l'ensemble des lieux choisis
-	$filtre = $_POST['lieu'];
+	$filtre = array();
+	foreach ($_POST['lieu'] as $valPost) {
+		$check = new Lieu();
+		if(!$check->db_load(array('lieu_id', '=', $valPost))){
+			continue;
+		}
+		$filtre[] = $valPost;
+	}
+
 	$_SESSION['filtreGroupeLieu'] = $filtre;
 	if (!empty($filtre))
 	{
@@ -237,9 +245,17 @@ if(isset($_POST['filtreGroupeLieu'])) {
 	}
 }
 
-if(isset($_POST['filtreGroupeRessource'])) {
+if(isset($_POST['filtreGroupeRessource']) && isset($_POST['ressource'])) {
 	// si filtre sur les ressources de tache, on boucle pour recuperer l'ensemble des ressources choisies
-	$filtre = $_POST['ressource'];
+	$filtre = array();
+	foreach ($_POST['ressource'] as $valPost) {
+		$check = new Ressource();
+		if(!$check->db_load(array('ressource_id', '=', $valPost))){
+			continue;
+		}
+		$filtre[] = $valPost;
+	}
+
 	$_SESSION['filtreGroupeRessource'] = $filtre;
 	if (!empty($filtre))
 	{
@@ -440,12 +456,12 @@ if(isset($_GET['triPlanning'])) {
 	if (($_SESSION['baseLigne'] == "users") &&  (in_array($_GET['triPlanning'], $triPlanningPossibleUser)))
 	{
 		$_SESSION['triPlanningUser'] = $_GET['triPlanning'];
-		setcookie('triPlanningUser', $_SESSION['triPlanningUser'], time()+60*60*24*500, '/');		
+		setcookie('triPlanningUser', $_SESSION['triPlanningUser'], time()+60*60*24*500, '/');
 	}
 	if (($_SESSION['baseLigne'] == "projets") &&  (in_array($_GET['triPlanning'], $triPlanningPossibleProjet)))
 	{
 		$_SESSION['triPlanningProjet'] = $_GET['triPlanning'];
-		setcookie('triPlanningProjet', $_SESSION['triPlanningProjet'], time()+60*60*24*500, '/');		
+		setcookie('triPlanningProjet', $_SESSION['triPlanningProjet'], time()+60*60*24*500, '/');
 	}
 	if ($_SESSION['baseLigne'] == "lieux")
 	{
