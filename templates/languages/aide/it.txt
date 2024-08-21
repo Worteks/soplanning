@@ -297,3 +297,18 @@ lieux_contenu = """
 	Una volta assegnato, è anche possibile eliminarlo da un'attività in un secondo momento modificando nuovamente l'attività.
 """
 
+faq_roi = "Project cost management / profitability"
+roi_contenu = """
+	The profitability calculation allows you to know the consumed/remaining amount on projects compared to the initial budget, whether on the total hours or the planned budget.
+	<br><br>
+	In order to make the best use of this profitability information, here is what to do:
+	<br>
+	<ul>
+		<li>Enter a default hourly rate in each employee form ("Configuration" tab)</li>
+		<li>Indicate in the project file the planned/initial budget for amount and hours</li>
+		<li>Modify (if necessary) the project form to indicate specific hourly rates for this project. Otherwise the employee's default rate will apply</li>
+		<li>Assign tasks to projects and collaborators</li>
+		<li>Give authorized people access to the Statistics / ROI module on projects (new right added)</li>
+		<li>Consult the figures in the project ROI module: the tool calculates the budget consumed (amount and hours), the remaining budget, and profitability</li>
+	</ul>
+"""

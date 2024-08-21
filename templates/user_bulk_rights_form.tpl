@@ -134,7 +134,7 @@
 										{if $userCourant.user_groupe_id neq $groupeTemp}
 											</optgroup><optgroup id="g{$userCourant.user_groupe_id}" value="1" label="{$userCourant.groupe_nom}">
 										{/if}
-									<option value="{$userCourant.user_id}">{$userCourant.nom|xss_protect} ({$userCourant.user_id|xss_protect})</option>		
+									<option value="{$userCourant.user_id}" {if in_array($userCourant.user_id, $listUsersRights)}selected="selected"{/if}>{$userCourant.nom|xss_protect} ({$userCourant.user_id|xss_protect})</option> 								
 									{assign var=groupeTemp value=$userCourant.user_groupe_id}
 									{/foreach}
 								{/if}

@@ -19,14 +19,14 @@
 						<h5>{#groupe_erreurChamps#} :</h5>
 						<ul>
 							{foreach from=$error_fields item=field}
-								<li>{$field}</li>
+								<li>{$field|xss_protect}</li>
 							{/foreach}
 						</ul>
 					</div>
 				{/if}
 				<form action="{$BASE}/process/groupe_save.php" method="POST" class="form-horizontal">
 					<input type="hidden" name="saved" value="{$groupe.saved}" />
-					<input type="hidden" name="groupe_id" value="{$groupe.groupe_id}" />
+					<input type="hidden" name="groupe_id" value="{$groupe.groupe_id|xss_protect}" />
 					<div class="input-group">
 						<label class="col-md-2 col-form-label" for="nom">{#groupe_nom#} :</label>
 						<div class="col-md-8">

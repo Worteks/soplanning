@@ -1106,7 +1106,7 @@ import_type_update = "Update"
 import_type_ignore = "Ignoriert"
 import_type_enregistration = "Aufzeichnungstyp"
 
-erreur_extraction_sauvegarde = "Backup extraction error! Wrong format?"
+erreur_extraction_sauvegarde = "Backup Lesefehler! Falsches Format?"
 
 options_api = "API-Zugang"
 options_api_url = "REST access point"
@@ -1136,98 +1136,152 @@ google_2fa_scan_code = "Einmal-Code"
 google_2fa_code_failed = "Falscher Code"
 google_2fa_code_help = "Bitte den Einmal-Code von der Google Authenticator App eingeben. <br> Wenn Sie keinen Zugang mehr erhalten, bitten Sie den Administrator Ihr Benutzerkonto zurückzusetzen."
 google_2fa_reset = "Reset der 2-Faktor-Authentifizierung (Google Authenticator neu konfigurieren)" 
-options_2fa_not_compatible = "This feature requires PHP 7 or more"
+options_2fa_not_compatible = "Diese Funktion erfordert PHP 7 oder höher"
 
-projet_copie_infobulle = "Copy this project and tasks"
-projet_copie_nom = "Name of new project"
-projet_copie_projet_id = "New project identifier"
-projet_copie_a_partir_de = "Copy from"
-projet_copie_radio_copie_a_partir_debut = "first task of this project"
-projet_copie_radio_copie_a_partir_date = "following date"
-projet_copie_jusqua = "until"
-projet_copie_radio_copie_jusqua_fin = "last task"
-projet_copie_radio_copie_jusqua_date = "following date"
-projet_copie_demarrer = "Copy on new project on"
-projet_copie_demarrer_erreur = "Please fill valid start date for the new project"
-projet_copie_nom_copie_erreur = "Please fill name of the new project"
-projet_copie_radio_copie_a_partir_date_erreur = "Please fill a valid date for start of your selection"
-projet_copie_radio_jusqua_date_erreur = "Please fill a valid date for end of your selection"
-projet_copie_projet_id_copie_erreur = "Please fill a valid project identifier (letters and digits only)"
+projet_copie_infobulle = "Dieses Projekt und seine Aufgaben kopieren"
+projet_copie_nom = "Name des neuen Projekts"
+projet_copie_projet_id = "Neue Projekt-ID"
+projet_copie_a_partir_de = "Kopieren von"
+projet_copie_radio_copie_a_partir_debut = "erste Aufgabe dieses Projekts"
+projet_copie_radio_copie_a_partir_date = "folgendes Datum"
+projet_copie_jusqua = "bis"
+projet_copie_radio_copie_jusqua_fin = "letzte Aufgabe"
+projet_copie_radio_copie_jusqua_date = "folgendes Datum"
+projet_copie_demarrer = "In neues Projekt kopieren am"
+projet_copie_demarrer_erreur = "Bitte gültiges Startdatum für das neue Projekt angeben"
+projet_copie_nom_copie_erreur = "Bitte den Namen des neuen Projekts angeben"
+projet_copie_radio_copie_a_partir_date_erreur = "Bitte gültiges Startdatum für die Auswahl angeben"
+projet_copie_radio_jusqua_date_erreur = "Bitte gültiges Enddatum für für die Auswahl angeben"
+projet_copie_projet_id_copie_erreur = "Bitte gültige Projekt-ID angeben (nur Buchstaben und Zahlen)"
 
-titre_action_multiple_taches = "Group action"
-action_multi_concernees = "Concerned tasks"
-action_multi_supprimer = "Delete those tasks"
-action_multi_annuler_selection = "Cancel my selection"
-action_multi_annuler_fermer = "Add other tasks"
-winPeriode_recurrente_fin = "Last occurence"
+titre_action_multiple_taches = "Sammelaktion"
+action_multi_concernees = "Betroffene Aufgaben"
+action_multi_supprimer = "Diese Aufgaben löschen"
+action_multi_annuler_selection = "Auswahl aufheben"
+action_multi_annuler_fermer = "Andere Aufgaben hinzufügen"
+winPeriode_recurrente_fin = "Letztes Vorkommen"
 
-tutoriel_titre = "Getting Started Tutorial"
-tutoriel_demarrer = "Start tutorial"
-tutoriel_precedent = "Previous"
-tutoriel_suivant = "Next"
-tutoriel_ne_plus_afficher = "Don't display anymore this tutorial"
-tutoriel_ne_plus_afficher_confirm = "If you confirm, this tutorial will not be shown anymore until next SOPlanning version"
+tutoriel_titre = "Einstiegs-Tutorial"
+tutoriel_demarrer = "Tutorial starten"
+tutoriel_precedent = "zurück"
+tutoriel_suivant = "weiter"
+tutoriel_ne_plus_afficher = "Dieses Tutorial nicht mehr anzeigen"
+tutoriel_ne_plus_afficher_confirm = "Wenn Sie bestätigen, wird dieses Tutorial nicht mehr angezeigt, bis eine neue Version von SOPlanning herauskommt."
 tutoriel_contenu_1 = """
-Welcome to SOPlanning!
+Wilkommen bei SOPlanning!
 <br><br>
-Follow this tutorial in a few steps to discover specific features of SOPlanning.
+Folgen Sie diesem Tutorial mit wenigen Schritten und lernen Sie so die Funktionen von SOPlanning kennen.
 <br>
-SOPlanning being quite intuitive you should understand the basic operation in a few minutes.
+SOPlanning ist intuitiv zu bedienen und Sie werden die wesentlichen Funktionen in wenigen Minuten verstehen.
 <br><br>
-After learning about these features, you can test them for yourself once this tutorial is closed.
+Nachdem Sie diese Funktionen kennengelernt haben, können Sie sie testen, sobald das Tutorial abgeschlossen ist.
 <br><br>
-For any other questions, look at the help (button in the bar at the top), or contact us at support.
+Bei weiteren Fragen schauen Sie in der Hilfe nach (Schaltfläche in der oberen Leiste), oder kontaktieren Sie uns (support).
 """
 tutoriel_contenu_2 = """
-<b>Task creation</b>
+<b>Aufgaben erstellen</b>
 <br><br>
-To create a task you can click on the corresponding button above the schedule, or click directly on a box.
+Um eine Aufgabe zu erstellen, klicken Sie auf die entsprechende Schaltfläche über dem Plan oder klicken Sie direkt in ein Kästchen.
 <br><br>
-In this case the date will be pre-filled, as well as the line on which you clicked (the person or the project depending on the current display).
+In diesem Fall wird das Datum vor-ausgefüllt, genauso wie die Zeile, in welche Sie geklickt haben (die Person oder das Projekt, je nach dem, wie die Anzeige ausgewählt ist).
 """
 tutoriel_contenu_3 = """
-<b>Drag / drop</b>
+<b>Ziehen / loslassen</b>
 <br><br>
-You can drag a task from one box to another. SOPlanning will then offer you to copy or move this task to the new location.
+Sie können eine Aufgabe von einer Position zu einer anderen ziehen. SOPlanning wird dann anbieten, die Aufgabe an die neue Position zu kopieren oder zu verschieben.
 <br><br>
-This feature will allow you to move the task in time, or change project / assigned person.
+Diese Funktion erlaubt es, die Aufgabe in der Zeit zu verschieben oder einem anderen Projekt bzw. einer anderen Person zuzuweisen.
 """
 tutoriel_contenu_4 = """
 <b>Multiple selection</b>
 <br><br>
-If you hold the CTRL key while you click on a task, then you can select multiple tasks from it as long as you hold CTRL.
+Wenn Sie beim klicken auf eine Aufgabe die STRG-Taste drücken, können Sie mehrere Aufgaben auswählen, solange Sie die STRG-Taste gedrückt halten.
 <br><br>
-As soon as you release CTRL, a window will allow you to perform actions on the selected tasks.
+Sobald Sie die STRG-Taste loslassen, können Sie die Änderungen an allen ausgewählten Aufgaben durchführen. 
 """
 tutoriel_contenu_5 = """
-<b>Double arrow and the different views of the schedule</b>
+<b>Doppelpfeil und verschiedene Ansichten des Plans</b>
 <br><br>
-You can see a double arrow as the first "box" of the schedule. This allows you to easily switch from the person view to the project view.
+Die erste Zelle im Plan zeigt einen Doppelpfeil. Diese Schaltfläche ermöglicht ein schnelles Umschalten zwischen Personen-Ansicht und Projekt-Ansicht.
 <br><br>
-You can do the same thing with the "Display" menu located above the schedule, and display the other possible views.
+Die Ansicht lässt sich auch über das Anzeige-Menü oberhalb des Plans wechseln.
 """
 tutoriel_contenu_6 = """
-<b>Project offset</b>
+<b>Projekt-Verschiebung</b>
 <br><br>
-When viewing the schedule "by project", you will see a small arrow behind each project name in the left column.
-<br><br>This will allow you to access the bulk task shift functionality, setting the start date of the shift, and the date to shift all matching tasks to.
+In der Projekt-Ansicht wird ein kleiner Pfeil hinter jedem Projektnamen in der linken Spalte angezeigt.
+<br><br>Damit kann man die Gruppenverschiebungsfunktion aufrufen, wo das Startdatum und das Zieldatum der Verschiebung aller entsprechenden Aufgaben eingegeben werden.
 """
 tutoriel_contenu_7 = """
-<b>Summary of the schedule</b>
+<b>Summe des Plans</b>
 <br><br>
-Below the schedule you will find a summary of all the tasks visible on the schedule, for the selected time period.
+Unterhalb des Plans wird eine Liste aller sichtbaren Aufgaben in der ausgewählten Zeitperiode angezeigt.
 <br>
-This allows you to see a more detailed version of scheduled tasks, with a list view.
+Das ermöglicht eine detailliertere Betrachtung der geplanten Aufgaben.
 <br><br>
-You can hide this summary in the "Display" menu.
+Diese Liste kann im Anzeigen-Menü ausgeblendet werden.
 """
 tutoriel_contenu_8 = """
-<b>It's up to you!</b>
+<b>Jetzt sind Sie dran!</b>
 <br><br>
-Take control of the tool for yourself and do not hesitate to contact us if you have any questions!
+Übernehmen Sie selbst die Kontrolle über diese Anwendung und zögern Sie nicht uns zu kontaktieren, wenn Sie weitere Fragen haben :  : <a href="mailto:contact@soplanning.org">contact@soplanning.org</a>!
 """
 
-user_masquerLigneVide = "Hide empty lines on planning"
-user_afficherTableauRecap = "Display summary below planning"
-audit_inactif = "Warning : Audit option is not activated, please enable it first on General settings"
+tutoriel_contenu_9 = """
+<b>Project cost management / profitability</b>
+<br><br>
+The profitability calculation allows you to know the consumed/remaining amount on projects compared to the initial budget, whether on the total hours or the planned budget.
+<br><br>
+In order to make the best use of this profitability information, here is what to do:
+<br>
+<ul>
+	<li>Enter a default hourly rate in each employee form ("Configuration" tab)</li>
+	<li>Indicate in the project file the planned/initial budget for amount and hours</li>
+	<li>Modify (if necessary) the project form to indicate specific hourly rates for this project. Otherwise the employee's default rate will apply</li>
+	<li>Assign tasks to projects and collaborators</li>
+	<li>Give authorized people access to the Statistics / ROI module on projects (new right added)</li>
+	<li>Consult the figures in the project ROI module: the tool calculates the budget consumed (amount and hours), the remaining budget, and profitability</li>
+</ul>
+"""
 
+user_masquerLigneVide = "Leere Zeilen in der Planung ausblenden"
+user_afficherTableauRecap = "Liste unterhalb des Plans anzeigen"
+audit_inactif = "Achtung: Die Protokollfunktion ist nicht aktiviert, bitte erst in den allgemeinen Einstellungen einschalten"
+
+texte_abo = "End of demo on %1%"
+texte_abo_lien = "https://www.soplanning.org/en/hosting-pro-version/?from_soplanning"
+texte_abo2 = "
+Your demo space is available <b>until %1%</b>, it is totally unlimited during this period.<br><br>Beyond that, you will be invited to subscribe to a subscription.< br ><b>Find our different offers</b> by clicking on this tooltip.<br><br>In case of subscription, you will not lose any data, and you keep the address of your SOPlanning.<br><br>Do not hesitate to contact us for any questions about SOPlanning or the subscription at contact@soplanning.org"
+
+qrcode_acces_mobile = "Access SOPlanning on your mobile"
+
+projet_dupliquer_tache_infobulle = "Duplicate tasks on this project"
+projet_dupliquer_tache_a_partir_de = "Duplicate from"
+projet_dupliquer_tache_jusqua = "To"
+projet_dupliquer_tache_demarrer = "duplicate on"
+projet_dupliquer_tache_a_partir_date_erreur = "Please fill a valid date for start date"
+projet_dupliquer_tache_jusqua_date_erreur = "Please fill a valid date for end date"
+projet_dupliquer_tache_demarrer_erreur = "Please fill a valid date for the new range"
+
+options_notification_email_coche = "Email notification by default"
+options_aide_notification_email_coche = "If yes, email notification checkbox will be checked by default in task form"
+
+user_tarif_horaire_defaut = "Default hourly rate"
+projet_couts = "Cost management / Profitability"
+projet_budget_montant = "Budget amount"
+projet_budget_consomme = "Budget consumed"
+projet_budget_restant = "Remaining budget"
+projet_budget_temps = "Budget time"
+projet_temps_consomme = "Time consumed"
+projet_temps_restant = "Remaining time"
+projet_budget_pourcent = "Profitability"
+projet_temps_pourcent = "Profitability"
+projet_soit = "either"
+projet_couts_ajouter = "Customize the hourly rate for this project"
+projet_couts_existants = "Hourly costs of the project"
+projet_saisir_budget_montant = "Please enter a valid budget amount"
+projet_saisir_budget_temps = "Please enter a valid time budget"
+winPeriode_pause = "Pause duration"
+erreur_pauseNonValide = "Please enter a valid pause"
+erreur_duree_pause_tache = "The pause duration is greater than the task duration"
+droits_stats_roi_projects = "ROI projects"

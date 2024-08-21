@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			<div class="soplanning-box" style="font-size:17px">
+			<div class="soplanning-box" style="font-size:17px;width:800px">
 				<table width="100%">
 				<tr>
 					<td><b>{#ressources_titre#|strtoupper}</b></td>

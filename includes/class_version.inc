@@ -82,6 +82,7 @@ class Version
 			} catch (Exception $e) {
 				return 'database_creation_failed';
 			}
+			
 			if(!mysqli_query($cfgConnection, 'CREATE DATABASE `' . $cfgDatabase . '` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;')) {
 			return 'database_creation_failed';
 			}
@@ -253,7 +254,7 @@ class Version
 
 	public function checkPhpVersion() {
 		$version = phpversion();
-		if($version < '5.6') {
+		if($version < '7.2') {
 			return 'php_too_old';
 		}
 		return true;

@@ -280,6 +280,7 @@ if($_SESSION['baseLigne'] == "projets") {
 }
 $smarty->assign('triPlanning', $_SESSION['triPlanning']);
 
+
 // Nombre de lignes affichées
 if(isset($_COOKIE['nb_lignes']) && is_numeric($_COOKIE['nb_lignes'])) {
 	$_SESSION['nb_lignes'] = $_COOKIE['nb_lignes'];
@@ -396,7 +397,7 @@ $sql .= ')';
 $sql .= " OR pp.createur_id = " . val2sql($user->user_id) . ')';
 // Si filtre sur statut de projet
 if(count($_SESSION['filtreStatutProjet']) > 0) {
-	$sql.= " AND pp.statut IN ('" . implode("','", $_SESSION['filtreStatutProjet']) . "')";
+	$sql.= " AND pp.statut IN ('" . implode("','", array_map('addslashes', $_SESSION['filtreStatutProjet'])) . "')";
 }
 $sql.= " GROUP BY pp.nom, pp.projet_id
 		ORDER BY pg.nom, pp.nom";
@@ -441,7 +442,7 @@ if ($user->checkDroit('tasks_view_only_own')) {
 	$sql .= " AND pu.user_id = " . val2sql($user->user_id);
 }
 // Si filtre sur son équipe
-if($user->checkDroit('droits_tasks_view_team_users')) {
+if($user->checkDroit('tasks_view_team_users')) {
 	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
 }
 $sql .=	" ORDER BY groupe_nom, pu.nom";

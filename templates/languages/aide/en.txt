@@ -63,7 +63,7 @@ planning_contenu = """
 	<br>
 	When hovering over a task, you can see all the information in the task. Just click on the cell of a task to modify it.
 	<br>
-	The list of tasks, projects and people displayed is directly related to the rights of the connected person. Depending on the rights assigned to it in the <a href="utilisateurs.php"> user management </a>, the connected person will see more or less information.
+	The list of tasks, projects and people displayed is directly related to the rights of the connected person. Depending on the rights assigned to it in the <a href="../utilisateurs.php"> user management </a>, the connected person will see more or less information.
 	<br>
 	When you click on an empty day, or below existing tasks, you go directly to the task creation form, and the project or person is pre-selected, as well as the date. You can also add a task directly from the menu at the top of the "Schedule >> Add a task" tool or from the colored "Add a task" button.
 	<br>
@@ -114,7 +114,7 @@ ressources_contenu = """
 	Resources are additional data that can be task-related. <br>
 	This module is optional and can be activated or deactivated at any time in the SOPlanning options.
 	<br>
-	When the module is active, a selection drop-down menu appears in the task management form, containing the list of available resources. You can manage this list in the interface of <a href="ressources.php"> resource management </a>, via the "Settings >> Resources" menu.
+	When the module is active, a selection drop-down menu appears in the task management form, containing the list of available resources. You can manage this list in the interface of <a href="../ressources.php"> resource management </a>, via the "Settings >> Resources" menu.
 	<br>
 	This field is optional in the task form, so you do not have to choose a resource for each task even if the module is enabled.
 	<br><br>
@@ -155,7 +155,7 @@ users_contenu = """
 	The "login" and "password" are also optional, and will only be needed if you want to give access to the schedule to the user concerned. Each login is unique. Please also enter passwords that are sufficiently complex (8 characters, with several breaks).
 
 	<H3> Team </h3>
-	You can attach a user to one and only one team. This will then define rights related to the team to which it belongs. See help on <a href="equipes.php"> teams </a> to manage the list of teams. See the <a href="../user_groupes.php"> Team Management </a> module
+	You can attach a user to one and only one team. This will then define rights related to the team to which it belongs. See help on <a href="../equipes.php"> teams </a> to manage the list of teams. See the <a href="../user_groupes.php"> Team Management </a> module
 
 	<h3> Definition of rights </h3>
 	<b> User Management </b>: gives the right to all possible actions on user accounts. There is no intermediate right to partially modify the accounts. See the module <a href="../user_list.php"> project management </a>.
@@ -193,7 +193,7 @@ equipes_titre = "Teams management"
 equipes_contenu = """
 	Teams can group together projects visually.
 	<br>
-	Teams can impact user rights in some cases, see managing <a href="user.php"> user rights </a>.
+	Teams can impact user rights in some cases, see managing <a href="../user.php"> user rights </a>.
 	<br>
 	These teams help visibility in the management of users (filter on a possible team), and in the planning (possibility of grouping users by team in the option "sort by").
 	<br>
@@ -281,7 +281,7 @@ lieux_contenu = """
 	Places are additional data that can be related to tasks. <br>
 	This module is optional and can be activated or deactivated at any time in the SOPlanning options.
 	<br>
-	When the module is active, a selection drop-down menu appears in the task management form, containing the list of available locations. You can manage this list in the <a href="lieux.php"> place management </a> interface, via the "Settings >> Places" menu.
+	When the module is active, a selection drop-down menu appears in the task management form, containing the list of available locations. You can manage this list in the <a href="../lieux.php"> place management </a> interface, via the "Settings >> Places" menu.
 	<br>
 	This field is optional in the task form, so you do not have to choose a location for each task even if the module is enabled.
 	<br><br>
@@ -290,3 +290,18 @@ lieux_contenu = """
 	Once assigned, you can also delete it from a task afterwards by editing the task again.
 """
 
+faq_roi = "Project cost management / profitability"
+roi_contenu = """
+	The profitability calculation allows you to know the consumed/remaining amount on projects compared to the initial budget, whether on the total hours or the planned budget.
+	<br><br>
+	In order to make the best use of this profitability information, here is what to do:
+	<br>
+	<ul>
+		<li>Enter a default hourly rate in each employee form ("Configuration" tab)</li>
+		<li>Indicate in the project file the planned/initial budget for amount and hours</li>
+		<li>Modify (if necessary) the project form to indicate specific hourly rates for this project. Otherwise the employee's default rate will apply</li>
+		<li>Assign tasks to projects and collaborators</li>
+		<li>Give authorized people access to the Statistics / ROI module on projects (new right added)</li>
+		<li>Consult the figures in the project ROI module: the tool calculates the budget consumed (amount and hours), the remaining budget, and profitability</li>
+	</ul>
+"""

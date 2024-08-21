@@ -1,0 +1,26 @@
+v1.51.00
+
+- QRcode implementation for mobile access : you can scan the code with your mobile
+- German translation update
+- PHP8.2 compatibility improved
+- security improved
+- installer improvement
+- Libraries update
+- Fix on help texts
+- fix on options saved on cookie (display empty lines, etc)
+- fix on ical error
+- Minor fixes on API
+- fixed error redirection page in some cases
+- Fixed header menu display for specific rights
+- fixed error message display not visible in specific cases
+- fix when moving tasks : if start date and end date are the same, the move will cause an extension of the end date. Now it simply move the "one day" task
+- Bugfix when deleting recurring tasks (task was deleted/recreated before being able to delete)
+- Minor bugfix display on project management page
+- Bugfix on task form when readonly (assigned users not visible)
+- Bugfix on repeated tasks, now you can start repetition even if the start date is a day off
+- Autocomplete fix on task title
+- Bugfix on view per hour : when end time was "rounded" (10h 11h, etc), the next hour was considered as worked. Also fixed case for task with duration (without start end), number of cells covered was not right
+- Several translation fixes
+- Some other small fixes reported by users
+
+

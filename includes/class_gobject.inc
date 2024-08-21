@@ -328,7 +328,7 @@ abstract class GObject
 	{
 		$fields = array();
 		foreach ($this->fields as $key => $val) {
-			$fields[$key] = $val->getSqlName() . ' AS ' . $key;
+			$fields[$key] = '`' . $val->getSqlName() . '`' . ' AS ' . '`' . $key . '`';
 		}
 		$from = array();
 		reset($this->fields);

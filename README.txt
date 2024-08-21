@@ -18,6 +18,50 @@ SO Planning - Readme
 
 ---------------------------
 
+v1.52.00 ( 10/04/24)
+
+- Update for many libraries, PHP 7.2 minimum required now, compatible with PHP 8.2
+- New module : Project cost management / profitability. Add your employees costs in the tool and get profitability rate for your projects based on assigned tasks
+- Email notification checkbox default value in task form (you can set yes or no)
+- Link to the task form added to ICAL export
+- UID (unique event ID) added to ICAL export
+- User login increased to 100 chars
+- Memory limit management on planning
+- Some translations fixes
+- Bugfixes on API
+- Fixed bug on redirect if specific logout provided
+- Fixed bug on Group creation if special characters in title
+- Bugfix on exclusive places and resources when creating a recurring task
+- Fix for advanced filter display when there are a lot of places/resources
+- various minor bugfixes
+- updated google Authenticator 2fA (google deactivated QRcode library)
+
+
+v1.51.00 (19/06/23)
+- QRcode implementation for mobile access : you can scan the code with your mobile
+- German translation update
+- PHP8.2 compatibility improved
+- security improved
+- installer improvement
+- Libraries update
+- Fix on help texts
+- fix on options saved on cookie (display empty lines, etc)
+- fix on ical error
+- Minor fixes on API
+- fixed error redirection page in some cases
+- Fixed header menu display for specific rights
+- fixed error message display not visible in specific cases
+- fix when moving tasks : if start date and end date are the same, the move will cause an extension of the end date. Now it simply move the "one day" task
+- Bugfix when deleting recurring tasks (task was deleted/recreated before being able to delete)
+- Minor bugfix display on project management page
+- Bugfix on task form when readonly (assigned users not visible)
+- Bugfix on repeated tasks, now you can start repetition even if the start date is a day off
+- Autocomplete fix on task title
+- Bugfix on view per hour : when end time was "rounded" (10h 11h, etc), the next hour was considered as worked. Also fixed case for task with duration (without start end), number of cells covered was not right
+- Several translation fixes
+- Some other small fixes reported by users
+
+
 v1.50.00 (02/11/2022)
 - Audit module control in settings
 - "Hide empty lines" and "Display summary under the planning" option are now stored in user profile and can be applied for all devices used
@@ -43,7 +87,6 @@ v1.50.00 (02/11/2022)
 
 
 v1.49.00 (25/02/2022)
-
 - New ability : select multiple tasks and delete them with CTRL (new other features for multiple selection coming soon)
 - Added new feature : can duplicate project and his tasks
 - End occurence date now displayed for repeated tasks
@@ -71,7 +114,6 @@ v1.49.00 (25/02/2022)
 - Various minor fixes
 
 v1.48.00 (17/05/2021)
-
 - Google login / SSO : connect now through your Google/Gmail login page. Requires to make some setup from your organization in order to be activated
 - Google 2 factors authentication : if activated, all people connecting to your soplanning will have to install Google Authenticator on their smartphone for a securized 2 step authentication
 - API is ready ! If you have technical skills you can find API features in SOPlanning settings in order to synchronize SOPlanning with your own system on both ways. Contact us for more details
@@ -82,7 +124,6 @@ v1.48.00 (17/05/2021)
 
 
 v1.47 (21/07/20)
-
 - You can now upload files in tasks !
 - new feature in order to cut tasks in 2 parts when covering several days. The task is splitted in 2 tasks, from each side of the selected date
 - sticky header for the planning, now you will use browser scrollbars (more fluent and instinctive)
@@ -112,7 +153,6 @@ v1.47 (21/07/20)
 
 
 v1.46.00 (03/03/20)
-
 - New feature, ability to shift a whole project
 - Added better timepicker in task form
 - Added "remember me" feature to the login page
@@ -132,7 +172,6 @@ v1.46.00 (03/03/20)
 - Several security issues fixed
 
 v1.45 (19/08/219)
-
 - new form decicated to task creation ! This form is lighter than the modification form and will save time when creating several tasks.
 - improved hour selection in task form, it's now easier to fill hour/minute
 - Task during less than one day are now beveled, and the text displayed is colored accordingly
@@ -150,7 +189,6 @@ v1.45 (19/08/219)
 
 
 v1.44 (13/03/19)
-
 - new fresh module : audit / history. This module will let you register allmost all actions in the planning : task modification, task removal, user modification, etc. You will be able to view all past actions and restore data if needed.
 - New design improvments, on desktop and mobile. Closer to current design standards
 - New options for task display in SOPlanning parameters : you can choose if you want to display specific icon depending on task data (link, comment, duration), you can decide where the task color come from (assignee, project, or status), etc
@@ -165,7 +203,6 @@ v1.44 (13/03/19)
 
 
 v1.43 (18/12/2018)
-
 - Improved drag and drop : now you can select "move task" only for selected task or all repeted tasks
 - New option to change text on task cells (increase it if you want)
 - Improved statutes management : display options (bold, underline, strike, etc) and more
@@ -182,7 +219,6 @@ v1.43 (18/12/2018)
 
 
 v1.42 (27/07/2018)
-
 - Big new version of the planning. Mostly code rewriting, not so many changes on display, but performances improved.
 - Help pages integrated in the tool. The help content will be improved in the next versions
 - LDAP : added login and password for bind command
@@ -195,7 +231,6 @@ v1.42 (27/07/2018)
 - Bugfix for some PHP versions
 
 v1.41 (20/12/2017)
-
 - Big change : now statutes are stored in database, for task status and project status. It means you can change status name, add new ones, etc !
 - PDF export : summary under the planning is now an option (included or not)
 - Project filter on planning : projects covering the timeline are now displayed first in the filter
@@ -207,7 +242,6 @@ v1.41 (20/12/2017)
 
 
 v1.40 (21/09/2017)
-
 - PHP7 compliancy !
 - option added in task form to disable notification by email
 - you can now open task from the summary under the planning (click on start date)
@@ -220,7 +254,6 @@ v1.40 (21/09/2017)
 - small bug fixes
 
 v1.39 (01/04/2017)
-
 - Big work on mobile/tablet version
 - new scrolls added on the planning, you can now fix display horizontaly and verticaly
 - you can now click on the planning header, it will display the planning based on the clicked day/week/month
@@ -236,7 +269,6 @@ v1.39 (01/04/2017)
 - Various bugfixes and small improvements coming from users feedback
 
 v1.38 (28/10/2016)
-
 - XLS export added
 - new right added to user : show him only his assigned tasks, he will not see tasks assigned to other people
 - Big layout upgrade for better browser compatibility, and maintenance for the future
@@ -250,7 +282,6 @@ v1.38 (28/10/2016)
 - now possible to start task at 00:00 as start hour
 
 v1.37 (27/06/2016)
-
 - 2 new optional modules : places and ressources. You can now assign a place and/or a ressource in task. The system will check you won't use the same place or ressource at the same time
 - Select multiple users when creating tasks : you can know copy the task to many people at the same time (2 maximum in the past)
 - New filter on teams added to users management module.
@@ -265,7 +296,6 @@ v1.37 (27/06/2016)
 
 
 v1.36 (12/01/2016)
-
 - Swiss public holidays updated
 - fixed list of projects displayed when using specific right
 - Added SMTP log to Email test (in parameters section) in order to have more details
@@ -281,7 +311,6 @@ v1.36 (12/01/2016)
 - new user preferences (click on your profile name in the header) : choose default view
 
 v1.35
-
 - New fresh view : click on the "zoom" icon and display more detailed cells for tasks : user name, title, duration, day occupency
 - Added total hours assigned and occupency rate at bottom of the planning (if activitated)
 - Total hours (bottom of the planning) now well computed and displayed in the last right cell of the day
@@ -296,7 +325,6 @@ v1.35
 - Fulltext search upgraded, can now search on several words, will display all tasks concerned by one of the words
 
 v1.34
-
 - New design/features for date selection in the planning ! Check it out !
 - Added free custom field in the tasks, for your specific needs (import/export with your system, etc)
 - Improvement in ICAL compatibility (specific cases on Outlook and Google Calendar)
@@ -313,19 +341,16 @@ v1.34
 - Some minors bugs and missing translations
 
 v1.33
-
 - Danish translation. Thanks to Peter Wollerup.
 - Hungarian translation. Thanks to Péter Horváth.
 - drag and drop fix for firefox 30
 - Various security issues, thanks to Huy-Ngoc Dau
 
 v1.32
-
 - Many small fixes coming for SOPlanning users, thanks to all
 - Active directory support (experimental)
 
 v1.31
-
 - new planning display : now possible to display per day with hour slots !
 - new funny tool to select project and user when creating task
 - fields order changed in task form, for a better experience
@@ -336,7 +361,6 @@ v1.31
 - Bug fix for gantt chart on recent PHP version
 
 v1.30
-
 - Design updates : thanks to Sebastien who reviewed all interfaces and applied the same design everywhere. Not a big visual impact, but more flexible and more compatible design !
 - auto-installer/upgrade system added. No file modification needed anymore, the interface will help for initial setup or upgrade to a new version.
 - Session isolation : you can now install 2 SOPlanning instances on the same url (with 2 differents databases), sessions will not be shared. You will be able to browse both instances.
@@ -345,7 +369,6 @@ v1.30
 - added an option in the planning to display the total time per day
 
 v1.29
-
 - Major update on DE translation (thanks to contributors)
 - full text search now search also on task title
 - Added teams and project groups on the PDF export (only displayed in the planning previously)
@@ -361,7 +384,6 @@ v1.29
 - Date calculation improved on recurring tasks : now escape days off AND go back to the original day for next weeks/months.
 
 v1.28
-
 - Update on planning menu, more "fluid" with smaller screens.
 - Bug fix on Firefox and IE : buttons didn't work in the planning (print, export, etc).
 - Bug fix on date picker, specific characters incorrectly displayed
@@ -381,7 +403,6 @@ v1.27
 - Dropdown added on title field when creating a task, in order to display existing titles for the same project.
 
 v1.26
-
 - email notification on task creation/modification/deletion
 - improved project list, display all or filter by date
 - now possible to send email to new user created to let them modify their password
@@ -394,26 +415,22 @@ v1.26
 - can now close opened window (task creation, project creation, etc) with ESC key
 
 v1.25
-
 - Added public holidays import module for several countries
 - new PDF calendar export (condensed view)
 - Minor fixes on new design
 - Some Security upgrades
 
 v1.24
-
 - New full layout !
 - Added portuguese and spanish languages
 - Added project color in the planning column, and today highlight.
 
 v1.23
-
 - overlapping periods are now displayed perfectly : cells stay on the same line instead
 - added groups of users, with ability to filter planning on those groups
 - excluded days off and public holidays from the repetition feature
 
 v1.22
-
 - Bug fix on project creation for users with limited rights
 - added half day displayed differently in the planning
 - added task title : display in mouseover on the planning, and in Gantt export
@@ -423,7 +440,6 @@ v1.22
 - small fixes
 
 v1.21
-
 - added "repeat task" feature : daily, weekly, monthly
 - fix on user self modification
 - Fix on drag and drop when planning is inverted (displayed by project)

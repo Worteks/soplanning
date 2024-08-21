@@ -288,3 +288,18 @@ lieux_contenu = """
 	Une fois un lieu assigné, vous pouvez également le supprimer d'une tâche par la suite en éditant à nouveau la tâche.
 """
 
+faq_roi = "Gestion des coûts des projets / rentabilité"
+roi_contenu = """
+	Le calcul de rentabilité permet de connaitre le consommé / restant sur les projets par rapport au budget initial, que ce soit sur le total d'heures ou le budget prévu.
+	<br><br>
+	Afin de pouvoir utiliser au mieux ces informations de rentabilité, voici ce qu'il faut faire :
+	<br>
+	<ul>
+		<li>Renseigner un tarif horaire par défaut dans la fiche de chaque collaborateur (onglet "Configuration")</li>
+		<li>Indiquer dans la fiche des projets les budgets prévus/initiaux en montant et en heures</li>
+		<li>Modifier (si nécessaire) la fiche du projet pour indiquer des tarifs horaires spécifiques à ce projet. Sinon le tarif par défaut du collaborateur s'appliquera</li>
+		<li>Assigner des tâches sur les projets et collaborateurs</li>
+		<li>Donner accès aux personnes habilitées au module de Statistiques / ROI sur les projets (nouveau droit rajouté)</li>
+		<li>Consulter les chiffres dans le module de ROI des projets : l'outil calcule le budget consommé (en montant et en heures), le budget restant, et la rentabilité</li>
+	</ul>
+"""

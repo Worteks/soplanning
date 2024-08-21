@@ -21,9 +21,7 @@ function db_connect($cfgHostname, $cfgUsername, $cfgPassword, $cfgDatabase, $cfg
 		return false;
 	}
 	mysqli_set_charset($cfgConnection, "latin1");
-	try { 
-		mysqli_select_db($cfgConnection, $cfgDatabase);
-	} catch (Exception $e) {
+	if(!mysqli_select_db($cfgConnection, $cfgDatabase)){
 		return false;
 	}
 	return $cfgConnection;

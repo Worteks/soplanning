@@ -1,0 +1,17 @@
+v1.52.00
+
+- Update for many libraries, PHP 7.2 minimum required now, compatible with PHP 8.2
+- New module : Project cost management / profitability. Add your employees costs in the tool and get profitability rate for your projects based on assigned tasks
+- Email notification checkbox default value in task form (you can set yes or no)
+- Link to the task form added to ICAL export
+- UID (unique event ID) added to ICAL export
+- User login increased to 100 chars
+- Memory limit management on planning
+- Some translations fixes
+- Bugfixes on API
+- Fixed bug on redirect if specific logout provided
+- Fixed bug on Group creation if special characters in title
+- Bugfix on exclusive places and resources when creating a recurring task
+- Fix for advanced filter display when there are a lot of places/resources
+- various minor bugfixes
+- updated google Authenticator 2fA (google deactivated QRcode library)

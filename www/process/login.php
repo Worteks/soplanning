@@ -200,7 +200,7 @@ if($user->login_actif == 'non'){
 
 if(isset($_POST['remember']) && $user->user_id != 'publicspl'){
 	$cle = $user->user_id . ';' . date('Y-m-d H:i:s') . ';' . sha1($user->user_id . date('Y-m-d H:i:s') . $user->cle);
-	setcookie('direct_auth', $cle, time()+60*60*24*30, '/');
+	setcookie('direct_auth', $cle, time()+60*60*24*30, '/', '', false, true);
 }
 
 $user->initPostLogin();

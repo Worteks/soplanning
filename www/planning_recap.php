@@ -19,6 +19,7 @@
 	$html_recap .= '		<th class="planningTabTask">' . $smarty->getConfigVars('tab_periode2') . '</th>' . CRLF;
 	$html_recap .= '		<th class="w220 planningTabCharge">' . $smarty->getConfigVars('tab_charge') . '</th>' . CRLF;
 	$html_recap .= '	</tr>' . CRLF;
+
 	foreach ($planning['lignes'] as $cle => $infos)
 	{
 		// Calcul des jours occupés
@@ -89,10 +90,10 @@
 					{
 						$html_recap .= '<div class="pastille-statut tooltipster" style="float:left;margin-right:7px;background-color:#'.$infos_tache['statut_couleur'].'" title="'.$infos_tache['statut_nom'].'"></div>';
 					}
-					$html_recap .= '<b>'.xss_protect($infos['nom']);
-					
+					$html_recap .= '<b>'.xss_protect($infos_tache['projet_nom']);
+					$html_recap .= '<br>'.xss_protect($infos_tache['user_nom']);
 					if (!is_null($infos_tache['titre'])) {
-						$html_recap .= ' - ' . xss_protect($infos_tache['titre']);
+						$html_recap .= '<br>' . xss_protect($infos_tache['titre']);
 					}
 					$html_recap .= '</b><br />';
 					$html_recap .= '<i class="fa fa-calendar" aria-hidden="true"></i> '.sqldate2userdate($infos_tache['date_debut']) . ' <i class="fa fa-caret-right" aria-hidden="true"></i> ';
@@ -132,13 +133,13 @@
 					$html_recap .= '</div>';
 
 					$date1 = new DateTime();
-					$date1->setDate(substr($infos_tache['date_debut'],0,4), substr($infos_tache['date_debut'],5,2), substr($infos_tache['date_debut'],8,2));
+					$date1->setDate((int)substr($infos_tache['date_debut'],0,4), (int)substr($infos_tache['date_debut'],5,2), (int)substr($infos_tache['date_debut'],8,2));
 
 					// on additionne les jours de travail
 					if(!is_null($infos_tache['date_fin'])) 
 					{
 						$date2 = new DateTime();
-						$date2->setDate(substr($infos_tache['date_fin'],0,4), substr($infos_tache['date_fin'],5,2), substr($infos_tache['date_fin'],8,2));
+						$date2->setDate((int)substr($infos_tache['date_fin'],0,4), (int)substr($infos_tache['date_fin'],5,2), (int)substr($infos_tache['date_fin'],8,2));
 						while ($date1 <= $date2) 
 						{
 							// on ne compte pas le jour si c'est WE ou jour férié
@@ -153,6 +154,8 @@
 						}
 					} else 
 					{
+						//$dureeSansPause = retirerDureePause($infos_tache['duree'], $infos_tache['pause']);
+						//$totalHeures = ajouterDuree($totalHeures, $dureeSansPause);
 						$totalHeures = ajouterDuree($totalHeures, $infos_tache['duree']);
 						if($date1 < $now) 
 						{
@@ -165,8 +168,8 @@
 		
 		$html_recap .= '</td>' . CRLF;
 		$html_recap .= '<td class="planningTabCharge">' . CRLF;
-		if(!is_null($infos_tache['charge'])) {
-			$html_recap .= $smarty->getConfigVars('tab_chargeProjet') . ' : ' . $infos_tache['charge'] . $smarty->getConfigVars('tab_j') . '<br />' . CRLF;
+		if(!is_null($infos_tache['budget_temps'])) {
+			$html_recap .= $smarty->getConfigVars('projet_budget_temps') . ' : ' . $infos_tache['budget_temps'] . ' ' . $smarty->getConfigVars('heures') . ' ' . $smarty->getConfigVars('projet_soit') . ' ' . heures2Jours($infos_tache['budget_temps']) . ' ' . $smarty->getConfigVars('winPeriode_jour'). '<br />' . CRLF;
 		}
 
 		$nbJourTot=0;
@@ -200,8 +203,9 @@
 			$TotalHeurePassedM=$TotalHeurePassedExplode[1];
 			$nbJourTotPassed = round (($TotalHeurePassedH+$TotalHeurePassedM/60)/$TotalMaxJour,2);
 		}
-		if($totalJoursPassed > 0 || $totalHeuresPassed > 0) 
+		if($totalJoursPassed > 0 || $totalHeuresPassed != '00:00') 
 		{
+			//echo $totalJoursPassed . ' - ' . totalHeuresPassed . ' - ' . $totalJours . ' - ' . $nbJourTot;die;
 			$nbHeuresTotalPassed = (($totalJoursPassed*$TotalMaxJour)+$TotalHeurePassedH).'h'.($TotalHeurePassedM!="00"?($TotalHeurePassedM):"");
 			$html_recap .= $smarty->getConfigVars('tab_passe') . ' : ' . ($totalJoursPassed+$nbJourTotPassed) .$smarty->getConfigVars('tab_j'). " ( = ".$nbHeuresTotalPassed." / ".round(($totalJoursPassed+$nbJourTotPassed)/($totalJours+$nbJourTot)*100,1) ."% ) " . CRLF;
 		}

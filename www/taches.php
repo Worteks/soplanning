@@ -59,11 +59,19 @@ if(isset($_POST['date_debut_affiche_tache']) && isset($_POST['date_fin_affiche_t
 }
 
 if (isset($_REQUEST['statut']) && is_array($_REQUEST['statut'])) {
-	$listeStatuts = $_REQUEST['statut'];
+	$listeStatuts = array();
+	foreach ($_REQUEST['statut'] as $valPost) {
+		$check = new Status();
+		if(!$check->db_load(array('status_id', '=', $valPost))){
+			continue;
+		}
+		$listeStatuts[] = $valPost;
+	}
+
 } elseif (isset($_SESSION['statut_taches']) && is_array($_SESSION['statut_taches'])) {
 	$listeStatuts = $_SESSION['statut_taches'];
 } else {
-	$listeStatuts = $_SESSION['status_taches_par_defaut'];
+	$listeStatuts = (array)$_SESSION['status_taches_par_defaut'];
 }
 $_SESSION['statut_taches'] = $listeStatuts;
 
@@ -168,6 +176,10 @@ if(isset($_POST['filtreGroupeProjet'])) {
 	$projetsFiltre = array();
 	foreach ($_POST as $keyPost => $valPost) {
 		if(strpos($keyPost, 'projet_') === 0) {
+			$check = new Projet();
+			if(!$check->db_load(array('projet_id', '=', $valPost))){
+				continue;
+			}
 			$projetsFiltre[] = $valPost;
 		}
 	}
@@ -178,6 +190,10 @@ if(isset($_POST['filtreUser'])) {
 	$projetsFiltre = array();
 	foreach ($_POST as $keyPost => $valPost) {
 		if(strpos($keyPost, 'user_') === 0) {
+			$check = new User();
+			if(!$check->db_load(array('user_id', '=', $valPost))){
+				continue;
+			}
 			$projetsFiltre[] = $valPost;
 		}
 	}
@@ -213,7 +229,7 @@ if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 	}
 	$sql.= " WHERE (" . $isLike . ") ";
 	if(count($listeStatuts) > 0){
-		$sql .= " AND planning_periode.statut_tache in ('" . implode("','", $listeStatuts) . "')";	
+		$sql .= " AND planning_periode.statut_tache in ('" . implode("','", array_map('addslashes', $listeStatuts)) . "')";	
 	}
 	if(count($_SESSION['filtreGroupeProjet']) > 0)	{
 		$sql.= " AND planning_periode.projet_id IN ('" . implode("','", $_SESSION['filtreGroupeProjet']) . "')";
@@ -228,7 +244,7 @@ if(isset($_REQUEST['rechercheTaches']) && $_REQUEST['rechercheTaches'] != ''){
 		$sql.= " AND planning_periode.ressource_id IN ('" . implode("','", $_SESSION['filtreGroupeRessource']) . "')";
 	}	
 	if(!empty($filtreGroupeProjet)) {
-		$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", $filtreGroupeProjet) . "')";
+		$sql .= "		AND (planning_projet.groupe_id IN ('" . implode("','", array_map('addslashes', $filtreGroupeProjet)) . "')";
 		if(in_array('gp0', $filtreGroupeProjet)) {
 			$sql .= '	OR planning_projet.groupe_id IS NULL ';
 		}
@@ -383,7 +399,7 @@ if ($user->checkDroit('tasks_view_only_own')) {
 	$sql .= " AND pu.user_id = " . val2sql($user->user_id);
 }
 // Si filtre sur son équipe
-if($user->checkDroit('droits_tasks_view_team_users')) {
+if($user->checkDroit('tasks_view_team_users')) {
 	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
 }
 $sql .=	" ORDER BY groupe_nom, pu.nom";

@@ -48,6 +48,18 @@ class Ressource extends GObject
 		return true;
 
 	}
+
+	public function db_delete() {
+		$periodes = new GCollection('Periode');
+		$periodes->db_load(array('ressource_id', '=', $this->ressource_id));
+		while($periode = $periodes->fetch()){
+			$periode->ressource_id = NULL;
+			$periode->db_save();
+		}
+		$return = parent::db_delete();
+		return $return;
+	}
+
 }
 
 ?>

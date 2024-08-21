@@ -82,7 +82,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] == '') {
 }
 
 // Check Google 2FA
-if (CONFIG_GOOGLE_2FA_ACTIVE == '1' && !isset($_SESSION['2fa_ok']) && basename($_SERVER['REQUEST_URI']) != '2fa.php') {
+if (CONFIG_GOOGLE_2FA_ACTIVE == '1' && !isset($_SESSION['2fa_ok']) && basename($_SERVER['REQUEST_URI']) != '2fa.php' && basename($_SERVER['REQUEST_URI']) != 'qrcode_2fa.php') {
     header('Location: ' . BASE . '/2fa.php');
     exit;
 }
@@ -124,3 +124,9 @@ if (strpos($urlCourante, '/aide/') !== false) {
   }
 }
 $smarty->assign('lienAide', BASE . '/aide/' . $lienAide);
+
+
+if(is_file(BASE . '/../abo.txt')) {
+	$abo = file_get_contents(BASE . '/../abo.txt');
+	$smarty->assign('dateAbo', $abo);
+}

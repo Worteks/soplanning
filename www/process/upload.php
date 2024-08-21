@@ -3,7 +3,7 @@ require 'base.inc';
 require BASE . '/../config.inc';
 require BASE . '/../includes/header.inc';
 
-$type=$_POST['type'];;
+$type=$_POST['type'];
 // securise link_id
 $linkid=preg_replace( '/[^a-z0-9]+/', '0', strtolower($_POST['linkid']));
 $upload_dir = UPLOAD_DIR."$linkid/"; // upload directory 
@@ -13,56 +13,61 @@ if ($type=='upload')
 {
 	// Pour tous les fichiers, on tente de les uploader
 	for($i=0; $i<count($_FILES); $i++){	
-	$filename = replaceAccents(utf8_decode($_FILES["fichier-$i"]['name']));
-	$tmp_dir = $_FILES["fichier-$i"]['tmp_name'];
-	$fileSize = $_FILES["fichier-$i"]['size'];
-	     
-	// Verification du répertoire
-	if(!file_exists(UPLOAD_DIR) || !is__writable(UPLOAD_DIR)) {
-		$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_erreur_ecriture_repertoire'));
-		echo $msg;
-		exit;
-	}else
-	{
-		// Création du répertoire si nécessaire
-		@mkdir($upload_dir);
-		
-		// Si il existe déjà, on ne l'écrase pas
-		if (file_exists($upload_dir.$filename))
-		{
-			$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_existe_deja'));
+		$filename = replaceAccents(utf8_decode($_FILES["fichier-$i"]['name']));
+		$infos = pathinfo($filename);
+		if(in_array(strtolower($infos['extension']), array('php', 'inc', 'htaccess'))){
+			echo 'File not allowed';
+			exit;
+		}
+		$tmp_dir = $_FILES["fichier-$i"]['tmp_name'];
+		$fileSize = $_FILES["fichier-$i"]['size'];
+			 
+		// Verification du répertoire
+		if(!file_exists(UPLOAD_DIR) || !is__writable(UPLOAD_DIR)) {
+			$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_erreur_ecriture_repertoire'));
 			echo $msg;
+			exit;
 		}else
 		{
-			// vérification de la taille du fichier
-			if ($fileSize > MAX_SIZE_UPLOAD)
-			{
-				$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_erreur_taille'));
-				echo $msg;
-				exit;
-			}
+			// Création du répertoire si nécessaire
+			@mkdir($upload_dir);
 			
-			// chargement du fichier
-			if(!(move_uploaded_file($tmp_dir,$upload_dir.$filename)))
+			// Si il existe déjà, on ne l'écrase pas
+			if (file_exists($upload_dir.$filename))
 			{
-				$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_erreur_chargement'));
+				$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_existe_deja'));
 				echo $msg;
-				exit;
 			}else
 			{
-				if (!file_exists($upload_dir.$filename))
+				// vérification de la taille du fichier
+				if ($fileSize > MAX_SIZE_UPLOAD)
+				{
+					$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_erreur_taille'));
+					echo $msg;
+					exit;
+				}
+				
+				// chargement du fichier
+				if(!(move_uploaded_file($tmp_dir,$upload_dir.$filename)))
 				{
 					$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_erreur_chargement'));
 					echo $msg;
 					exit;
 				}else
 				{
-					$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_chargement_ok'));
-					echo $msg;
+					if (!file_exists($upload_dir.$filename))
+					{
+						$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_erreur_chargement'));
+						echo $msg;
+						exit;
+					}else
+					{
+						$msg=preg_replace('/filename/',$filename,$smarty->getConfigVars('upload_fichier_chargement_ok'));
+						echo $msg;
+					}
 				}
 			}
 		}
-	}
 	}
 }
 
@@ -104,7 +109,7 @@ if (!empty($_POST['periodeid']))
 		$periode->db_load(array('periode_id', '=', $_POST['periodeid']));		
 		if (!empty($_POST['fichiers']))
 		{
-			$periode->fichiers=replaceAccents($_POST['fichiers']);
+			$periode->fichiers=replaceAccents(utf8_decode($_POST['fichiers']));
 		}else 
 		{
 			$periode->fichiers = null;

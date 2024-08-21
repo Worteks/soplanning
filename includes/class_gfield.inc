@@ -146,7 +146,7 @@ abstract class GField
 			}
 
 			if (count($finalValues) > 0) {
-				return $this->getSqlName() . ' ' . $op . ' (' . implode(', ', $finalValues) . ')';
+				return '`'. $this->getSqlName() . '`' . ' ' . $op . ' (' . implode(', ', $finalValues) . ')';
 			} else {
 				if (DEBUG) {
 					echo '<pre>';
@@ -158,7 +158,7 @@ abstract class GField
 				return FALSE;
 			}
 		} elseif ($this->isValid($val)) {
-			return $this->getSqlName() . ' ' . $op . ' ' . $this->getSqlValue($val);
+			return '`' . $this->getSqlName() . '`' . ' ' . $op . ' ' . $this->getSqlValue($val);
 		} else {
 			if (DEBUG) {
 				echo '<pre>';

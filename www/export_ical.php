@@ -7,20 +7,20 @@ require(BASE . '/../config.inc');
 if(isset($_GET['login'])) {
 	if(!isset($_GET['hash'])) {
 		$_SESSION['message'] = 'erreur_bad_login';
-		header('Location: ../index.php');
+		header('Location: index.php');
 		exit;
 	}
 	$user = New User();
 	if(!$user->db_load(array('login', '=', $_GET['login']))) {
 		$_SESSION['message'] = 'erreur_bad_login';
-		header('Location: ../index.php');
+		header('Location: index.php');
 		exit;
 	}
 
 	$hashUser = md5($user->login . '¤¤' . $user->password . '¤¤' . CONFIG_SECURE_KEY);
 	if($hashUser != $_GET['hash']) {
 		$_SESSION['message'] = 'erreur_bad_login';
-		header('Location: ../index.php');
+		header('Location: index.php');
 		exit;
 	}
 	//$_SESSION['user_id'] = $user->user_id;
@@ -193,11 +193,22 @@ while($lineTmp = $lines->fetch()) {
 			$e->setProperty('dtstart', substr($periode->date_debut, 0, 4), substr($periode->date_debut, 5, 2), substr($periode->date_debut, 8, 2), 9, 00, 00);
 			$e->setProperty('dtend', substr($periode->date_fin, 0, 4), substr($periode->date_fin, 5, 2), substr($periode->date_fin, 8, 2), 18, 00, 00);
 		}
-
+		if(!is_null($periode->lieu_id)){
+			$lieu = new Lieu();
+			$lieu->db_load(array('lieu_id', '=', $periode->lieu_id));
+			$e->setLocation($lieu->nom);
+		}
 		$e->setProperty('summary' , utf8_encode($nomTache));
-		$e->setProperty('description', $smarty->getConfigVars('tab_commentaires') . ' : ' . utf8_encode($periode->notes));
+		$description = '';
+		$lienTache = $periode->getTaskLink();
+		if($lienTache != ''){
+			$description .= $smarty->getConfigVars('tab_lien') . ' : ' . $lienTache . "\n";
+		}
+		$description .= $smarty->getConfigVars('tab_commentaires') . ' : ' . utf8_encode($periode->notes);
 
-		$periode->getData();
+		$e->setProperty('description', $description);
+		$e->setProperty('uid', $periode->periode_id);
+
 	}
 }
 

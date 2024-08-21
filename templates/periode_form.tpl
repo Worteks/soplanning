@@ -15,13 +15,13 @@
 	<div class="form-group row col-md-12">
 		<label class="col-md-2 col-form-label">{#winPeriode_titre#} :</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="titre" id="titre" maxlength="2000" value="{$periode.titre|xss_protect}" onFocus="xajax_autocompleteTitreTache($('#projet_id').val());"   data-provide="typeahead" tabindex="21" />
+			<input type="text" class="form-control" name="titre" id="titre" maxlength="2000" value="{$periode.titre|xss_protect}" onFocus="xajax_autocompleteTitreTache($('#projet_id').val());"  {if $periode.saved eq "1"}autocomplete="off"{/if}  data-provide="typeahead" tabindex="21" />
 		</div>
 	</div>
 	<div class="form-group row col-md-12">
 			<label class="col-md-2 col-form-label">{#winPeriode_projet#} :</label>
 			<div class="col-md-4">
-				<select name="projet_id" id="projet_id" class="form-control {if !$smarty.session.isMobileOrTablet}select2{/if}" tabindex="1" style="width:100%">
+				<select name="projet_id" id="projet_id" class="form-control {if !$smarty.session.isMobileOrTablet}select2{/if}" tabindex="1" style="width:100%" onChange="document.getElementById('titre').autocomplete='off';">
 					<option value="">- - - - - - - - - - -</option>
 					{assign var="groupeCourant" value="-1"}
 					{foreach from=$listeProjets item=projetTmp}
@@ -75,6 +75,10 @@
 				{else}
 					<input type="text" class="form-control datepicker" name="date_debut" id="date_debut" maxlength="10" value="{$periode.date_debut|sqldate2userdate}" tabindex="4" autocomplete="off" />
 				{/if}
+			</div>
+			<label class="col-md-2 col-form-label">{#winPeriode_pause#} :</label>
+			<div class="col-md-2" style="position:relative">
+				<input type="text" class="form-control" id="pause" value="{if $periode.pause neq ""}{$periode.pause|sqltime2usertime}{/if}" maxlength="5" autocomplete="off" style="width:70px" />
 			</div>
 		</div>
 		<div class="form-group row col-md-12">
@@ -465,7 +469,7 @@
 		<div id="divSubmitPeriode" class="form-group row col-md-12 justify-content-end {if $buttonSubmitTache eq 0}d-none{/if}">
 			{if $smarty.const.CONFIG_SMTP_HOST neq ''}
 				<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="notif_email" checked="checked">
+						<input class="form-check-input" type="checkbox" id="notif_email" {if $smarty.const.CONFIG_NOTIFICATION_EMAIL_COCHE eq "1"}checked="checked"{/if}>
 						<label class="form-check-label" for="notif_email" style="font-weight:normal" class="padding-right-25">{#winPeriode_notif_email#}</label>
 				</div>
 			{else}
@@ -473,7 +477,7 @@
 			{/if}
 
 			<div class="btn-group" role="group">
-				<button type="button" id="butSubmitPeriode" class="btn btn-primary" tabindex="24" onClick="$('#divPatienter').removeClass('d-none');this.disabled=true;users_ids=getSelectValue('user_id2');xajax_submitFormPeriode('{$periode.periode_id}', $('#projet_id').val(), users_ids, $('#date_debut').val(), $('#conserver_duree').is(':checked'), $('#date_fin').val(), $('#nb_jours').val(), $('#duree').val(), $('#heure_debut').val(), $('#heure_fin').val(), $('#matin').is(':checked'), $('#apresmidi').is(':checked'), $('#repetition option:selected').val(), $('#dateFinRepetitionJour').val(),$('#dateFinRepetitionSemaine').val(),$('#dateFinRepetitionMois').val(), $('#nbRepetitionJour option:selected').val(),$('#nbRepetitionSemaine option:selected').val(),$('#nbRepetitionMois option:selected').val(),getRadioValue('jourSemaine'),getRadioValue('exceptionRepetition'),$('#appliquerATous').is(':checked'), $('#statut_tache').val(),$('#lieu').val(), $('#ressource').val(), $('#livrable').val(), $('#titre').val(), $('#notes').val(), $('#lien').val(), $('#custom').val(), $('#liste_fichiers').val(), $('#link_id').val(), $('#notif_email').is(':checked'), $('#updateoccurrences').val());">{#winPeriode_valider#|xss_protect}</button>
+				<button type="button" id="butSubmitPeriode" class="btn btn-primary" tabindex="24" onClick="$('#divPatienter').removeClass('d-none');this.disabled=true;users_ids=getSelectValue('user_id2');xajax_submitFormPeriode('{$periode.periode_id}', $('#projet_id').val(), users_ids, $('#date_debut').val(), $('#conserver_duree').is(':checked'), $('#date_fin').val(), $('#nb_jours').val(), $('#duree').val(), $('#heure_debut').val(), $('#heure_fin').val(), $('#matin').is(':checked'), $('#apresmidi').is(':checked'), $('#repetition option:selected').val(), $('#dateFinRepetitionJour').val(),$('#dateFinRepetitionSemaine').val(),$('#dateFinRepetitionMois').val(), $('#nbRepetitionJour option:selected').val(),$('#nbRepetitionSemaine option:selected').val(),$('#nbRepetitionMois option:selected').val(),getRadioValue('jourSemaine'),getRadioValue('exceptionRepetition'),$('#appliquerATous').is(':checked'), $('#statut_tache').val(),$('#lieu').val(), $('#ressource').val(), $('#livrable').val(), $('#titre').val(), $('#notes').val(), $('#lien').val(), $('#custom').val(), $('#liste_fichiers').val(), $('#link_id').val(), $('#notif_email').is(':checked'), $('#pause').val(), $('#updateoccurrences').val());">{#winPeriode_valider#|xss_protect}</button>
 				{if $periode.periode_id neq 0}
 					<button type="button" class="btn btn-warning" onClick="if(confirm('{#winPeriode_confirmSuppr#|xss_protect}'))xajax_supprimerPeriode({$periode.periode_id}, false, $('#notif_email').is(':checked'));undefined;">{#winPeriode_supprimer#}</button>
 				{/if}

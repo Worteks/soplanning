@@ -249,7 +249,7 @@
 					<div class="btn-group pt-2" id="dropdownAdvancedFilter">
 						<form action="process/planning.php" method="POST">
 						<button class="btn {if ($filtreGroupeLieu|@count >0) or ($filtreGroupeRessource|@count >0)}btn-danger{else}btn-default{/if} dropdown-toggle" data-toggle="dropdown" onclick="javascript:multiselecthide();" data-display="static"><i class="fa fa-flask fa-lg fa-fw" aria-hidden="true"></i><span class="d-none d-xl-inline-block">&nbsp;{#filtres_avances#}&nbsp;</span><span class="caret"></span></button>
-						<ul class="dropdown-menu filtrePlanning">
+						<ul class="dropdown-menu filtrePlanning" style="width:800px;overflow-x:scroll">
 							<li>
 								<input type="submit" value="{#submit#}" class="btn btn-default ml-2" />
 								{if ($filtreGroupeLieu|@count >0) or ($filtreGroupeRessource|@count >0)}<a href="process/planning.php?desactiverFiltreAvances=1" class="btn btn-danger btn-sm margin-left-10">{#formFiltreAvancesDesactiver#}</a>{/if}

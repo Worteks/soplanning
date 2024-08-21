@@ -73,4 +73,12 @@ $xajax->registerFunction('selection_multi_tache_suppr');
 
 $xajax->registerFunction('tutoriel_masquer');
 
+$xajax->registerFunction('qrcode');
+$xajax->registerFunction('projet_dupliquer_tache_form');
+$xajax->registerFunction('projet_dupliquer_tache_submit');
+
+$xajax->registerFunction('projet_couts_form');
+$xajax->registerFunction('projet_couts_submit');
+$xajax->registerFunction('projet_couts_supprimer_personne');
+
 ?>

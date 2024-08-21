@@ -6,7 +6,7 @@ require(BASE .'/../includes/header.inc');
 
 if(!$user->checkDroit('lieux_all')) {
 	$_SESSION['erreur'] = 'droitsInsuffisants';
-	header('Location: ../index.php');
+	header('Location: index.php');
 	exit;
 }
 

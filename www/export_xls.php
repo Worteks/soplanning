@@ -331,7 +331,7 @@ while($ligneTmp = $lines->fetch()) {
 		}
 
 		$dateDebut_projet = new DateTime();
-		$dateDebut_projet->setDate(substr($periode->date_debut,0,4), substr($periode->date_debut,5,2), substr($periode->date_debut,8,2));
+		$dateDebut_projet->setDate((int)substr($periode->date_debut,0,4), (int)substr($periode->date_debut,5,2), (int)substr($periode->date_debut,8,2));
 
 		$dateFin_projet = new DateTime();
 

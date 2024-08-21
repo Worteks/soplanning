@@ -123,14 +123,10 @@ class GoogleAuthenticator
      *
      * @return string
      */
-    public function getUrl($user, $hostname, $secret)
+    public function getQRCode($user_id, $hostname, $secret)
     {
-        $args = func_get_args();
-        $encoder = 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=';
-        $urlString = '%sotpauth://totp/%s@%s%%3Fsecret%%3D%s'.(array_key_exists(3, $args) && !is_null($args[3]) ? ('%%26issuer%%3D'.$args[3]) : '');
-        $encoderURL = sprintf($urlString, $encoder, $user, $hostname, $secret);
-
-        return $encoderURL;
+		$urlString = 'otpauth://totp/' . $user_id . '@' . str_replace(' ', '-', substr($hostname, 0, 30)) . '?secret=' . $secret;
+        return $urlString;
     }
 
     /**

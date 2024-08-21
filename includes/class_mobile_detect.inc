@@ -1380,7 +1380,7 @@ class Mobile_Detect
             // Windows Phone 7.5-8 - Tested on the HTC Surround (7.5), HTC Trophy (7.5), LG-E900 (7.5), Nokia 800 (7.8), HTC Mazaa (7.8), Nokia Lumia 520 (8), Nokia Lumia 920 (8), HTC 8x (8)
             $this->version('Windows Phone OS', self::VERSION_TYPE_FLOAT) >= 7.5 ||
 
-            // Tested on the Torch 9800 (6) and Style 9670 (6), BlackBerry® Torch 9810 (7), BlackBerry Z10 (10)
+            // Tested on the Torch 9800 (6) and Style 9670 (6), BlackBerryï¿½ Torch 9810 (7), BlackBerry Z10 (10)
             $this->is('BlackBerry') && $this->version('BlackBerry', self::VERSION_TYPE_FLOAT) >= 6.0 ||
             // Blackberry Playbook (1.0-2.0) - Tested on PlayBook
             $this->match('Playbook.*Tablet') ||

@@ -8,19 +8,18 @@
 		{#options_2fa#}
 		<br><br>
 		</div>
-		po:{$user.google_2fa}
 		
 		{if $user.google_2fa eq "ok"}
 			{#google_2fa_code_help#}
 			<br><br>
 		{/if}
 
-		<form action="#" method="post" class="form-horizontal box">
+		<form action="#" method="post" class="form-horizontal box" onSubmit="return false">
 			{if $user.google_2fa eq "setup"}
 				<div class="form-group row col-md-12">
 					<label for="login" class="col-md-4 col-sm-4 control-label"><br>{#google_2fa_scan_qrcode#} :</label>
 					<div class="col-md-8 col-sm-8">
-						<img src="{$qrcode}"  />
+						<img src="qrcode_2fa.php"  />
 					</div>
 				</div>
 			{/if}

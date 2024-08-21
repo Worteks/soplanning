@@ -32,7 +32,7 @@
 	<div class="form-group row col-md-12">
 				<label class="col-form-label col-md-2">{#user_login#} :</label>
 				<div class="col-md-4">
-					<input id="tmp_lo" class="form-control" type="text" value="{$user_form.login|xss_protect}" maxlength="30" autocomplete="new-password" />
+					<input id="tmp_lo" class="form-control" type="text" value="{$user_form.login|xss_protect}" maxlength="100" autocomplete="new-password" />
 				</div>
 				<label class="col-form-label col-md-2">{#user_password#} :</label>
 				<div class="col-md-4">
@@ -56,7 +56,7 @@
 	<div class="form-group">
 	<div class="form-group">
 	<div class="tab-content">	
-		<div class="tab-pane container active" id="droits">
+		<div class="tab-pane active" id="droits">
 			{if in_array("users_manage_all", $user.tabDroits)}
 				<div class="row">
 					<label class="col-form-label col-md-3">{#droits_utilisateurs#} :</label>
@@ -153,8 +153,8 @@
 							<label class="form-check-label" for="tasks_view_all_users">{#droits_tasks_view_all_users#}</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="planning_view_users" id="droits_tasks_view_team_users" value="droits_tasks_view_team_users" {if in_array("droits_tasks_view_team_users", $user_form.tabDroits)}checked="checked"{/if} onChange="{literal}if(this.checked){document.getElementById('divSpecificUsers').style.display='none';}{/literal}">
-							<label class="form-check-label" for="droits_tasks_view_team_users">{#droits_tasks_view_team_users#}</label>
+							<input class="form-check-input" type="radio" name="planning_view_users" id="tasks_view_team_users" value="tasks_view_team_users" {if in_array("tasks_view_team_users", $user_form.tabDroits)}checked="checked"{/if} onChange="{literal}if(this.checked){document.getElementById('divSpecificUsers').style.display='none';}{/literal}">
+							<label class="form-check-label" for="tasks_view_team_users">{#droits_tasks_view_team_users#}</label>
 						</div>
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="planning_view_users" id="tasks_view_specific_users" value="tasks_view_specific_users" {if in_array("tasks_view_specific_users", $user_form.tabDroits)}checked="checked"{/if} onChange="{literal}if(this.checked){document.getElementById('divSpecificUsers').style.display='inline-block';}{/literal}">
@@ -260,10 +260,14 @@
 						<input class="form-check-input" type="checkbox" name="stats_projects" id="stats_projects" value="stats_projects" {if in_array("stats_projects", $user_form.tabDroits)}checked="checked"{/if}>
 						<label class="form-check-label" for="stats_projects">{#droits_stats_projects#}</label>
 					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="stats_roi_projects" id="stats_roi_projects" value="stats_roi_projects" {if in_array("stats_roi_projects", $user_form.tabDroits)}checked="checked"{/if}>
+						<label class="form-check-label" for="stats_roi_projects">{#droits_stats_roi_projects#}</label>
+					</div>
 			</div>
 			{/if}
 		</div>
-		<div class="tab-pane container fade" id="perso">
+		<div class="tab-pane fade" id="perso">
 			<div class="form-group row">
 			<label class="col-form-label col-md-3">{#user_login_actif#} :</label>
 				<div class="form-check form-check-inline">
@@ -324,6 +328,13 @@
 				</div>
 			</div>
 
+			<div class="form-group row">
+				<label class="col-form-label col-md-3">{#user_tarif_horaire_defaut#} :</label>
+				<div class="form-check form-check-inline">
+					<input id="tarif_horaire_defaut" class="form-control" type="text" value="{$user_form.tarif_horaire_defaut|xss_protect}" maxlength="20" style="width:80px" />&nbsp;€
+				</div>
+			</div>
+
 			<div class="form-group">
 				<div class="col-md-12">
 					<label class="checkbox-inline">
@@ -343,7 +354,7 @@
 				<input type="hidden" id="google_2fa_reset" value="0" />
 			{/if}
 		</div>	
-        <div class="tab-pane container fade" id="infos">
+        <div class="tab-pane fade" id="infos">
 			<div class="form-group row">
 				<label class="col-form-label col-md-3">{#user_adress#} :</label>
 				<div class="col-md-6">
@@ -378,7 +389,7 @@
 	</div>
 	</div>
 	<div class="form-group col-md-12 text-center">
-				<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="specific_users_ids=getSelectValue('specific_user_id');xajax_submitFormUser($('#user_id').val(), $('#user_id_origine').val(), $('#user_groupe_id').val(), $('#nom').val(), $('#email_user').val(), $('#tmp_lo').val(), $('#tmp_pa').val(), $('#visible_planningOui').is(':checked'), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur_user').val(){/if}, $('#notificationsOui').is(':checked'), $('#envoiMailPwd').is(':checked'), new Array(getRadioValue('users_manage'), getRadioValue('projects_manage'), getRadioValue('projectgroups_manage'), getRadioValue('planning_modif'), getRadioValue('planning_view'), getRadioValue('planning_view_users'), getRadioValue('lieux'), getRadioValue('ressources'), getRadioValue('audit'), getRadioValue('parameters'), ($('#stats_users').is(':checked') ? $('#stats_users').val() : ''), ($('#stats_projects').is(':checked') ? $('#stats_projects').val() : '')), $('#user_adress').val(), $('#user_phone').val(),$('#user_mobile').val(), $('#user_metier').val(), $('#user_comment').val(), $('#login_actifOui').is(':checked'), specific_users_ids, $('#google_2fa_reset').is(':checked'));" />
+				<input type="button" class="btn btn-primary" value="{#enregistrer#}" onClick="specific_users_ids=getSelectValue('specific_user_id');xajax_submitFormUser($('#user_id').val(), $('#user_id_origine').val(), $('#user_groupe_id').val(), $('#nom').val(), $('#email_user').val(), $('#tmp_lo').val(), $('#tmp_pa').val(), $('#visible_planningOui').is(':checked'), {if $smarty.const.CONFIG_PROJECT_COLORS_POSSIBLE neq ""}$('#couleur2 option:selected').val(){else}$('#couleur_user').val(){/if}, $('#notificationsOui').is(':checked'), $('#envoiMailPwd').is(':checked'), new Array(getRadioValue('users_manage'), getRadioValue('projects_manage'), getRadioValue('projectgroups_manage'), getRadioValue('planning_modif'), getRadioValue('planning_view'), getRadioValue('planning_view_users'), getRadioValue('lieux'), getRadioValue('ressources'), getRadioValue('audit'), getRadioValue('parameters'), ($('#stats_users').is(':checked') ? $('#stats_users').val() : ''), ($('#stats_projects').is(':checked') ? $('#stats_projects').val() : ''), ($('#stats_roi_projects').is(':checked') ? $('#stats_roi_projects').val() : '')), $('#user_adress').val(), $('#user_phone').val(),$('#user_mobile').val(), $('#user_metier').val(), $('#user_comment').val(), $('#login_actifOui').is(':checked'), specific_users_ids, $('#google_2fa_reset').is(':checked'), $('#tarif_horaire_defaut').val());" />
 		</div>
 	</div>
 </div>

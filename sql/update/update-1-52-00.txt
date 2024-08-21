@@ -1,0 +1,37 @@
+
+INSERT INTO `planning_config`(`cle`, `valeur`, `commentaire`) VALUES ('NOTIFICATION_EMAIL_COCHE', '1', 'Default state for notification checkbox in task form');
+
+ALTER TABLE `planning_user` MODIFY COLUMN `login` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NULL DEFAULT NULL AFTER `nom`;
+
+ALTER TABLE `planning_user` ADD `tarif_horaire_defaut` float NULL AFTER `tutoriel`;
+
+DROP TABLE IF EXISTS `planning_projet_user_tarif`;
+CREATE TABLE `planning_projet_user_tarif`  (
+  `projet_user_tarif_id` int(255) NOT NULL,
+  `user_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `projet_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `tarif_horaire` float NULL DEFAULT NULL,
+  PRIMARY KEY (`projet_user_tarif_id`) USING BTREE,
+  INDEX `put_projet_id`(`projet_id`) USING BTREE,
+  INDEX `put_user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_general_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `planning_projet_user_tarif` ADD CONSTRAINT `put_projet_id` FOREIGN KEY (`projet_id`) REFERENCES `planning_projet` (`projet_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `planning_projet_user_tarif` ADD CONSTRAINT `put_user_id` FOREIGN KEY (`user_id`) REFERENCES `planning_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `planning_periode`  ADD COLUMN `pause` time(0) NULL AFTER `custom`;
+
+ALTER TABLE `planning_periode` ADD COLUMN `duree_reelle` float NULL AFTER `pause`;
+
+ALTER TABLE `planning_projet`  CHANGE COLUMN `charge` `budget_temps` float NULL DEFAULT NULL AFTER `createur_id`;
+ALTER TABLE `planning_projet` ADD COLUMN `budget_montant` float NULL AFTER `createur_id`;
+
+ALTER TABLE `planning_projet` ADD COLUMN `montant_consomme` float NULL AFTER `budget_temps`;
+ALTER TABLE `planning_projet` ADD COLUMN `temps_consomme` float NULL AFTER `montant_consomme`;
+ALTER TABLE `planning_projet` ADD COLUMN `montant_restant` float NULL AFTER `temps_consomme`;
+ALTER TABLE `planning_projet` ADD COLUMN `temps_restant` float NULL AFTER `montant_restant`;
+
+update planning_user set droits = REPLACE(droits,'"users_manage_all"','"users_manage_all","stats_roi_projects"') where droits like '%users_manage_all%';
+
+UPDATE  `planning_config` SET  valeur ='1.52.00' WHERE  `planning_config`.`cle` =  'CURRENT_VERSION';
+

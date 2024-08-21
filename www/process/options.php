@@ -418,6 +418,17 @@ if(isset($_POST['PLANNING_DUREE_CRENEAU_HORAIRE'])) {
 	}
 }
 
+if(isset($_POST['NOTIFICATION_EMAIL_COCHE'])) {
+	$config = new Config();
+	$config->db_load(array('cle', '=', 'NOTIFICATION_EMAIL_COCHE'));
+	$config->valeur = $_POST['NOTIFICATION_EMAIL_COCHE'];
+	if(!$config->db_save()) {
+		$_SESSION['erreur'] = 'changeNotOK';
+		header('Location: ../options.php' . (isset($_POST['tab']) ? '?tab=' . $_POST['tab'] : ''));
+		exit;
+	}
+}
+
 
 if(isset($_POST['DEFAULT_NB_MONTHS_DISPLAYED'])) {
 	if(is_numeric($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) && round($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) > 0  && round($_POST['DEFAULT_NB_MONTHS_DISPLAYED']) < 50) {
@@ -820,13 +831,13 @@ if(isset($_POST['DEFAULT_PERIOD_LINK'])) {
 	}
 }
 
-if(isset($_POST['LOGOUT_REDIRECT'])) {
+if(isset($_REQUEST['LOGOUT_REDIRECT'])) {
 	$config = new Config();
 	$config->db_load(array('cle', '=', 'LOGOUT_REDIRECT'));
-	if(strlen($_POST['LOGOUT_REDIRECT']) == 0) {
+	if(strlen($_REQUEST['LOGOUT_REDIRECT']) == 0) {
 		$config->valeur = null;
 	} else {
-		$config->valeur = $_POST['LOGOUT_REDIRECT'];
+		$config->valeur = $_REQUEST['LOGOUT_REDIRECT'];
 	}
 	if(!$config->db_save()) {
 		$_SESSION['erreur'] = 'changeNotOK';

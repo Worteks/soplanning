@@ -628,7 +628,7 @@ options_aide_largeurColonne = "En nombre de pixels. (minimum 25px maximum 200px)
 options_largeurColonneLarge = "Largeur de colonne (mode large)"
 options_aide_largeurColonneLarge = "En nombre de pixels. (minimum 25px maximum 200px)"
 
-user_perso_notif = "Personnalisation & notifications"
+user_perso_notif = "Configuration"
 user_infos_perso = "Infos personnelles"
 
 options_largeurCode = "Longueur du texte (mode réduit)"
@@ -950,7 +950,7 @@ option_contenu_taches_nom_tache = "Titre de la tâche"
 option_contenu_taches_vide = "Ne rien afficher"
 
 status_affichage_liste = "Affichage dans les listes"
-options_aide_status_affichage_liste = "Option qui permet d'afficher le statut dans les listes de sélection. Permet de masquer les statuts que vous ne souhaitez pas voir apparaitre (projets abandonnés, etc)"
+options_aide_status_affichage_liste = "Option qui permet de masquer les projets ou personnes ayant ce statut dans les menus déroulants lors de la création de tâche (projets abandonnés, personnes sorties, etc)"
 
 raccourci_4_mois = "début + 4 mois"
 raccourci_5_mois = "début + 5 mois"
@@ -977,7 +977,7 @@ date_a = "à"
 ajax_titreNouvellePeriode = "Nouvelle tâche"
 js_choisirTitre = "Veuillez saisir un titre"
 options_dureeCreneauHoraire = "Interval horaire de tâches"
-options_aide_dureeCreneauHoraire = "Permet de définir l'interval entre les horaires affichés lors de la création et modification d'une tâche.<br>Exemple pour un créneau de 2h :<br><img src='assets/img/pictos/help_creneau_horaire.png' alt='' />"
+options_aide_dureeCreneauHoraire = "Permet de définir l'interval entre les horaires affichés lors de la création et modification d'une tâche.<br>Exemple pour un interval de 2h :<br><img src='assets/img/pictos/help_creneau_horaire.png' alt='' />"
 minutes = "minutes"
 heure = "heure"
 heures = "heures"
@@ -1224,9 +1224,68 @@ Vous pouvez masquer ce récapitulatif dans le menu "Affichage".
 tutoriel_contenu_8 = """
 <b>C'est à vous de jouer !</b>
 <br><br>
-Prenez en main l'outil par vous-même et n'hésitez pas à nous contacter pour toute question !
+Prenez en main l'outil par vous-même et n'hésitez pas à nous contacter pour toute question : <a href="mailto:contact@soplanning.org">contact@soplanning.org</a> !
+"""
+
+tutoriel_contenu_9 = """
+<b>Calculez la rentabilité de vos projets</b>
+<br><br>
+Le calcul de rentabilité permet de connaitre le consommé / restant sur les projets par rapport au budget initial, que ce soit sur le total d'heures ou le budget prévu.
+<br><br>
+Afin de pouvoir utiliser au mieux ces informations de rentabilité, voici ce qu'il faut faire :
+<br>
+<ul>
+	<li>Renseigner un tarif horaire par défaut dans la fiche de chaque collaborateur (onglet "Configuration")</li>
+	<li>Indiquer dans la fiche des projets les budgets prévus/initiaux en montant et en heures</li>
+	<li>Modifier (si nécessaire) la fiche du projet pour indiquer des tarifs horaires spécifiques à ce projet. Sinon le tarif par défaut du collaborateur s'appliquera</li>
+	<li>Assigner des tâches sur les projets et collaborateurs</li>
+	<li>Donner accès aux personnes habilitées au module de Statistiques / ROI sur les projets (nouveau droit rajouté)</li>
+	<li>Consulter les chiffres dans le module de ROI des projets : l'outil calcule le budget consommé (en montant et en heures), le budget restant, et la rentabilité</li>
+</ul>
+
 """
 
 user_masquerLigneVide = "Masquer les lignes vides du planning"
 user_afficherTableauRecap = "Afficher récapitulatif sous le planning"
 audit_inactif = "Attention : le module d'audit est inactif, veuillez d'abord l'activer dans l'onglet Configuration général"
+
+texte_abo = "Fin de démo le %1%"
+texte_abo_lien = "https://www.soplanning.org/fr/hebergement-version-pro/?from_soplanning"
+texte_abo2 = "
+Votre espace de démonstration est disponible <b>jusqu'au %1%</b>, il est totalement illimité durant cette période.<br><br>Au delà vous serez invité(e) à souscrire à un abonnement.<br><b>Retrouvez nos différentes offres</b> en cliquant sur cette infobulle.<br><br>En cas de souscription, vous ne perdrez aucune donnée, et vous conserverez l'adresse de votre SOPlanning.<br><br>N'hésitez pas à nous contacter pour toute question à propos de SOPlanning ou de l'abonnement, à contact@soplanning.org"
+
+qrcode_acces_mobile = "Accédez à SOPlanning sur votre mobile"
+
+projet_dupliquer_tache_infobulle = "Dupliquer des tâches sur ce projet"
+projet_dupliquer_tache_a_partir_de = "Dupliquer à partir du"
+projet_dupliquer_tache_jusqua = "jusqu'au"
+projet_dupliquer_tache_demarrer = "dupliquer au"
+projet_dupliquer_tache_a_partir_date_erreur = "Veuillez saisir une date valide pour le début de votre sélection"
+projet_dupliquer_tache_jusqua_date_erreur = "Veuillez saisir une date valide pour la fin de votre sélection"
+projet_dupliquer_tache_demarrer_erreur = "Veuillez saisir une date de démarrage valide sur ce projet"
+
+options_notification_email_coche = "Notification email par défaut"
+options_aide_notification_email_coche = "Si oui, la case de notification par email sera cochée par défaut dans le formulaire de tâche"
+
+user_tarif_horaire_defaut = "Tarif horaire par défaut"
+projet_couts = "Gestion des coûts / Rentabilité"
+projet_budget_montant = "Montant budget"
+projet_budget_consomme = "Budget consommé"
+projet_budget_restant = "Budget restant"
+projet_budget_temps = "Temps budget"
+projet_temps_consomme = "Temps consommé"
+projet_temps_restant = "Temps restant"
+projet_budget_pourcent = "Rentabilité"
+projet_temps_pourcent = "Rentabilité"
+projet_soit = "soit"
+projet_couts_ajouter = "Personnaliser le tarif horaire pour ce projet"
+projet_couts_existants = "Couts horaires du projet"
+projet_saisir_budget_montant = "Veuillez saisir un montant de budget valide"
+projet_saisir_budget_temps = "Veuillez saisir un budget de temps valide"
+winPeriode_pause = "Durée de pause"
+erreur_pauseNonValide = "Veuillez saisir une pause valide"
+erreur_duree_pause_tache = "La durée de pause est supérieure à la durée de la tâche"
+droits_stats_roi_projects = "ROI projets"
+
+
+

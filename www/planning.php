@@ -3,8 +3,40 @@ require('./base.inc');
 require(BASE .'/../config.inc');
 
 require(BASE .'/../includes/header.inc');
-require(BASE .'/planning_param.php');
 
+function initErrorHandler()
+{
+    // This storage is freed on error (case of allowed memory exhausted)
+    // in order to test with memory filled (put this after the detection function : 	$memory = str_repeat('*', 91024 * 1024);
+
+
+    register_shutdown_function(function()
+    {
+        $memory = null;
+		echo '<pre>';
+		print_r(error_get_last());
+		echo '</pre>';
+
+		if ((!is_null($err = error_get_last())) && (!in_array($err['type'], array (E_NOTICE, E_WARNING))) && strpos($err['message'], 'Allowed memory size') !== FALSE)
+        {
+			setcookie('date_debut_affiche', date('d/m/Y'), time()+60*60*24*500, '/');
+			$fin = Datetime::createfromformat('Y-m-d', date('Y-m-d'));
+			$fin->modify('+5 days');
+			setcookie('date_fin_affiche', $fin->format('d/m/Y'), time()+60*60*24*500, '/');
+			/*
+			echo '<pre>';
+			print_r(error_get_last());
+			echo '</pre>';die;
+			*/
+			echo '<br><br><center><span style="font-family:Arial;font-size:15px;font-weight:bold">Memory limit reached. A shorter time period will be applied,<br> the schedule will be reloaded in a few seconds.<br><br>Limite de mémoire atteinte. Une période de temps plus courte va être appliquée,<br> le planning sera rechargé dans quelques secondes.</span></center><meta http-equiv="refresh" content="5;url=index.php" />';
+        }
+    });
+    return true;
+}
+initErrorHandler();
+
+
+require(BASE .'/planning_param.php');
 
 $planning=array();
 $planning['lignes']=array();
@@ -65,12 +97,11 @@ if(is_array($_SESSION['filtreUser']) && count($_SESSION['filtreUser']) > 0) {
 	$sql .= " WHERE pu.visible_planning='oui'";
 }
 // Si filtre sur son équipe
-if($user->checkDroit('droits_tasks_view_team_users')) {
+if($user->checkDroit('tasks_view_team_users')) {
 	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
 }
-if (isset($_SESSION['triPlanningUser']))
-{
-$sql .= " ORDER BY " . $_SESSION['triPlanningUser'];
+if (isset($_SESSION['triPlanningUser'])) {
+	$sql .= " ORDER BY " . $_SESSION['triPlanningUser'];
 }
 $realUsers->db_loadSQL($sql);
 $nbRealUsers = $realUsers->getCount();
@@ -83,7 +114,7 @@ $nbRealUsers = $realUsers->getCount();
 $periodes = new GCollection('Periode');
 $sql = "SELECT planning_periode.*,planning_projet.statut, planning_status.nom as status_nom,  planning_status.barre as statut_barre,planning_status.gras as statut_gras,planning_status.italique as statut_italique,planning_status.souligne as statut_souligne, planning_status.couleur as statut_couleur,planning_status.pourcentage as statut_pourcentage, pu.nom as user_nom, pu.couleur as user_couleur,
 		planning_projet.nom as projet_nom, planning_projet.couleur as projet_couleur, pg.nom AS groupe_nom, pu.*,pug.nom AS team_nom,
-		pl.nom as lieu_nom, pr.nom as ressource_nom, planning_projet.charge as charge, planning_projet.createur_id AS projet_createur_id,
+		pl.nom as lieu_nom, pr.nom as ressource_nom, planning_projet.budget_montant, planning_projet.budget_temps, planning_projet.createur_id AS projet_createur_id,
 		puc.nom AS nom_createur, pum.nom AS nom_modifier, planning_periode.date_creation, planning_periode.date_modif,
 		CASE 
 		   WHEN planning_periode.duree_details = 'AM' THEN '08:00:00;08:01:00' 
@@ -115,7 +146,7 @@ if(is_array($_SESSION['filtreUser']) && count($_SESSION['filtreUser']) > 0) {
 	$sql.= " AND planning_periode.user_id IN ('" . implode("','", $_SESSION['filtreUser']) . "')";
 }
 // Si filtre sur son équipe
-if($user->checkDroit('droits_tasks_view_team_users')) {
+if($user->checkDroit('tasks_view_team_users')) {
 	$sql.= " AND pu.user_groupe_id = '".$_SESSION['user_groupe_id']."'";
 }
 // Si filtre sur groupe projet
@@ -132,11 +163,11 @@ if(count($_SESSION['filtreGroupeRessource']) > 0) {
 }
 // Si filtre sur statut de tache
 if(count($_SESSION['filtreStatutTache']) > 0) {
-	$sql.= " AND planning_periode.statut_tache IN ('" . implode("','", $_SESSION['filtreStatutTache']) . "')";
+	$sql.= " AND planning_periode.statut_tache IN ('" . implode("','", array_map('addslashes', $_SESSION['filtreStatutTache'])) . "')";
 }
 // Si filtre sur statut de projet
 if(count($_SESSION['filtreStatutProjet']) > 0) {
-	$sql.= " AND planning_projet.statut IN ('" . implode("','", $_SESSION['filtreStatutProjet']) . "')";
+	$sql.= " AND planning_projet.statut IN ('" . implode("','", array_map('addslashes', $_SESSION['filtreStatutProjet'])) . "')";
 }
 // Si filtre sur ses projets seulement
 if($user->checkDroit('tasks_view_own_projects')) {
@@ -154,9 +185,6 @@ if ($user->checkDroit('tasks_view_only_own')) {
 if($_SESSION['filtreTexte'] != "") {
 	$sql.= " AND (convert(planning_periode.notes using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR convert(planning_periode.lien using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') ." OR convert(planning_periode.titre using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR convert(planning_periode.custom using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR planning_periode.projet_id LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " OR convert(planning_periode.user_id using utf8) collate utf8_general_ci LIKE " . val2sql('%' . $_SESSION['filtreTexte'] . '%') . " )";
 }
-$periodes->db_loadSQL($sql);
-//echo $sql;die;
-$nbLignesTotal = $periodes->getCount();
 
 // on trie par la date de début
 if ($base_ligne == "heures") {
@@ -165,7 +193,9 @@ if ($base_ligne == "heures") {
 	$sql .=" ORDER by date_debut,duree_details asc";
 }
 
+//echo $sql;die;
 $periodes->db_loadSQL($sql);
+$nbLignesTotal = $periodes->getCount();
 
 // FIN RECHERCHE DES PERIODES EN COURS
 
@@ -189,20 +219,16 @@ if ($base_ligne == 'users')
 }
 
 // Lignes projets
-if ($base_ligne == 'projets') 
-{
+if ($base_ligne == 'projets') {
 	// Si filtre sur groupe projet on supprime les projets non nécessaires
 	if(count($_SESSION['filtreGroupeProjet']) > 0) {
-		$listeProjets_temp=$projetsFiltre->getSmartyData();
-		foreach ($listeProjets_temp as $p)
-		{
-			if (in_array($p['projet_id'],$_SESSION['filtreGroupeProjet']))
-			{
+		$listeProjets_temp = $projetsFiltre->getSmartyData();
+		foreach ($listeProjets_temp as $p) {
+			if (in_array($p['projet_id'],$_SESSION['filtreGroupeProjet'])) {
 				$listeProjets[]=$p;
 			}
 		}
-	}else 
-	{
+	} else {
 		$listeProjets=$projetsFiltre->getSmartyData();
 	}
 	// liste des projets à partir des périodes remontées
@@ -224,6 +250,7 @@ if ($base_ligne == 'projets')
 	if ($_SESSION['triPlanning'] == "groupe_nom asc, projet_id asc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_ASC, "id", SORT_ASC);
 	if ($_SESSION['triPlanning'] == "groupe_nom desc, nom desc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_DESC, "nom", SORT_DESC);
 	if ($_SESSION['triPlanning'] == "groupe_nom desc, projet_id desc") $planning['lignes']=array_sort_by_columns($planning['lignes'],"groupe_nom", SORT_DESC, "id", SORT_DESC);
+	
 }
 
 // Ligne lieux
@@ -290,7 +317,7 @@ $totalNbTachesParJour = array();
 $totauxJourUsers = array();
 
 // Parcours de l'ensemble des périodes pour en définir les lignes et les cases remplies
-$periodes->db_loadSQL($sql);
+//$periodes->db_loadSQL($sql);
 while ($p = $periodes->fetch()) {
 	$infosJour = $p->getSmartyData();
 	$dateDebut_planning = new DateTime();
@@ -380,7 +407,8 @@ while ($p = $periodes->fetch()) {
 			'parent_id'=>$infosJour['parent_id'],
 			'projet_id'=>$infosJour['projet_id'],
 			'groupe_nom'=>$infosJour['groupe_nom'],
-			'charge'=>$infosJour['charge'],
+			'budget_montant'=>$infosJour['budget_montant'],
+			'budget_temps'=>$infosJour['budget_temps'],
 			'user_id'=>$infosJour['user_id'],
 			'lieu_id'=>$infosJour['lieu_id'],		
 			'ressource_id'=>$infosJour['ressource_id'],			
@@ -411,6 +439,7 @@ while ($p = $periodes->fetch()) {
 			'date_modif'=>$infosJour['date_modif'],
 			'user_couleur'=>$infosJour['user_couleur'],
 			'projet_couleur'=>$infosJour['projet_couleur'],
+			'pause'=>$infosJour['pause'],
 			'dureeHeures'=>$dureeHeures,
 			'heure_debut'=>$heureDebut,
 			'heure_fin'=>$heureFin);
@@ -850,25 +879,29 @@ while ($p = $periodes->fetch()) {
 			} elseif ($infosJour['duree_details']=="duree") {
 				$dureeFixe=convertHourToDecimal($infosJour['duree']);
 				$heureDebut=convertHourToDecimal($planning['heures'][0]);
+				//echo $dureeFixe . ' - ' . $heureDebut;die;
 				$heureFin=$heureDebut + $dureeFixe;
+				$iteration = 0;
 				for ($h = $heureDebut; $h < $heureFin; $h++) {
 					// Heure pleine
 					$heure=sprintf("%'.02d:00", $h);
 					// tâches par user et jour
-					if ($base_ligne=='users') 
-						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
+					if ($base_ligne=='users') {
+						$planning['taches'][$infosJour['user_id']][$tmpDate->format('Y-m-d')][$planning['heures'][$iteration]][]=$infosJour['periode_id'];
+					}
 					// tâches par projet et jour
-					if ($base_ligne=='projets')
-						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
+					if ($base_ligne=='projets') {
+						$planning['taches'][$infosJour['projet_id']][$tmpDate->format('Y-m-d')][$planning['heures'][$iteration]][]=$infosJour['periode_id'];
+					}
 					// tâches par lieux et jour
-					if ($base_ligne=='lieux')
-						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
-
+					if ($base_ligne=='lieux') {
+						$planning['taches'][$infosJour['lieu_id']][$tmpDate->format('Y-m-d')][$planning['heures'][$iteration]][]=$infosJour['periode_id'];
+					}
 					// tâches par ressources et jour
-					if ($base_ligne=='ressources')
-						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+					if ($base_ligne=='ressources') {
+						$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$planning['heures'][$iteration]][]=$infosJour['periode_id'];
+					}
+					$iteration++;
 				}
 			
 			// Si on est sur une demie-journée AM
@@ -933,7 +966,7 @@ while ($p = $periodes->fetch()) {
 				{
 					//echo '<br>Heure : ' .$h .  ' - ' . $heureDebutSelect . ' - ' . round($heureDebutSelect,0,PHP_ROUND_HALF_DOWN) . ' - ' . $heureFinSelect;
 					// Heure pleine
-					if ($h >= round($heureDebutSelect,0,PHP_ROUND_HALF_DOWN) && $h <= $heureFinSelect) {
+					if ($h >= floor($heureDebutSelect) && ($heureFinSelect < $heureDebutSelect ? $h < '24' : $h < $heureFinSelect) && $heureFinSelect != $h) {
 						// Heure pleine
 						$heure=sprintf("%'.02d:00", $h);
 						// tâches par user et jour
@@ -953,6 +986,35 @@ while ($p = $periodes->fetch()) {
 							$planning['taches'][$infosJour['ressource_id']][$tmpDate->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
 					}
 					
+				}
+				
+				// si tache à cheval sur 2 jours, on remplit les cases du jour suivant
+				if($heureFinSelect < $heureDebutSelect){
+					$heureDebut = 0;
+					$heureFin = $heureFinSelect;
+					for ($h = $heureDebut; $h < $heureFin; $h++)
+					{
+						$tmpDate2 = clone $tmpDate;
+						$tmpDate2->modify('+1 day');
+
+						$heure=sprintf("%'.02d:00", $h);
+						// tâches par user et jour
+						if ($base_ligne=='users') {
+							$planning['taches'][$infosJour['user_id']][$tmpDate2->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+						}
+						// tâches par projet et jour
+						if ($base_ligne=='projets')
+							$planning['taches'][$infosJour['projet_id']][$tmpDate2->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+						// tâches par lieux et jour
+						if ($base_ligne=='lieux')
+							$planning['taches'][$infosJour['lieu_id']][$tmpDate2->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+
+						// tâches par ressources et jour
+						if ($base_ligne=='ressources')
+							$planning['taches'][$infosJour['ressource_id']][$tmpDate2->format('Y-m-d')][$heure][]=$infosJour['periode_id'];
+						
+					}
 				}
 			}
 			
@@ -1424,6 +1486,7 @@ foreach ($planning['lignes'] as $ligne)
 					<div class="dropdown-menu" aria-labelledby="p'.$ligne['id'].'">
 						<a class="dropdown-item" href="javascript:xajax_projet_decalage_form(\'' . $ligne['id'] . '\');undefined;"><i class="fa fa-fw fa-arrows-h" aria-hidden="true"></i> ' . $smarty->getConfigVars('decaler_taches') . '</a>			
 						<a class="dropdown-item" href="javascript:xajax_projet_copie_form(\'' . $ligne['id'] . '\');undefined;"><i class="fa fa-fw fa-copy" aria-hidden="true"></i> ' . $smarty->getConfigVars('projet_copie_infobulle') . '</a>			
+						<a class="dropdown-item" href="javascript:xajax_projet_dupliquer_tache_form(\'' . $ligne['id'] . '\');undefined;"><i class="fa fa-fw fa-copy" aria-hidden="true"></i> ' . $smarty->getConfigVars('projet_dupliquer_tache_infobulle') . '</a>			
 					</div>';
 			$html .= '</div>';
 		}
@@ -1485,7 +1548,7 @@ foreach ($planning['lignes'] as $ligne)
 				$ferie = false;
 				if (array_key_exists($current_date, $joursFeries)) {
 					$ferieObj = new Ferie();
-					if($ferieObj->db_load(array('date_ferie', '=', $current_date)) && trim($ferieObj->libelle) != "") {
+					if($ferieObj->db_load(array('date_ferie', '=', $current_date)) && trim((string)$ferieObj->libelle) != "") {
 						if (CONFIG_PLANNING_MASQUER_FERIES == 0) {
 							$tooltip = '<b>' . $ferieObj->libelle . '</b>';
 							$ferie = '<div class="cellHolidays tooltipster" title="'.$tooltip.'">' . $smarty->getConfigVars('planning_ferie') . '</div>' . CRLF;
@@ -1505,12 +1568,12 @@ foreach ($planning['lignes'] as $ligne)
 						$droitAjoutPeriode = true;
 						
 						// Cellule en lecture seule si equipe différente et droit de modification de son équipe seulement
-						if ( $user->checkDroit('tasks_readonly') || ($user->checkDroit('tasks_modify_team') && isset($ligne['team_id']) && $ligne['team_id'] <> $_SESSION['user_groupe_id']) )
-						{
+						if ($user->checkDroit('tasks_modify_team') && isset($ligne['team_id']) && $ligne['team_id'] <> $_SESSION['user_groupe_id']) {
 							$dragndropzone = '';
 							$classTD.=" read-only";
 						}else $dragndropzone = 'ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDropZone(event);"';
 					}else {
+						$classTD.=" read-only";
 						$droitAjoutPeriode = false;
 						$dragndropzone = '';
 					}
@@ -2097,5 +2160,6 @@ $smarty->assign('baseligne', $base_ligne);
 $smarty->assign('nbGroupes', ($idGroupeCourant+1));
 $smarty->assign('droitAjoutPeriode',$droitAjoutPeriode);
 $smarty->assign('xajax', $xajax->getJavascript("", "assets/js/xajax.js"));
+
 
 $smarty->display('www_planning.tpl');
